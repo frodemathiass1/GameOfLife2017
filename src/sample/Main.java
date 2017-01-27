@@ -14,6 +14,8 @@ public class Main extends Application {
         primaryStage.setTitle("Game of Life");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
+
+        //This is a test comment
     }
 
 
