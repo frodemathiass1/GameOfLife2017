@@ -16,6 +16,5 @@
       <Label layoutX="389.0" layoutY="363.0" text="Speed" />
       <Slider layoutX="223.0" layoutY="365.0" />
       <Slider layoutX="453.0" layoutY="365.0" />
-
    </children>
 </AnchorPane>
