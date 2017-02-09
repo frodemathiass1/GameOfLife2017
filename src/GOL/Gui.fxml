@@ -5,15 +5,28 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Canvas height="343.0" layoutX="4.0" layoutY="7.0" width="591.0" />
-      <Button layoutX="14.0" layoutY="359.0" mnemonicParsing="false" text="Start/Stop" />
-      <Button layoutX="104.0" layoutY="359.0" mnemonicParsing="false" text="Reset" />
-      <Label layoutX="189.0" layoutY="363.0" text="Size" />
-      <Label layoutX="389.0" layoutY="363.0" text="Speed" />
-      <Slider layoutX="223.0" layoutY="365.0" />
-      <Slider layoutX="453.0" layoutY="365.0" />
+      <HBox layoutX="14.0" layoutY="359.0" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" text="Start/Stop" />
+            <Button mnemonicParsing="false" text="Reset" />
+         </children>
+      </HBox>
+      <HBox layoutX="189.0" layoutY="363.0" spacing="10.0">
+         <children>
+            <Label text="Size" />
+            <Slider />
+         </children>
+      </HBox>
+      <HBox layoutX="389.0" layoutY="363.0" spacing="10.0">
+         <children>
+            <Label text="Speed" />
+            <Slider />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
