@@ -6,13 +6,10 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Canvas height="343.0" layoutX="4.0" layoutY="7.0" width="591.0" />
-      <Button layoutX="14.0" layoutY="359.0" mnemonicParsing="false" text="Start/Stop" textFill="#e40707" />
+      <Button layoutX="14.0" layoutY="359.0" mnemonicParsing="false" text="Start/Stop" />
       <Button layoutX="104.0" layoutY="359.0" mnemonicParsing="false" text="Reset" />
       <Label layoutX="189.0" layoutY="363.0" text="Size" />
       <Label layoutX="389.0" layoutY="363.0" text="Speed" />
