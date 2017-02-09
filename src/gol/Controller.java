@@ -1,4 +1,4 @@
-package GOL;
+package gol;
 
 public class Controller {
 
