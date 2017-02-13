@@ -46,15 +46,16 @@ public class Controller implements Initializable {
 
     public void resetBoard(ActionEvent e){
 
-        String rB = resetBtn.getText();
+        /*String rB = resetBtn.getText();
         resetBtn.setText("Foo");
         resetBtn.setTextFill(Color.GREEN);
         if(rB=="Foo"){
             resetBtn.setText("Reset");
             resetBtn.setTextFill(Color.BLACK);
+
         }
         System.out.println(rB);
-
+        */
     }
 
     public void pickColor(ActionEvent e){
@@ -64,7 +65,8 @@ public class Controller implements Initializable {
 
         System.out.println(picked);
 
-
+        resetBtn.setTextFill(Color.web(""+picked+""));
+        // funker ikke, får kun 0xffffffff i return uansett farge valgt
 
     }
 
