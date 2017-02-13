@@ -16,8 +16,18 @@ import javafx.scene.paint.Color;
 
 public class Main extends Application {
 
+    private byte[][] board = {
+
+            { 1, 0, 0, 1 },
+            { 0, 1, 1, 0 },
+            { 0, 1, 1, 0 },
+            { 1, 0, 0, 1 }
+    };
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+
 
         Parent root = FXMLLoader.load(getClass().getResource("Gui.fxml"));
         primaryStage.setTitle("Game of Life");
