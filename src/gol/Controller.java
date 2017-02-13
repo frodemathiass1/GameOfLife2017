@@ -11,15 +11,15 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
 
-import javax.swing.*;
+
 import java.lang.management.PlatformLoggingMXBean;
 
 public class Controller implements Initializable {
 
     //@FXML private Canvas canvas;
     @FXML private Button startBtn;
-    //@FXML private Button resetBtn;
-    //@FXML private ColorPicker colorPicker;
+    @FXML private Button resetBtn;
+    @FXML private ColorPicker pickColor;
     //@FXML private Slider sizeSlider;
 
 
@@ -49,6 +49,13 @@ public class Controller implements Initializable {
     }
 
     public void pickColor(ActionEvent e){
+
+        ColorPicker cp = new ColorPicker();
+        Color picked = cp.getValue();
+
+        System.out.println(picked);
+        resetBtn.setTextFill(picked);
+        // Funker ikke.......
 
     }
 
