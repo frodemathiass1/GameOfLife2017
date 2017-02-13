@@ -1,5 +1,6 @@
 package gol;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,6 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
+
+import javax.swing.*;
+import java.lang.management.PlatformLoggingMXBean;
 
 public class Controller implements Initializable {
 
@@ -27,10 +31,31 @@ public class Controller implements Initializable {
 
     }
 
-    public void startBtn(ActionEvent event){
+    public void startPause(ActionEvent e){
 
+        String st = startBtn.getText();
         startBtn.setText("Pause");
+        startBtn.setTextFill(Color.RED);
+        if(st=="Pause"){
+            startBtn.setText("Start");
+            startBtn.setTextFill(Color.BLACK);
+        }
+        System.out.println(st);
+
     }
+
+    public void resetBoard(ActionEvent e){
+
+    }
+
+    public void pickColor(ActionEvent e){
+
+    }
+
+
+
+
+
 
 
 

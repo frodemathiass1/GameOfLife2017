@@ -8,23 +8,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/8.0.111"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="gol.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gol.Controller">
    <children>
-      <Canvas height="354.0" layoutX="1.0" width="600.0" fx:id="canvasControl" />
+      <Canvas fx:id="canvasControl" height="354.0" layoutX="1.0" width="600.0" />
       <HBox layoutX="14.0" layoutY="359.0" spacing="10.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Start" fx:id="startBtn"/>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Reset" fx:id="resetBtn"/>
-            <ColorPicker prefHeight="27.0" prefWidth="90.0" fx:id="colorPicker"/>
+            <Button fx:id="startBtn" onAction="#startPause" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Start" />
+            <Button fx:id="resetBtn" onAction="#resetBoard" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Reset" />
+            <ColorPicker fx:id="colorPicker" onAction="#pickColor" prefHeight="27.0" prefWidth="90.0" />
             <Label text="Size" />
-            <Slider prefHeight="16.0" prefWidth="150.0" fx:id="sizeSlider"/>
+            <Slider fx:id="sizeSlider" prefHeight="16.0" prefWidth="150.0" />
          </children>
       </HBox>
-      <HBox layoutX="273.0" layoutY="364.0" spacing="10.0" />
    </children>
 </AnchorPane>
