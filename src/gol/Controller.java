@@ -46,7 +46,7 @@ public class Controller implements Initializable {
 
     public void resetBoard(ActionEvent e){
 
-        /*String rB = resetBtn.getText();
+        String rB = resetBtn.getText();
         resetBtn.setText("Foo");
         resetBtn.setTextFill(Color.GREEN);
         if(rB=="Foo"){
@@ -55,7 +55,7 @@ public class Controller implements Initializable {
 
         }
         System.out.println(rB);
-        */
+
     }
 
     public void pickColor(ActionEvent e){
