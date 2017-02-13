@@ -19,7 +19,7 @@ public class Controller implements Initializable {
     //@FXML private Canvas canvas;
     @FXML private Button startBtn;
     @FXML private Button resetBtn;
-    @FXML private ColorPicker pickColor;
+    @FXML private ColorPicker colorPicker;
     //@FXML private Slider sizeSlider;
 
 
@@ -46,16 +46,25 @@ public class Controller implements Initializable {
 
     public void resetBoard(ActionEvent e){
 
+        String rB = resetBtn.getText();
+        resetBtn.setText("Foo");
+        resetBtn.setTextFill(Color.GREEN);
+        if(rB=="Foo"){
+            resetBtn.setText("Reset");
+            resetBtn.setTextFill(Color.BLACK);
+        }
+        System.out.println(rB);
+
     }
 
     public void pickColor(ActionEvent e){
 
         ColorPicker cp = new ColorPicker();
-        Color picked = cp.getValue();
+        Color picked = cp.getValue();  // Gets the Hex code
 
         System.out.println(picked);
-        resetBtn.setTextFill(picked);
-        // Funker ikke.......
+
+
 
     }
 
