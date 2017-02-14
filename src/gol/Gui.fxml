@@ -15,7 +15,7 @@
          <children>
             <Button fx:id="startBtn" onAction="#startPause" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Start" />
             <Button fx:id="resetBtn" onAction="#resetBoard" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Reset" />
-            <ColorPicker fx:id="colorPicker" onAction="#pickColor" prefHeight="27.0" prefWidth="90.0" />
+            <ColorPicker fx:id="colorPick" onAction="#pickColor" prefHeight="27.0" prefWidth="90.0" />
             <Label text="Size" />
             <Slider fx:id="sizeSlider" prefHeight="16.0" prefWidth="150.0" />
          </children>

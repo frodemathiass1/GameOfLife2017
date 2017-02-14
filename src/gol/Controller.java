@@ -1,6 +1,7 @@
 package gol;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,22 +11,26 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
-
+import javafx.scene.shape.Rectangle;
 
 import java.lang.management.PlatformLoggingMXBean;
 
+
+
 public class Controller implements Initializable {
 
-    //@FXML private Canvas canvas;
+    @FXML private Canvas canvasControl;
     @FXML private Button startBtn;
     @FXML private Button resetBtn;
-    @FXML private ColorPicker colorPicker;
+    @FXML private ColorPicker colorPick;
     //@FXML private Slider sizeSlider;
 
 
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
 
+        //Canvas canvas = new Canvas(200,200);
+        //GraphicsContext gc;
         //colorPicker.setValue(Color.BLUE);
         // draw();
 
@@ -60,15 +65,19 @@ public class Controller implements Initializable {
 
     public void pickColor(ActionEvent e){
 
+
         ColorPicker cp = new ColorPicker();
-        Color picked = cp.getValue();  // Gets the Hex code
-
-        System.out.println(picked);
-
-        resetBtn.setTextFill(Color.web(""+picked+""));
-        // funker ikke, får kun 0xffffffff i return uansett farge valgt
+        //String picked = cp.getValue().toString();  // Gets the Hex code
+        String s = cp.getValue().toString();
+        //System.out.println(c.getRed() +"\n"+ c.getGreen() +"\n"+ c.getBlue() +"\n");
+        System.out.println(s);
 
     }
+
+
+
+
+
 
 
 

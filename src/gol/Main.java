@@ -35,14 +35,11 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
 
-        //gc = canvas.getGraphicsContext2D();
-        //gc.setStroke(Color.BLUE);
-        //gc.setLineWidth(1);
+
 
     }
 
-    //Canvas canvas = new Canvas(200,200);
-    //GraphicsContext gc;
+
 
 
 
