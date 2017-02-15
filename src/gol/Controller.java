@@ -19,6 +19,7 @@ import java.lang.management.PlatformLoggingMXBean;
 
 public class Controller implements Initializable {
 
+    // Interne objekter til GUI
     @FXML private Canvas canvasControl;
     @FXML private Button startBtn;
     @FXML private Button resetBtn;
