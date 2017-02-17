@@ -35,6 +35,7 @@ public class GUIController implements Initializable {
         //colorPicker.setValue(Color.BLUE);
         // draw();
 
+
     }
 
     public void startPause(ActionEvent e){
