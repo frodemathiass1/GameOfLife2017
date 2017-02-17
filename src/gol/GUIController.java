@@ -79,4 +79,8 @@ public class GUIController implements Initializable {
         System.out.println(colorPick.getValue().toString());
     }
 
+    public void setSize(){
+
+    }
+
 }
