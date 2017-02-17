@@ -67,11 +67,11 @@ public class Controller implements Initializable {
     public void pickColor(ActionEvent e){
 
 
-        ColorPicker cp = new ColorPicker();
+        //ColorPicker cp = new ColorPicker();
         //String picked = cp.getValue().toString();  // Gets the Hex code
-        String s = cp.getValue().toString();
+       colorPick.getValue().toString();
         //System.out.println(c.getRed() +"\n"+ c.getGreen() +"\n"+ c.getBlue() +"\n");
-        System.out.println(s);
+        System.out.println(colorPick.getValue().toString());
 
     }
 
