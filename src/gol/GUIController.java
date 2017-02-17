@@ -1,5 +1,7 @@
 package gol;
 
+import javafx.scene.shape.Rectangle;
+import java.lang.management.PlatformLoggingMXBean;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,9 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
-import java.lang.management.PlatformLoggingMXBean;
 
 
 
@@ -25,6 +25,7 @@ public class GUIController implements Initializable {
     @FXML private ColorPicker colorPick;
     @FXML private Canvas canvasControl;
     @FXML private Slider sizeSlider;
+
 
     public static final int SIZE = 25;
     private GraphicsContext gc;

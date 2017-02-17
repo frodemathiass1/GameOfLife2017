@@ -7,18 +7,12 @@ import javafx.scene.paint.Color;
 
 public class Cell {
 
+    public static final int SIZE=20;
+
     private int posX;
     private int posY;
     private Paint cellColor;
     private boolean isAlive;
-    private Cell neighbours[];
-    private Cell generation [];
-
-    // Cell size & Color
-    public static final int SIZE=20;
-
-
-
 
 
     public int getPosX(){
