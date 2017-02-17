@@ -34,12 +34,10 @@ public class GUIController implements Initializable {
 
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
-
         gc=canvasControl.getGraphicsContext2D();
         board = new Board(gc);
         board.setBoard(board.getBoard());
         draw(gc);
-
     }
 
     public void draw(GraphicsContext gc){
@@ -52,10 +50,7 @@ public class GUIController implements Initializable {
     }
 
 
-
-
     // Event handling
-
     public void startPause(ActionEvent e){
         String st = startBtn.getText();
         startBtn.setText("Pause");
@@ -83,21 +78,4 @@ public class GUIController implements Initializable {
         colorPick.getValue().toString();
         System.out.println(colorPick.getValue().toString());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
