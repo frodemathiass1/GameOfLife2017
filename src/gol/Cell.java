@@ -20,6 +20,7 @@ public class Cell {
 
 
 
+
     public int getPosX(){
         return this.posX;
     }

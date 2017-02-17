@@ -20,16 +20,11 @@ public class Main extends Application {
     public static final int WIDTH=100;
     public static final int HEIGHT=100;
 
-    private byte[][] board = {
 
-            { 1, 0, 0, 1 },
-            { 0, 1, 1, 0 },
-            { 0, 1, 1, 0 },
-            { 1, 0, 0, 1 }
-    };
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
 
 
         Parent root = FXMLLoader.load(getClass().getResource("Gui.fxml"));
