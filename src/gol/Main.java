@@ -16,6 +16,10 @@ import javafx.scene.paint.Color;
 
 public class Main extends Application {
 
+    // Stage Dimensions
+    public static final int WIDTH=100;
+    public static final int HEIGHT=100;
+
     private byte[][] board = {
 
             { 1, 0, 0, 1 },
