@@ -5,9 +5,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 
-/**
- * Created by frodemathiassen on 17.02.2017.
- */
 public class Cell {
 
     private int posX;
@@ -19,8 +16,8 @@ public class Cell {
 
     // Cell size & Color
     public static final int SIZE=20;
-    Color colorAlive = Color.GREEN;
-    Color colorDead = Color.RED;
+
+
 
 
     public int getPosX(){

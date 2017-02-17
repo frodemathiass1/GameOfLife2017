@@ -19,8 +19,15 @@ import java.lang.management.PlatformLoggingMXBean;
 
 public class GUIController implements Initializable {
 
-    // Interne objekter til GUI
+    // Interne objekter GUI
     @FXML private Canvas canvasControl;
+    private GraphicsContext gc;
+
+    public void draw(GraphicsContext gc){
+        gc.setFill(Color.GREEN);
+        gc.fillRect(10,10,100,100);
+
+    }
     @FXML private Button startBtn;
     @FXML private Button resetBtn;
     @FXML private ColorPicker colorPick;
@@ -29,14 +36,11 @@ public class GUIController implements Initializable {
 
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
-
-        //Canvas canvas = new Canvas(200,200);
-        //GraphicsContext gc;
-        //colorPicker.setValue(Color.BLUE);
-        // draw();
-
+        gc=canvasControl.getGraphicsContext2D();
+        draw(gc);
 
     }
+
 
     public void startPause(ActionEvent e){
 
@@ -67,11 +71,7 @@ public class GUIController implements Initializable {
 
     public void pickColor(ActionEvent e){
 
-
-        //ColorPicker cp = new ColorPicker();
-        //String picked = cp.getValue().toString();  // Gets the Hex code
-       colorPick.getValue().toString();
-        //System.out.println(c.getRed() +"\n"+ c.getGreen() +"\n"+ c.getBlue() +"\n");
+        colorPick.getValue().toString();
         System.out.println(colorPick.getValue().toString());
 
     }
