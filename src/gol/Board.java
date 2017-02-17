@@ -1,11 +1,18 @@
 package gol;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 import static gol.GUIController.SIZE;
 
 
 public class Board {
+
+    private GraphicsContext gc;
+
+    public Board(GraphicsContext gc){
+        this.gc=gc;
+    }
 
     private byte[][] board = {
             { 1, 0, 0, 1 },
@@ -15,17 +22,7 @@ public class Board {
     };
 
     public byte[][] getBoard(){
-
         return this.board;
-    }
-
-    private GraphicsContext gc;
-
-
-    public Board(GraphicsContext gc){
-
-        this.gc=gc;
-
     }
 
     // Sets board and lays out alive cells on canvas
@@ -46,7 +43,4 @@ public class Board {
             System.out.println();
         }
     }
-
-
-
 }

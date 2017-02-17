@@ -63,7 +63,7 @@ public class GUIController implements Initializable {
 
     }
 
-    public void resetBoard(ActionEvent e){
+    public void resetBoard(){
         String rB = resetBtn.getText();
         resetBtn.setText("Foo");
         resetBtn.setTextFill(Color.GREEN);
@@ -74,8 +74,9 @@ public class GUIController implements Initializable {
         System.out.println(rB);
     }
 
-    public void pickColor(ActionEvent e){
+    public void pickColor(){
         colorPick.getValue().toString();
         System.out.println(colorPick.getValue().toString());
     }
+
 }
