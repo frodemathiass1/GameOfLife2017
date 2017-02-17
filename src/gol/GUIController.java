@@ -24,7 +24,7 @@ public class GUIController implements Initializable {
     @FXML private Button resetBtn;
     @FXML private ColorPicker colorPick;
     @FXML private Canvas canvasControl;
-    //@FXML private Slider sizeSlider;
+    @FXML private Slider sizeSlider;
 
     public static final int SIZE = 25;
     private GraphicsContext gc;
@@ -51,7 +51,7 @@ public class GUIController implements Initializable {
 
 
     // Event handling
-    public void startPause(ActionEvent e){
+    public void startPause(){
         String st = startBtn.getText();
         startBtn.setText("Pause");
         startBtn.setTextFill(Color.RED);
@@ -78,7 +78,4 @@ public class GUIController implements Initializable {
         colorPick.getValue().toString();
         System.out.println(colorPick.getValue().toString());
     }
-
-
-
 }
