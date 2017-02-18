@@ -22,6 +22,9 @@ public class Main extends Application {
 
 
 
+
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -41,6 +44,15 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
+        // Constructor and method tests
+        Cell cell = new Cell(10,10,false,10);
+        System.out.println(cell.getPosX()+" "+
+                cell.getPosY()+" "+
+                cell.getCellColor()+" "+
+                cell.isAlive());
+
+
+        // Launch application
         launch(args);
 
     }
