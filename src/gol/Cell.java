@@ -23,8 +23,6 @@ public class Cell extends Rectangle{
         this.setCellShape();
     }
 
-
-
     // Setters
     public void setPosX(int x){this.posX=x;}
     public void setPosY(int y){this.posY=y;}

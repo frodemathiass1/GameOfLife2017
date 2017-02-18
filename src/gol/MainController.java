@@ -31,16 +31,10 @@ public class MainController implements Initializable {
     }
 
 
-    // Draw method render to Canvas
+    // Draw method renders to Canvas
     public void draw(){
         gc=canvasControl.getGraphicsContext2D();
         board=new Board(gc);
-                                                //gc.setFill(Color.GREEN);
-                                                //gc.fillRect(0,0,100,100);
-                                                //gc.fillRect(100,100,100,100);
-                                                //gc.fillRect(200,200,100,100);
-                                                //gc.fillRect(200,0,100,100);
-                                                //gc.fillRect(0,200,100,100);
     }
 
 

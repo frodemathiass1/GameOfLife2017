@@ -2,13 +2,13 @@ package gol;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-//import static gol.Cell.SIZE;
-
 
 public class Board{
 
     private Cell cSize;                                                       //private static final int NUMBER_OF_CELLS = 16;
     private GraphicsContext gc;
+
+    // Array pattern : HEI
     private byte[][] cells = {
             { 1, 0, 1, 0, 1, 1, 1, 0, 1},
             { 1, 0, 1, 0, 1, 0, 0, 0, 1},
@@ -18,23 +18,16 @@ public class Board{
 
     };
 
-
-
-
     // Board Constructor
     public Board(GraphicsContext g){
         this.gc=g;
         setBoard(getCells());
     }
 
-
-
-
     // Getters
     public byte[][] getCells(){return this.cells;}
 
                                                             //public int getNumberOfCells(){return NUMBER_OF_CELLS;}
-
     // Sets board and lays out  cells on canvas
     public void setBoard(byte[][] board){
 
@@ -55,5 +48,4 @@ public class Board{
             System.out.println();
         }
     }
-
 }
