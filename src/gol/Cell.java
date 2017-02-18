@@ -3,11 +3,11 @@ package gol;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+//import static gol.Board.SIZE;
 
 public class Cell extends Rectangle{
 
-    public static final int SIZE=20;
-
+    public static final int SIZE=20; //
     private boolean alive;
     private int posX;
     private int posY;
@@ -16,6 +16,7 @@ public class Cell extends Rectangle{
 
 
     // Cell Constructor
+    public Cell(){}
     public Cell(int x,int y,boolean alive){
         this.setPosition(x,y);
         this.setAlive(alive);
