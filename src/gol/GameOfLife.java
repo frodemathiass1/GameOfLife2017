@@ -52,6 +52,7 @@ public class GameOfLife extends Application {
                 cell.isAlive()+" "+
                 cell.getSize()+"\n"+
                 cell.getCellShape()
+
         );
 
 

@@ -2,39 +2,35 @@ package gol;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import static gol.MainController.SIZE;
+import static gol.Cell.SIZE;
 
 
 public class Board {
 
-    public static final int NUMBER_OF_CELLS = 16;
-
+                                                      //private static final int NUMBER_OF_CELLS = 16;
     private GraphicsContext gc;
-
     private byte[][] cells = {
             { 1, 0, 0, 1 },
             { 0, 1, 1, 0 },
             { 0, 1, 1, 0 },
             { 1, 0, 0, 1 }};
 
-    // private Cell[][] cellObjects;
-
 
     // Board Constructor
+    public Board(){
+
+    }
     public Board(GraphicsContext gc){
         this.gc=gc;
-
+        setBoard(getCells());
     }
 
 
 
-    // Get Board Method
-    public byte[][] getBoard(){
-        return this.cells;
-    }
+    // Getters
+    public byte[][] getCells(){return this.cells;}
 
-
-
+                                                            //public int getNumberOfCells(){return NUMBER_OF_CELLS;}
 
     // Sets board and lays out  cells on canvas
     public void setBoard(byte[][] board){
@@ -44,14 +40,14 @@ public class Board {
                 System.out.print(board[i][j]);
                 if(board[i][j]==1){
                     gc.setFill(Color.GREEN);
-                    gc.fillRect(i*SIZE,j*SIZE, SIZE, SIZE);
-                }
-                else{
+                    gc.fillRect(i * SIZE,j * SIZE, SIZE, SIZE);
+                } else{
                     gc.setFill(Color.BLUE);
-                    gc.fillRect(i*SIZE,j*SIZE, SIZE, SIZE);
+                    gc.fillRect(i * SIZE,j * SIZE, SIZE, SIZE);
                 }
             }
             System.out.println();
         }
     }
+
 }

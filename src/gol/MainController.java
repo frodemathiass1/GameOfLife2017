@@ -1,10 +1,5 @@
 package gol;
 
-import javafx.scene.shape.Rectangle;
-import java.lang.management.PlatformLoggingMXBean;
-import javafx.application.Platform;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -15,19 +10,13 @@ import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
 
 
-
-
 public class MainController implements Initializable {
 
+
+    GraphicsContext gc;
     private Board board;
 
-    private GraphicsContext gc;
-
-    public static final int SIZE = 25;
-
-
-
-    // Interne objekter GUI
+    // Internal GUI objects
     @FXML private Button startBtn;
     @FXML private Button resetBtn;
     @FXML private ColorPicker colorPick;
@@ -35,31 +24,28 @@ public class MainController implements Initializable {
     @FXML private Slider sizeSlider;
 
 
-    // Initialze at application startup
+    // Initialize at application startup
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
+        draw();
+    }
+
+
+    // Draw method render to Canvas
+    public void draw(){
         gc=canvasControl.getGraphicsContext2D();
         board=new Board(gc);
-        board.setBoard(board.getBoard());
-        draw(gc);
-    }
-
-    public void draw(GraphicsContext gc){
-        //gc.setFill(Color.GREEN);
-        //gc.fillRect(0,0,100,100);
-        //gc.fillRect(100,100,100,100);
-        //gc.fillRect(200,200,100,100);
-        //gc.fillRect(200,0,100,100);
-        //gc.fillRect(0,200,100,100);
+                                                //gc.setFill(Color.GREEN);
+                                                //gc.fillRect(0,0,100,100);
+                                                //gc.fillRect(100,100,100,100);
+                                                //gc.fillRect(200,200,100,100);
+                                                //gc.fillRect(200,0,100,100);
+                                                //gc.fillRect(0,200,100,100);
     }
 
 
 
-
-
-
-
-    // Event handling
+    // Button & Slider Event handling
     public void startPause(){
         String st = startBtn.getText();
         startBtn.setText("Pause");
