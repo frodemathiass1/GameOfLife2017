@@ -14,7 +14,7 @@ public class MainController implements Initializable {
 
 
     GraphicsContext gc;
-    private Board board;
+    private Board board; // why grey ?
 
     // Internal GUI objects
     @FXML private Button startBtn;

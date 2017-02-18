@@ -3,7 +3,6 @@ package gol;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-//import static gol.Board.SIZE;
 
 public class Cell extends Rectangle{
 
