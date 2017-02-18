@@ -37,10 +37,10 @@ public class Board{
 
                 System.out.print(board[i][j]);
                 if(board[i][j]==1){
-                    gc.setFill(Color.WHITE);
+                    gc.setFill(Color.BLACK);
                     gc.fillRect(i * cSize.getSize(),j * cSize.getSize(), cSize.getSize(), cSize.getSize());
                 } else{
-                    gc.setFill(Color.BLACK);
+                    gc.setFill(Color.LIGHTGREY);
                     gc.fillRect(i * cSize.getSize(),j * cSize.getSize(), cSize.getSize(), cSize.getSize());
                 }
             }
