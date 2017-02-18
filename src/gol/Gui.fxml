@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="/Style/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gol.MainController" styleClass="canvas">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="/style/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gol.MainController" styleClass="canvas">
    <children>
       <Canvas fx:id="canvasControl" height="354.0" layoutX="1.0" styleClass="canvasBackground" width="600.0" />
       <HBox layoutY="353.0" prefHeight="47.0" prefWidth="600.0" spacing="10.0" styleClass="buttonBar">
