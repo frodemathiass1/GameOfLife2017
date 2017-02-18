@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 
 
 
-public class Main extends Application {
+public class GameOfLife extends Application {
 
     // Stage Dimensions
     public static final int WIDTH=100;
@@ -45,11 +45,14 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         // Constructor and method tests
-        Cell cell = new Cell(10,10,false,10);
+        Cell cell = new Cell(10,10,false);
         System.out.println(cell.getPosX()+" "+
                 cell.getPosY()+" "+
                 cell.getCellColor()+" "+
-                cell.isAlive());
+                cell.isAlive()+" "+
+                cell.getSize()+"\n"+
+                cell.getCellShape()
+        );
 
 
         // Launch application

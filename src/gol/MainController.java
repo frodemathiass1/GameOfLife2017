@@ -17,7 +17,15 @@ import javafx.scene.paint.Color;
 
 
 
-public class GUIController implements Initializable {
+public class MainController implements Initializable {
+
+    private Board board;
+
+    private GraphicsContext gc;
+
+    public static final int SIZE = 25;
+
+
 
     // Interne objekter GUI
     @FXML private Button startBtn;
@@ -27,16 +35,11 @@ public class GUIController implements Initializable {
     @FXML private Slider sizeSlider;
 
 
-    public static final int SIZE = 25;
-    private GraphicsContext gc;
-    private Board board;
-
-
-
+    // Initialze at application startup
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         gc=canvasControl.getGraphicsContext2D();
-        board = new Board(gc);
+        board=new Board(gc);
         board.setBoard(board.getBoard());
         draw(gc);
     }
@@ -49,6 +52,11 @@ public class GUIController implements Initializable {
         //gc.fillRect(200,0,100,100);
         //gc.fillRect(0,200,100,100);
     }
+
+
+
+
+
 
 
     // Event handling
