@@ -34,6 +34,7 @@ public class GameOfLife extends Application {
         primaryStage.setTitle("Game of Life");
         primaryStage.setOnCloseRequest(e -> Platform.exit());
         primaryStage.setScene(new Scene(root, 600, 400));
+        //root.setStyle("-fx-background-color:darkgray");
         primaryStage.show();
 
 

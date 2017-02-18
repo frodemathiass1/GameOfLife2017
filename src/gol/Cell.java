@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Cell extends Rectangle{
 
-    public static final int SIZE=20; //
+    public static final int SIZE=25; //
     private boolean alive;
     private int posX;
     private int posY;

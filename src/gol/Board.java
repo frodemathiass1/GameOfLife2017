@@ -10,17 +10,23 @@ public class Board{
     private Cell cSize;                                                       //private static final int NUMBER_OF_CELLS = 16;
     private GraphicsContext gc;
     private byte[][] cells = {
-            { 1, 0, 0, 1 },
-            { 0, 1, 1, 0 },
-            { 0, 1, 1, 0 },
-            { 1, 0, 0, 1 }};
+            { 1, 0, 1, 0, 1, 1, 1, 0, 1},
+            { 1, 0, 1, 0, 1, 0, 0, 0, 1},
+            { 1, 1, 1, 0, 1, 1, 0, 0, 1},
+            { 1, 0, 1, 0, 1, 0, 0, 0, 1},
+            { 1, 0, 1, 0, 1, 1, 1, 0, 1},
+
+    };
+
+
 
 
     // Board Constructor
-    public Board(GraphicsContext gc){
-        this.gc=gc;
+    public Board(GraphicsContext g){
+        this.gc=g;
         setBoard(getCells());
     }
+
 
 
 
@@ -38,13 +44,14 @@ public class Board{
 
                 System.out.print(board[i][j]);
                 if(board[i][j]==1){
-                    gc.setFill(Color.GREEN);
+                    gc.setFill(Color.WHITE);
                     gc.fillRect(i * cSize.getSize(),j * cSize.getSize(), cSize.getSize(), cSize.getSize());
                 } else{
-                    gc.setFill(Color.BLUE);
+                    gc.setFill(Color.BLACK);
                     gc.fillRect(i * cSize.getSize(),j * cSize.getSize(), cSize.getSize(), cSize.getSize());
                 }
             }
+
             System.out.println();
         }
     }
