@@ -43,10 +43,10 @@ public class MainController implements Initializable {
     public void startPause(){
         String st = startBtn.getText();
         startBtn.setText("Pause");
-        startBtn.setTextFill(Color.RED);
+        //startBtn.setTextFill(Color.RED);
         if(st=="Pause"){
             startBtn.setText("Start");
-            startBtn.setTextFill(Color.BLACK);
+            startBtn.setTextFill(Color.WHITE);
         }
         System.out.println(st);
 
