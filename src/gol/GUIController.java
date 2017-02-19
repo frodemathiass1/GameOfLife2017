@@ -1,7 +1,8 @@
 package gol;
 
+import javafx.beans.value.ObservableValue;
 import javafx.scene.shape.Rectangle;
-import java.lang.management.PlatformLoggingMXBean;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,8 +13,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.paint.Color;
-
 
 
 
@@ -39,6 +40,12 @@ public class GUIController implements Initializable {
         board = new Board(gc);
         board.setBoard(board.getBoard());
         draw(gc);
+
+        //Added listener to slider. Outputs value to console. TODO: Make the value change the size of cells
+        sizeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Value of slider changed: " + newValue.intValue());
+        });
+
     }
 
     public void draw(GraphicsContext gc){
