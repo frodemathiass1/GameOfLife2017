@@ -83,7 +83,8 @@
                <font>
                   <Font size="10.0" />
                </font></Label>
-            <Slider fx:id="sizeSlider" prefHeight="16.0" prefWidth="150.0">
+
+             <Slider fx:id="sizeSlider" onMouseClicked="#sliderSize" prefHeight="16.0" prefWidth="150.0">
                <HBox.margin>
                   <Insets top="15.0" />
                </HBox.margin></Slider>

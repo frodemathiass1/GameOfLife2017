@@ -1,12 +1,14 @@
 package gol;
 
 
+import javafx.event.ActionEvent;
+import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Cell extends Rectangle{
 
-    public static final int SIZE=25; //
+    public  static final int SIZE=25;
     private boolean alive;
     private int posX;
     private int posY;
@@ -15,7 +17,9 @@ public class Cell extends Rectangle{
 
 
     // Cell Constructor
-    public Cell(){}
+    public Cell(){
+
+    }
     public Cell(int x,int y,boolean alive){
         this.setPosition(x,y);
         this.setAlive(alive);
@@ -29,6 +33,10 @@ public class Cell extends Rectangle{
         setPosX(x);
         setPosY(y);
     }
+
+    /*public void setCellSize(int s){
+        this.SIZE=s;
+    }*/
 
     public void setAlive(boolean alive){
         this.alive=alive;

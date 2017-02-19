@@ -29,6 +29,7 @@ public class MainController implements Initializable {
 
 
 
+
     // Initialize at application startup
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
@@ -72,9 +73,8 @@ public class MainController implements Initializable {
         alert.showAndWait();
     }
 
+    @FXML
     public void pickColor(){
-
-        colorPick.getValue().toString();
         System.out.println(colorPick.getValue().toString());
     }
 
@@ -83,4 +83,13 @@ public class MainController implements Initializable {
         Platform.exit();
         System.out.println(" <<  Good Bye! >> ");
     }
+
+    /*
+    @FXML
+    public int sliderSize(){
+            return ((int)sizeSlider.getValue());
+    }
+    */
+
+
 }
