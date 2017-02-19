@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 
 public class GameOfLife extends Application {
 
@@ -16,12 +18,17 @@ public class GameOfLife extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Gui.fxml"));
-        primaryStage.setTitle("Game of Life");
-        primaryStage.setOnCloseRequest(e -> Platform.exit());
-        primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
-        primaryStage.show();
+    public void start(Stage primaryStage) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Gui.fxml"));
+            primaryStage.setTitle("Game of Life");
+            primaryStage.setOnCloseRequest(e -> Platform.exit());
+            primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
+            primaryStage.show();
+        }
+        catch(IOException ioe){
+            ioe.printStackTrace();
+        }
     }
 
 

@@ -1,9 +1,12 @@
 package gol;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
@@ -24,10 +27,12 @@ public class MainController implements Initializable {
     @FXML private Slider sizeSlider;
 
 
+
+
     // Initialize at application startup
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
-        draw();
+        //draw();
     }
 
 
@@ -38,33 +43,43 @@ public class MainController implements Initializable {
     }
 
 
-
     // Button & Slider Event handling
     public void startPause(){
+        gc=canvasControl.getGraphicsContext2D();
+        board=new Board(gc);
+
         String st = startBtn.getText();
         startBtn.setText("Pause");
-        //startBtn.setTextFill(Color.RED);
         if(st=="Pause"){
             startBtn.setText("Start");
-            startBtn.setTextFill(Color.WHITE);
         }
-        System.out.println(st);
+        draw();
+    }
+
+
+    public void resetBoard(){
+            gc.clearRect(0,0,600,354);
+            System.out.println("Canvas reset");
+            resetDialog();
 
     }
 
-    public void resetBoard(){
-        String rB = resetBtn.getText();
-        resetBtn.setText("Foo");
-        resetBtn.setTextFill(Color.GREEN);
-        if(rB=="Foo"){
-            resetBtn.setText("Reset");
-            resetBtn.setTextFill(Color.BLACK);
-        }
-        System.out.println(rB);
+    public void resetDialog(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Reset");
+        alert.setHeaderText(null);
+        alert.setContentText("<< The Board is Cleared! >>");
+        alert.showAndWait();
     }
 
     public void pickColor(){
         colorPick.getValue().toString();
         System.out.println(colorPick.getValue().toString());
+    }
+
+    @FXML
+    public void exitApp(){
+        Platform.exit();
+        System.out.println(" <<  Good Bye! >> ");
     }
 }
