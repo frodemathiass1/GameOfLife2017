@@ -1,6 +1,8 @@
 package gol;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +20,7 @@ public class MainController implements Initializable {
 
     GraphicsContext gc;
     private Board board; // why grey ?
+    private Cell cellSize;
 
 
     // Internal GUI objects
@@ -93,5 +96,6 @@ public class MainController implements Initializable {
         sizeSlider.valueProperty().addListener((observable, oldValue, newValue)
                 -> System.out.println("Value: " + newValue.intValue()));
     }
+
 
 }
