@@ -39,7 +39,7 @@ public class Board{
         for(int i=0; i <board.length; i++ ){
             for(int j = 0; j < board[0].length; j++ ){
 
-                System.out.println(board[i][j]);
+                System.out.print(board[i][j]);
                 if(board[i][j]==1){
                     gc.setFill(Color.BLACK);
                     gc.fillRect(i * cSize.getSize(),j * cSize.getSize(), cSize.getSize(), cSize.getSize());
@@ -47,10 +47,8 @@ public class Board{
                     gc.setFill(Color.LIGHTGREY);
                     gc.fillRect(i * cSize.getSize(),j * cSize.getSize(), cSize.getSize(), cSize.getSize());
                 }
-
             }
             System.out.println();
         }
-
     }
 }
