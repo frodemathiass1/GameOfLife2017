@@ -19,6 +19,7 @@ public class MainController implements Initializable {
     GraphicsContext gc;
     private Board board; // why grey ?
 
+
     // Internal GUI objects
     @FXML private Button startBtn;
     @FXML private Button resetBtn;
@@ -34,6 +35,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         //draw();
+        sliderSize();
     }
 
 
@@ -62,7 +64,6 @@ public class MainController implements Initializable {
             gc.clearRect(0,0,600,354);
             System.out.println("Canvas reset");
             resetDialog();
-
     }
 
     public void resetDialog(){
@@ -84,12 +85,13 @@ public class MainController implements Initializable {
         System.out.println(" <<  Good Bye! >> ");
     }
 
-    /*
-    @FXML
-    public int sliderSize(){
-            return ((int)sizeSlider.getValue());
-    }
-    */
 
+    @FXML
+    public void sliderSize(){
+        //return ((int)sizeSlider.getValue());
+        //cellSize.setSize();
+        sizeSlider.valueProperty().addListener((observable, oldValue, newValue)
+                -> System.out.println("Value: " + newValue.intValue()));
+    }
 
 }

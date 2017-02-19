@@ -8,10 +8,9 @@ import javafx.scene.shape.Rectangle;
 
 public class Cell extends Rectangle{
 
-    public  static final int SIZE=25;
+    public  static int SIZE=25;
     private boolean alive;
-    private int posX;
-    private int posY;
+    private int posX, posY;
     private Color cellColor;
     private Rectangle cellShape;
 
@@ -59,6 +58,10 @@ public class Cell extends Rectangle{
     public void setCellShape(){
         this.cellShape=new Rectangle(SIZE,SIZE);
 
+    }
+
+    public void setSize(int size){
+        this.SIZE=size;
     }
 
     // Getters
