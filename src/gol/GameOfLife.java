@@ -37,15 +37,6 @@ public class GameOfLife extends Application {
 
         launch(args);
 
-        // Constructor and method tests
-        Cell cell = new Cell(10,10,false);
-        System.out.println(cell.getPosX()+" "+
-                cell.getPosY()+" "+
-                cell.getCellColor()+" "+
-                cell.isAlive()+" "+
-                cell.getSize()+"\n"+
-                cell.getCellShape()
 
-        );
     }
 }

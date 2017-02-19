@@ -12,24 +12,27 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 
 public class MainController implements Initializable {
 
 
-    GraphicsContext gc;
-    private Board board; // why grey ?
+    private GraphicsContext gc;
+    private Board board;
     private Cell cellSize;
+    private Cell[][] cells;
+    private int speed;
 
 
     // Internal GUI objects
-    @FXML private Button startBtn;
-    @FXML private Button resetBtn;
+    @FXML private Button startBtn, resetBtn, exitApp;
     @FXML private ColorPicker colorPick;
-    @FXML private Canvas canvasControl;
+    @FXML private Canvas canvas;
     @FXML private Slider sizeSlider;
-
+    @FXML private GridPane grid;
 
 
 
@@ -44,14 +47,14 @@ public class MainController implements Initializable {
 
     // Draw method renders to Canvas
     public void draw(){
-        gc=canvasControl.getGraphicsContext2D();
+        gc=canvas.getGraphicsContext2D();
         board=new Board(gc);
     }
 
 
     // Button & Slider Event handling
     public void startPause(){
-        gc=canvasControl.getGraphicsContext2D();
+        gc=canvas.getGraphicsContext2D();
         board=new Board(gc);
 
         String st = startBtn.getText();

@@ -16,7 +16,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="canvas" stylesheets="/style/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gol.MainController">
    <children>
-      <GridPane fx:id="gridPane" gridLinesVisible="true" opacity="0.34" prefHeight="354.0" prefWidth="600.0" styleClass="gridPane" stylesheets="@../style/stylesheet.css">
+      <GridPane fx:id="grid" gridLinesVisible="true" opacity="0.34" prefHeight="354.0" prefWidth="600.0" styleClass="gridPane" stylesheets="@../style/stylesheet.css">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -55,7 +55,7 @@
         </rowConstraints>
       </GridPane>
        <!-- GRIDLINES IS FOR DEBUGGING ONLY, this is just for demonstration purposes-->
-      <Canvas fx:id="canvasControl" height="354.0" layoutX="1.0" styleClass="canvasBackground" width="600.0" />
+      <Canvas fx:id="canvas" height="354.0" layoutX="1.0" styleClass="canvasBackground" width="600.0" />
       <HBox layoutY="353.0" prefHeight="47.0" prefWidth="600.0" spacing="10.0" styleClass="buttonBar" stylesheets="@../style/stylesheet.css">
          <children>
             <Button fx:id="startBtn" mnemonicParsing="false" onAction="#startPause" prefHeight="0.0" prefWidth="60.0" styleClass="startBtn" stylesheets="@../style/stylesheet.css" text="Start">
@@ -76,15 +76,15 @@
                <HBox.margin>
                   <Insets right="10.0" top="12.0" />
                </HBox.margin></ColorPicker>
-            <Label text="Size" textFill="WHITE">
+            <Label text="Grid size:" textFill="WHITE">
                <HBox.margin>
-                  <Insets right="10.0" top="17.0" />
+                  <Insets top="17.0" />
                </HBox.margin>
                <font>
                   <Font size="10.0" />
                </font></Label>
 
-             <Slider fx:id="sizeSlider"  prefHeight="16.0" prefWidth="150.0"  blockIncrement="1.0" max="50" showTickMarks="true" snapToTicks="true" >
+             <Slider fx:id="sizeSlider" blockIncrement="1.0" max="50" prefHeight="16.0" prefWidth="150.0" showTickMarks="true" snapToTicks="true">
                <HBox.margin>
                   <Insets top="15.0" />
                </HBox.margin></Slider>
@@ -93,7 +93,7 @@
                   <Font size="10.0" />
                </font>
                <HBox.margin>
-                  <Insets left="85.0" top="12.0" />
+                  <Insets left="70.0" top="12.0" />
                </HBox.margin>
             </Button>
          </children>
