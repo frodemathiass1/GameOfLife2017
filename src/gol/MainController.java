@@ -88,13 +88,12 @@ public class MainController implements Initializable {
         System.out.println(" <<  Good Bye! >> ");
     }
 
-
     @FXML
     public void sliderSize(){
         //return ((int)sizeSlider.getValue());
         //cellSize.setSize();
-        sizeSlider.valueProperty().addListener((observable, oldValue, newValue)
-                -> System.out.println("Value: " + newValue.intValue()));
+        sizeSlider.valueProperty().addListener((observable, oldSize, newSize)
+                -> System.out.println("Value: " + newSize.intValue()));
     }
 
 
