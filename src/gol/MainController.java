@@ -73,6 +73,7 @@ public class MainController implements Initializable {
     }
 
     public void pickColor(){
+
         colorPick.getValue().toString();
         System.out.println(colorPick.getValue().toString());
     }
