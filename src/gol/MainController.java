@@ -94,7 +94,8 @@ public class MainController implements Initializable {
     @FXML
     public void sliderSize(){
         //return ((int)sizeSlider.getValue());
-        //cellSize.setSize();
+
+        //@Override
         sizeSlider.valueProperty().addListener((observable, oldSize, newSize)
                 -> System.out.println("Value: " + newSize.intValue()));
     }
