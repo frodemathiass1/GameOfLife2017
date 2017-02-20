@@ -8,33 +8,33 @@ public class Board {
 
 
                                                    //private static final int NUMBER_OF_CELLS = 16;
-                                                   // Array pattern : HEI
-    /*private byte[][] cells = {
+                                                 // Array pattern : HEI
+    private byte[][] cells = {
             { 1, 0, 1, 0, 1, 1, 1, 0, 1},
             { 1, 0, 1, 0, 1, 0, 0, 0, 1},
             { 1, 1, 1, 0, 1, 1, 0, 0, 1},
             { 1, 0, 1, 0, 1, 0, 0, 0, 1},
             { 1, 0, 1, 0, 1, 1, 1, 0, 1},
 
-    };*/
+    };
     private GraphicsContext gc;
 
 
+    /*
     private byte[][] cells;
-    private int row=10;
+    private int row=40;
     private int col=40;
-
     public void populateCells(){
+
         cells =new byte[row][col];
             for(int i=0; i<cells.length; i++){
                 for(int j=0; j<cells[i].length; j++){
-
                     cells[i][j]=1;
-
-
                 }
             }
     }
+    */
+
 
 
     // Board Constructor
@@ -43,10 +43,7 @@ public class Board {
 
     }
     public Board(GraphicsContext g){
-        populateCells();
-
-
-
+        //populateCells();
         this.gc=g;
         setBoard(getCells());
 
@@ -58,7 +55,6 @@ public class Board {
 
                                                             //public int getNumberOfCells(){return NUMBER_OF_CELLS;}
     // Sets board and lays out  cells on canvas
-
     public void setBoard(byte[][] board){
 
         Cell c=new Cell();
@@ -78,6 +74,8 @@ public class Board {
 
         }
     }
+
+
 
     /*
     //Alternativ setBoard
