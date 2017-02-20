@@ -15,7 +15,7 @@ import javafx.scene.control.Alert;
 public class MainController implements Initializable {
 
     private Board board;
-    private int cellSize = 40;
+    private int cellSize = 20;
     //private Cell[][] cells;
 
 

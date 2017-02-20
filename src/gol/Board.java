@@ -6,8 +6,8 @@ import javafx.scene.paint.Color;
 public class Board {
 
     private int cellSize;
-    private int colums = 4;
-    private int rows = 4;
+    private int colums = 30;
+    private int rows = 20;
     private Cell[][] cells;
     private GraphicsContext gc;
 
@@ -34,8 +34,8 @@ public class Board {
 
     // Draw cell to canvas
     public void drawCell(Cell cell) {
-        // System.out.println(cell.getX());
-        //  System.out.println(cell.getY());
+        System.out.println(cell.getX());
+        System.out.println(cell.getY());
         if (cell.isAlive()) {
             this.gc.setFill(Color.BLACK);
 
