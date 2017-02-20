@@ -1,31 +1,22 @@
 package gol;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Alert;
 
 
 public class MainController implements Initializable {
 
-
-    //private GraphicsContext gc;
     private Board board;
-    private int cellSize;
-    private Cell[][] cells;
-    private int speed;
-
+    private int cellSize = 40;
+    //private Cell[][] cells;
 
 
     // Internal GUI objects
@@ -33,73 +24,66 @@ public class MainController implements Initializable {
     @FXML private ColorPicker colorPick;
     @FXML private Canvas canvas;
     @FXML private Slider sizeSlider;
-    @FXML private GridPane grid;
 
 
     // Initialize at application startup
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
-        //draw();
-        sliderSize();
-    }
-
-
-    // Draw method renders to Canvas
-    public void draw(){
-        GraphicsContext gc=canvas.getGraphicsContext2D();
-        board=new Board(gc);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        this.board=new Board(gc, this.cellSize); // this is dependency injection!
     }
 
 
     // Button & Slider Event handling
+    @FXML
     public void startPause(){
-        GraphicsContext gc=canvas.getGraphicsContext2D();
-        board=new Board(gc);
 
-        String st = startBtn.getText();
-        startBtn.setText("Pause");
-        if(st=="Pause"){
-            startBtn.setText("Start");
-        }
-       draw();
-    }
-
-
-    public void resetBoard(){
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-            gc.clearRect(0,0,600,354);
-            System.out.println("Canvas reset");
-            resetDialog();
-    }
-
-    public void resetDialog(){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Reset");
-        alert.setHeaderText(null);
-        alert.setContentText("<< The Board is Cleared! >>");
-        alert.showAndWait();
     }
 
     @FXML
-    public void pickColor(){
+    public void resetBoard(){
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.clearRect(0,0,600,354);
+    }
 
-        System.out.println(colorPick.getValue().toString());
+
+    @FXML
+   public void pickColor(){
+         System.out.println(colorPick.getValue().toString());
     }
 
     @FXML
     public void exitApp(){
         Platform.exit();
-        System.out.println(" <<  Good Bye! >> ");
     }
+
 
     @FXML
     public void sliderSize(){
-        //return ((int)sizeSlider.getValue());
-
         //@Override
         sizeSlider.valueProperty().addListener((observable, oldSize, newSize)
                 -> System.out.println("Value: " + newSize.intValue()));
     }
 
+    @FXML
+    public void drawCell(MouseEvent event){
 
+        // Get mouseClick coordinates
+        double x = event.getX(); // mouse x pos
+        double y = event.getY(); // mouse y pos
+
+        // Find cell position in board cells array
+        int cellPosX = (int) Math.floor(x / this.cellSize);
+        int cellPosY = (int) Math.floor(y / this.cellSize);
+
+        // Get cell
+        Cell cell = this.board.getCell(cellPosX, cellPosY);
+
+        // Toggle alive
+        boolean toggle = !cell.isAlive();
+        cell.setAlive(toggle);
+
+        // update canvas
+        this.board.drawCell(cell);
+    }
 }

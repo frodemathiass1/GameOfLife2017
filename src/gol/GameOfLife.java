@@ -32,19 +32,7 @@ public class GameOfLife extends Application {
     }
 
 
-
     public static void main(String[] args) {
-
         launch(args);
-
-
-
-
-        //Board bc = new Board();
-       // bc.setCellz();
-        //bc.printCellList();
-        //bc.getCellsList();
-
-
     }
 }
