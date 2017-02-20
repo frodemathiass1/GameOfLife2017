@@ -22,9 +22,10 @@ public class MainController implements Initializable {
 
     //private GraphicsContext gc;
     private Board board;
-    private Cell cellSize;
+    private int cellSize;
     private Cell[][] cells;
     private int speed;
+
 
 
     // Internal GUI objects
@@ -60,7 +61,7 @@ public class MainController implements Initializable {
         if(st=="Pause"){
             startBtn.setText("Start");
         }
-        draw();
+       draw();
     }
 
 
@@ -81,6 +82,7 @@ public class MainController implements Initializable {
 
     @FXML
     public void pickColor(){
+
         System.out.println(colorPick.getValue().toString());
     }
 

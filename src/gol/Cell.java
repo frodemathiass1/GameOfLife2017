@@ -6,7 +6,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class Cell extends Rectangle{
+public class Cell{
 
     public  static final int CELLSIZE=25;
     private boolean alive;
@@ -14,14 +14,14 @@ public class Cell extends Rectangle{
 
 
     public Cell(){
-        super(CELLSIZE,CELLSIZE);
+        //super(CELLSIZE,CELLSIZE);
         setAlive(true); // Boolean should not be set here
     }
 
 
     public void setAlive(boolean alive){
         this.alive=alive;
-        setFill(alive ? Color.BLACK : Color.WHITE);
+        //setFill(alive ? Color.BLACK : Color.WHITE);
     }
 
 
@@ -37,6 +37,6 @@ public class Cell extends Rectangle{
     public boolean isAlive(){return this.alive;}
     public int getPosX(){return this.posX;}
     public int getPosY(){return this.posY;}
-    public int getSize(){return CELLSIZE;}
+    //public int getSize(){return CELLSIZE;}
 
 }
