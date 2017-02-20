@@ -20,7 +20,7 @@ import javafx.scene.paint.Color;
 public class MainController implements Initializable {
 
 
-    private GraphicsContext gc;
+    //private GraphicsContext gc;
     private Board board;
     private Cell cellSize;
     private Cell[][] cells;
@@ -35,8 +35,6 @@ public class MainController implements Initializable {
     @FXML private GridPane grid;
 
 
-
-
     // Initialize at application startup
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
@@ -47,14 +45,14 @@ public class MainController implements Initializable {
 
     // Draw method renders to Canvas
     public void draw(){
-        gc=canvas.getGraphicsContext2D();
+        GraphicsContext gc=canvas.getGraphicsContext2D();
         board=new Board(gc);
     }
 
 
     // Button & Slider Event handling
     public void startPause(){
-        gc=canvas.getGraphicsContext2D();
+        GraphicsContext gc=canvas.getGraphicsContext2D();
         board=new Board(gc);
 
         String st = startBtn.getText();
@@ -67,6 +65,7 @@ public class MainController implements Initializable {
 
 
     public void resetBoard(){
+        GraphicsContext gc = canvas.getGraphicsContext2D();
             gc.clearRect(0,0,600,354);
             System.out.println("Canvas reset");
             resetDialog();

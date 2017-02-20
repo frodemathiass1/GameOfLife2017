@@ -13,13 +13,9 @@ public class Cell extends Rectangle{
     private int posX, posY;
 
 
-    // Cell Constructor
     public Cell(){
-
-    }
-    public Cell(boolean alive){
         super(CELLSIZE,CELLSIZE);
-        setAlive(alive);
+        setAlive(true); // Boolean should not be set here
     }
 
 

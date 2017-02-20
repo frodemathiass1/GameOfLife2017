@@ -38,5 +38,13 @@ public class GameOfLife extends Application {
         launch(args);
 
 
+
+
+        //Board bc = new Board();
+       // bc.setCellz();
+        //bc.printCellList();
+        //bc.getCellsList();
+
+
     }
 }
