@@ -50,8 +50,8 @@ public class MainController implements Initializable {
         Cell cell = this.board.getCell(cellPosX, cellPosY);
 
         // Toggle alive
-        boolean toggle = !cell.isAlive();
-        cell.setAlive(toggle);
+        boolean toggleAlive = !cell.isAlive();
+        cell.setAlive(toggleAlive);
 
         // update canvas
         this.board.drawCell(cell);
@@ -64,13 +64,11 @@ public class MainController implements Initializable {
     public void startPause(){
 
     }
-
     @FXML
     public void resetBoard(){
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0,0,600,354);
     }
-
     @FXML
     public void pickColor(){
          System.out.println(colorPick.getValue().toString());
@@ -80,7 +78,6 @@ public class MainController implements Initializable {
     public void exitApp(){
         Platform.exit();
     }
-
 
     @FXML
     public void sliderSize(){
