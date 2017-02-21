@@ -71,9 +71,8 @@ public class MainController implements Initializable {
         gc.clearRect(0,0,600,354);
     }
 
-
     @FXML
-   public void pickColor(){
+    public void pickColor(){
          System.out.println(colorPick.getValue().toString());
     }
 
