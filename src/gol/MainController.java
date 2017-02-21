@@ -11,7 +11,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Alert;
 
-
+// test
 public class MainController implements Initializable {
 
     private Board board;
