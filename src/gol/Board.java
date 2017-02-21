@@ -1,6 +1,7 @@
 package gol;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 
 public class Board {
@@ -32,15 +33,17 @@ public class Board {
     }
 
 
+
     // Draw cell to canvas
     public void drawCell(Cell cell) {
         System.out.println(cell.getX());
         System.out.println(cell.getY());
         if (cell.isAlive()) {
             this.gc.setFill(Color.BLACK);
-
+            // Need colorPicker object here to assign colorPicker value?
         } else {
             this.gc.setFill(Color.LIGHTGRAY);
+
         }
         this.gc.fillRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
     }

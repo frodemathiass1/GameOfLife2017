@@ -26,6 +26,7 @@ public class MainController implements Initializable {
     @FXML private Slider sizeSlider;
 
 
+
     // Initialize at application startup
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
