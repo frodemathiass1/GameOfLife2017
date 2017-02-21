@@ -3,12 +3,10 @@ package gol;
 
 public class Cell{
 
-    // Dead at initalisation
     private boolean alive = false;
     private int posX, posY;
     private Cell[] neibours;
 
-    // Cell Constructor
     public Cell(int x, int y) {
         this.posX = x;
         this.posY = y;
@@ -27,5 +25,4 @@ public class Cell{
     public boolean isAlive(){return this.alive;}
     public int getX(){return this.posX;}
     public int getY(){return this.posY;}
-
 }

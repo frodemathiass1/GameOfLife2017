@@ -41,10 +41,12 @@ public class MainController implements Initializable {
         double x = event.getX(); // mouse x pos
         double y = event.getY(); // mouse y pos
 
+
         // Find cell position in board cells array
-        // Rounds down event coordinates to integer and divides it with cellsize to get exact canvas position
+        // Rounds down event coordinates to integer and divides it with cellSize to get exact canvas position
         int cellPosX = (int) Math.floor(x / this.cellSize);
         int cellPosY = (int) Math.floor(y / this.cellSize);
+
         System.out.println(cellPosX+" "+cellPosY);
 
         // Get cell
@@ -54,9 +56,15 @@ public class MainController implements Initializable {
         boolean toggleAlive = !cell.isAlive();
         cell.setAlive(toggleAlive);
 
-        // update canvas
+        // Update canvas
         this.board.drawCell(cell);
     }
+
+
+
+
+
+
 
 
 

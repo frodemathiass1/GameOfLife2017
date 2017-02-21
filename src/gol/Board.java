@@ -13,6 +13,13 @@ public class Board {
     private GraphicsContext gc;
 
 
+    // Board Constructor
+    public Board(GraphicsContext gc, int cellSize) {
+        this.cellSize = cellSize;
+        this.initialize();
+        this.gc = gc;
+    }
+
     // Initialize game board
     private void initialize() {
         this.cells = new Cell[colums][rows];
@@ -24,14 +31,6 @@ public class Board {
             }
         }
     }
-
-    // Board Constructor
-    public Board(GraphicsContext gc, int cellSize) {
-        this.cellSize = cellSize;
-        this.initialize();
-        this.gc = gc;
-    }
-
 
 
     // Draw cell to canvas
