@@ -33,6 +33,31 @@ public class MainController implements Initializable {
         this.board=new Board(gc, this.cellSize); // this is dependency injection!
     }
 
+    @FXML
+    public void getCellPosition(MouseEvent event){
+
+        // Get mouseClick coordinates
+        double x = event.getX(); // mouse x pos
+        double y = event.getY(); // mouse y pos
+
+        // Find cell position in board cells array
+        // Rounds down event coordinates to integer and divides it with cellsize to get canvas position
+        int cellPosX = (int) Math.floor(x / this.cellSize);
+        int cellPosY = (int) Math.floor(y / this.cellSize);
+        System.out.println(cellPosX+" "+cellPosY);
+
+        // Get cell
+        Cell cell = this.board.getCell(cellPosX, cellPosY);
+
+        // Toggle alive
+        boolean toggle = !cell.isAlive();
+        cell.setAlive(toggle);
+
+        // update canvas
+        this.board.drawCell(cell);
+    }
+
+
 
     // Button & Slider Event handling
     @FXML
@@ -65,27 +90,5 @@ public class MainController implements Initializable {
                 -> System.out.println("Value: " + newSize.intValue()));
     }
 
-    @FXML
-    public void getCellPosition(MouseEvent event){
 
-        // Get mouseClick coordinates
-        double x = event.getX(); // mouse x pos
-        double y = event.getY(); // mouse y pos
-
-        // Find cell position in board cells array
-        // Rounds down event coordinates to integer and divides it with cellsize to get canvas position
-        int cellPosX = (int) Math.floor(x / this.cellSize);
-        int cellPosY = (int) Math.floor(y / this.cellSize);
-        System.out.println(cellPosX+" "+cellPosY);
-
-        // Get cell
-        Cell cell = this.board.getCell(cellPosX, cellPosY);
-
-        // Toggle alive
-        boolean toggle = !cell.isAlive();
-        cell.setAlive(toggle);
-
-        // update canvas
-        this.board.drawCell(cell);
-    }
 }
