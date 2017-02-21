@@ -3,6 +3,7 @@ package gol;
 
 public class Cell{
 
+    // Dead at initalisation
     private boolean alive = false;
     private int posX, posY;
     private Cell[] neibours;
