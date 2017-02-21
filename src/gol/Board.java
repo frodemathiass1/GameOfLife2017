@@ -20,6 +20,11 @@ public class Board {
         this.gc = gc;
     }
 
+    // Returns cells
+    public Cell getCell(int x, int y) {
+        return this.cells[x][y];
+    }
+
     // Initialize game board
     private void initialize() {
         this.cells = new Cell[colums][rows];
@@ -47,8 +52,5 @@ public class Board {
         this.gc.fillRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
     }
 
-    // returns cells
-    public Cell getCell(int x, int y) {
-        return this.cells[x][y];
-    }
+
 }
