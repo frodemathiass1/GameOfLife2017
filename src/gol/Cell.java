@@ -7,6 +7,7 @@ public class Cell{
     private int posX, posY;
     private Cell[] neibours;
 
+    // Constructor is invoked the Draw cell method in the controller
     public Cell(int x, int y) {
         this.posX = x;
         this.posY = y;
