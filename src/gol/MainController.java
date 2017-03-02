@@ -13,11 +13,10 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-
 public class MainController implements Initializable {
 
     public Board board;
-    public int cellSize = 20;
+    public int cellSize = 10;
     //private Cell[][] cells;
 
 
@@ -27,12 +26,11 @@ public class MainController implements Initializable {
     @FXML private Canvas canvas;
     @FXML private Slider sizeSlider;
 
-
     /*
-    * Step 1:
     * Initializes application, with 'new board constructor' which
     * takes the graphic content from canvas, and cellsize as argument
     */
+
     // Initialize at application startup
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
@@ -46,11 +44,9 @@ public class MainController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
                                 Number oldValue, Number newValue) {
-
-                System.out.println(board.getColor());
-                System.out.println(newValue.intValue() );
                 setCellSize(newValue.intValue());
-
+                //System.out.println(board.getColor());
+                //System.out.println(newValue.intValue() );
 
             }
         });
@@ -60,7 +56,6 @@ public class MainController implements Initializable {
         this.board.setCellSize(cellSize);
         this.board.draw();
     }
-
 
     /*
     * Responsible for handling mouseClicks on canvas.
@@ -78,18 +73,12 @@ public class MainController implements Initializable {
         double x = event.getX(); // mouse x pos
         double y = event.getY(); // mouse y pos
 
-
         // Find cell position in board cells array
         // Rounds down event coordinates to integer and divides it with cellSize to get exact canvas position
-
-
         int cellPosX = (int) Math.floor(x / board.getCellSize());
         int cellPosY = (int) Math.floor(y / board.getCellSize());
-
-
-         System.out.println(cellPosX+" "+cellPosY);
-
-        System.out.println(cellSize);
+        //System.out.println(cellPosX+" "+cellPosY);
+        //System.out.println(cellSize);
 
         // Get cell
         Cell cell = this.board.getCell(cellPosX, cellPosY);
@@ -103,13 +92,6 @@ public class MainController implements Initializable {
     }
 
 
-
-
-
-
-
-
-
     // Button & Slider Event handling
     @FXML
     public void startPause(){
@@ -118,32 +100,20 @@ public class MainController implements Initializable {
     @FXML
     public void resetBoard(){
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.clearRect(0,0,600,354);
+        gc.clearRect(0,0,600,400);
+        board.killCells(board.getCells());
+        board.draw();
     }
+
     @FXML
     public void pickColor(){
          //System.out.println(colorPick.getValue().toString());
          board.setColor(colorPick.getValue());
          board.draw();
-
-
     }
 
     @FXML
     public void exitApp(){
         Platform.exit();
     }
-
-    @FXML
-    public void sliderSize(){
-        //@Override
-        //sizeSlider.valueProperty().addListener((observable, oldSize, newSize)
-          //      -> System.out.println("Value: " + newSize.intValue()));
-
-
-
-
-    }
-
-
 }
