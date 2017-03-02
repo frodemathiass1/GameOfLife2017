@@ -7,8 +7,8 @@ import javafx.scene.paint.Color;
 public class Board {
 
     private int cellSize;
-    private int colums = 30;
-    private int rows = 20;
+    private int colums = 50;
+    private int rows = 40;
     private Cell[][] cells;
     private GraphicsContext gc;
 
@@ -19,6 +19,8 @@ public class Board {
    * to draw the board and cells by mouseEvents
    */
     // Board Constructor
+
+
     public Board(GraphicsContext gc, int cellSize) {
         this.cellSize = cellSize;
         this.initialize();
@@ -79,6 +81,16 @@ public class Board {
         this.gc.fillRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
     }
 
+    public void draw() {
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells[i].length; j++) {
+                drawCell(cells[i][j]);
+            }
+        }
+    }
 
 
+    public void setCellSize(int cellsize) {
+        this.cellSize = cellsize;
+    }
 }
