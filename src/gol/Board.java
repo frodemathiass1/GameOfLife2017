@@ -6,12 +6,16 @@ import javafx.scene.paint.Color;
 
 public class Board {
 
-    private int cellSize;
+    public int cellSize;
     private int colums = 50;
     private int rows = 40;
     private Cell[][] cells;
     private GraphicsContext gc;
+    private Color color;
 
+    public void setColor(Color c){
+        this.color = c;
+    }
 
     /*
    * Board constructor triggers the board initialisation method and sets the boards cells' size
@@ -20,11 +24,18 @@ public class Board {
    */
     // Board Constructor
 
+    public Board() {
+
+    }
 
     public Board(GraphicsContext gc, int cellSize) {
         this.cellSize = cellSize;
         this.initialize();
         this.gc = gc;
+    }
+
+    public int getCellSize(){
+        return this.cellSize;
     }
 
     /*
@@ -61,11 +72,12 @@ public class Board {
     // Invoked by the Board constructor which takes Graphic Content as argument
     // Draw cell to canvas
     public void drawCell(Cell cell) {
-        System.out.println(cell.getX());
-        System.out.println(cell.getY());
+        //System.out.println(cell.getX());
+        //System.out.println(cell.getY());
 
         if (cell.isAlive()) {
-            this.gc.setFill(Color.BLACK);
+            this.gc.setFill(color);
+
             // Need colorPicker object here to assign colorPicker value?
         } else {
             this.gc.setFill(Color.LIGHTGREY);

@@ -34,7 +34,7 @@
                <HBox.margin>
                   <Insets right="10.0" top="12.0" />
                </HBox.margin></ColorPicker>
-            <Label text="Grid size:" textFill="WHITE">
+            <Label text="Cell size:" textFill="WHITE">
                <HBox.margin>
                   <Insets top="17.0" />
                </HBox.margin>
@@ -42,7 +42,7 @@
                   <Font size="10.0" />
                </font></Label>
 
-             <Slider fx:id="sizeSlider" blockIncrement="1.0" max="50" prefHeight="16.0" prefWidth="150.0" showTickMarks="true" snapToTicks="true">
+             <Slider fx:id="sizeSlider" blockIncrement="1.0" min="20" max="50" prefHeight="16.0" prefWidth="150.0" showTickMarks="true" snapToTicks="true">
                <HBox.margin>
                   <Insets top="15.0" />
                </HBox.margin></Slider>

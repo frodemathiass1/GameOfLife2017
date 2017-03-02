@@ -11,8 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
-// test
+
 public class MainController implements Initializable {
 
     public Board board;
@@ -37,6 +38,7 @@ public class MainController implements Initializable {
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         this.board=new Board(gc, this.cellSize); // this is dependency injection!
+        colorPick.setValue(Color.BLACK);
 
         sizeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -45,6 +47,8 @@ public class MainController implements Initializable {
 
                 System.out.println(newValue.intValue() );
                 setCellSize(newValue.intValue());
+
+
             }
         });
     }
@@ -74,10 +78,15 @@ public class MainController implements Initializable {
 
         // Find cell position in board cells array
         // Rounds down event coordinates to integer and divides it with cellSize to get exact canvas position
-        int cellPosX = (int) Math.floor(x / this.cellSize);
-        int cellPosY = (int) Math.floor(y / this.cellSize);
 
-        // System.out.println(cellPosX+" "+cellPosY);
+
+        int cellPosX = (int) Math.floor(x / board.getCellSize());
+        int cellPosY = (int) Math.floor(y / board.getCellSize());
+
+
+         System.out.println(cellPosX+" "+cellPosY);
+
+        System.out.println(cellSize);
 
         // Get cell
         Cell cell = this.board.getCell(cellPosX, cellPosY);
@@ -110,7 +119,11 @@ public class MainController implements Initializable {
     }
     @FXML
     public void pickColor(){
-         System.out.println(colorPick.getValue().toString());
+         //System.out.println(colorPick.getValue().toString());
+         board.setColor(colorPick.getValue());
+         board.draw();
+
+
     }
 
     @FXML
