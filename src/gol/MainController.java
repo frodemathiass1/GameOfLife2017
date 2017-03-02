@@ -39,12 +39,15 @@ public class MainController implements Initializable {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         this.board=new Board(gc, this.cellSize); // this is dependency injection!
         colorPick.setValue(Color.BLACK);
+        this.board.draw();
+
 
         sizeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
                                 Number oldValue, Number newValue) {
 
+                System.out.println(board.getColor());
                 System.out.println(newValue.intValue() );
                 setCellSize(newValue.intValue());
 

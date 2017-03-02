@@ -11,7 +11,7 @@ public class Board {
     private int rows = 40;
     private Cell[][] cells;
     private GraphicsContext gc;
-    private Color color;
+    private Color color = Color.BLACK;
 
     public void setColor(Color c){
         this.color = c;
@@ -55,6 +55,8 @@ public class Board {
                 // To do: initialize each cells neigbours...
 
 
+
+
             }
         }
     }
@@ -78,9 +80,11 @@ public class Board {
         if (cell.isAlive()) {
             this.gc.setFill(color);
 
-            // Need colorPicker object here to assign colorPicker value?
+
+
         } else {
             this.gc.setFill(Color.LIGHTGREY);
+
 
 
         }
@@ -90,7 +94,11 @@ public class Board {
         * Each x,y coordinate for every cell in the array of cells is being called in this codeline.
         * In other words, each cell is being asked for its position in this line.
         * */
+
         this.gc.fillRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
+        this.gc.setStroke(Color.WHITE);
+        this.gc.setLineWidth(0.3);
+        this.gc.strokeRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
     }
 
     public void draw() {
@@ -104,5 +112,9 @@ public class Board {
 
     public void setCellSize(int cellsize) {
         this.cellSize = cellsize;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }
