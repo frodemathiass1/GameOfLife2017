@@ -40,6 +40,7 @@ public class MainController implements Initializable {
         this.board.draw();
 
 
+
         sizeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
@@ -77,7 +78,7 @@ public class MainController implements Initializable {
         // Rounds down event coordinates to integer and divides it with cellSize to get exact canvas position
         int cellPosX = (int) Math.floor(x / board.getCellSize());
         int cellPosY = (int) Math.floor(y / board.getCellSize());
-        //System.out.println(cellPosX+" "+cellPosY);
+        System.out.println(cellPosX+" "+cellPosY);
         //System.out.println(cellSize);
 
         // Get cell
@@ -96,12 +97,13 @@ public class MainController implements Initializable {
     @FXML
     public void startPause(){
 
+
     }
     @FXML
     public void resetBoard(){
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0,0,600,400);
-        board.killCells(board.getCells());
+        board.killCells(board.getGrid());
         board.draw();
     }
 

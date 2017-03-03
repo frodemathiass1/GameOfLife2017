@@ -9,7 +9,7 @@ public class Board {
     public int cellSize;
     private int colums = 60;
     private int rows = 40;
-    private Cell[][] cells;
+    private Cell[][] grid;
     private GraphicsContext gc;
     private Color color = Color.BLACK;
 
@@ -33,16 +33,25 @@ public class Board {
    * which are triggered by mouseEvents method in controller
    */
 
+    private double [][] neigbours;
+
     private void initialize() {
-        this.cells = new Cell[colums][rows];
+        this.grid = new Cell[colums][rows];
         for (int x = 0; x < this.colums; x++) {
             for (int y = 0; y < this.rows; y++) {
-                // initialize all cells (default dead)  selve spillbrettet
-                this.cells[x][y] = new Cell(x, y);
+                // initialize all cells (default dead) selve spillbrettet
+                this.grid[x][y] = new Cell(x, y);
+
                 // To do: initialize each cells neigbours...
+
+                // Each cell's coordinates debugging
+                System.out.println(this.grid[x][y].getX()+" "+this.grid[x][y].getY());
+
             }
         }
     }
+
+
 
     // Invoked by the Board constructor which takes Graphic Content as argument
     public void drawCell(Cell cell) {
@@ -63,15 +72,15 @@ public class Board {
 
 
     public void draw() {
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; j < cells[i].length; j++) {
-                drawCell(cells[i][j]);
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                drawCell(grid[i][j]);
             }
         }
     }
 
 
-    // Loop through Cell array and kill alive sells
+    // Loop through Cell array and kill alive cells  (Clear board)
     public void killCells(Cell[][] cells){
         for(int i =0; i< cells.length; i++){
             for(int j=0; j < cells[j].length; j++){
@@ -82,19 +91,22 @@ public class Board {
         }
     }
 
+
+
+
+
     // Setters
     public void setColor(Color c){
         this.color = c;
     }
-
     public void setCellSize(int cellsize) {
         this.cellSize = cellsize;
     }
 
     // Getters
     // getCell Method is called by the MouseClick event which asks every Cell in the array of Cell objects for its coordinates
-    public Cell getCell(int x, int y) {return this.cells[x][y];}
-    public Cell[][] getCells(){return this.cells;}
+    public Cell getCell(int x, int y) {return this.grid[x][y];}
+    public Cell[][] getGrid(){return this.grid;}
     public int getCellSize(){return this.cellSize;}
 
 
