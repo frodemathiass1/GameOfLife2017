@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
 public class MainController implements Initializable {
 
     public Board board;
-    public int cellSize = 10;
+    public int cellSize = 30;
     //private Cell[][] cells;
 
 
@@ -34,8 +34,8 @@ public class MainController implements Initializable {
     // Initialize at application startup
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        this.board=new Board(gc, this.cellSize); // this is dependency injection!
+        GraphicsContext graphics = canvas.getGraphicsContext2D();
+        this.board=new Board(graphics, this.cellSize); // this is dependency injection!
         colorPick.setValue(Color.BLACK);
         this.board.draw();
 
@@ -82,7 +82,7 @@ public class MainController implements Initializable {
         //System.out.println(cellSize);
 
         // Get cell
-        Cell cell = this.board.getCell(cellPosX, cellPosY);
+        Cell cell = this.board.getCellCoordinates(cellPosX, cellPosY);
 
         // Toggle alive
         boolean toggleAlive = !cell.isAlive();
@@ -101,16 +101,17 @@ public class MainController implements Initializable {
     }
     @FXML
     public void resetBoard(){
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.clearRect(0,0,600,400);
+        GraphicsContext graphics = canvas.getGraphicsContext2D();
+        graphics.clearRect(0,0,600,400);
         board.killCells(board.getGrid());
         board.draw();
+
     }
 
     @FXML
     public void pickColor(){
          //System.out.println(colorPick.getValue().toString());
-         board.setColor(colorPick.getValue());
+         board.setPickedColor(colorPick.getValue());
          board.draw();
     }
 
