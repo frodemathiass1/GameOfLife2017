@@ -42,56 +42,68 @@ public class Board {
 
                 // Instantiate neigbours at gameboard initialisation ...or in Cell class? See alternative in cell class
 
-                    // Må vel være en bedre måte å gjøre det her på????????
+                // Må vel være en bedre måte å gjøre det her på????????
 
                 // funker ikke helt... out of bounds
-                for(int rowMod =1; rowMod < grid.length-1; rowMod++ ){
-                    for (int colMod=1; colMod < grid[rowMod].length-1; colMod++){
-                        if(rows >=0 && colums >=0){
-                            neighbors=new ArrayList<>();
+                for (int rowMod = 1; rowMod < grid.length - 1; rowMod++) {
+                    for (int colMod = 1; colMod < grid[rowMod].length - 1; colMod++) {
+                        if (rows >= 0 && colums >= 0) {
+                            neighbors = new ArrayList<>();
 
                             // 1.Top-left (0,0)
-                            neighbors.add(this.grid[x][y].getX()-1);
-                            neighbors.add(this.grid[x][y].getY()-1);
+                            neighbors.add(this.grid[x][y].getX() - 1);
+                            neighbors.add(this.grid[x][y].getY() - 1);
 
                             // 2.Top (0,1)
                             neighbors.add(this.grid[x][y].getX());
-                            neighbors.add(this.grid[x][y].getY()-1);
+                            neighbors.add(this.grid[x][y].getY() - 1);
 
                             // 3.Top-right (0,2)
-                            neighbors.add(this.grid[x][y].getX()+1);
-                            neighbors.add(this.grid[x][y].getY()-1);
+                            neighbors.add(this.grid[x][y].getX() + 1);
+                            neighbors.add(this.grid[x][y].getY() - 1);
 
                             // 4.Left (1,0)
-                            neighbors.add(this.grid[x][y].getX()-1);
+                            neighbors.add(this.grid[x][y].getX() - 1);
                             neighbors.add(this.grid[x][y].getY());
 
                             // 5.Right (1,2)
-                            neighbors.add(this.grid[x][y].getX()+1);
+                            neighbors.add(this.grid[x][y].getX() + 1);
                             neighbors.add(this.grid[x][y].getY());
 
                             // 6.Bottom-left (2,0)
-                            neighbors.add(this.grid[x][y].getX()-1);
-                            neighbors.add(this.grid[x][y].getY()+1);
+                            neighbors.add(this.grid[x][y].getX() - 1);
+                            neighbors.add(this.grid[x][y].getY() + 1);
 
                             // 7.Bottom (2,1)
                             neighbors.add(this.grid[x][y].getX());
-                            neighbors.add(this.grid[x][y].getY()+1);
+                            neighbors.add(this.grid[x][y].getY() + 1);
 
                             // 8.Bottom-right (2,2)
-                            neighbors.add(this.grid[x][y].getX()+1);
-                            neighbors.add(this.grid[x][y].getY()+1);
+                            neighbors.add(this.grid[x][y].getX() + 1);
+                            neighbors.add(this.grid[x][y].getY() + 1);
                         }
                     }
                 }
-                System.out.println(" X: "+grid[x][y].getX() +" | Y: "+ grid[x][y].getY()); // Cell coordinate
-                System.out.println(neighbors); //each cell neighbour coordinates
+
+
+                // Debugging, printing cells and neighbors
+                System.out.println("Cell:  X: " + grid[x][y].getX() + " | Y: " + grid[x][y].getY()); // Cell coordinate
+                System.out.print("Neighbors: ");
+
+                for (int i = 0; i < neighbors.size(); i++) {
+                    //System.out.print(neighbors.get(i).toString()+", ");
+                    String str = neighbors.get(i) + " ";
+                    System.out.print(str.substring(0, str.length()));
+                }
+                //System.out.println(neighbors); //each cell neighbour coordinates
                 System.out.println();
+                System.out.println();
+
+
             }
         }
+
     }
-
-
   public void nextGeneration(){
 
         // tegn grafikk til canvas basert på gol regler
