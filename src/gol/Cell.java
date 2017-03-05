@@ -17,8 +17,8 @@ public class Cell{
         this.y = y;
 
         // set neighbours at cell instantiation ???
-        setNeigbours(x, y);
-        System.out.println(this.getNeighbors());
+        //setNeigbours(x, y);
+        //System.out.println(this.getNeighbors());
     }
 
     public String getNeighbors(){

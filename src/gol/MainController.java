@@ -37,7 +37,7 @@ public class MainController implements Initializable {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         this.board=new Board(graphics, this.cellSize); // this is dependency injection!
         colorPick.setValue(Color.BLACK);
-        this.board.draw();
+        this.board.drawGrid();
 
 
 
@@ -55,7 +55,7 @@ public class MainController implements Initializable {
 
     public void setCellSize(int cellSize) {
         this.board.setCellSize(cellSize);
-        this.board.draw();
+        this.board.drawGrid();
     }
 
     /*
@@ -93,18 +93,23 @@ public class MainController implements Initializable {
     }
 
 
+
+
+
+
+
     // Button & Slider Event handling
     @FXML
     public void startPause(){
-
+        board.nextGeneration();
 
     }
     @FXML
-    public void resetBoard(){
+    public void clearBoard(){
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.clearRect(0,0,600,400);
-        board.killCells(board.getGrid());
-        board.draw();
+        board.clearBoard(board.getGrid());
+        board.drawGrid();
 
     }
 
@@ -112,7 +117,7 @@ public class MainController implements Initializable {
     public void pickColor(){
          //System.out.println(colorPick.getValue().toString());
          board.setPickedColor(colorPick.getValue());
-         board.draw();
+         board.drawGrid();
     }
 
     @FXML
