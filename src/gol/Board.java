@@ -56,6 +56,8 @@ public class Board {
                 //System.out.println(this.grid[x][y].getX()+" "+this.grid[x][y].getY());
 
                 //neighbors = new int[16];
+
+                // Instantiate neigbours at gameboard initalisation ...or in Cell class?
                 neighbors=new ArrayList<>();
 
                 // 1.Top-left (0,0)
@@ -90,8 +92,6 @@ public class Board {
                 neighbors.add(this.grid[x][y].getX()+1);
                 neighbors.add(this.grid[x][y].getY()+1);
 
-
-
                 //neighbors[x]=this.grid[x][y].getX();
                 //neighbors[y]=this.grid[x][y].getY();
                 //System.out.println("x: "+neighbors[x]+" | y: "+neighbors[y]);
@@ -99,21 +99,12 @@ public class Board {
 
 
             }
-
-
-
-
         }
 
-
-
     }
 
 
-    public void initializeNeighbors(){
 
-
-    }
 
     // Invoked by the Board constructor which takes Graphic Content as argument
     public void drawCell(Cell cell) {
