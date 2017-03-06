@@ -7,16 +7,14 @@ public class Cell{
 
     private boolean alive = false;
     private int x, y;
-    //private Cell[] neibours;
     private ArrayList<Integer> neighbors;
-    public int neighborCount = 0; // test
 
-    // Constructor is invoked the Draw cell method in the controller
+
+
     public Cell(int x, int y) {
         this.x = x;
         this.y = y;
-
-        // set neighbours at cell instantiation ???
+        // initialize neighbours at cell instantiation or in board class???
         //setNeigbours(x, y);
         //System.out.println(this.getNeighbors());
     }
@@ -60,14 +58,10 @@ public class Cell{
         // 8.Bottom-right (2,2)
         neighbors.add(this.x+1);
         neighbors.add(this.y+1);
-
-        neighborCount+=8;
-
     }
 
-
+    // Setters
     public void setAlive(boolean alive){
-
         this.alive=alive;
     }
 

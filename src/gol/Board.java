@@ -2,8 +2,6 @@ package gol;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +17,6 @@ public class Board {
     //protected ArrayList<ArrayList<Cell>>[][] grid2;
 
 
-
-
     public Board(GraphicsContext graphics, int cellSize) {
         this.cellSize = cellSize;
         this.initialize();
@@ -28,14 +24,9 @@ public class Board {
 
     }
 
-
-    /*
-   *
-   * Method responsible for initializing the 2d Cell array (Grid).
-   * All the individual Cells are called when the Grid(array) is initialized with their position
-   * which are triggered by mouseEvents method in controller
-   */
-
+    // Initializes the Board matrix (grid) with dead cells including its neighbors
+    // All individual cells are called when the grid is initialized with their coordinates
+    // triggered by mouse-events in controller class.
     private void initialize() {
         grid = new Cell[colums][rows];
         //grid2 = new ArrayList[colums][rows];
@@ -46,12 +37,9 @@ public class Board {
                 grid[x][y] = new Cell(x, y);
                 //grid2<Cell>[x][y]=new Cell(x, y);
 
-
-
                 // To do: initialize each cells neighbors...
 
                 // Instantiate neigbours at gameboard initialisation ...or in Cell class? See alternative in cell class
-
                 // Må vel være en bedre måte å gjøre det her på????????
 
 
@@ -94,11 +82,8 @@ public class Board {
                             // 8.Bottom-right
                             neighbors.add(this.grid[x][y].getX() + 1);
                             neighbors.add(this.grid[x][y].getY() + 1);
-
-
                         }
                     }
-
                 }
 
 
@@ -114,30 +99,19 @@ public class Board {
                 //System.out.println(neighbors);
                 System.out.println();
                 System.out.println();
-
-
-
-
             }
         }
 
     }
-  public void nextGeneration(){
-
+    public void nextGeneration(){
         // tegn grafikk til canvas basert på gol regler
+    }
 
-
-  }
-
-  public void checkNeighbors(){
-
+    public void checkNeighbors(){
       // regler ?
       // gå igjennom alle naboer og sjekk etter levende celler
       // ta vare på tilstander ... og posisjoner ?
-  }
-
-
-
+    }
 
 
 
@@ -147,10 +121,10 @@ public class Board {
         //System.out.println(cell.getY());
         if (cell.isAlive()) {
             this.graphics.setFill(color);
-        }else {
+        }
+        else {
             this.graphics.setFill(Color.LIGHTGREY);
         }
-
 
         this.graphics.setStroke(Color.WHITE); // Sets grid color
         this.graphics.setLineWidth(0.3); // sets the width of the grid line
@@ -168,7 +142,7 @@ public class Board {
     }
 
 
-    // Loop through Cell array and kill alive cells  (Clear board)
+    // Loops through array of cells and toggles alive cells to dead
     public void clearBoard(Cell[][] cells){
         for(int i =0; i< cells.length; i++){
             for(int j=0; j < cells[j].length; j++){
@@ -181,8 +155,6 @@ public class Board {
 
 
 
-
-
     // Setters
     public void setPickedColor(Color c){
         this.color = c;
@@ -192,10 +164,17 @@ public class Board {
     }
 
     // Getters
-    // getCellCoordinates Method is called by the MouseClick event which asks every Cell in the array of Cell objects for its coordinates
-    public Cell getCellCoordinates(int x, int y) {return this.grid[x][y];}
-    public Cell[][] getGrid(){return this.grid;}
-    public int getCellSize(){return this.cellSize;}
+    public Cell getCellCoordinates(int x, int y) {
+        return this.grid[x][y];
+    }
+
+    public Cell[][] getGrid(){
+        return this.grid;
+    }
+
+    public int getCellSize(){
+        return this.cellSize;
+    }
 
 
 }

@@ -33,9 +33,6 @@ public class MainController implements Initializable {
         colorPick.setValue(Color.BLACK);
         this.board.drawGrid();
         sizeSliderHandler();
-
-
-
     }
 
     public void setCellSize(int cellSize) {
