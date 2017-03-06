@@ -36,7 +36,8 @@ public class MainController implements Initializable {
         this.board=new Board(graphics, this.cellSize); // this is dependency injection!
         colorPick.setValue(Color.BLACK);
         this.board.drawGrid();
-        sizeSliderHandler();
+        sliderEventHandler();
+
     }
 
     public void setCellSize(int cellSize) {
@@ -74,8 +75,7 @@ public class MainController implements Initializable {
 
 
     // Button & Slider Event handling
-    @FXML
-    public void sizeSliderHandler(){
+    public void sliderEventHandler(){
         sizeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
@@ -89,7 +89,10 @@ public class MainController implements Initializable {
     }
     @FXML
     public void startPause(){
-        board.nextGeneration();
+        board.checkNeighbors();
+        clearBoard();
+        board.resetCounter();
+
 
     }
     @FXML
@@ -98,6 +101,8 @@ public class MainController implements Initializable {
         graphics.clearRect(0,0,WIDTH,HEIGHT);
         board.clearBoard(board.getGrid());
         board.drawGrid();
+        System.out.println("Board is cleared");
+        sizeSlider.setValue(10); // reset slider when reset
     }
 
     @FXML
