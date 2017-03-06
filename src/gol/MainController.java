@@ -13,6 +13,10 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import static gol.GameOfLife.WIDTH; // Access Stage dimensions from main class
+import static gol.GameOfLife.HEIGHT;
+
+
 public class MainController implements Initializable {
 
     public Board board;
@@ -91,7 +95,7 @@ public class MainController implements Initializable {
     @FXML
     public void clearBoard(){
         GraphicsContext graphics = canvas.getGraphicsContext2D();
-        graphics.clearRect(0,0,600,400);
+        graphics.clearRect(0,0,WIDTH,HEIGHT);
         board.clearBoard(board.getGrid());
         board.drawGrid();
     }

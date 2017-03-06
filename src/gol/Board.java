@@ -33,14 +33,12 @@ public class Board {
 
         for (int x = 0; x < this.grid.length; x++) {
             for (int y = 0; y < this.grid[x].length; y++) {
-                // initialize cell grid
-                grid[x][y] = new Cell(x, y);
+                grid[x][y] = new Cell(x, y); // initialize cell grid
                 //grid2<Cell>[x][y]=new Cell(x, y);
 
-                // To do: initialize each cells neighbors...
-
-                // Instantiate neigbours at gameboard initialisation ...or in Cell class? See alternative in cell class
-                // Må vel være en bedre måte å gjøre det her på????????
+    // To do: initialize each cells neighbors...
+    // Instantiate neigbours at gameboard initialisation ...or in Cell class? See alternative in cell class
+    // Må vel være en bedre måte å gjøre det her på????????
 
 
                 //skal adde naboer der naboen ikke er utenfor kantene ,funker ikke helt... still out of bounds
@@ -101,8 +99,8 @@ public class Board {
                 System.out.println();
             }
         }
-
     }
+
     public void nextGeneration(){
         // tegn grafikk til canvas basert på gol regler
     }
