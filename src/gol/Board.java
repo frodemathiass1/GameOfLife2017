@@ -10,13 +10,13 @@ import java.util.List;
 public class Board {
 
     public int cellSize;
-    private int colums = 20;
-    private int rows = 10;
+    private int colums = 60;
+    private int rows = 40;
     private Cell[][] grid;
     private GraphicsContext graphics;
     private Color color = Color.BLACK;
     private ArrayList<Integer> neighbors;
-    protected ArrayList<ArrayList<Cell>>[][] grid2;
+    //protected ArrayList<ArrayList<Cell>>[][] grid2;
 
 
 

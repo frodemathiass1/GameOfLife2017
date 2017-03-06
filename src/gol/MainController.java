@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
 public class MainController implements Initializable {
 
     public Board board;
-    public int cellSize = 30;
+    public int cellSize = 20;
     //private Cell[][] cells;
 
 
@@ -49,6 +49,7 @@ public class MainController implements Initializable {
                 //System.out.println(board.getColor());
                 //System.out.println(newValue.intValue() );
 
+                // Trenger et updateCanvas metodeKall her? Skriver over gammel grid slik at gamle rutenett henger igjen
             }
         });
     }
