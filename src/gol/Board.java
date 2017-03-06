@@ -126,6 +126,41 @@ public class Board {
       // gå igjennom alle naboer og sjekk etter levende celler
       // ta vare på tilstander ... og posisjoner ?
 
+        // naaahh.
+        /*for(int x = 0; x < this.grid.length ;x++){
+            for(int y = 0; y <this.grid[x].length; y++){
+                if (this.grid[x][y].isAlive() == true){
+
+                    if(this.grid[x-1][y-1].isAlive()==true){
+
+                    }
+                    else if(this.grid[x][y-1].isAlive()==true){
+
+                    }
+                    else if(this.grid[x+1][y-1].isAlive()==true){
+
+                    }
+                    else if(this.grid[x-1][y].isAlive()==true){
+
+                    }
+                    else if(this.grid[x+1][y].isAlive()==true){
+
+                    }
+                    else if(this.grid[x-1][y+1].isAlive()==true){
+
+                    }
+                    else if(this.grid[x][y+1].isAlive()==true){
+
+                    }
+                    else if(this.grid[x+1][y+1].isAlive()==true){
+
+                    }
+                }
+            }
+        }*/
+
+
+
 
         // loops through grid and looks for alive cells
         for(int x = 0; x <this.grid.length; x++){
@@ -135,10 +170,7 @@ public class Board {
                 // but will not work bcus neighbor is array of Integers (x/y positions) ?
                 if(this.grid[x][y].isAlive()==true){ // sjekk etter levende naboer
 
-                    foundAlive=true;
-                    neighborCounter++;  // Må finne levende naboer for at dette skal fungere
-                    System.out.println(neighborCounter);
-
+                    // ===== how to proceed? ====== //
 
                     // Game of Life Rules
                     if( (grid[x][y].isAlive()==true) && (neighborCounter < 2) ){ // underpopulation
@@ -153,12 +185,6 @@ public class Board {
                     else if( (grid[x][y].isAlive()==false) && (neighborCounter > 3) ){  //reproduction
                          // do something...
                     }
-
-
-
-
-
-
                 }
             }
 
