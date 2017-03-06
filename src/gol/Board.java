@@ -61,38 +61,37 @@ public class Board {
                         if (rows >= 0 && colums >= 0) {
                             neighbors = new ArrayList<>();
 
-                            // 1.Top-left (0,0)
+                            // 1.Top-left
                             neighbors.add(this.grid[x][y].getX() - 1);
                             neighbors.add(this.grid[x][y].getY() - 1);
 
 
-                            // 2.Top (0,1)
+                            // 2.Top
                             neighbors.add(this.grid[x][y].getX());
                             neighbors.add(this.grid[x][y].getY() - 1);
 
-                            // 3.Top-right (0,2)
+                            // 3.Top-right
                             neighbors.add(this.grid[x][y].getX() + 1);
                             neighbors.add(this.grid[x][y].getY() - 1);
 
-                            // 4.Left (1,0)
+                            // 4.Left
                             neighbors.add(this.grid[x][y].getX() - 1);
                             neighbors.add(this.grid[x][y].getY());
 
-                            // Center/original Cell 0,0
 
-                            // 5.Right (1,2)
+                            // 5.Right
                             neighbors.add(this.grid[x][y].getX() + 1);
                             neighbors.add(this.grid[x][y].getY());
 
-                            // 6.Bottom-left (2,0)
+                            // 6.Bottom-left
                             neighbors.add(this.grid[x][y].getX() - 1);
                             neighbors.add(this.grid[x][y].getY() + 1);
 
-                            // 7.Bottom (2,1)
+                            // 7.Bottom
                             neighbors.add(this.grid[x][y].getX());
                             neighbors.add(this.grid[x][y].getY() + 1);
 
-                            // 8.Bottom-right (2,2)
+                            // 8.Bottom-right
                             neighbors.add(this.grid[x][y].getX() + 1);
                             neighbors.add(this.grid[x][y].getY() + 1);
 
