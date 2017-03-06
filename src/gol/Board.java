@@ -3,7 +3,9 @@ package gol;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Board {
 
@@ -14,12 +16,16 @@ public class Board {
     private GraphicsContext graphics;
     private Color color = Color.BLACK;
     private ArrayList<Integer> neighbors;
+    protected ArrayList<ArrayList<Cell>>[][] grid2;
+
+
 
 
     public Board(GraphicsContext graphics, int cellSize) {
         this.cellSize = cellSize;
         this.initialize();
         this.graphics = graphics;
+
     }
 
 
@@ -32,11 +38,15 @@ public class Board {
 
     private void initialize() {
         grid = new Cell[colums][rows];
+        //grid2 = new ArrayList[colums][rows];
 
         for (int x = 0; x < this.grid.length; x++) {
             for (int y = 0; y < this.grid[x].length; y++) {
                 // initialize cell grid
                 grid[x][y] = new Cell(x, y);
+                //grid2<Cell>[x][y]=new Cell(x, y);
+
+
 
                 // To do: initialize each cells neighbors...
 
@@ -44,7 +54,8 @@ public class Board {
 
                 // Må vel være en bedre måte å gjøre det her på????????
 
-                // funker ikke helt... out of bounds
+
+                //skal adde naboer der naboen ikke er utenfor kantene ,funker ikke helt... still out of bounds
                 for (int rowMod = 1; rowMod < grid.length - 1; rowMod++) {
                     for (int colMod = 1; colMod < grid[rowMod].length - 1; colMod++) {
                         if (rows >= 0 && colums >= 0) {
@@ -53,6 +64,7 @@ public class Board {
                             // 1.Top-left (0,0)
                             neighbors.add(this.grid[x][y].getX() - 1);
                             neighbors.add(this.grid[x][y].getY() - 1);
+
 
                             // 2.Top (0,1)
                             neighbors.add(this.grid[x][y].getX());
@@ -65,6 +77,8 @@ public class Board {
                             // 4.Left (1,0)
                             neighbors.add(this.grid[x][y].getX() - 1);
                             neighbors.add(this.grid[x][y].getY());
+
+                            // Center/original Cell 0,0
 
                             // 5.Right (1,2)
                             neighbors.add(this.grid[x][y].getX() + 1);
@@ -81,8 +95,11 @@ public class Board {
                             // 8.Bottom-right (2,2)
                             neighbors.add(this.grid[x][y].getX() + 1);
                             neighbors.add(this.grid[x][y].getY() + 1);
+
+
                         }
                     }
+
                 }
 
 
@@ -92,12 +109,14 @@ public class Board {
 
                 for (int i = 0; i < neighbors.size(); i++) {
                     //System.out.print(neighbors.get(i).toString()+", ");
-                    String str = neighbors.get(i) + " ";
-                    System.out.print(str.substring(0, str.length()));
+                    String str = neighbors.get(i) + ", ";
+                    System.out.print(str.substring(0, str.length()-1)); //planen med substring var å trimme bort siste komma tegnet..no go
                 }
-                //System.out.println(neighbors); //each cell neighbour coordinates
+                //System.out.println(neighbors);
                 System.out.println();
                 System.out.println();
+
+
 
 
             }
