@@ -2,9 +2,6 @@ package gol;
 
 
 import jdk.nashorn.internal.runtime.arrays.ArrayIndex;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -17,18 +14,15 @@ public class Cell{
     private List<Cell> neighbors;
 
 
-
     public Cell(int x, int y) {
         this.x = x;
         this.y = y;
-        // initialize neighbours at cell instantiation or in board class???
-        //setNeigbours(x, y);
-        //System.out.println(this.getNeighbors());
     }
 
     public List<Cell> getNeighbors(){
         return this.neighbors;
     }
+
     // List of neighbours
     public void updateNeighbors(Board board) {
         // 1.Top-left (0,0)
@@ -56,7 +50,7 @@ public class Cell{
         Cell bottomRight = board.getCellCoordinates(this.x + 1, this.y + 1);
 
         // Makes a stream of adjacent cells and filters out null cells(not on the map), then it collects it in a list.
-        neighbors = Stream.of(topLeft, top, topRight, left, right, bottomLeft, bottom, bottomRight)
+        this.neighbors = Stream.of(topLeft, top, topRight, left, right, bottomLeft, bottom, bottomRight)
                 .filter(Objects::nonNull) // Filter out non-existent neighbors
                 .collect(Collectors.toList());
     }
@@ -73,10 +67,6 @@ public class Cell{
 
     @Override
     public String toString() {
-        return "Cell{" +
-                "alive=" + alive +
-                ", x=" + x +
-                ", y=" + y +
-                '}';
+        return "Cell: " + "alive: " + alive + ", X=" + x + ", Y=" + y;
     }
 }

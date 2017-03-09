@@ -13,7 +13,6 @@ public class Board {
     private Cell[][] grid;
     private GraphicsContext graphics;
     private Color color = Color.BLACK;
-    //protected ArrayList<ArrayList<Cell>>[][] grid2;
 
 
     public Board(GraphicsContext graphics, int cellSize) {
@@ -23,40 +22,15 @@ public class Board {
 
     }
 
-
     // Initializes the Board matrix (grid) with dead cells including its neighbors
-    // All individual cells are called when the grid is initialized with their coordinates
-    // triggered by mouse-events in controller class.
     private void initialize() {
         grid = new Cell[columns][rows];
-        //grid2 = new ArrayList[columns][rows];
 
         for (int x = 0; x < this.grid.length; x++) {
             for (int y = 0; y < this.grid[x].length; y++) {
                 Cell cell = new Cell(x, y);
                 cell.updateNeighbors(this);
                 grid[x][y] = cell; // initialize cell grid
-                //grid2<Cell>[x][y]=new Cell(x, y);
-
-    // To do: initialize each cells neighbors...
-    // Instantiate neigbours at gameboard initialisation ...or in Cell class? See alternative in cell class
-    // Må vel være en bedre måte å gjøre det her på????????
-
-
-                //loop som skal adde naboer kun innenfor kantene ,funker ikke helt... still out of bounds
-             /*
-                 for (int rowMod = 1; rowMod < grid.length - 1; rowMod++) {
-                        for (int colMod = 1; colMod < grid[rowMod].length - 1; colMod++) {
-                            if (rows >= 0 && columns >= 0) {
-
-                            }
-                        }
-                    }
-             */
-                // Debugging: printing cells and neighbors
-                System.out.println("Cell:  X: " + cell.getX() + " | Y: " + cell.getY()); // Cell coordinate
-
-                System.out.println();
             }
         }
 
@@ -64,15 +38,12 @@ public class Board {
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
                 grid[x][y].updateNeighbors(this);
-
-                System.out.println("Neighbors: " + grid[x][y].getNeighbors());
+                //System.out.println("Neighbors: " + grid[x][y].getNeighbors());
             }
         }
-
     }
 
     public void nextGeneration(){
-        // tegn grafikk til canvas basert på gol regler
         ArrayList<Cell> alive = new ArrayList<>();
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
@@ -90,85 +61,6 @@ public class Board {
             cell.setAlive(!cell.isAlive());
             drawCell(cell);
         }));
-    }
-
-    public  Integer neighborCounter=0;
-    public boolean foundAlive=false;
-
-    public void resetCounter(){
-        neighborCounter=0;
-    }
-
-
-    public void checkNeighbors(){
-      // regler ?
-      // gå igjennom alle naboer og sjekk etter levende celler
-      // ta vare på tilstander ... og posisjoner ?
-
-        // naaahh.
-        /*for(int x = 0; x < this.grid.length ;x++){
-            for(int y = 0; y <this.grid[x].length; y++){
-                if (this.grid[x][y].isAlive() == true){
-
-                    if(this.grid[x-1][y-1].isAlive()==true){
-
-                    }
-                    else if(this.grid[x][y-1].isAlive()==true){
-
-                    }
-                    else if(this.grid[x+1][y-1].isAlive()==true){
-
-                    }
-                    else if(this.grid[x-1][y].isAlive()==true){
-
-                    }
-                    else if(this.grid[x+1][y].isAlive()==true){
-
-                    }
-                    else if(this.grid[x-1][y+1].isAlive()==true){
-
-                    }
-                    else if(this.grid[x][y+1].isAlive()==true){
-
-                    }
-                    else if(this.grid[x+1][y+1].isAlive()==true){
-
-                    }
-                }
-            }
-        }*/
-
-
-
-
-        // loops through grid and looks for alive cells
-        for(int x = 0; x <this.grid.length; x++){
-            for(int y=0; y < this.grid[x].length; y++){
-
-                // If cell is alive check corresponding neighbour array for alive cells(??)
-                // but will not work bcus neighbor is array of Integers (x/y positions) ?
-                if(this.grid[x][y].isAlive()==true){ // sjekk etter levende naboer
-
-                    // ===== how to proceed? ====== //
-
-                    // Game of Life Rules
-                    if( (grid[x][y].isAlive()==true) && (neighborCounter < 2) ){ // underpopulation
-                            // do something...
-                    }
-                    else if( (grid[x][y].isAlive()==true) && (neighborCounter ==2 || neighborCounter == 3) ){ // next generation
-                        // do something...
-                    }
-                    else if( (grid[x][y].isAlive()==true) && (neighborCounter > 3) ){ // overpopulation
-                         // do something...
-                    }
-                    else if( (grid[x][y].isAlive()==false) && (neighborCounter > 3) ){  //reproduction
-                         // do something...
-                    }
-                }
-            }
-
-        }
-        System.out.println(" ---  "+neighborCounter);
     }
 
 
