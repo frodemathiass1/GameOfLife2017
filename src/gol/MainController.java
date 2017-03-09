@@ -76,22 +76,21 @@ public class MainController implements Initializable {
 
     // Button & Slider Event handling
     public void sliderEventHandler(){
-        sizeSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable,
-                                Number oldValue, Number newValue) {
-                setCellSize(newValue.intValue());
-                //System.out.println(board.getColor());
-                //System.out.println(newValue.intValue() );
-            }
+        sizeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            setCellSize(newValue.intValue());
+            //System.out.println(board.getColor());
+            //System.out.println(newValue.intValue() );
         });
 
     }
     @FXML
     public void startPause(){
-        board.checkNeighbors();
+
+        board.nextGeneration();
+
+        /*board.checkNeighbors();
         clearBoard();
-        board.resetCounter();
+        board.resetCounter();*/
 
 
     }

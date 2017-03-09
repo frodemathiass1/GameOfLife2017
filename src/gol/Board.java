@@ -3,20 +3,16 @@ package gol;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class Board {
 
     public int cellSize;
-    private int colums = 60;
+    private int columns = 60;
     private int rows = 40;
     private Cell[][] grid;
     private GraphicsContext graphics;
     private Color color = Color.BLACK;
-    private ArrayList<Integer> neighbors;
     //protected ArrayList<ArrayList<Cell>>[][] grid2;
 
 
@@ -32,12 +28,14 @@ public class Board {
     // All individual cells are called when the grid is initialized with their coordinates
     // triggered by mouse-events in controller class.
     private void initialize() {
-        grid = new Cell[colums][rows];
-        //grid2 = new ArrayList[colums][rows];
+        grid = new Cell[columns][rows];
+        //grid2 = new ArrayList[columns][rows];
 
         for (int x = 0; x < this.grid.length; x++) {
             for (int y = 0; y < this.grid[x].length; y++) {
-                grid[x][y] = new Cell(x, y); // initialize cell grid
+                Cell cell = new Cell(x, y);
+                cell.updateNeighbors(this);
+                grid[x][y] = cell; // initialize cell grid
                 //grid2<Cell>[x][y]=new Cell(x, y);
 
     // To do: initialize each cells neighbors...
@@ -49,59 +47,25 @@ public class Board {
              /*
                  for (int rowMod = 1; rowMod < grid.length - 1; rowMod++) {
                         for (int colMod = 1; colMod < grid[rowMod].length - 1; colMod++) {
-                            if (rows >= 0 && colums >= 0) {
+                            if (rows >= 0 && columns >= 0) {
 
                             }
                         }
                     }
              */
-
-                neighbors = new ArrayList<>();
-
-                // 1.Top-left
-                neighbors.add(this.grid[x][y].getX() - 1);
-                neighbors.add(this.grid[x][y].getY() - 1);
-
-
-                // 2.Top
-                neighbors.add(this.grid[x][y].getX());
-                neighbors.add(this.grid[x][y].getY() - 1);
-
-                // 3.Top-right
-                neighbors.add(this.grid[x][y].getX() + 1);
-                neighbors.add(this.grid[x][y].getY() - 1);
-
-                // 4.Left
-                neighbors.add(this.grid[x][y].getX() - 1);
-                neighbors.add(this.grid[x][y].getY());
-
-
-                // 5.Right
-                neighbors.add(this.grid[x][y].getX() + 1);
-                neighbors.add(this.grid[x][y].getY());
-
-                // 6.Bottom-left
-                neighbors.add(this.grid[x][y].getX() - 1);
-                neighbors.add(this.grid[x][y].getY() + 1);
-
-                // 7.Bottom
-                neighbors.add(this.grid[x][y].getX());
-                neighbors.add(this.grid[x][y].getY() + 1);
-
-                // 8.Bottom-right
-                neighbors.add(this.grid[x][y].getX() + 1);
-                neighbors.add(this.grid[x][y].getY() + 1);
-
-
                 // Debugging: printing cells and neighbors
-                System.out.println("Cell:  X: " + grid[x][y].getX() + " | Y: " + grid[x][y].getY()); // Cell coordinate
-                System.out.print("Neighbors: ");
+                System.out.println("Cell:  X: " + cell.getX() + " | Y: " + cell.getY()); // Cell coordinate
 
-                for (int i = 0; i < neighbors.size(); i++) {
-                    System.out.print(neighbors.get(i)+", ");
-                }
                 System.out.println();
-                System.out.println();
+            }
+        }
+
+        // We are working with references so we don't need to update its neighbors unless the map is reinitialized (cell toggles to alive when clicked).
+        for (int x = 0; x < grid.length; x++) {
+            for (int y = 0; y < grid[x].length; y++) {
+                grid[x][y].updateNeighbors(this);
+
+                System.out.println("Neighbors: " + grid[x][y].getNeighbors());
             }
         }
 
@@ -109,8 +73,23 @@ public class Board {
 
     public void nextGeneration(){
         // tegn grafikk til canvas basert på gol regler
-
-
+        ArrayList<Cell> alive = new ArrayList<>();
+        for (int x = 0; x < grid.length; x++) {
+            for (int y = 0; y < grid[x].length; y++) {
+                Cell cell = grid[x][y];
+                // Add all the cells that are alive to a list of cells, then set the cell to not be alive and repaint it
+                if (cell.isAlive()) {
+                    alive.add(cell);
+                    cell.setAlive(false);
+                    drawCell(cell);
+                }
+            }
+        }
+        // Iterate through all the cells that were alive and update their neighbors to have the opposite state
+        alive.forEach(cellAlive -> cellAlive.getNeighbors().forEach(cell -> {
+            cell.setAlive(!cell.isAlive());
+            drawCell(cell);
+        }));
     }
 
     public  Integer neighborCounter=0;
@@ -225,9 +204,7 @@ public class Board {
     public void clearBoard(Cell[][] cells){
         for(int i =0; i< cells.length; i++){
             for(int j=0; j < cells[j].length; j++){
-                if(cells[i][j].isAlive()==true){
-                    cells[i][j].setAlive(false);
-                }
+                cells[i][j].setAlive(false);
             }
         }
     }
@@ -238,12 +215,14 @@ public class Board {
     public void setPickedColor(Color c){
         this.color = c;
     }
-    public void setCellSize(int cellsize) {
-        this.cellSize = cellsize;
+    public void setCellSize(int cellSize) {
+        this.cellSize = cellSize;
     }
 
     // Getters
     public Cell getCellCoordinates(int x, int y) {
+        if (x < 0 || y < 0 || x >= grid.length || y >= grid[x].length)
+            return null;
         return this.grid[x][y];
     }
 
