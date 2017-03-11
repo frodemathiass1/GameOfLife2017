@@ -1,4 +1,4 @@
-package gol;
+package main.gol;
 
 import javafx.application.Application;
 import javafx.application.Platform;

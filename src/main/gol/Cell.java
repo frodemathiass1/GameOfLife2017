@@ -1,4 +1,4 @@
-package gol;
+package main.gol;
 
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +13,6 @@ public class Cell{
     private int x, y;
     private boolean alive=false;
     private List<Cell> neighbors;
-    private int neighborCount=0;
 
 
     public Cell(int x, int y) {
@@ -30,9 +29,10 @@ public class Cell{
 
 
     public int countAliveNeighbors(){
+        int neighborCount=0;
         for(int i = 0; i < this.getNeighbors().size(); i++ )
             if(this.neighbors.get(i).isAlive())
-                this.neighborCount++;
+                neighborCount++;
         return neighborCount;
     }
 

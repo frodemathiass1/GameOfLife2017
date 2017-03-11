@@ -1,9 +1,7 @@
-package gol;
+package main.gol;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import java.util.ArrayList;
-import java.util.Random;
 
 
 public class Board {
@@ -36,7 +34,6 @@ public class Board {
                 Cell cell = new Cell(x, y);
                 cell.updateNeighbors(this);  // update cell neighbors
                 grid[x][y] = cell; // initialize cell grid
-
             }
         }
 
@@ -59,19 +56,27 @@ public class Board {
                 Cell cell = grid[x][y];
 
                 if ( cell.isAlive() && cell.countAliveNeighbors() < 2 ){
+
                     cell.setAlive(false);
+                    cell.updateNeighbors(this);
                     drawCell(cell);
                 }
                 else if( cell.isAlive() && (cell.countAliveNeighbors()==2 || cell.countAliveNeighbors()==3)){
+
                     cell.setAlive(true);
+                    cell.updateNeighbors(this);
                     drawCell(cell);
                 }
                 else if( cell.isAlive() && cell.countAliveNeighbors() > 3){
+
                     cell.setAlive(false);
+                    cell.updateNeighbors(this);
                     drawCell(cell);
                 }
                 else if(!cell.isAlive() && cell.countAliveNeighbors() == 3){
+
                     cell.setAlive(true);
+                    cell.updateNeighbors(this);
                     drawCell(cell);
                 }
             }

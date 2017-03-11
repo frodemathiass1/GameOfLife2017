@@ -1,10 +1,9 @@
-package gol;
+package main.gol;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -18,8 +17,8 @@ import javafx.util.Duration;
 
 import java.util.Random;
 
-import static gol.GameOfLife.WIDTH; // Access Stage dimensions from main class
-import static gol.GameOfLife.HEIGHT;
+import static main.gol.GameOfLife.WIDTH; // Access Stage dimensions from main class
+import static main.gol.GameOfLife.HEIGHT;
 
 
 
