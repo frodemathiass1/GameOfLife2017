@@ -1,8 +1,10 @@
 package gol;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -12,21 +14,53 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
+
+import java.util.Random;
 
 import static gol.GameOfLife.WIDTH; // Access Stage dimensions from main class
 import static gol.GameOfLife.HEIGHT;
 
 
+
 public class MainController implements Initializable {
 
-    public Board board;
-    public int cellSize = 10;
+    private Timeline timeline = new Timeline();
+    private int durationMillis = 250;
+    private Board board;
+    private int cellSize = 10;
+
 
     // Internal GUI objects
-    @FXML private Button startBtn, resetBtn, exitApp;
+    @FXML private Button startBtn,random, stopBtn,resetBtn, exitApp;
     @FXML private ColorPicker colorPick;
     @FXML private Canvas canvas;
     @FXML private Slider sizeSlider;
+
+
+
+    public void setCellSize(int cellSize) {
+        this.board.setCellSize(cellSize);
+        this.board.drawGrid();
+    }
+
+
+    /**
+     *
+     * @return timeline
+     */
+
+   public void addTimeLine(){
+        //timeline = new Timeline();
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(durationMillis),e-> {
+            board.nextGeneration();
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        //return timeline;
+    }
+
+
+
 
 
 
@@ -36,14 +70,12 @@ public class MainController implements Initializable {
         this.board=new Board(graphics, this.cellSize); // this is dependency injection!
         colorPick.setValue(Color.BLACK);
         this.board.drawGrid();
-        sliderEventHandler();
-
+        this.sliderHandler();
     }
 
-    public void setCellSize(int cellSize) {
-        this.board.setCellSize(cellSize);
-        this.board.drawGrid();
-    }
+
+
+
 
 
     @FXML
@@ -57,11 +89,9 @@ public class MainController implements Initializable {
         // Rounds down event coordinates to integer and divides it with cellSize to get exact canvas position
         int cellPosX = (int) Math.floor(x / board.getCellSize());
         int cellPosY = (int) Math.floor(y / board.getCellSize());
-        System.out.println(cellPosX+" "+cellPosY);
-        //System.out.println(cellSize);
 
         // Get cell
-        Cell cell = this.board.getCellCoordinates(cellPosX, cellPosY);
+        Cell cell = this.board.getCell(cellPosX, cellPosY);
 
         // Toggle alive
         boolean toggleAlive = !cell.isAlive();
@@ -75,41 +105,85 @@ public class MainController implements Initializable {
 
 
     // Button & Slider Event handling
-    public void sliderEventHandler(){
+    public void sliderHandler(){
         sizeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             setCellSize(newValue.intValue());
             //System.out.println(board.getColor());
             //System.out.println(newValue.intValue() );
         });
-
     }
+
+
+
+
     @FXML
     public void startPause(){
+        addTimeLine();
+        if (timeline.getStatus() == Animation.Status.RUNNING) {
+            timeline.stop();
+            startBtn.setText("Start");
+        } else {
+            timeline.play();
+            startBtn.setText("Stopp");
+        }
+    }
 
-        board.nextGeneration();
 
-        /*board.checkNeighbors();
-        clearBoard();
-        board.resetCounter();*/
+    private  int min = 1;
+    private int max = 100;
+    private int mid = 50;
+
+    @FXML public void randomize(){
+        Random rand = new Random();
+        int result1 = rand.nextInt(max-min)+min;
+        int result2 = rand.nextInt(max-min)+min;
+        int result3 = rand.nextInt(max-min)+min;
+                   //System.out.println(result+""+result2);
+
+
+         board.setColumns(result1);
+         board.setRows(result2);
+         board.setCellSize(result3);
+
+        colorPick.setValue(Color.BLACK);
+        this.board.drawGrid();
+
+
+
+
 
 
     }
+
+
+
     @FXML
     public void clearBoard(){
+        timeline.stop();
+        this.setCellSize(10);
+        this.board.setRows(35);
+        this.board.setColumns(60);
+
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.clearRect(0,0,WIDTH,HEIGHT);
         board.clearBoard(board.getGrid());
         board.drawGrid();
         System.out.println("Board is cleared");
-        sizeSlider.setValue(10); // reset slider when reset
+        sizeSlider.setValue(cellSize);
     }
+
+
+
 
     @FXML
     public void pickColor(){
-         //System.out.println(colorPick.getValue().toString());
-         board.setPickedColor(colorPick.getValue());
-         board.drawGrid();
+        //colorPick.setOnAction(e->{
+            board.setPickedColor(colorPick.getValue());
+            board.drawGrid();
+        //});
+
     }
+
 
     @FXML
     public void exitApp(){

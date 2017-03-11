@@ -2,35 +2,41 @@ package gol;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
+import java.util.Random;
+
 
 public class Board {
 
+
     public int cellSize;
     private int columns = 60;
-    private int rows = 40;
+    private int rows = 36;
     private Cell[][] grid;
     private GraphicsContext graphics;
     private Color color = Color.BLACK;
 
 
+
+
     public Board(GraphicsContext graphics, int cellSize) {
         this.cellSize = cellSize;
-        this.initialize();
         this.graphics = graphics;
-
+        this.initialize();
     }
+
+
+
 
     // Initializes the Board matrix (grid) with dead cells including its neighbors
     private void initialize() {
         grid = new Cell[columns][rows];
-
         for (int x = 0; x < this.grid.length; x++) {
             for (int y = 0; y < this.grid[x].length; y++) {
                 Cell cell = new Cell(x, y);
-                cell.updateNeighbors(this);
+                cell.updateNeighbors(this);  // update cell neighbors
                 grid[x][y] = cell; // initialize cell grid
+
             }
         }
 
@@ -43,20 +49,49 @@ public class Board {
         }
     }
 
+
+
+
+
     public void nextGeneration(){
         ArrayList<Cell> alive = new ArrayList<>();
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
                 Cell cell = grid[x][y];
                 // Add all the cells that are alive to a list of cells, then set the cell to not be alive and repaint it
-                if (cell.isAlive()) {
+
+                //if (cell.isAlive()) {
+                    //System.out.print(grid[x][y].countAliveNeighbors(cell)+" ");
+                    //alive.add(cell);
+                    //cell.setAlive(false); //
+                    //drawCell(cell);
+
+                //}
+
+                if ( cell.isAlive() && cell.countAliveNeighbors() < 2 ){
                     alive.add(cell);
                     cell.setAlive(false);
+                    drawCell(cell);
+                }
+                else if( cell.isAlive() && cell.countAliveNeighbors()==2 || cell.countAliveNeighbors()==3){
+                    alive.add(cell);
+                    cell.setAlive(true);
+                    drawCell(cell);
+                }
+                else if( cell.isAlive() && cell.countAliveNeighbors() > 3){
+                    alive.add(cell);
+                    cell.setAlive(false);
+                    drawCell(cell);
+                }
+                else if( cell.isAlive() == false && cell.countAliveNeighbors() == 3){
+                    alive.add(cell);
+                    cell.setAlive(true);
                     drawCell(cell);
                 }
             }
         }
         // Iterate through all the cells that were alive and update their neighbors to have the opposite state
+        // should be in cell class???
         alive.forEach(cellAlive -> cellAlive.getNeighbors().forEach(cell -> {
             cell.setAlive(!cell.isAlive());
             drawCell(cell);
@@ -65,41 +100,44 @@ public class Board {
 
 
 
+
+
     // Invoked by the Board constructor which takes Graphic Content as argument
     public void drawCell(Cell cell) {
-        //System.out.println(cell.getX());
-        //System.out.println(cell.getY());
-        if (cell.isAlive()) {
+        if (cell.isAlive())
             this.graphics.setFill(color);
-        }
-        else {
-            this.graphics.setFill(Color.LIGHTGREY);
-        }
+        else
+            this.graphics.setFill(Color.LIGHTGRAY);
 
         this.graphics.setStroke(Color.WHITE); // Sets grid color
-        this.graphics.setLineWidth(0.3); // sets the width of the grid line
+        this.graphics.setLineWidth(0.3);
         this.graphics.fillRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
         this.graphics.strokeRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
     }
 
 
+
+
+
+    // Draw grid
     public void drawGrid() {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
+        for (int i = 0; i < grid.length; i++)
+            for (int j = 0; j < grid[i].length; j++)
                 drawCell(grid[i][j]);
-            }
-        }
     }
+
+
 
 
     // Loops through array of cells and toggles alive cells to dead
     public void clearBoard(Cell[][] cells){
-        for(int i =0; i< cells.length; i++){
-            for(int j=0; j < cells[j].length; j++){
+        for(int i =0; i< cells.length; i++)
+            for(int j=0; j < cells[j].length; j++)
                 cells[i][j].setAlive(false);
-            }
-        }
     }
+
+
+
 
 
 
@@ -110,9 +148,15 @@ public class Board {
     public void setCellSize(int cellSize) {
         this.cellSize = cellSize;
     }
+    public void setRows(int r){
+        this.rows=r;
+    }
+    public void setColumns(int c){
+        this.columns=c;
+    }
 
     // Getters
-    public Cell getCellCoordinates(int x, int y) {
+    public Cell getCell(int x, int y) {
         if (x < 0 || y < 0 || x >= grid.length || y >= grid[x].length)
             return null;
         return this.grid[x][y];
@@ -125,6 +169,9 @@ public class Board {
     public int getCellSize(){
         return this.cellSize;
     }
+
+
+
 
 
 }
