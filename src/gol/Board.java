@@ -54,48 +54,28 @@ public class Board {
 
 
     public void nextGeneration(){
-        ArrayList<Cell> alive = new ArrayList<>();
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
                 Cell cell = grid[x][y];
-                // Add all the cells that are alive to a list of cells, then set the cell to not be alive and repaint it
-
-                //if (cell.isAlive()) {
-                    //System.out.print(grid[x][y].countAliveNeighbors(cell)+" ");
-                    //alive.add(cell);
-                    //cell.setAlive(false); //
-                    //drawCell(cell);
-
-                //}
 
                 if ( cell.isAlive() && cell.countAliveNeighbors() < 2 ){
-                    alive.add(cell);
                     cell.setAlive(false);
                     drawCell(cell);
                 }
-                else if( cell.isAlive() && cell.countAliveNeighbors()==2 || cell.countAliveNeighbors()==3){
-                    alive.add(cell);
+                else if( cell.isAlive() && (cell.countAliveNeighbors()==2 || cell.countAliveNeighbors()==3)){
                     cell.setAlive(true);
                     drawCell(cell);
                 }
                 else if( cell.isAlive() && cell.countAliveNeighbors() > 3){
-                    alive.add(cell);
                     cell.setAlive(false);
                     drawCell(cell);
                 }
-                else if( cell.isAlive() == false && cell.countAliveNeighbors() == 3){
-                    alive.add(cell);
+                else if(!cell.isAlive() && cell.countAliveNeighbors() == 3){
                     cell.setAlive(true);
                     drawCell(cell);
                 }
             }
         }
-        // Iterate through all the cells that were alive and update their neighbors to have the opposite state
-        // should be in cell class???
-        alive.forEach(cellAlive -> cellAlive.getNeighbors().forEach(cell -> {
-            cell.setAlive(!cell.isAlive());
-            drawCell(cell);
-        }));
     }
 
 
