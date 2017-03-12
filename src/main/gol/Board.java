@@ -8,8 +8,8 @@ public class Board {
 
 
     public int cellSize;
-    private int columns = 60;
-    private int rows = 36;
+    private int columns = 80;
+    private int rows = 55;
     private Cell[][] grid;
     private GraphicsContext graphics;
     private Color color = Color.BLACK;
@@ -94,10 +94,10 @@ public class Board {
         else
             this.graphics.setFill(Color.LIGHTGRAY);
 
-        this.graphics.setStroke(Color.WHITE); // Sets grid color
+        this.graphics.setStroke(Color.LIGHTGRAY); // Sets grid color
         this.graphics.setLineWidth(0.3);
-        this.graphics.fillRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
-        this.graphics.strokeRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
+        this.graphics.fillOval(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
+        this.graphics.strokeOval(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
     }
 
 
@@ -128,14 +128,20 @@ public class Board {
 
     // Setters
     public void setPickedColor(Color c){
+
         this.color = c;
     }
+
     public void setCellSize(int cellSize) {
+
         this.cellSize = cellSize;
     }
+
     public void setRows(int r){
+
         this.rows=r;
     }
+
     public void setColumns(int c){
         this.columns=c;
     }
@@ -147,11 +153,14 @@ public class Board {
         return this.grid[x][y];
     }
 
+
     public Cell[][] getGrid(){
+
         return this.grid;
     }
 
     public int getCellSize(){
+
         return this.cellSize;
     }
 

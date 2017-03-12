@@ -13,8 +13,8 @@ import java.io.IOException;
 public class GameOfLife extends Application {
 
     // Stage Dimensions
-    public static final int WIDTH=600;
-    public static final int HEIGHT=400;
+    public static final int WIDTH=800;
+    public static final int HEIGHT=600;
 
 
     @Override

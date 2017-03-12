@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="canvas" stylesheets="/main/style/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="canvas" stylesheets="/main/style/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.MainController">
    <children>
-      <Canvas fx:id="canvas" height="354.0" layoutX="1.0" onMouseClicked="#getCellPosition" styleClass="canvasBackground" width="600.0" />
-      <HBox layoutY="351.0" prefHeight="49.0" prefWidth="600.0" spacing="10.0" styleClass="buttonBar" stylesheets="@../style/stylesheet.css">
+      <Canvas fx:id="canvas" height="554.0" layoutX="1.0" onMouseDragged="#getCellPosition" styleClass="canvasBackground" width="800.0" />
+      <HBox layoutY="551.0" prefHeight="49.0" prefWidth="583.0" spacing="10.0" styleClass="buttonBar" stylesheets="@../style/stylesheet.css">
          <children>
             <Button fx:id="startBtn" mnemonicParsing="false" onAction="#startPause" prefHeight="0.0" prefWidth="60.0" styleClass="startBtn" stylesheets="@../style/stylesheet.css" text="Start">
                <HBox.margin>
@@ -47,6 +47,10 @@
                <HBox.margin>
                   <Insets top="15.0" />
                </HBox.margin></Slider>
+         </children>
+      </HBox>
+      <HBox layoutX="583.0" layoutY="551.0" prefHeight="49.0" prefWidth="219.0" spacing="10.0" styleClass="buttonBar" stylesheets="@../style/stylesheet.css">
+         <children>
             <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#clearBoard" prefHeight="0.0" prefWidth="60.0" styleClass="resetBtn" stylesheets="@../style/stylesheet.css" text="Reset">
                <HBox.margin>
                   <Insets bottom="10.0" top="12.0" />
@@ -54,7 +58,7 @@
                <font>
                   <Font size="10.0" />
                </font></Button>
-            <Button fx:id="exitApp" layoutX="90.0" layoutY="20.0" mnemonicParsing="false" onAction="#exitApp" prefHeight="21.0" prefWidth="60.0" styleClass="exitBtn" stylesheets="@../style/stylesheet.css" text="EXIT">
+            <Button fx:id="exitApp" mnemonicParsing="false" onAction="#exitApp" prefHeight="21.0" prefWidth="60.0" styleClass="exitBtn" stylesheets="@../style/stylesheet.css" text="EXIT">
                <font>
                   <Font size="10.0" />
                </font>
@@ -63,6 +67,9 @@
                </HBox.margin>
             </Button>
          </children>
+         <padding>
+            <Insets left="80.0" />
+         </padding>
       </HBox>
    </children>
 </AnchorPane>

@@ -12,6 +12,9 @@ public class Cell{
 
     private int x, y;
     private boolean alive=false;
+    public boolean nextState;
+
+
     private List<Cell> neighbors;
 
 
@@ -63,14 +66,22 @@ public class Cell{
         this.alive=alive;
     }
 
-    public boolean isAlive(){return this.alive;}
+    public boolean isAlive(){
+        return this.alive;
+    }
 
-    public int getX(){return this.x;}
+    public int getX(){
+        return this.x;
+    }
 
-    public int getY(){return this.y;}
+    public int getY(){
+        return this.y;
+    }
+
 
     @Override
     public String toString() {
+
         return "Cell: " + "alive: " + alive + ", X=" + x + ", Y=" + y;
     }
 }

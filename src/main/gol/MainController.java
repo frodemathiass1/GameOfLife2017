@@ -23,7 +23,7 @@ import static main.gol.GameOfLife.HEIGHT;
 
 
 public class MainController implements Initializable {
-
+    //private Timeline timeline;
     private Timeline timeline = new Timeline();
     private int durationMillis = 250;
     private Board board;
@@ -44,17 +44,13 @@ public class MainController implements Initializable {
     }
 
 
-    /**
-     *
-     * @return timeline
-     */
 
-   public void addTimeLine(){
+
+   public void setAnimation(){
         //timeline = new Timeline();
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(durationMillis),e-> {
-            board.nextGeneration();
-        }));
-        timeline.setCycleCount(Timeline.INDEFINITE);
+        this.timeline.getKeyFrames().add(
+                new KeyFrame(Duration.millis(durationMillis),e-> board.nextGeneration()));
+        this.timeline.setCycleCount(Timeline.INDEFINITE);
         //return timeline;
     }
 
@@ -67,7 +63,7 @@ public class MainController implements Initializable {
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         this.board=new Board(graphics, this.cellSize); // this is dependency injection!
-        colorPick.setValue(Color.BLACK);
+        colorPick.setValue(Color.WHITE);
         this.board.drawGrid();
         this.sliderHandler();
     }
@@ -115,9 +111,10 @@ public class MainController implements Initializable {
 
 
 
+
     @FXML
     public void startPause(){
-        addTimeLine();
+        setAnimation();
         if (timeline.getStatus() == Animation.Status.RUNNING) {
             timeline.stop();
             startBtn.setText("Start");
