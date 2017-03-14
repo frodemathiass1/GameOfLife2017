@@ -88,16 +88,17 @@ public class Board {
 
 
     // Invoked by the Board constructor which takes Graphic Content as argument
+
     public void drawCell(Cell cell) {
         if (cell.isAlive())
             this.graphics.setFill(color);
         else
-            this.graphics.setFill(Color.LIGHTGRAY);
+            this.graphics.setFill(Color.WHITE);
 
         this.graphics.setStroke(Color.LIGHTGRAY); // Sets grid color
         this.graphics.setLineWidth(0.3);
-        this.graphics.fillOval(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
-        this.graphics.strokeOval(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
+        this.graphics.fillRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
+        this.graphics.strokeRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
     }
 
 

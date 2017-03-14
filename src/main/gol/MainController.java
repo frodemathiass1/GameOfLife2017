@@ -137,11 +137,13 @@ public class MainController implements Initializable {
                    //System.out.println(result+""+result2);
 
 
-         board.setColumns(result1);
-         board.setRows(result2);
-         board.setCellSize(result3);
+        board.setColumns(result1);
+        board.setRows(result2);
+        board.setCellSize(result3);
 
-        colorPick.setValue(Color.BLACK);
+        colorPick.setValue(Color.BLACK);  // want random color here
+        //this.canvas.setTranslateX(result1);
+        //this.canvas.setTranslateY(result2);
         this.board.drawGrid();
 
 
@@ -185,4 +187,6 @@ public class MainController implements Initializable {
     public void exitApp(){
         Platform.exit();
     }
+
+
 }

@@ -36,6 +36,7 @@ public class Cell{
         for(int i = 0; i < this.getNeighbors().size(); i++ )
             if(this.neighbors.get(i).isAlive())
                 neighborCount++;
+        //System.out.println(neighborCount);
         return neighborCount;
     }
 
