@@ -25,25 +25,6 @@ public class Cell{
 
 
 
-    public List<Cell> getNeighbors(){
-
-        return this.neighbors;
-    }
-
-
-    public void setNextState(boolean ns){
-
-        this.nextState=ns;
-    }
-
-
-    public boolean getNextState(){
-
-        return nextState;
-    }
-
-
-
     public int countAliveNeighbors(){
         int neighborCount=0;
         for(int i = 0; i < this.getNeighbors().size(); i++ )
@@ -75,6 +56,10 @@ public class Cell{
 
 
 
+    public List<Cell> getNeighbors(){
+
+        return this.neighbors;
+    }
 
     public void setState(boolean state){
 
@@ -85,6 +70,19 @@ public class Cell{
 
         return this.state;
     }
+
+
+    public void setNextState(boolean ns){
+
+        this.nextState=ns;
+    }
+
+
+    public boolean getNextState(){
+
+        return nextState;
+    }
+
 
     public int getX(){
 

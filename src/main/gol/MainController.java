@@ -46,7 +46,6 @@ public class MainController implements Initializable {
 
 
 
-
    public void setAnimation(){
         this.timeline.getKeyFrames().add(
                 new KeyFrame(Duration.millis(durationMillis),
@@ -58,10 +57,6 @@ public class MainController implements Initializable {
 
 
 
-
-
-
-
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
@@ -70,7 +65,6 @@ public class MainController implements Initializable {
         this.board.drawGrid();
         this.sliderHandler();
     }
-
 
 
 
@@ -112,9 +106,6 @@ public class MainController implements Initializable {
     }
 
 
-
-
-
     @FXML
     public void startPause(){
         setAnimation();
@@ -137,8 +128,7 @@ public class MainController implements Initializable {
         int result1 = rand.nextInt(max-min)+min;
         int result2 = rand.nextInt(max-min)+min;
         int result3 = rand.nextInt(max-min)+min;
-                   //System.out.println(result+""+result2);
-
+        //System.out.println(result+""+result2);
 
         board.setColumns(result1);
         board.setRows(result2);
@@ -148,12 +138,6 @@ public class MainController implements Initializable {
         //this.canvas.setTranslateX(result1);
         //this.canvas.setTranslateY(result2);
         this.board.drawGrid();
-
-
-
-
-
-
     }
 
 
@@ -164,14 +148,9 @@ public class MainController implements Initializable {
         this.setCellSize(10);
         this.board.setRows(35);
         this.board.setColumns(60);
-
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.clearRect(0,0,WIDTH,HEIGHT);
-
-
-
         board.clearBoard(board.getGrid());
-
         board.drawGrid();
         System.out.println("Board is cleared");
         sizeSlider.setValue(cellSize);
@@ -182,10 +161,8 @@ public class MainController implements Initializable {
 
     @FXML
     public void pickColor(){
-        //colorPick.setOnAction(e->{
             board.setPickedColor(colorPick.getValue());
             board.drawGrid();
-        //});
 
     }
 

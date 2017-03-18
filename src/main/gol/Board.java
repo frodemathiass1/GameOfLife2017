@@ -53,8 +53,6 @@ public class Board {
 
     public void nextGeneration(){
         ArrayList<Cell> generationList = new ArrayList<>();
-
-
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
                 Cell cell = grid[x][y];
@@ -63,33 +61,21 @@ public class Board {
 
                     cell.setNextState(false);
                     generationList.add(cell);
-                    //cell.setState(false);
-                    //cell.initNeighbors(this);
-                    //drawCell(cell);
                 }
                 else if( cell.getState() && (cell.countAliveNeighbors()==2 || cell.countAliveNeighbors()==3)){
 
                     cell.setNextState(true);
                     generationList.add(cell);
-                    //cell.setState(true);
-                    //cell.initNeighbors(this);
-                    //drawCell(cell);
                 }
                 else if( cell.getState() && cell.countAliveNeighbors() > 3){
 
                     cell.setNextState(false);
                     generationList.add(cell);
-                    //cell.setState(false);
-                    //cell.initNeighbors(this);
-                    //drawCell(cell);
                 }
                 else if(!cell.getState() && cell.countAliveNeighbors() == 3){
 
                     cell.setNextState(true);
                     generationList.add(cell);
-                    //cell.setState(true);
-                    //cell.initNeighbors(this);
-                    //drawCell(cell);
                 }
             }
         }
@@ -98,38 +84,24 @@ public class Board {
        for(Cell cell : generationList){
            drawCell(cell);
        }
-
-
     }
 
 
-
-
-
-
-
-
-
     // Invoked by the Board constructor which takes Graphic Content as argument
-
     public void drawCell(Cell cell) {
         if (cell.getNextState()){
             this.graphics.setFill(color);
             cell.setState(true);
-        }  //cell.getNextState
+        }
         else {
               this.graphics.setFill(Color.WHITE);
               cell.setState(false);
         }
-
-
         this.graphics.setStroke(Color.LIGHTGRAY); // Sets grid color
         this.graphics.setLineWidth(0.3);
         this.graphics.fillRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
         this.graphics.strokeRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
     }
-
-
 
 
 
@@ -139,8 +111,6 @@ public class Board {
             for (int j = 0; j < grid[i].length; j++)
                 drawCell(grid[i][j]);
     }
-
-
 
 
     // Loops through array of cells and toggles alive cells to dead
@@ -153,21 +123,16 @@ public class Board {
 
 
 
-
-
     // Setters
     public void setPickedColor(Color c){
-
         this.color = c;
     }
 
     public void setCellSize(int cellSize) {
-
         this.cellSize = cellSize;
     }
 
     public void setRows(int r){
-
         this.rows=r;
     }
 
@@ -184,12 +149,10 @@ public class Board {
 
 
     public Cell[][] getGrid(){
-
         return this.grid;
     }
 
     public int getCellSize(){
-
         return this.cellSize;
     }
 
