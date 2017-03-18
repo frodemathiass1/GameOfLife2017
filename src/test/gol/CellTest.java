@@ -2,7 +2,6 @@ package test.gol;
 
 import main.gol.Cell;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 
@@ -15,9 +14,9 @@ class CellTest {
 
     @Test
     void toggleIsAliveTest() {
-        Assert.assertFalse(cell.isAlive());
-        cell.setAlive(true);
-        Assert.assertTrue(cell.isAlive());
+        Assert.assertFalse(cell.getState());
+        cell.setState(true);
+        Assert.assertTrue(cell.getState());
     }
 
 }

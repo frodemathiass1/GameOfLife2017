@@ -11,7 +11,7 @@ public class Cell{
 
 
     private int x, y;
-    private boolean alive=false;
+    private boolean state =false;
     public boolean nextState;
 
 
@@ -26,14 +26,19 @@ public class Cell{
 
 
     public List<Cell> getNeighbors(){
+
         return this.neighbors;
     }
 
 
     public void setNextState(boolean ns){
+
         this.nextState=ns;
     }
+
+
     public boolean getNextState(){
+
         return nextState;
     }
 
@@ -42,7 +47,7 @@ public class Cell{
     public int countAliveNeighbors(){
         int neighborCount=0;
         for(int i = 0; i < this.getNeighbors().size(); i++ )
-            if(this.neighbors.get(i).isAlive())
+            if(this.neighbors.get(i).getState())
                 neighborCount++;
         //System.out.println(neighborCount);
         return neighborCount;
@@ -71,19 +76,23 @@ public class Cell{
 
 
 
-    public void setAlive(boolean alive){
-        this.alive=alive;
+    public void setState(boolean state){
+
+        this.state = state;
     }
 
-    public boolean isAlive(){
-        return this.alive;
+    public boolean getState(){
+
+        return this.state;
     }
 
     public int getX(){
+
         return this.x;
     }
 
     public int getY(){
+
         return this.y;
     }
 
@@ -91,6 +100,6 @@ public class Cell{
     @Override
     public String toString() {
 
-        return "Cell: " + "alive: " + alive + ", X=" + x + ", Y=" + y;
+        return "Cell: " + "state: " + state + ", X=" + x + ", Y=" + y;
     }
 }

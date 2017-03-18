@@ -4,7 +4,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class Board {
@@ -60,41 +59,42 @@ public class Board {
             for (int y = 0; y < grid[x].length; y++) {
                 Cell cell = grid[x][y];
 
-                if ( cell.isAlive() && cell.countAliveNeighbors() < 2 ){
+                if ( cell.getState() && cell.countAliveNeighbors() < 2 ){
 
                     cell.setNextState(false);
                     generationList.add(cell);
-                    //cell.setAlive(false);
+                    //cell.setState(false);
                     //cell.initNeighbors(this);
                     //drawCell(cell);
                 }
-                else if( cell.isAlive() && (cell.countAliveNeighbors()==2 || cell.countAliveNeighbors()==3)){
+                else if( cell.getState() && (cell.countAliveNeighbors()==2 || cell.countAliveNeighbors()==3)){
 
                     cell.setNextState(true);
                     generationList.add(cell);
-                    //cell.setAlive(true);
+                    //cell.setState(true);
                     //cell.initNeighbors(this);
                     //drawCell(cell);
                 }
-                else if( cell.isAlive() && cell.countAliveNeighbors() > 3){
+                else if( cell.getState() && cell.countAliveNeighbors() > 3){
 
                     cell.setNextState(false);
                     generationList.add(cell);
-                    //cell.setAlive(false);
+                    //cell.setState(false);
                     //cell.initNeighbors(this);
                     //drawCell(cell);
                 }
-                else if(!cell.isAlive() && cell.countAliveNeighbors() == 3){
+                else if(!cell.getState() && cell.countAliveNeighbors() == 3){
 
                     cell.setNextState(true);
                     generationList.add(cell);
-                    //cell.setAlive(true);
+                    //cell.setState(true);
                     //cell.initNeighbors(this);
                     //drawCell(cell);
                 }
             }
         }
 
+       // prints out the next generation
        for(Cell cell : generationList){
            drawCell(cell);
        }
@@ -115,11 +115,11 @@ public class Board {
     public void drawCell(Cell cell) {
         if (cell.getNextState()){
             this.graphics.setFill(color);
-            cell.setAlive(true);
+            cell.setState(true);
         }  //cell.getNextState
         else {
               this.graphics.setFill(Color.WHITE);
-              cell.setAlive(false);
+              cell.setState(false);
         }
 
 
@@ -147,7 +147,7 @@ public class Board {
     public void clearBoard(Cell[][] cells){
         for(int i =0; i< cells.length; i++)
             for(int j=0; j < cells[j].length; j++)
-                cells[i][j].setAlive(false);
+                cells[i][j].setNextState(false);
     }
 
 

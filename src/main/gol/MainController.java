@@ -92,8 +92,8 @@ public class MainController implements Initializable {
         Cell cell = this.board.getCell(cellPosX, cellPosY);
 
         // Toggle alive
-        boolean toggleAlive = !cell.isAlive();
-        cell.setAlive(toggleAlive);
+        boolean toggleAlive = !cell.getState();
+        cell.setNextState(toggleAlive);
 
         // Update canvas
         this.board.drawCell(cell);
@@ -167,7 +167,11 @@ public class MainController implements Initializable {
 
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.clearRect(0,0,WIDTH,HEIGHT);
+
+
+
         board.clearBoard(board.getGrid());
+
         board.drawGrid();
         System.out.println("Board is cleared");
         sizeSlider.setValue(cellSize);
