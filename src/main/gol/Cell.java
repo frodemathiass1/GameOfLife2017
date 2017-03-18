@@ -30,6 +30,14 @@ public class Cell{
     }
 
 
+    public void setNextState(boolean ns){
+        this.nextState=ns;
+    }
+    public boolean getNextState(){
+        return nextState;
+    }
+
+
 
     public int countAliveNeighbors(){
         int neighborCount=0;

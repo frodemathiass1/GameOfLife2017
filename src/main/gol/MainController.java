@@ -30,6 +30,7 @@ public class MainController implements Initializable {
     private int cellSize = 10;
 
 
+
     // Internal GUI objects
     @FXML private Button startBtn,random, stopBtn,resetBtn, exitApp;
     @FXML private ColorPicker colorPick;
@@ -48,8 +49,12 @@ public class MainController implements Initializable {
 
    public void setAnimation(){
         //timeline = new Timeline();
+
         this.timeline.getKeyFrames().add(
-                new KeyFrame(Duration.millis(durationMillis),e-> board.nextGeneration()));
+                new KeyFrame(Duration.millis(durationMillis),
+
+                        e-> board.nextGeneration()));
+
         this.timeline.setCycleCount(Timeline.INDEFINITE);
         //return timeline;
     }

@@ -16,7 +16,6 @@ public class Board {
 
 
 
-
     public Board(GraphicsContext graphics, int cellSize) {
         this.cellSize = cellSize;
         this.graphics = graphics;
@@ -57,31 +56,40 @@ public class Board {
 
                 if ( cell.isAlive() && cell.countAliveNeighbors() < 2 ){
 
+                    //cell.setNextState(false);
                     cell.setAlive(false);
                     cell.updateNeighbors(this);
                     drawCell(cell);
                 }
                 else if( cell.isAlive() && (cell.countAliveNeighbors()==2 || cell.countAliveNeighbors()==3)){
 
+                    //cell.setNextState(true);
                     cell.setAlive(true);
                     cell.updateNeighbors(this);
                     drawCell(cell);
                 }
                 else if( cell.isAlive() && cell.countAliveNeighbors() > 3){
 
+                    //cell.setNextState(false);
                     cell.setAlive(false);
                     cell.updateNeighbors(this);
                     drawCell(cell);
                 }
                 else if(!cell.isAlive() && cell.countAliveNeighbors() == 3){
 
+                    //cell.setNextState(true);
                     cell.setAlive(true);
                     cell.updateNeighbors(this);
                     drawCell(cell);
                 }
             }
         }
+
     }
+
+
+
+
 
 
 
@@ -164,9 +172,5 @@ public class Board {
 
         return this.cellSize;
     }
-
-
-
-
 
 }
