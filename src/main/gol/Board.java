@@ -3,6 +3,9 @@ package main.gol;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Board {
 
@@ -31,15 +34,16 @@ public class Board {
         for (int x = 0; x < this.grid.length; x++) {
             for (int y = 0; y < this.grid[x].length; y++) {
                 Cell cell = new Cell(x, y);
-                cell.updateNeighbors(this);  // update cell neighbors
+                //cell.initNeighbors(this);  // update cell neighbors
                 grid[x][y] = cell; // initialize cell grid
             }
         }
 
+
         // We are working with references so we don't need to update its neighbors unless the map is reinitialized (cell toggles to alive when clicked).
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
-                grid[x][y].updateNeighbors(this);
+                grid[x][y].initNeighbors(this);
                 //System.out.println("Neighbors: " + grid[x][y].getNeighbors());
             }
         }
@@ -48,42 +52,53 @@ public class Board {
 
 
 
-
     public void nextGeneration(){
+        ArrayList<Cell> generationList = new ArrayList<>();
+
+
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
                 Cell cell = grid[x][y];
 
                 if ( cell.isAlive() && cell.countAliveNeighbors() < 2 ){
 
-                    //cell.setNextState(false);
-                    cell.setAlive(false);
-                    cell.updateNeighbors(this);
-                    drawCell(cell);
+                    cell.setNextState(false);
+                    generationList.add(cell);
+                    //cell.setAlive(false);
+                    //cell.initNeighbors(this);
+                    //drawCell(cell);
                 }
                 else if( cell.isAlive() && (cell.countAliveNeighbors()==2 || cell.countAliveNeighbors()==3)){
 
-                    //cell.setNextState(true);
-                    cell.setAlive(true);
-                    cell.updateNeighbors(this);
-                    drawCell(cell);
+                    cell.setNextState(true);
+                    generationList.add(cell);
+                    //cell.setAlive(true);
+                    //cell.initNeighbors(this);
+                    //drawCell(cell);
                 }
                 else if( cell.isAlive() && cell.countAliveNeighbors() > 3){
 
-                    //cell.setNextState(false);
-                    cell.setAlive(false);
-                    cell.updateNeighbors(this);
-                    drawCell(cell);
+                    cell.setNextState(false);
+                    generationList.add(cell);
+                    //cell.setAlive(false);
+                    //cell.initNeighbors(this);
+                    //drawCell(cell);
                 }
                 else if(!cell.isAlive() && cell.countAliveNeighbors() == 3){
 
-                    //cell.setNextState(true);
-                    cell.setAlive(true);
-                    cell.updateNeighbors(this);
-                    drawCell(cell);
+                    cell.setNextState(true);
+                    generationList.add(cell);
+                    //cell.setAlive(true);
+                    //cell.initNeighbors(this);
+                    //drawCell(cell);
                 }
             }
         }
+
+       for(Cell cell : generationList){
+           drawCell(cell);
+       }
+
 
     }
 
@@ -98,10 +113,15 @@ public class Board {
     // Invoked by the Board constructor which takes Graphic Content as argument
 
     public void drawCell(Cell cell) {
-        if (cell.isAlive())
+        if (cell.getNextState()){
             this.graphics.setFill(color);
-        else
-            this.graphics.setFill(Color.WHITE);
+            cell.setAlive(true);
+        }  //cell.getNextState
+        else {
+              this.graphics.setFill(Color.WHITE);
+              cell.setAlive(false);
+        }
+
 
         this.graphics.setStroke(Color.LIGHTGRAY); // Sets grid color
         this.graphics.setLineWidth(0.3);

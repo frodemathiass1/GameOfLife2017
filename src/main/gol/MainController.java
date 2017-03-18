@@ -48,16 +48,14 @@ public class MainController implements Initializable {
 
 
    public void setAnimation(){
-        //timeline = new Timeline();
-
         this.timeline.getKeyFrames().add(
                 new KeyFrame(Duration.millis(durationMillis),
-
-                        e-> board.nextGeneration()));
-
+                        e-> board.nextGeneration()
+                ));
         this.timeline.setCycleCount(Timeline.INDEFINITE);
-        //return timeline;
+
     }
+
 
 
 

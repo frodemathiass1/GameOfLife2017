@@ -52,7 +52,7 @@ public class Cell{
 
 
     // List of neighbours
-    public void updateNeighbors(Board board) {
+    public void initNeighbors(Board board) {
         Cell topLeft = board.getCell(this.x-1, this.y - 1);
         Cell top = board.getCell(this.x, this.y - 1);
         Cell topRight = board.getCell(this.x + 1, this.y - 1);
