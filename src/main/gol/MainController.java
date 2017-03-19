@@ -4,14 +4,12 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -25,7 +23,7 @@ import static main.gol.GameOfLife.HEIGHT;
 
 public class MainController implements Initializable {
     private Timeline timeline = new Timeline();
-    private double durationMillis =250;
+    private double durationMillis =500;
     private Board board;
     private int cellSize = 10;
 
@@ -37,6 +35,8 @@ public class MainController implements Initializable {
     @FXML private Canvas canvas;
     @FXML private Slider sizeSlider;
     @FXML private MenuBar menuBar;
+    @FXML private MenuButton menuButton;
+    @FXML private MenuItem slower,slow,normal,fast,faster;
 
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
@@ -48,6 +48,23 @@ public class MainController implements Initializable {
 
     }
 
+
+    @FXML public void changeSpeed(){
+
+       /* slower.setOnAction(e-> timeline.setRate(-2.0));
+        slow.setOnAction(e->timeline.setRate(-1.0));
+        normal.setOnAction(e->timeline.setRate(1.0));
+        fast.setOnAction(e->timeline.setRate(2.0));
+        faster.setOnAction(e->timeline.setRate(3.0));*/
+    }
+
+    @FXML public void slower(){
+        timeline.setRate(timeline.getCurrentRate()-0.5);
+    }
+
+    @FXML public void faster(){
+        timeline.setRate(timeline.getCurrentRate()+0.5);
+    }
 
 
     @FXML
@@ -90,7 +107,7 @@ public class MainController implements Initializable {
                 new KeyFrame(Duration.millis(durationMillis),
                         e-> board.nextGeneration()
                 ));
-        this.timeline.setRate(1.0);
+        //this.timeline.setRate(1.0);
         this.timeline.setCycleCount(Timeline.INDEFINITE);
 
     }
