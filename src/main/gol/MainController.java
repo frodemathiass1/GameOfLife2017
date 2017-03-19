@@ -23,19 +23,36 @@ import static main.gol.GameOfLife.HEIGHT;
 
 
 public class MainController implements Initializable {
-    //private Timeline timeline;
     private Timeline timeline = new Timeline();
-    private int durationMillis = 250;
+    private double durationMillis =250;
     private Board board;
     private int cellSize = 10;
 
 
 
     // Internal GUI objects
-    @FXML private Button startBtn,random, stopBtn,resetBtn, exitApp;
+    @FXML private Button startBtn,random, stopBtn,resetBtn, exitApp,fasterRate,slowerRate;
     @FXML private ColorPicker colorPick;
     @FXML private Canvas canvas;
     @FXML private Slider sizeSlider;
+
+
+    @FXML
+    public void increaseRate(){
+
+            timeline.setRate(timeline.getCurrentRate()+0.5);
+
+        System.out.println(timeline.getCurrentRate());
+    }
+
+    @FXML
+    public void decreaseRate(){
+
+            timeline.setRate(timeline.getCurrentRate()-0.5);
+
+        System.out.println(timeline.getCurrentRate());
+
+    }
 
 
 
@@ -44,6 +61,12 @@ public class MainController implements Initializable {
         this.board.drawGrid();
     }
 
+    private void setDurationMillis(double millis){
+        this.durationMillis=millis;
+    }
+    private double getDurationMillis(){
+        return this.durationMillis;
+    }
 
 
    public void setAnimation(){
@@ -51,6 +74,7 @@ public class MainController implements Initializable {
                 new KeyFrame(Duration.millis(durationMillis),
                         e-> board.nextGeneration()
                 ));
+        this.timeline.setRate(1.0);
         this.timeline.setCycleCount(Timeline.INDEFINITE);
 
     }
@@ -63,7 +87,7 @@ public class MainController implements Initializable {
         this.board=new Board(graphics, this.cellSize); // this is dependency injection!
         colorPick.setValue(Color.WHITE);
         this.board.drawGrid();
-        this.sliderHandler();
+        this.sizeHandler();
     }
 
 
@@ -96,14 +120,15 @@ public class MainController implements Initializable {
 
 
 
+
     // Button & Slider Event handling
-    public void sliderHandler(){
+    public void sizeHandler(){
         sizeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             setCellSize(newValue.intValue());
-            //System.out.println(board.getColor());
-            //System.out.println(newValue.intValue() );
         });
     }
+
+
 
 
     @FXML

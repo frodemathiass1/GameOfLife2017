@@ -33,7 +33,6 @@ public class Board {
         for (int x = 0; x < this.grid.length; x++) {
             for (int y = 0; y < this.grid[x].length; y++) {
                 Cell cell = new Cell(x, y);
-                //cell.initNeighbors(this);  // update cell neighbors
                 grid[x][y] = cell; // initialize cell grid
             }
         }
@@ -79,7 +78,6 @@ public class Board {
                 }
             }
         }
-
        // prints out the next generation
        for(Cell cell : generationList){
            drawCell(cell);
@@ -94,10 +92,10 @@ public class Board {
             cell.setState(true);
         }
         else {
-              this.graphics.setFill(Color.WHITE);
+              this.graphics.setFill(Color.LIGHTGRAY);
               cell.setState(false);
         }
-        this.graphics.setStroke(Color.LIGHTGRAY); // Sets grid color
+        this.graphics.setStroke(Color.WHITE); // Sets grid color
         this.graphics.setLineWidth(0.3);
         this.graphics.fillRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
         this.graphics.strokeRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
