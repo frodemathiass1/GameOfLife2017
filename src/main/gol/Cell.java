@@ -13,18 +13,24 @@ public class Cell{
     private int x, y;
     private boolean state =false;
     public boolean nextState;
-
-
     private List<Cell> neighbors;
 
-
+    /**
+     * Cell Constructor
+     *
+     * @param x int
+     * @param y int
+     */
     public Cell(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
 
-
+    /**
+     *
+     * @return neighborCount int
+     */
     public int countAliveNeighbors(){
         int neighborCount=0;
         for(int i = 0; i < this.getNeighbors().size(); i++ )
@@ -37,7 +43,11 @@ public class Cell{
 
 
 
-    // List of neighbours
+    /**
+     * List of neighbors
+     *
+     * @param board Board
+     */
     public void initNeighbors(Board board) {
         Cell topLeft = board.getCell(this.x-1, this.y - 1);
         Cell top = board.getCell(this.x, this.y - 1);
@@ -55,46 +65,75 @@ public class Cell{
     }
 
 
-
+    /**
+     *
+     * @return List neighbors
+     */
     public List<Cell> getNeighbors(){
 
         return this.neighbors;
     }
 
+    /**
+     *
+     * @param state boolean
+     */
     public void setState(boolean state){
 
         this.state = state;
     }
 
+    /**
+     *
+     * @return state boolean
+     */
     public boolean getState(){
 
         return this.state;
     }
 
-
+    /**
+     * Set next state (dead/alive)
+     *
+     * @param ns boolean
+     */
     public void setNextState(boolean ns){
 
         this.nextState=ns;
     }
 
-
+    /**
+     *
+     * @return nextState boolean
+     */
     public boolean getNextState(){
 
         return nextState;
     }
 
-
+    /**
+     *
+     * @return x int
+     */
     public int getX(){
 
         return this.x;
     }
 
+    /**
+     *
+     * @return y int
+     */
     public int getY(){
 
         return this.y;
     }
 
-
+    /**
+     * Returns a String of cells , their state and positions
+     *
+     * @return String
+     */
     @Override
     public String toString() {
 

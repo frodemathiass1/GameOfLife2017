@@ -14,14 +14,14 @@ public class GameOfLife extends Application {
 
     // Stage Dimensions
     public static final int WIDTH=800;
-    public static final int HEIGHT=600;
+    public static final int HEIGHT=625;
 
 
     @Override
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("Gui.fxml"));
-            primaryStage.setTitle("Game of Life");
+            primaryStage.setTitle("Conway's Game of Life");
             primaryStage.setOnCloseRequest(e -> Platform.exit());
             primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
             primaryStage.show();
@@ -33,6 +33,7 @@ public class GameOfLife extends Application {
 
 
     public static void main(String[] args) {
+
         launch(args);
     }
 }

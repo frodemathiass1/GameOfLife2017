@@ -10,6 +10,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -35,8 +36,13 @@ public class MainController implements Initializable {
     @FXML private ColorPicker colorPick;
     @FXML private Canvas canvas;
     @FXML private Slider sizeSlider;
+    @FXML private MenuBar menuBar;
 
 
+    @FXML
+    public void quitApp(){
+        Platform.exit();
+    }
     @FXML
     public void increaseRate(){
 
@@ -136,7 +142,7 @@ public class MainController implements Initializable {
         setAnimation();
         if (timeline.getStatus() == Animation.Status.RUNNING) {
             timeline.stop();
-            startBtn.setText("Start");
+            startBtn.setText("Play");
         } else {
             timeline.play();
             startBtn.setText("Stopp");
@@ -171,14 +177,14 @@ public class MainController implements Initializable {
     public void clearBoard(){
         timeline.stop();
         this.setCellSize(10);
-        this.board.setRows(35);
-        this.board.setColumns(60);
+        this.board.setRows(80);
+        this.board.setColumns(55);
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.clearRect(0,0,WIDTH,HEIGHT);
         board.clearBoard(board.getGrid());
         board.drawGrid();
-        System.out.println("Board is cleared");
         sizeSlider.setValue(cellSize);
+        startBtn.setText("Play");
     }
 
 
@@ -192,10 +198,10 @@ public class MainController implements Initializable {
     }
 
 
-    @FXML
+    /*@FXML
     public void exitApp(){
         Platform.exit();
-    }
+    }*/
 
 
 }

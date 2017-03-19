@@ -17,7 +17,12 @@ public class Board {
     private Color color = Color.BLACK;
 
 
-
+    /**
+     * Board constructor
+     *
+     * @param graphics GraphicContext
+     * @param cellSize int
+     */
     public Board(GraphicsContext graphics, int cellSize) {
         this.cellSize = cellSize;
         this.graphics = graphics;
@@ -26,8 +31,9 @@ public class Board {
 
 
 
-
-    // Initializes the Board matrix (grid) with dead cells including its neighbors
+    /**
+     * Instantiate grid with cells and set each neighbor
+     */
     private void initialize() {
         grid = new Cell[columns][rows];
         for (int x = 0; x < this.grid.length; x++) {
@@ -36,7 +42,6 @@ public class Board {
                 grid[x][y] = cell; // initialize cell grid
             }
         }
-
 
         // We are working with references so we don't need to update its neighbors unless the map is reinitialized (cell toggles to alive when clicked).
         for (int x = 0; x < grid.length; x++) {
@@ -48,8 +53,10 @@ public class Board {
     }
 
 
-
-
+    /**
+     * Generate next generation of cells and draw to canvas
+     * Game of Life rules
+     */
     public void nextGeneration(){
         ArrayList<Cell> generationList = new ArrayList<>();
         for (int x = 0; x < grid.length; x++) {
@@ -85,7 +92,10 @@ public class Board {
     }
 
 
-    // Invoked by the Board constructor which takes Graphic Content as argument
+    /**
+     *
+     * @param cell Cell
+     */
     public void drawCell(Cell cell) {
         if (cell.getNextState()){
             this.graphics.setFill(color);
@@ -102,8 +112,9 @@ public class Board {
     }
 
 
-
-    // Draw grid
+    /**
+     * Draw grid to canvas
+     */
     public void drawGrid() {
         for (int i = 0; i < grid.length; i++)
             for (int j = 0; j < grid[i].length; j++)
@@ -111,7 +122,13 @@ public class Board {
     }
 
 
-    // Loops through array of cells and toggles alive cells to dead
+
+
+    /**
+     * Loops through array of cells and toggles alive cells to dead
+     *
+     * @param cells
+     */
     public void clearBoard(Cell[][] cells){
         for(int i =0; i< cells.length; i++)
             for(int j=0; j < cells[j].length; j++)
@@ -119,37 +136,62 @@ public class Board {
     }
 
 
-
-
-    // Setters
-    public void setPickedColor(Color c){
-        this.color = c;
+    /**
+     *
+     * @param color
+     */
+    public void setPickedColor(Color color){
+        this.color = color;
     }
 
+    /**
+     *
+     * @param cellSize int
+     */
     public void setCellSize(int cellSize) {
         this.cellSize = cellSize;
     }
 
-    public void setRows(int r){
-        this.rows=r;
+    /**
+     *
+     * @param rows int
+     */
+    public void setRows(int rows){
+        this.rows=rows;
     }
 
-    public void setColumns(int c){
-        this.columns=c;
+    /**
+     *
+     * @param cols int
+     */
+    public void setColumns(int cols){
+        this.columns=cols;
     }
 
-    // Getters
+    /**
+     *
+     * @param x
+     * @param y
+     * @return Cell[][]
+     */
     public Cell getCell(int x, int y) {
         if (x < 0 || y < 0 || x >= grid.length || y >= grid[x].length)
             return null;
         return this.grid[x][y];
     }
 
-
+    /**
+     *
+     * @return Cell[][]
+     */
     public Cell[][] getGrid(){
         return this.grid;
     }
 
+    /**
+     *
+     * @return int
+     */
     public int getCellSize(){
         return this.cellSize;
     }
