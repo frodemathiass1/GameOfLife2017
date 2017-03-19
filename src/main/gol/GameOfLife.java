@@ -25,6 +25,7 @@ public class GameOfLife extends Application {
             primaryStage.setOnCloseRequest(e -> Platform.exit());
             primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
             primaryStage.show();
+
         }
         catch(IOException ioe){
             ioe.printStackTrace();

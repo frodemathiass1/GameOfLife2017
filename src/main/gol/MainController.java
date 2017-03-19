@@ -32,11 +32,22 @@ public class MainController implements Initializable {
 
 
     // Internal GUI objects
-    @FXML private Button startBtn,random, stopBtn,resetBtn, exitApp,fasterRate,slowerRate;
+    @FXML private Button startBtn,random, stopBtn,resetBtn,fasterRate,slowerRate;
     @FXML private ColorPicker colorPick;
     @FXML private Canvas canvas;
     @FXML private Slider sizeSlider;
     @FXML private MenuBar menuBar;
+
+    @Override
+    public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
+        GraphicsContext graphics = canvas.getGraphicsContext2D();
+        this.board=new Board(graphics, this.cellSize); // this is dependency injection!
+        colorPick.setValue(Color.WHITE);
+        this.board.drawGrid();
+        this.sizeHandler();
+
+    }
+
 
 
     @FXML
@@ -59,7 +70,6 @@ public class MainController implements Initializable {
         System.out.println(timeline.getCurrentRate());
 
     }
-
 
 
     public void setCellSize(int cellSize) {
@@ -87,14 +97,6 @@ public class MainController implements Initializable {
 
 
 
-    @Override
-    public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
-        GraphicsContext graphics = canvas.getGraphicsContext2D();
-        this.board=new Board(graphics, this.cellSize); // this is dependency injection!
-        colorPick.setValue(Color.WHITE);
-        this.board.drawGrid();
-        this.sizeHandler();
-    }
 
 
 
@@ -150,7 +152,7 @@ public class MainController implements Initializable {
     }
 
 
-    private  int min = 1;
+    private int min = 1;
     private int max = 100;
     private int mid = 50;
 

@@ -14,7 +14,7 @@ public class Board {
     private int rows = 55;
     private Cell[][] grid;
     private GraphicsContext graphics;
-    private Color color = Color.BLACK;
+    private Color color = Color.DARKCYAN;
 
 
     /**
@@ -102,10 +102,10 @@ public class Board {
             cell.setState(true);
         }
         else {
-              this.graphics.setFill(Color.LIGHTGRAY);
+              this.graphics.setFill(Color.GHOSTWHITE);
               cell.setState(false);
         }
-        this.graphics.setStroke(Color.WHITE); // Sets grid color
+        this.graphics.setStroke(Color.LIGHTGRAY); // Sets grid color
         this.graphics.setLineWidth(0.3);
         this.graphics.fillRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
         this.graphics.strokeRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);

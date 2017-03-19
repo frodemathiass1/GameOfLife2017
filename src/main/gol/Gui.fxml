@@ -2,6 +2,7 @@
 
 <?language javascript?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="800.0" styleClass="canvas" stylesheets="/main/style/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.MainController">
    <children>
        <MenuBar layoutY="-1.0" maxHeight="25.0" prefHeight="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
            <menus>
@@ -25,17 +26,17 @@
                </Menu>
            </menus>
        </MenuBar>
-      <Canvas fx:id="canvas" height="550.0" layoutY="27.0" onMouseClicked="#getCellPosition" onMouseDragged="#getCellPosition" styleClass="canvasBackground" width="800.0" />
+      <Canvas fx:id="canvas" height="550.0" layoutY="27.0" onMouseClicked="#getCellPosition" onMouseDragged="#getCellPosition" styleClass="canvasBackground" width="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <HBox layoutY="576.0" prefHeight="50.0" prefWidth="800.0" spacing="12.0" styleClass="buttonBar" stylesheets="@../style/stylesheet.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button fx:id="startBtn" mnemonicParsing="false" onAction="#startPause" prefHeight="0.0" prefWidth="60.0" styleClass="startBtn" stylesheets="@../style/stylesheet.css" text="Play">
+            <Button fx:id="startBtn" mnemonicParsing="false" onAction="#startPause" prefHeight="0.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../style/stylesheet.css" text="Play">
                <HBox.margin>
                   <Insets left="10.0" top="12.0" />
                </HBox.margin>
                <font>
                   <Font size="10.0" />
                </font></Button>
-            <Button fx:id="resetBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clearBoard" prefHeight="21.0" prefWidth="65.0" styleClass="resetBtn" stylesheets="@../style/stylesheet.css" text="Reset">
+            <Button fx:id="resetBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clearBoard" prefHeight="21.0" prefWidth="65.0" styleClass="buttons" stylesheets="@../style/stylesheet.css" text="Reset">
                <font>
                   <Font size="10.0" />
                </font>
@@ -43,7 +44,7 @@
                   <Insets top="12.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="random" layoutX="20.0" layoutY="22.0" mnemonicParsing="false" onAction="#randomize" prefHeight="21.0" prefWidth="70.0" styleClass="startBtn" stylesheets="@../style/stylesheet.css" text="Randomize">
+            <Button id="random" fx:id="random" layoutX="20.0" layoutY="22.0" mnemonicParsing="false" onAction="#randomize" prefHeight="21.0" prefWidth="70.0" styleClass="buttons" stylesheets="@../style/stylesheet.css" text="Randomize">
                <font>
                   <Font size="10.0" />
                </font>
@@ -51,10 +52,15 @@
                   <Insets bottom="10.0" top="12.0" />
                </HBox.margin>
             </Button>
-            <ColorPicker fx:id="colorPick" onAction="#pickColor" opacity="0.8" prefHeight="21.0" prefWidth="77.0" styleClass="colorPick" stylesheets="@../style/stylesheet.css">
+
+            <ColorPicker id="colorpicker" fx:id="colorPick" onAction="#pickColor" opacity="1.0" prefHeight="21.0" prefWidth="77.0" styleClass="colorPick" stylesheets="@../style/stylesheet.css">
+
                <HBox.margin>
                   <Insets right="10.0" top="12.0" />
-               </HBox.margin></ColorPicker>
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor></ColorPicker>
             <Label text="Size:" textFill="WHITE">
                <HBox.margin>
                   <Insets right="10.0" top="17.0" />
@@ -78,12 +84,12 @@
                </HBox.margin>
             </Label>
 
-            <Button fx:id="fasterRate" mnemonicParsing="false" onAction="#increaseRate" prefWidth="25.0" snapToPixel="false" text="+">
+            <Button fx:id="fasterRate" mnemonicParsing="false" onAction="#increaseRate" prefWidth="25.0" snapToPixel="false" styleClass="btn2" text="+">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="slowerRate" mnemonicParsing="false" onAction="#decreaseRate" prefWidth="25.0" snapToPixel="false" text="-">
+            <Button fx:id="slowerRate" mnemonicParsing="false" onAction="#decreaseRate" prefWidth="25.0" snapToPixel="false" styleClass="btn2" text="-">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>
