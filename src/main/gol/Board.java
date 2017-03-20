@@ -1,6 +1,7 @@
 package main.gol;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.*;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -10,16 +11,17 @@ import java.util.Random;
 public class Board {
 
 
-    public int cellSize;
+    private int cellSize;
     private int columns = 160;
     private int rows = 110;
     private Cell[][] grid;
-    private GraphicsContext graphics;
+    private final GraphicsContext graphics;
     private Color color = Color.WHITE;
 
 
+
+
     /**
-     * Board constructor
      *
      * @param graphics GraphicContext
      * @param cellSize int
@@ -60,27 +62,24 @@ public class Board {
      */
     public void nextGeneration(){
         ArrayList<Cell> generationList = new ArrayList<>();
+
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
                 Cell cell = grid[x][y];
 
                 if ( cell.getState() && cell.countAliveNeighbors() < 2 ){
-
                     cell.setNextState(false);
                     generationList.add(cell);
                 }
                 else if( cell.getState() && (cell.countAliveNeighbors()==2 || cell.countAliveNeighbors()==3)){
-
                     cell.setNextState(true);
                     generationList.add(cell);
                 }
                 else if( cell.getState() && cell.countAliveNeighbors() > 3){
-
                     cell.setNextState(false);
                     generationList.add(cell);
                 }
                 else if(!cell.getState() && cell.countAliveNeighbors() == 3){
-
                     cell.setNextState(true);
                     generationList.add(cell);
                 }
@@ -92,6 +91,19 @@ public class Board {
        }
     }
 
+    /**
+     *
+     * @return DropShadow
+     */
+    public DropShadow makeShadow(){
+        DropShadow ds = new DropShadow();
+        ds.setRadius(5.0);
+        ds.setOffsetX(3.0);
+        ds.setOffsetY(3.0);
+        ds.setColor(Color.BLACK);
+        return ds;
+    }
+
 
     /**
      *
@@ -101,15 +113,17 @@ public class Board {
         Random rand = new Random();
         if (cell.getNextState()){
             //this.graphics.setFill(color);
-            graphics.setFill(Color.rgb(rand.nextInt(155),rand.nextInt(255),rand.nextInt(100)));
+            graphics.setFill(Color.rgb(rand.nextInt(175),rand.nextInt(255),rand.nextInt(125)));
+            //graphics.setEffect(makeShadow());
             cell.setState(true);
         }
         else {
               graphics.setFill(Color.DARKSLATEGRAY);
               cell.setState(false);
         }
+        //graphics.setEffect(new DropShadow());
         graphics.setStroke(Color.BLACK); // Sets grid color
-        graphics.setLineWidth(0.3);
+        graphics.setLineWidth(0.2);
         graphics.fillRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
         graphics.strokeRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
     }
@@ -119,9 +133,11 @@ public class Board {
      * Draw grid to canvas
      */
     public void drawGrid() {
-        for (int i = 0; i < grid.length; i++)
-            for (int j = 0; j < grid[i].length; j++)
+        for (int i = 0; i < grid.length; i++){
+            for (int j = 0; j < grid[i].length; j++){
                 drawCell(grid[i][j]);
+            }
+        }
     }
 
 
@@ -130,18 +146,20 @@ public class Board {
     /**
      * Loops through array of cells and toggles alive cells to dead
      *
-     * @param cells
+     * @param cells Cell[x][y]
      */
     public void clearBoard(Cell[][] cells){
-        for(int i =0; i< cells.length; i++)
-            for(int j=0; j < cells[j].length; j++)
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells[i].length; j++) {
                 cells[i][j].setNextState(false);
+            }
+        }
     }
 
 
     /**
      *
-     * @param color
+     * @param color Color
      */
     public void setPickedColor(Color color){
         this.color = color;
@@ -173,20 +191,9 @@ public class Board {
 
     /**
      *
-     * @return rows int
-     */
-    public int getRows(){return this.rows;}
-
-    /**
-     *
-     * @return columns int
-     */
-    public int getColumns(){return this.columns;}
-    /**
-     *
-     * @param x
-     * @param y
-     * @return Cell[][]
+     * @param x int
+     * @param y int
+     * @return cell
      */
     public Cell getCell(int x, int y) {
         if (x < 0 || y < 0 || x >= grid.length || y >= grid[x].length)

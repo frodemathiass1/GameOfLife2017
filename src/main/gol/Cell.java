@@ -10,9 +10,9 @@ import java.util.stream.Stream;
 public class Cell{
 
 
-    private int x, y;
+    private final int x, y;
     private boolean state =false;
-    public boolean nextState;
+    private boolean nextState;
     private List<Cell> neighbors;
 
     /**
@@ -69,7 +69,7 @@ public class Cell{
      *
      * @return List neighbors
      */
-    public List<Cell> getNeighbors(){
+    private List<Cell> getNeighbors(){
 
         return this.neighbors;
     }

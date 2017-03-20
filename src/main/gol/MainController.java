@@ -21,30 +21,28 @@ import static main.gol.GameOfLife.HEIGHT;
 public class MainController implements Initializable {
 
 
-    private Timeline timeline = new Timeline();
-    private double durationMillis =500;
+    private final Timeline timeline = new Timeline();
+    private final double durationMillis =500;
     private Board board;
-    private int cellSize = 5;
+    private final int cellSize = 5;
 
 
     /**
      * Internal FXML objects
      */
-    @FXML private Button startBtn,random, stopBtn,resetBtn,fasterRate,slowerRate;
+    @FXML private Button startBtn;
     @FXML private ColorPicker colorPick;
     @FXML private Canvas canvas;
     @FXML private Slider sizeSlider;
-    @FXML private MenuBar menuBar;
-    @FXML private MenuButton menuButton;
-    @FXML private MenuItem slower,slow,normal,fast,faster,small,big, bigger;
-
+    @FXML private MenuItem small,big, bigger;
+    @FXML private Label counter;
 
 
 
     /**
      * init application
-     * @param location
-     * @param resources
+     * @param location java..net.URL
+     * @param resources java.util.ResourceBundle
      */
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
@@ -58,10 +56,12 @@ public class MainController implements Initializable {
     }
 
 
+
     /**
-     * Grid size handler
+     * Grid size selector
      */
-    public void changeSizeHandler(){
+    @FXML
+    private void changeSizeHandler(){
 
         small.setOnAction(e -> {
             setCellSize(5);
@@ -88,21 +88,7 @@ public class MainController implements Initializable {
 
 
 
-    /**
-     * Alternative rate menu button
-     */
-    @FXML public void slower(){
-        timeline.setRate(timeline.getCurrentRate()-0.5);
-    }
 
-
-
-    /**
-     * Alternative rate menu button
-     */
-    @FXML public void faster(){
-        timeline.setRate(timeline.getCurrentRate()+0.5);
-    }
 
 
 
@@ -128,41 +114,25 @@ public class MainController implements Initializable {
      *
      * @param cellSize int
      */
-    public void setCellSize(int cellSize) {
+    private void setCellSize(int cellSize) {
         this.board.setCellSize(cellSize);
         this.board.drawGrid();
     }
 
 
 
-    /**
-     *
-     * @param millis double
-     */
-    private void setDurationMillis(double millis){
-        this.durationMillis=millis;
-    }
 
 
 
     /**
-     *
-     * @return double durationMillis
+     * Set animation timeline, call nextGeneration in keyframe
      */
-    private double getDurationMillis(){
-        return this.durationMillis;
-    }
-
-
-
-    /**
-     * Set animation timeline and call nextGeneration in keyframe
-     */
-   public void setAnimation(){
-        this.timeline.getKeyFrames().add(
+   private void setAnimation(){
+        this.timeline.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(durationMillis),
                         e-> board.nextGeneration()
                 ));
+
         //this.timeline.setRate(1.0);
         this.timeline.setCycleCount(Timeline.INDEFINITE);
 
@@ -175,9 +145,9 @@ public class MainController implements Initializable {
      * Observable list. Set gridSize from slider values
      */
     public void sizeHandler(){
-        sizeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            setCellSize(newValue.intValue());
-        });
+        sizeSlider.valueProperty().addListener((
+                observable, oldValue, newValue) ->
+                setCellSize(newValue.intValue()));
     }
 
 
@@ -225,7 +195,7 @@ public class MainController implements Initializable {
             startBtn.setText("Play");
         } else {
             timeline.play();
-            startBtn.setText("Stopp");
+            startBtn.setText("Stop");
         }
     }
 
@@ -292,6 +262,5 @@ public class MainController implements Initializable {
         this.board.drawGrid();
     }
     */
-
 
 }
