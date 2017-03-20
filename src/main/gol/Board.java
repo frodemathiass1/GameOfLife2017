@@ -4,6 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class Board {
@@ -97,18 +98,20 @@ public class Board {
      * @param cell Cell
      */
     public void drawCell(Cell cell) {
+        Random rand = new Random();
         if (cell.getNextState()){
-            this.graphics.setFill(color);
+            //this.graphics.setFill(color);
+            graphics.setFill(Color.rgb(rand.nextInt(155),rand.nextInt(255),rand.nextInt(100)));
             cell.setState(true);
         }
         else {
-              this.graphics.setFill(Color.DARKSLATEGRAY);
+              graphics.setFill(Color.DARKSLATEGRAY);
               cell.setState(false);
         }
-        this.graphics.setStroke(Color.BLACK); // Sets grid color
-        this.graphics.setLineWidth(0.3);
-        this.graphics.fillRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
-        this.graphics.strokeRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
+        graphics.setStroke(Color.BLACK); // Sets grid color
+        graphics.setLineWidth(0.3);
+        graphics.fillRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
+        graphics.strokeRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
     }
 
 

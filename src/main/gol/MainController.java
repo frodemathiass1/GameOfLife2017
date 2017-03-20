@@ -4,8 +4,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -14,8 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-
-import java.util.Random;
 
 import static main.gol.GameOfLife.WIDTH; // Access Stage dimensions from main class
 import static main.gol.GameOfLife.HEIGHT;
@@ -40,7 +36,7 @@ public class MainController implements Initializable {
     @FXML private Slider sizeSlider;
     @FXML private MenuBar menuBar;
     @FXML private MenuButton menuButton;
-    @FXML private MenuItem slower,slow,normal,fast,faster,defaultSize,big,biggest;
+    @FXML private MenuItem slower,slow,normal,fast,faster,small,big, bigger;
 
 
 
@@ -58,6 +54,7 @@ public class MainController implements Initializable {
         this.board.drawGrid();
         this.sizeHandler();
         this.changeSizeHandler();
+
     }
 
 
@@ -66,7 +63,7 @@ public class MainController implements Initializable {
      */
     public void changeSizeHandler(){
 
-        defaultSize.setOnAction(e -> {
+        small.setOnAction(e -> {
             setCellSize(5);
             board.setColumns(160);
             board.setRows(110);
@@ -80,7 +77,7 @@ public class MainController implements Initializable {
             board.drawGrid();
         });
 
-        biggest.setOnAction(e -> {
+        bigger.setOnAction(e -> {
             board.setCellSize(20);
             board.setColumns(40);
             board.setRows(28);
