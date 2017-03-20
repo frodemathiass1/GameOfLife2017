@@ -20,7 +20,7 @@ import static main.gol.GameOfLife.HEIGHT;
 
 public class MainController implements Initializable {
 
-
+    GraphicsContext gc;
     private final Timeline timeline = new Timeline();
     private final double durationMillis =500;
     private Board board;
@@ -37,7 +37,9 @@ public class MainController implements Initializable {
     @FXML private MenuItem small,big, bigger;
     @FXML private Label counter;
 
-
+    @FXML public void nextGeneration(){
+        board.nextGeneration();
+    }
 
     /**
      * init application
