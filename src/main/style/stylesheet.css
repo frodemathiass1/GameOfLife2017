@@ -3,7 +3,7 @@
 */
 
 .buttonBar{
-    -fx-background-color: dimgray;
+    -fx-background-color: lightslateblue;
 }
 
 
@@ -16,6 +16,7 @@
 
     -fx-background-radius: 5,5,4;
     -fx-text-fill:black;
+    -fx-font-size: 12px;
 
 }
 

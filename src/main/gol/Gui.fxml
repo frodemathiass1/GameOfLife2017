@@ -11,6 +11,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -30,14 +31,14 @@
       <Canvas fx:id="canvas" height="550.0" layoutY="27.0" onMouseClicked="#getCellPosition" onMouseDragged="#getCellPosition" styleClass="canvasBackground" width="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <HBox layoutY="576.0" prefHeight="50.0" prefWidth="800.0" spacing="12.0" styleClass="buttonBar" stylesheets="@../style/stylesheet.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button fx:id="startBtn" mnemonicParsing="false" onAction="#startPause" prefHeight="0.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../style/stylesheet.css" text="Play">
+            <Button fx:id="startBtn" mnemonicParsing="false" onAction="#startPause" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../style/stylesheet.css" text="Play">
                <HBox.margin>
                   <Insets left="10.0" top="12.0" />
                </HBox.margin>
                <font>
                   <Font size="10.0" />
                </font></Button>
-            <Button fx:id="resetBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clearBoard" prefHeight="21.0" prefWidth="65.0" styleClass="buttons" stylesheets="@../style/stylesheet.css" text="Reset">
+            <Button fx:id="resetBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clearBoard" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../style/stylesheet.css" text="Reset">
                <font>
                   <Font size="10.0" />
                </font>
@@ -45,6 +46,30 @@
                   <Insets top="12.0" />
                </HBox.margin>
             </Button>
+            <Separator layoutX="338.0" layoutY="10.0" orientation="VERTICAL" prefHeight="41.0" prefWidth="13.0" />
+             <!--
+            <MenuButton fx:id="speed" mnemonicParsing="false" styleClass="btn2" stylesheets="@../style/stylesheet.css" text="Speed">
+              <items>
+                <MenuItem fx:id="slower" mnemonicParsing="false" onAction="#slower" text="Slower" />
+                  <MenuItem fx:id="faster" mnemonicParsing="false" onAction="#faster" text="Faster" />
+              </items>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </MenuButton>
+            -->
+
+             <MenuButton fx:id="gridSize" mnemonicParsing="false" onAction="#changeSizeHandler" prefHeight="25.0" prefWidth="60.0" styleClass="btn2" stylesheets="@../style/stylesheet.css" text="Size">
+                 <items>
+                     <MenuItem fx:id="defaultSize" mnemonicParsing="false" text="Default" />
+                     <MenuItem fx:id="big" mnemonicParsing="false" text="Big" />
+                     <MenuItem fx:id="biggest" mnemonicParsing="false" text="Bigger" />
+                 </items>
+                 <HBox.margin>
+                     <Insets top="12.0" />
+                 </HBox.margin>
+             </MenuButton>
+             <!--
             <Button id="random" fx:id="random" layoutX="20.0" layoutY="22.0" mnemonicParsing="false" onAction="#randomize" prefHeight="21.0" prefWidth="70.0" styleClass="buttons" stylesheets="@../style/stylesheet.css" text="Randomize">
                <font>
                   <Font size="10.0" />
@@ -53,30 +78,18 @@
                   <Insets bottom="10.0" top="12.0" />
                </HBox.margin>
             </Button>
+            -->
 
-            <ColorPicker id="colorpicker" fx:id="colorPick" onAction="#pickColor" opacity="1.0" prefHeight="21.0" prefWidth="86.0" styleClass="colorPick" stylesheets="@../style/stylesheet.css">
+            <ColorPicker id="colorpicker" fx:id="colorPick" onAction="#pickColor" opacity="1.0" prefHeight="25.0" prefWidth="90.0" styleClass="colorPick" stylesheets="@../style/stylesheet.css">
 
                <HBox.margin>
-                  <Insets right="10.0" top="12.0" />
+                  <Insets top="12.0" />
                </HBox.margin>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor></ColorPicker>
-            <Label text="Size:" textFill="WHITE">
-               <HBox.margin>
-                  <Insets right="10.0" top="17.0" />
-               </HBox.margin>
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Label>
-
-                   <Slider fx:id="sizeSlider" blockIncrement="1.0" max="30" min="10" prefHeight="26.0" prefWidth="100.0" showTickMarks="true" snapToTicks="true">
-               <HBox.margin>
-                  <Insets top="15.0" />
-               </HBox.margin>
-            </Slider>
-            <Label text="Speedrate" textFill="WHITE">
+            <Separator orientation="VERTICAL" prefHeight="50.0" />
+            <Label text="Speed">
                <font>
                   <Font size="10.0" />
                </font>
@@ -85,35 +98,36 @@
                </HBox.margin>
             </Label>
 
-            <Button fx:id="fasterRate" mnemonicParsing="false" onAction="#increaseRate" prefWidth="25.0" snapToPixel="false" styleClass="btn2" text="+">
+            <Button fx:id="fasterRate" mnemonicParsing="false" onAction="#increaseRate" prefHeight="25.0" prefWidth="25.0" snapToPixel="false" styleClass="btn2" text="+">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="slowerRate" mnemonicParsing="false" onAction="#decreaseRate" prefWidth="25.0" snapToPixel="false" styleClass="btn2" text="-">
+            <Button fx:id="slowerRate" mnemonicParsing="false" onAction="#decreaseRate" prefHeight="25.0" prefWidth="25.0" snapToPixel="false" styleClass="btn2" text="-">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>
             </Button>
-            <MenuButton fx:id="speed" onAction="#changeSpeed" mnemonicParsing="false" styleClass="btn2" stylesheets="@../style/stylesheet.css" text="Speed">
-              <items>
-                <MenuItem fx:id="slower" onAction="#slower" mnemonicParsing="false" text="Slower" />
-                  <MenuItem fx:id="faster" onAction="#faster" mnemonicParsing="false" text="Faster" />
-              </items>
+            <Separator orientation="VERTICAL" prefHeight="50.0" prefWidth="0.0" />
+            <Label text="Zoom:">
                <HBox.margin>
-                  <Insets top="10.0" />
+                  <Insets left="10.0" right="10.0" top="17.0" />
                </HBox.margin>
-            </MenuButton>
-             <!--
-            <Button fx:id="exitApp" mnemonicParsing="false" onAction="#exitApp" prefHeight="21.0" prefWidth="52.0" styleClass="exitBtn" stylesheets="@../style/stylesheet.css" text="EXIT">
                <font>
                   <Font size="10.0" />
                </font>
+            </Label>
+
+                   <Slider fx:id="sizeSlider" blockIncrement="1.0" max="30" min="10" prefHeight="26.0" prefWidth="205.0" showTickMarks="true" snapToTicks="true">
                <HBox.margin>
-                  <Insets top="10.0" />
+                  <Insets top="15.0" />
                </HBox.margin>
-            </Button>
-            -->
+            </Slider>
+
+
+
+
+
          </children>
       </HBox>
 

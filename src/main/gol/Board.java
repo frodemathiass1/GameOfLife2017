@@ -10,11 +10,11 @@ public class Board {
 
 
     public int cellSize;
-    private int columns = 80;
-    private int rows = 55;
+    private int columns = 160;
+    private int rows = 110;
     private Cell[][] grid;
     private GraphicsContext graphics;
-    private Color color = Color.DARKCYAN;
+    private Color color = Color.WHITE;
 
 
     /**
@@ -102,10 +102,10 @@ public class Board {
             cell.setState(true);
         }
         else {
-              this.graphics.setFill(Color.GHOSTWHITE);
+              this.graphics.setFill(Color.DARKSLATEGRAY);
               cell.setState(false);
         }
-        this.graphics.setStroke(Color.LIGHTGRAY); // Sets grid color
+        this.graphics.setStroke(Color.BLACK); // Sets grid color
         this.graphics.setLineWidth(0.3);
         this.graphics.fillRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
         this.graphics.strokeRect(cell.getX() * this.cellSize, cell.getY() * this.cellSize, this.cellSize, this.cellSize);
@@ -168,6 +168,17 @@ public class Board {
         this.columns=cols;
     }
 
+    /**
+     *
+     * @return rows int
+     */
+    public int getRows(){return this.rows;}
+
+    /**
+     *
+     * @return columns int
+     */
+    public int getColumns(){return this.columns;}
     /**
      *
      * @param x
