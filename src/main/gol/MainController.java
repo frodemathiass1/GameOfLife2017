@@ -37,9 +37,7 @@ public class MainController implements Initializable {
     @FXML private MenuItem small,big, bigger;
     @FXML private Label counter;
 
-    @FXML public void nextGeneration(){
-        board.nextGeneration();
-    }
+
 
     /**
      * init application
@@ -54,10 +52,16 @@ public class MainController implements Initializable {
         this.board.drawGrid();
         this.sizeHandler();
         this.changeSizeHandler();
+        clearBoard(); // Workaround to enable gridSize to be set "Big" as "Default"
 
     }
 
-
+    /**
+     * Next generation, no animation
+     */
+    @FXML public void nextGeneration(){
+        board.nextGeneration();
+    }
 
     /**
      * Grid size selector
