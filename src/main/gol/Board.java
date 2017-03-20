@@ -112,8 +112,8 @@ public class Board {
     public void drawCell(Cell cell) {
         Random rand = new Random();
         if (cell.getNextState()){
-            //this.graphics.setFill(color);
-            graphics.setFill(Color.rgb(rand.nextInt(175),rand.nextInt(255),rand.nextInt(125)));
+            this.graphics.setFill(color);
+            //graphics.setFill(Color.rgb(rand.nextInt(175),rand.nextInt(255),rand.nextInt(125)));
             //graphics.setEffect(makeShadow());
             cell.setState(true);
         }
