@@ -2,15 +2,6 @@
 * Game of life stylesheet
 */
 
-.buttonBar{
-    -fx-background-color: lightslateblue;
-}
-
-
-.canvas{
-    -fx-background-color: black;
-}
-
 
 .buttons{
 
