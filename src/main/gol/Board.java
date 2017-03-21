@@ -67,25 +67,29 @@ public class Board {
             for (int y = 0; y < grid[x].length; y++) {
                 Cell cell = grid[x][y];
 
+                // dies, as if by underpopulation.
                 if ( cell.getState() && cell.countAliveNeighbors() < 2 ){
                     cell.setNextState(false);
                     generationList.add(cell);
                 }
+                // lives on to the next generation.
                 else if( cell.getState() && (cell.countAliveNeighbors()==2 || cell.countAliveNeighbors()==3)){
                     cell.setNextState(true);
                     generationList.add(cell);
                 }
+                // dies, as if by overpopulation.
                 else if( cell.getState() && cell.countAliveNeighbors() > 3){
                     cell.setNextState(false);
                     generationList.add(cell);
                 }
+                // becomes a live cell, as if by reproduction.
                 else if(!cell.getState() && cell.countAliveNeighbors() == 3){
                     cell.setNextState(true);
                     generationList.add(cell);
                 }
             }
         }
-       // prints out the next generation
+       // Draw next generation
        for(Cell cell : generationList){
            drawCell(cell);
        }
@@ -119,7 +123,9 @@ public class Board {
         }
         else {
               graphics.setFill(Color.DARKSLATEGRAY);
+
               cell.setState(false);
+
         }
         //graphics.setEffect(new DropShadow());
         graphics.setStroke(Color.BLACK); // Sets grid color
@@ -127,6 +133,8 @@ public class Board {
         graphics.fillRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
         graphics.strokeRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
     }
+
+
 
 
     /**
@@ -215,6 +223,42 @@ public class Board {
      */
     public int getCellSize(){
         return this.cellSize;
+    }
+
+
+    /**
+     * Generates a random set of alive Cells
+     */
+    public void randomGeneration(){
+        ArrayList<Cell> generationList = new ArrayList<>();
+        Random rand = new Random();
+
+        for (int x = 0; x < grid.length; x++) {
+            for (int y = 0; y < grid[x].length; y++) {
+                Cell cell = grid[x][y];
+
+                if ( cell.getState() && cell.countAliveNeighbors() < rand.nextInt(2) ){
+                    cell.setNextState(rand.nextBoolean());
+                    generationList.add(cell);
+                }
+                else if( cell.getState() && (cell.countAliveNeighbors()==rand.nextInt(2) || cell.countAliveNeighbors()==rand.nextInt(3))){
+                    cell.setNextState(rand.nextBoolean());
+                    generationList.add(cell);
+                }
+                else if( cell.getState() && cell.countAliveNeighbors() > rand.nextInt(3)){
+                    cell.setNextState(rand.nextBoolean());
+                    generationList.add(cell);
+                }
+                else if(!cell.getState() && cell.countAliveNeighbors() == rand.nextInt(3)){
+                    cell.setNextState(rand.nextBoolean());
+                    generationList.add(cell);
+                }
+            }
+        }
+        // prints out the next generation
+        for(Cell cell : generationList){
+            drawCell(cell);
+        }
     }
 
 }

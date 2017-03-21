@@ -63,6 +63,10 @@ public class MainController implements Initializable {
         board.nextGeneration();
     }
 
+    @FXML public void randomGeneration(){
+        board.randomGeneration();
+    }
+
     /**
      * Grid size selector
      */

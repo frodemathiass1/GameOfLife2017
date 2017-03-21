@@ -46,6 +46,14 @@
                 <Insets top="12.0" />
             </HBox.margin>
         </Button>
+      <Button contentDisplay="CENTER" layoutX="169.0" layoutY="22.0" mnemonicParsing="false" onAction="#randomGeneration" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../style/stylesheet.css" text="Random">
+         <font>
+            <Font size="10.0" />
+         </font>
+         <HBox.margin>
+            <Insets top="12.0" />
+         </HBox.margin>
+      </Button>
         <Separator layoutX="338.0" layoutY="10.0" maxHeight="35.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="13.0">
             <HBox.margin>
                 <Insets top="7.0" />
@@ -76,7 +84,7 @@
                 <Insets top="7.0" />
             </HBox.margin>
         </Separator>
-        <Label text="Speed">
+        <Label prefHeight="13.0" prefWidth="37.0" styleClass="btn2" text="Speed">
             <font>
                 <Font size="12.0" />
             </font>
@@ -99,7 +107,7 @@
                 <Insets top="7.0" />
             </HBox.margin>
         </Separator>
-        <Label text="Zoom:">
+        <Label prefHeight="13.0" prefWidth="37.0" styleClass="btn2" text="Zoom:">
             <HBox.margin>
                 <Insets left="5.0" right="10.0" top="17.0" />
             </HBox.margin>
@@ -112,10 +120,5 @@
                 <Insets top="15.0" />
             </HBox.margin>
         </Slider>
-        <Separator layoutX="529.0" layoutY="17.0" maxHeight="35.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="0.0">
-            <HBox.margin>
-                <Insets top="7.0" />
-            </HBox.margin>
-        </Separator>
     </HBox>
 </AnchorPane>
