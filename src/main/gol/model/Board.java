@@ -1,4 +1,4 @@
-package main.gol;
+package main.gol.model;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.*;

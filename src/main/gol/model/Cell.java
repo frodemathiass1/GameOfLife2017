@@ -1,4 +1,4 @@
-package main.gol;
+package main.gol.model;
 
 import java.util.List;
 import java.util.Objects;

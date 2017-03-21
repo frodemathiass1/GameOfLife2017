@@ -1,4 +1,4 @@
-package main.gol;
+package main.gol.controller;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import main.gol.model.*;
 
 import static main.gol.GameOfLife.WIDTH; // Access Stage dimensions from main class
 import static main.gol.GameOfLife.HEIGHT;
@@ -184,7 +185,7 @@ public class MainController implements Initializable {
         int cellPosY = (int) Math.floor(y / board.getCellSize());
 
         // Get cell
-        Cell cell = this.board.getCell(cellPosX, cellPosY);
+        main.gol.model.Cell cell = this.board.getCell(cellPosX, cellPosY);
 
         // Toggle alive
         boolean toggleState = !cell.getState();

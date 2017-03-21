@@ -1,4 +1,4 @@
-package main.gol;
+package main.gol.controller;
 
 public class GameControl {
 

@@ -17,15 +17,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.MainController">
     <MenuBar layoutY="-1.0" maxHeight="25.0" prefHeight="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#quitApp" text="Quit" />
         </Menu>
     </MenuBar>
     <Canvas fx:id="canvas" height="550.0" layoutY="27.0" onMouseClicked="#getCellPosition" onMouseDragged="#getCellPosition" width="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-    <HBox layoutY="576.0" prefHeight="50.0" prefWidth="800.0" spacing="12.0" stylesheets="@../style/stylesheet.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <Button fx:id="startBtn" mnemonicParsing="false" onAction="#startPause" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../style/stylesheet.css" text="Play">
+    <HBox layoutY="576.0" prefHeight="50.0" prefWidth="800.0" spacing="12.0" stylesheets="@../../style/stylesheet.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <Button fx:id="startBtn" mnemonicParsing="false" onAction="#startPause" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../../style/stylesheet.css" text="Play">
             <HBox.margin>
                 <Insets left="15.0" top="12.0" />
             </HBox.margin>
@@ -33,7 +33,7 @@
                 <Font size="10.0" />
             </font>
         </Button>
-      <Button mnemonicParsing="false" onAction="#nextGeneration" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../style/stylesheet.css" text="Next">
+      <Button mnemonicParsing="false" onAction="#nextGeneration" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../../style/stylesheet.css" text="Next">
          <HBox.margin>
             <Insets top="12.0" />
          </HBox.margin>
@@ -43,7 +43,7 @@
                 <Insets top="7.0" />
             </HBox.margin>
         </Separator>
-        <Button contentDisplay="CENTER" layoutX="169.0" layoutY="22.0" mnemonicParsing="false" onAction="#randomGeneration" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../style/stylesheet.css" text="Random">
+        <Button contentDisplay="CENTER" layoutX="169.0" layoutY="22.0" mnemonicParsing="false" onAction="#randomGeneration" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../../style/stylesheet.css" text="Random">
             <font>
                 <Font size="10.0" />
             </font>
@@ -51,7 +51,7 @@
                 <Insets top="12.0" />
             </HBox.margin>
         </Button>
-        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#clearBoard" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../style/stylesheet.css" text="Reset">
+        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#clearBoard" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../../style/stylesheet.css" text="Reset">
             <font>
                 <Font size="10.0" />
             </font>
@@ -66,7 +66,7 @@
             </HBox.margin>
         </Separator>
 
-        <MenuButton mnemonicParsing="false" onAction="#changeSizeHandler" prefHeight="25.0" prefWidth="60.0" styleClass="btn2" stylesheets="@../style/stylesheet.css" text="Size">
+        <MenuButton mnemonicParsing="false" onAction="#changeSizeHandler" prefHeight="25.0" prefWidth="60.0" styleClass="btn2" stylesheets="@../../style/stylesheet.css" text="Size">
             <items>
                 <MenuItem fx:id="small" mnemonicParsing="false" text="Small" />
                 <MenuItem fx:id="big" mnemonicParsing="false" text="Big" />
@@ -77,7 +77,7 @@
             </HBox.margin>
         </MenuButton>
 
-        <ColorPicker id="colorPicker" fx:id="colorPick" onAction="#pickColor" prefHeight="25.0" prefWidth="90.0" styleClass="colorPick" stylesheets="@../style/stylesheet.css">
+        <ColorPicker id="colorPicker" fx:id="colorPick" onAction="#pickColor" prefHeight="25.0" prefWidth="90.0" styleClass="colorPick" stylesheets="@../../style/stylesheet.css">
             <HBox.margin>
                 <Insets right="5.0" top="12.0" />
             </HBox.margin>

@@ -20,7 +20,7 @@ public class GameOfLife extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Gui.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("view/Gui.fxml"));
             primaryStage.setTitle("Game Of Life");
             primaryStage.setOnCloseRequest(e -> Platform.exit());
             primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
