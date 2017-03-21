@@ -95,6 +95,8 @@ public class Board {
        }
     }
 
+
+
     /**
      *
      * @return DropShadow
@@ -123,9 +125,7 @@ public class Board {
         }
         else {
               graphics.setFill(Color.DARKSLATEGRAY);
-
               cell.setState(false);
-
         }
         //graphics.setEffect(new DropShadow());
         graphics.setStroke(Color.BLACK); // Sets grid color
@@ -133,6 +133,7 @@ public class Board {
         graphics.fillRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
         graphics.strokeRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
     }
+
 
 
 
@@ -237,21 +238,30 @@ public class Board {
             for (int y = 0; y < grid[x].length; y++) {
                 Cell cell = grid[x][y];
 
-                if ( cell.getState() && cell.countAliveNeighbors() < rand.nextInt(2) ){
+                if ( cell.getState() && cell.countAliveNeighbors() < rand.nextInt(8) ){
+
                     cell.setNextState(rand.nextBoolean());
                     generationList.add(cell);
+
+
                 }
-                else if( cell.getState() && (cell.countAliveNeighbors()==rand.nextInt(2) || cell.countAliveNeighbors()==rand.nextInt(3))){
+               else if( cell.getState() && (cell.countAliveNeighbors()==rand.nextInt(8) || cell.countAliveNeighbors()==rand.nextInt(4))){
+
                     cell.setNextState(rand.nextBoolean());
                     generationList.add(cell);
+
                 }
-                else if( cell.getState() && cell.countAliveNeighbors() > rand.nextInt(3)){
+                else if( cell.getState() && cell.countAliveNeighbors() > rand.nextInt(8)){
+
                     cell.setNextState(rand.nextBoolean());
                     generationList.add(cell);
+
                 }
-                else if(!cell.getState() && cell.countAliveNeighbors() == rand.nextInt(3)){
+                else if(!cell.getState() && cell.countAliveNeighbors() == rand.nextInt(4)){
+
                     cell.setNextState(rand.nextBoolean());
                     generationList.add(cell);
+
                 }
             }
         }
