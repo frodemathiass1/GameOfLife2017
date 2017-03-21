@@ -13,6 +13,7 @@ class CellTest {
         Assert.assertFalse(cell.getState());
         cell.setState(true);
         Assert.assertTrue(cell.getState());
+
     }
 
 }
