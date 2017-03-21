@@ -11,7 +11,7 @@ public class Cell{
 
 
     private final int x, y;
-    private boolean state =false;
+    private boolean state = false;
     private boolean nextState;
     private List<Cell> neighbors;
 
@@ -32,7 +32,7 @@ public class Cell{
      * @return neighborCount int
      */
     public int countAliveNeighbors(){
-        int neighborCount=0;
+        int neighborCount = 0;
         for(int i = 0; i < this.getNeighbors().size(); i++ )
             if(this.neighbors.get(i).getState())
                 neighborCount++;
@@ -49,7 +49,7 @@ public class Cell{
      * @param board Board
      */
     public void initNeighbors(Board board) {
-        Cell topLeft = board.getCell(this.x-1, this.y - 1);
+        Cell topLeft = board.getCell(this.x - 1, this.y - 1);
         Cell top = board.getCell(this.x, this.y - 1);
         Cell topRight = board.getCell(this.x + 1, this.y - 1);
         Cell left = board.getCell(this.x - 1, this.y);
@@ -99,7 +99,7 @@ public class Cell{
      */
     public void setNextState(boolean ns){
 
-        this.nextState=ns;
+        this.nextState = ns;
     }
 
     /**

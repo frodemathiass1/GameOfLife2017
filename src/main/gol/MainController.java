@@ -22,7 +22,7 @@ public class MainController implements Initializable {
 
     GraphicsContext gc;
     private final Timeline timeline = new Timeline();
-    private final double durationMillis =500;
+    private final double durationMillis = 500;
     private Board board;
     private final int cellSize = 5;
 
@@ -34,7 +34,7 @@ public class MainController implements Initializable {
     @FXML private ColorPicker colorPick;
     @FXML private Canvas canvas;
     @FXML private Slider sizeSlider;
-    @FXML private MenuItem small,big, bigger;
+    @FXML private MenuItem small, big, bigger;
     @FXML private Label counter;
 
 
@@ -47,7 +47,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
-        this.board=new Board(graphics, this.cellSize); // this is dependency injection!
+        this.board = new Board(graphics, this.cellSize); // this is dependency injection!
         colorPick.setValue(Color.WHITE);
         this.board.drawGrid();
         this.sizeHandler();
@@ -108,7 +108,7 @@ public class MainController implements Initializable {
      * Increase animation rate
      */
     @FXML public void increaseRate(){
-            timeline.setRate(timeline.getCurrentRate()+0.5);
+            timeline.setRate(timeline.getCurrentRate() + 0.5);
     }
 
 
@@ -117,7 +117,7 @@ public class MainController implements Initializable {
      * Decrease animation rate
      */
     @FXML public void decreaseRate(){
-            timeline.setRate(timeline.getCurrentRate()-0.5);
+            timeline.setRate(timeline.getCurrentRate() - 0.5);
     }
 
 
@@ -225,7 +225,7 @@ public class MainController implements Initializable {
         this.board.setRows(80);
         this.board.setColumns(55);
         GraphicsContext graphics = canvas.getGraphicsContext2D();
-        graphics.clearRect(0,0,WIDTH,HEIGHT);
+        graphics.clearRect(0,0, WIDTH, HEIGHT);
         board.clearBoard(board.getGrid());
         board.drawGrid();
         sizeSlider.setValue(cellSize);

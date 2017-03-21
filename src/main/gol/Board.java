@@ -68,17 +68,17 @@ public class Board {
                 Cell cell = grid[x][y];
 
                 // dies, as if by underpopulation.
-                if ( cell.getState() && cell.countAliveNeighbors() < 2 ){
+                if (cell.getState() && cell.countAliveNeighbors() < 2 ){
                     cell.setNextState(false);
                     generationList.add(cell);
                 }
                 // lives on to the next generation.
-                else if( cell.getState() && (cell.countAliveNeighbors()==2 || cell.countAliveNeighbors()==3)){
+                else if(cell.getState() && (cell.countAliveNeighbors() == 2 || cell.countAliveNeighbors() == 3)){
                     cell.setNextState(true);
                     generationList.add(cell);
                 }
                 // dies, as if by overpopulation.
-                else if( cell.getState() && cell.countAliveNeighbors() > 3){
+                else if(cell.getState() && cell.countAliveNeighbors() > 3){
                     cell.setNextState(false);
                     generationList.add(cell);
                 }
@@ -171,6 +171,7 @@ public class Board {
      * @param color Color
      */
     public void setPickedColor(Color color){
+        // Color picker
         this.color = color;
     }
 
@@ -187,7 +188,7 @@ public class Board {
      * @param rows int
      */
     public void setRows(int rows){
-        this.rows=rows;
+        this.rows = rows;
     }
 
     /**
@@ -195,7 +196,7 @@ public class Board {
      * @param cols int
      */
     public void setColumns(int cols){
-        this.columns=cols;
+        this.columns = cols;
     }
 
     /**
@@ -241,20 +242,20 @@ public class Board {
             for (int y = 0; y < grid[x].length; y++) {
                 Cell cell = grid[x][y];
 
-                if ( cell.getState() && cell.countAliveNeighbors() < rand.nextInt(8) ){
+                if (cell.getState() && cell.countAliveNeighbors() < rand.nextInt(8) ){
 
                     cell.setNextState(rand.nextBoolean());
                     generationList.add(cell);
 
 
                 }
-               else if( cell.getState() && (cell.countAliveNeighbors()==rand.nextInt(8) || cell.countAliveNeighbors()==rand.nextInt(4))){
+               else if(cell.getState() && (cell.countAliveNeighbors() == rand.nextInt(8) || cell.countAliveNeighbors() == rand.nextInt(4))){
 
                     cell.setNextState(rand.nextBoolean());
                     generationList.add(cell);
 
                 }
-                else if( cell.getState() && cell.countAliveNeighbors() > rand.nextInt(8)){
+                else if(cell.getState() && cell.countAliveNeighbors() > rand.nextInt(8)){
 
                     cell.setNextState(rand.nextBoolean());
                     generationList.add(cell);
