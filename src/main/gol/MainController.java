@@ -53,6 +53,7 @@ public class MainController implements Initializable {
         this.sizeHandler();
         this.changeSizeHandler();
         clearBoard(); // Workaround to enable gridSize to be set "Big" as "Default"
+        colorPick.setValue(Color.ORANGE);
 
     }
 
@@ -64,7 +65,7 @@ public class MainController implements Initializable {
     }
 
     @FXML public void randomGeneration(){
-        board.randomGeneration();
+        board.makeRandomGenerations();
     }
 
     /**

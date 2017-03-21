@@ -16,7 +16,7 @@ public class Board {
     private int rows = 110;
     private Cell[][] grid;
     private final GraphicsContext graphics;
-    private Color color = Color.WHITE;
+    private Color color = Color.ORANGE;
 
 
 
@@ -229,7 +229,7 @@ public class Board {
     /**
      * Generates a random set of alive Cells
      */
-    public void randomGeneration(){
+    public void makeRandomGenerations(){
         ArrayList<Cell> generationList = new ArrayList<>();
         Random rand = new Random();
 
