@@ -205,9 +205,12 @@ public class Board {
      * @return cell
      */
     public Cell getCell(int x, int y) {
-        if (x < 0 || y < 0 || x >= grid.length || y >= grid[x].length)
+        if (x < 0 || y < 0 || x >= grid.length || y >= grid[x].length){
             return null;
-        return this.grid[x][y];
+        }
+        else {
+            return this.grid[x][y];
+        }
     }
 
     /**
