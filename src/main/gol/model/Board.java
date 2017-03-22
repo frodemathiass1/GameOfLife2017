@@ -3,6 +3,7 @@ package main.gol.model;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.*;
 import javafx.scene.paint.Color;
+import main.gol.controller.MainController;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -127,6 +128,7 @@ public class Board {
     public void drawCell(Cell cell) {
         Random rand = new Random();
         if (cell.getNextState()){
+
             this.graphics.setFill(cellColor);
             //graphics.setFill(Color.rgb(rand.nextInt(175),rand.nextInt(255),rand.nextInt(125)));
             //graphics.setEffect(makeShadow());

@@ -15,6 +15,8 @@ import javafx.util.Duration;
 import main.gol.model.*;
 import main.gol.model.Cell;
 
+import java.util.Random;
+
 import static main.gol.GameOfLife.WIDTH; // Access Stage dimensions from main class
 import static main.gol.GameOfLife.HEIGHT;
 
@@ -32,7 +34,7 @@ public class MainController implements Initializable {
     /**
      * Internal FXML objects
      */
-    @FXML private Button play;
+    @FXML private Button play,random;
     @FXML private ColorPicker colorPick,cellColor,gridColor,backgroundColor;
     @FXML private Canvas canvas;
     @FXML private Slider sizeSlider;
@@ -41,19 +43,7 @@ public class MainController implements Initializable {
 
 
 
-    @FXML public void setCellColor(){
-        board.setCellColor(cellColor.getValue());
-        board.drawGrid();
-    }
-    @FXML public void setGridColor(){
-        board.setGridColor(gridColor.getValue());
-        board.drawGrid();
-    }
 
-    @FXML public void setBackgroundColor(){
-        board.setBcColor(backgroundColor.getValue());
-        board.drawGrid();
-    }
 
     /**
      * init application
@@ -63,35 +53,50 @@ public class MainController implements Initializable {
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
-        this.board = new Board(graphics, this.cellSize); // this is dependency injection!
-        //colorPick.setValue(Color.WHITE);
-        this.board.drawGrid();
+        board = new Board(graphics, this.cellSize); // this is dependency injection!
+        board.drawGrid();
         this.sizeHandler();
         this.changeSizeHandler();
-        clearBoard(); // Workaround to enable gridSize to be set "Big" as "Default"
-        //colorPick.setValue(Color.ORANGE);
         cellColor.setValue(Color.BLACK);
         gridColor.setValue(Color.BLACK);
         backgroundColor.setValue(Color.WHITE);
-        this.timeline.setRate(3.0);
-
-
-
-
-
+        clearBoard(); // Workaround to enable gridSize to be set "Big" as "Default"
     }
 
 
     /**
      * Next generation, no animation
      */
-    @FXML public void nextGeneration(){
+    @FXML
+    public void nextGeneration(){
         board.nextGeneration();
     }
 
-    @FXML public void randomGeneration(){
+    @FXML
+    public void randomGeneration(){
         board.makeRandomGenerations();
     }
+
+    private void setCellSize(int cellSize) {this.board.setCellSize(cellSize);}
+
+    @FXML
+    public void setCellColor(){
+        board.setCellColor(cellColor.getValue());
+        board.drawGrid();
+    }
+    @FXML
+    public void setGridColor(){
+        board.setGridColor(gridColor.getValue());
+        board.drawGrid();
+    }
+
+    @FXML
+    public void setBackgroundColor(){
+        board.setBcColor(backgroundColor.getValue());
+        board.drawGrid();
+    }
+
+
 
     /**
      * Grid size selector
@@ -104,7 +109,6 @@ public class MainController implements Initializable {
             board.setColumns(160);
             board.setRows(110);
             board.drawGrid();
-
         });
 
         normal.setOnAction(e -> {
@@ -124,48 +128,6 @@ public class MainController implements Initializable {
 
 
 
-
-
-
-
-
-    /**
-     * Increase animation rate
-     */
-    @FXML public void increaseRate(){
-            timeline.setRate(timeline.getCurrentRate() + 0.5);
-    }
-
-
-
-    /**
-     * Decrease animation rate
-     */
-    @FXML public void decreaseRate(){
-            timeline.setRate(timeline.getCurrentRate() - 0.5);
-    }
-
-
-
-    /**
-     *
-     * @param cellSize int
-     */
-    private void setCellSize(int cellSize) {
-        this.board.setCellSize(cellSize);
-        this.board.drawGrid();
-    }
-
-
-
-
-    /**
-     * Set animation timeline, call nextGeneration in keyframe
-     */
-   private void setAnimation(){
-
-
-    }
 
 
 
@@ -254,6 +216,30 @@ public class MainController implements Initializable {
 
 
     /**
+     * Increase animation rate
+     */
+    @FXML public void increaseRate(){
+        timeline.setRate(timeline.getCurrentRate() + 0.5);
+    }
+
+
+
+    /**
+     * Decrease animation rate
+     */
+    @FXML public void decreaseRate(){
+        timeline.setRate(timeline.getCurrentRate() - 0.5);
+    }
+
+
+    /**
+     * Close application
+     */
+    @FXML public void quitApp(){
+        Platform.exit();
+    }
+
+    /**
      * Toggle all cells state to false and clear canvas
      * Reset grid settings to default
      * Reset slider value and buttons to default
@@ -279,13 +265,6 @@ public class MainController implements Initializable {
 
 
 
-    /**
-     * Close application
-     */
-    @FXML public void quitApp(){
-        Platform.exit();
-    }
-
         /*
     private int min = 1;
     private int max = 100;
@@ -308,5 +287,15 @@ public class MainController implements Initializable {
         this.board.drawGrid();
     }
     */
+
+       @FXML
+       public void randomColor(){
+           Random rand = new Random();
+           Color randColor = Color.rgb(rand.nextInt(175),rand.nextInt(255),rand.nextInt(175) );
+           board.setCellColor(randColor);
+
+       }
+
+
 
 }

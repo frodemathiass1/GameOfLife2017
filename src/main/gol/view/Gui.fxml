@@ -2,7 +2,6 @@
 
 <?language javascript?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
@@ -93,19 +92,25 @@
         <items>
           <MenuItem mnemonicParsing="false" text="Cell">
                <graphic>
-                  <ColorPicker fx:id="cellColor" onAction="#setCellColor" />
+                  <ColorPicker fx:id="cellColor" onAction="#setCellColor" prefHeight="25.0" prefWidth="90.0" />
                </graphic>
             </MenuItem>
             <MenuItem mnemonicParsing="false" text="Grid">
                <graphic>
-                  <ColorPicker fx:id="gridColor" onAction="#setGridColor" />
+                  <ColorPicker fx:id="gridColor" onAction="#setGridColor" prefHeight="25.0" prefWidth="90.0" />
                </graphic>
             </MenuItem>
             <MenuItem mnemonicParsing="false" text="Background">
                <graphic>
-                  <ColorPicker fx:id="backgroundColor" onAction="#setBackgroundColor" />
+                  <ColorPicker fx:id="backgroundColor" onAction="#setBackgroundColor" prefHeight="25.0" prefWidth="90.0" />
                </graphic>
             </MenuItem>
+            <MenuItem mnemonicParsing="false" text="Random">
+               <graphic>
+                  <Button fx:id="randomSingle" onAction="#randomColor" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Random" />
+               </graphic>
+            </MenuItem>
+
         </items>
          <HBox.margin>
             <Insets top="12.0" />
