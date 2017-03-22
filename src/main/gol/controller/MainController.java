@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.gol.model.*;
+import main.gol.model.Cell;
 
 import static main.gol.GameOfLife.WIDTH; // Access Stage dimensions from main class
 import static main.gol.GameOfLife.HEIGHT;
@@ -31,14 +32,28 @@ public class MainController implements Initializable {
     /**
      * Internal FXML objects
      */
-    @FXML private Button startBtn;
-    @FXML private ColorPicker colorPick;
+    @FXML private Button play;
+    @FXML private ColorPicker colorPick,cellColor,gridColor,backgroundColor;
     @FXML private Canvas canvas;
     @FXML private Slider sizeSlider;
-    @FXML private MenuItem small, big, bigger;
+    @FXML private MenuItem small, normal, large;
     @FXML private Label counter;
 
 
+
+    @FXML public void setCellColor(){
+        board.setCellColor(cellColor.getValue());
+        board.drawGrid();
+    }
+    @FXML public void setGridColor(){
+        board.setGridColor(gridColor.getValue());
+        board.drawGrid();
+    }
+
+    @FXML public void setBackgroundColor(){
+        board.setBcColor(backgroundColor.getValue());
+        board.drawGrid();
+    }
 
     /**
      * init application
@@ -49,12 +64,20 @@ public class MainController implements Initializable {
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         this.board = new Board(graphics, this.cellSize); // this is dependency injection!
-        colorPick.setValue(Color.WHITE);
+        //colorPick.setValue(Color.WHITE);
         this.board.drawGrid();
         this.sizeHandler();
         this.changeSizeHandler();
         clearBoard(); // Workaround to enable gridSize to be set "Big" as "Default"
-        colorPick.setValue(Color.ORANGE);
+        //colorPick.setValue(Color.ORANGE);
+        cellColor.setValue(Color.BLACK);
+        gridColor.setValue(Color.BLACK);
+        backgroundColor.setValue(Color.WHITE);
+        this.timeline.setRate(3.0);
+
+
+
+
 
     }
 
@@ -81,16 +104,17 @@ public class MainController implements Initializable {
             board.setColumns(160);
             board.setRows(110);
             board.drawGrid();
+
         });
 
-        big.setOnAction(e -> {
+        normal.setOnAction(e -> {
             board.setCellSize(10);
             board.setColumns(80);
             board.setRows(55);
             board.drawGrid();
         });
 
-        bigger.setOnAction(e -> {
+        large.setOnAction(e -> {
             board.setCellSize(20);
             board.setColumns(40);
             board.setRows(28);
@@ -135,19 +159,11 @@ public class MainController implements Initializable {
 
 
 
-
-
     /**
      * Set animation timeline, call nextGeneration in keyframe
      */
    private void setAnimation(){
-        this.timeline.getKeyFrames().addAll(
-                new KeyFrame(Duration.millis(durationMillis),
-                        e-> board.nextGeneration()
-                ));
 
-        //this.timeline.setRate(1.0);
-        this.timeline.setCycleCount(Timeline.INDEFINITE);
 
     }
 
@@ -159,8 +175,7 @@ public class MainController implements Initializable {
      */
     public void sizeHandler(){
         sizeSlider.valueProperty().addListener((
-                observable, oldValue, newValue) ->
-                setCellSize(newValue.intValue()));
+                observable, oldValue, newValue) -> setCellSize(newValue.intValue()));
     }
 
 
@@ -176,23 +191,40 @@ public class MainController implements Initializable {
     @FXML public void getCellPosition(MouseEvent event){
 
         // Get mouseClick coordinates
-        double x = event.getX(); // mouse x pos
-        double y = event.getY(); // mouse y pos
+      try{
+          double x = event.getX(); // mouse x pos
+          double y = event.getY(); // mouse y pos
 
-        // Find cell position in board cells array
-        // Rounds down event coordinates to integer and divides it with cellSize to get exact canvas position
-        int cellPosX = (int) Math.floor(x / board.getCellSize());
-        int cellPosY = (int) Math.floor(y / board.getCellSize());
 
-        // Get cell
-        main.gol.model.Cell cell = this.board.getCell(cellPosX, cellPosY);
+          // Find cell position in board cells array
+          // Rounds down event coordinates to integer and divides it with cellSize to get exact canvas position
+          int cellPosX = (int) Math.floor(x / board.getCellSize());
+          int cellPosY = (int) Math.floor(y / board.getCellSize());
 
-        // Toggle alive
-        boolean toggleState = !cell.getState();
-        cell.setNextState(toggleState);
+          // Get cell
+          Cell cell = this.board.getCell(cellPosX, cellPosY);
 
-        // Update canvas
-        this.board.drawCell(cell);
+          // Toggle alive
+          boolean toggleState = !cell.getState();
+
+          // For smooth drawing
+          if(toggleState){
+              cell.setNextState(toggleState);
+          }
+
+          // Double click to toggle back
+          if(event.getClickCount() > 1){
+             cell.setNextState(toggleState);
+          }
+
+          this.board.drawCell(cell);
+
+
+      }
+      catch(NullPointerException ne){
+          ne.printStackTrace();
+      }
+
     }
 
 
@@ -201,14 +233,21 @@ public class MainController implements Initializable {
      * Start animation
      * Checks if running, if running stop animation and change button text
      */
-    @FXML public void startPause(){
-        setAnimation();
+    @FXML public void play(){
+        this.timeline.getKeyFrames().addAll(
+                new KeyFrame(Duration.millis(durationMillis),
+                        e-> board.nextGeneration()
+                ));
+        this.timeline.setRate(3.0);
+        this.timeline.setCycleCount(Timeline.INDEFINITE);
+
+
         if (timeline.getStatus() == Animation.Status.RUNNING) {
             timeline.stop();
-            startBtn.setText("Play");
+            play.setText("Play");
         } else {
             timeline.play();
-            startBtn.setText("Stop");
+            play.setText("Stop");
         }
     }
 
@@ -225,24 +264,18 @@ public class MainController implements Initializable {
         this.setCellSize(10);
         this.board.setRows(80);
         this.board.setColumns(55);
+
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.clearRect(0,0, WIDTH, HEIGHT);
         board.clearBoard(board.getGrid());
         board.drawGrid();
         sizeSlider.setValue(cellSize);
-        startBtn.setText("Play");
+        play.setText("Play");
     }
 
 
 
 
-    /**
-     * Select color from colorPicker and set selected color
-     */
-    @FXML public void pickColor(){
-            board.setPickedColor(colorPick.getValue());
-            board.drawGrid();
-    }
 
 
 

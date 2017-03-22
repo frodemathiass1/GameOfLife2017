@@ -10,6 +10,11 @@ import java.util.Random;
 
 public class Board {
 
+    // testing the test
+    public String ping(){
+        return "Ping!";
+    }
+
 
     private int cellSize;
     private int columns = 160;
@@ -17,6 +22,9 @@ public class Board {
     private Cell[][] grid;
     private final GraphicsContext graphics;
     private Color color = Color.ORANGE;
+    private Color gridColor = Color.BLACK;
+    private Color cellColor = Color.BLACK;
+    private Color backgroundColor = Color.WHITE;
 
 
 
@@ -92,9 +100,10 @@ public class Board {
        // Draw next generation
        for(Cell cell : generationList){
            drawCell(cell);
-       }
-    }
 
+       }
+
+    }
 
 
     /**
@@ -118,17 +127,17 @@ public class Board {
     public void drawCell(Cell cell) {
         Random rand = new Random();
         if (cell.getNextState()){
-            this.graphics.setFill(color);
+            this.graphics.setFill(cellColor);
             //graphics.setFill(Color.rgb(rand.nextInt(175),rand.nextInt(255),rand.nextInt(125)));
             //graphics.setEffect(makeShadow());
             cell.setState(true);
         }
         else {
-              graphics.setFill(Color.DARKSLATEGRAY);
+              graphics.setFill(backgroundColor);
               cell.setState(false);
         }
         //graphics.setEffect(new DropShadow());
-        graphics.setStroke(Color.BLACK); // Sets grid color
+        graphics.setStroke(gridColor); // Sets grid color
         graphics.setLineWidth(0.2);
         graphics.fillRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
         graphics.strokeRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
@@ -145,6 +154,9 @@ public class Board {
         for (int i = 0; i < grid.length; i++){
             for (int j = 0; j < grid[i].length; j++){
                 drawCell(grid[i][j]);
+
+                System.out.println(grid[i][j].getX()+" "+grid[i][j].getY());
+
             }
         }
     }
@@ -166,38 +178,25 @@ public class Board {
     }
 
 
-    /**
-     *
-     * @param color Color
-     */
-    public void setPickedColor(Color color){
-        // Color picker
-        this.color = color;
-    }
 
-    /**
-     *
-     * @param cellSize int
-     */
+    public void setCellColor(Color color){this.cellColor = color;}
+
+    public void setGridColor(Color color){this.gridColor = color;}
+
+    public void setBcColor(Color color){this.backgroundColor = color;}
+
     public void setCellSize(int cellSize) {
         this.cellSize = cellSize;
     }
 
-    /**
-     *
-     * @param rows int
-     */
     public void setRows(int rows){
         this.rows = rows;
     }
 
-    /**
-     *
-     * @param cols int
-     */
     public void setColumns(int cols){
         this.columns = cols;
     }
+
 
     /**
      *
@@ -213,6 +212,9 @@ public class Board {
             return this.grid[x][y];
         }
     }
+
+
+
 
     /**
      *
@@ -273,6 +275,8 @@ public class Board {
         for(Cell cell : generationList){
             drawCell(cell);
         }
+
+
     }
 
 }

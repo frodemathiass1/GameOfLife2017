@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.gol.model.Board;
 
 import java.io.IOException;
 
@@ -37,4 +38,9 @@ public class GameOfLife extends Application {
 
         launch(args);
     }
+
+
+
+
+
 }

@@ -32,12 +32,12 @@ public class Cell{
      * @return neighborCount int
      */
     public int countAliveNeighbors(){
-        int neighborCount = 0;
+        int count = 0;
         for(int i = 0; i < this.getNeighbors().size(); i++ )
             if(this.neighbors.get(i).getState())
-                neighborCount++;
+                count++;
         //System.out.println(neighborCount);
-        return neighborCount;
+        return count;
     }
 
 
@@ -134,9 +134,9 @@ public class Cell{
      *
      * @return String
      */
-    @Override
+   /* @Override
     public String toString() {
 
-        return "Cell: " + "state: " + state + ", X=" + x + ", Y=" + y;
-    }
+        return "Cell: state: " + state + " x=" + x + ", y=" + y;
+    }*/
 }

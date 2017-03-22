@@ -25,7 +25,7 @@
     </MenuBar>
     <Canvas fx:id="canvas" height="550.0" layoutY="27.0" onMouseClicked="#getCellPosition" onMouseDragged="#getCellPosition" width="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
     <HBox layoutY="576.0" prefHeight="50.0" prefWidth="800.0" spacing="12.0" stylesheets="@../../style/stylesheet.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <Button fx:id="startBtn" mnemonicParsing="false" onAction="#startPause" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../../style/stylesheet.css" text="Play">
+        <Button fx:id="play" mnemonicParsing="false" onAction="#play" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../../style/stylesheet.css" text="Play">
             <HBox.margin>
                 <Insets left="15.0" top="12.0" />
             </HBox.margin>
@@ -69,14 +69,15 @@
         <MenuButton mnemonicParsing="false" onAction="#changeSizeHandler" prefHeight="25.0" prefWidth="60.0" styleClass="btn2" stylesheets="@../../style/stylesheet.css" text="Size">
             <items>
                 <MenuItem fx:id="small" mnemonicParsing="false" text="Small" />
-                <MenuItem fx:id="big" mnemonicParsing="false" text="Big" />
-                <MenuItem fx:id="bigger" mnemonicParsing="false" text="Bigger" />
+                <MenuItem fx:id="normal" mnemonicParsing="false" text="Normal" />
+                <MenuItem fx:id="large" mnemonicParsing="false" text="Large" />
             </items>
             <HBox.margin>
                 <Insets top="12.0" />
             </HBox.margin>
         </MenuButton>
 
+        <!--
         <ColorPicker id="colorPicker" fx:id="colorPick" onAction="#pickColor" prefHeight="25.0" prefWidth="90.0" styleClass="colorPick" stylesheets="@../../style/stylesheet.css">
             <HBox.margin>
                 <Insets right="5.0" top="12.0" />
@@ -85,6 +86,35 @@
                 <Cursor fx:constant="DEFAULT" />
             </cursor>
         </ColorPicker>
+        -->
+
+
+      <MenuButton mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" styleClass="colorPick" stylesheets="@../../style/stylesheet.css" text="Colors">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Cell">
+               <graphic>
+                  <ColorPicker fx:id="cellColor" onAction="#setCellColor" />
+               </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" text="Grid">
+               <graphic>
+                  <ColorPicker fx:id="gridColor" onAction="#setGridColor" />
+               </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" text="Background">
+               <graphic>
+                  <ColorPicker fx:id="backgroundColor" onAction="#setBackgroundColor" />
+               </graphic>
+            </MenuItem>
+        </items>
+         <HBox.margin>
+            <Insets top="12.0" />
+         </HBox.margin>
+      </MenuButton>
+
+
+
+
         <Separator maxHeight="35.0" orientation="VERTICAL" prefHeight="35.0">
             <HBox.margin>
                 <Insets top="7.0" />
