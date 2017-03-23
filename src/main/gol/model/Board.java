@@ -22,8 +22,9 @@ public class Board {
     private int rows = 110;
     private Cell[][] grid;
     private final GraphicsContext graphics;
-    private Color color = Color.ORANGE;
-    private Color gridColor = Color.BLACK;
+
+    // Does not belong in this class
+    private Color gridColor = Color.DARKGRAY;
     private Color cellColor = Color.BLACK;
     private Color backgroundColor = Color.WHITE;
 
@@ -63,6 +64,9 @@ public class Board {
             }
         }
     }
+
+
+
 
 
     /**
@@ -129,18 +133,17 @@ public class Board {
         Random rand = new Random();
         if (cell.getNextState()){
 
-            this.graphics.setFill(cellColor);
+            graphics.setFill(cellColor);
             //graphics.setFill(Color.rgb(rand.nextInt(175),rand.nextInt(255),rand.nextInt(125)));
             //graphics.setEffect(makeShadow());
             cell.setState(true);
         }
         else {
-              graphics.setFill(backgroundColor);
-              cell.setState(false);
+            graphics.setFill(backgroundColor);
+            cell.setState(false);
         }
-        //graphics.setEffect(new DropShadow());
+        // graphics.setEffect(new DropShadow());
         graphics.setStroke(gridColor); // Sets grid color
-        graphics.setLineWidth(0.2);
         graphics.fillRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
         graphics.strokeRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
     }
@@ -157,7 +160,7 @@ public class Board {
             for (int j = 0; j < grid[i].length; j++){
                 drawCell(grid[i][j]);
 
-                System.out.println(grid[i][j].getX()+" "+grid[i][j].getY());
+                //System.out.println(grid[i][j].getX()+" "+grid[i][j].getY());
 
             }
         }
@@ -180,7 +183,7 @@ public class Board {
     }
 
 
-
+    // Setters
     public void setCellColor(Color color){this.cellColor = color;}
 
     public void setGridColor(Color color){this.gridColor = color;}
@@ -199,9 +202,14 @@ public class Board {
         this.columns = cols;
     }
 
+    // Getters
+    public Cell[][] getGrid(){ return this.grid;}
+
+    public int getCellSize(){return this.cellSize;}
+
 
     /**
-     *
+     * Returns a cell within the array index
      * @param x int
      * @param y int
      * @return cell
@@ -217,22 +225,6 @@ public class Board {
 
 
 
-
-    /**
-     *
-     * @return Cell[][]
-     */
-    public Cell[][] getGrid(){
-        return this.grid;
-    }
-
-    /**
-     *
-     * @return int
-     */
-    public int getCellSize(){
-        return this.cellSize;
-    }
 
 
     /**
@@ -250,8 +242,6 @@ public class Board {
 
                     cell.setNextState(rand.nextBoolean());
                     generationList.add(cell);
-
-
                 }
                else if(cell.getState() && (cell.countAliveNeighbors() == rand.nextInt(8) || cell.countAliveNeighbors() == rand.nextInt(4))){
 
@@ -273,12 +263,10 @@ public class Board {
                 }
             }
         }
-        // prints out the next generation
+        // Draw the next generation
         for(Cell cell : generationList){
             drawCell(cell);
         }
-
-
     }
 
 }

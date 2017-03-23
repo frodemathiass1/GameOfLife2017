@@ -24,7 +24,7 @@ import static main.gol.GameOfLife.HEIGHT;
 
 public class MainController implements Initializable {
 
-    GraphicsContext gc;
+
     private final Timeline timeline = new Timeline();
     private final double durationMillis = 500;
     private Board board;
@@ -35,11 +35,13 @@ public class MainController implements Initializable {
      * Internal FXML objects
      */
     @FXML private Button play,random;
-    @FXML private ColorPicker colorPick,cellColor,gridColor,backgroundColor;
+    @FXML private ColorPicker cellColor,gridColor,backgroundColor;
     @FXML private Canvas canvas;
     @FXML private Slider sizeSlider;
     @FXML private MenuItem small, normal, large;
     @FXML private Label counter;
+
+
 
 
 
@@ -53,49 +55,69 @@ public class MainController implements Initializable {
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
-        board = new Board(graphics, this.cellSize); // this is dependency injection!
+        board = new Board(graphics, cellSize); // this is dependency injection!
         board.drawGrid();
+
         this.sizeHandler();
         this.changeSizeHandler();
+
         cellColor.setValue(Color.BLACK);
-        gridColor.setValue(Color.BLACK);
+        gridColor.setValue(Color.DARKGRAY);
         backgroundColor.setValue(Color.WHITE);
         clearBoard(); // Workaround to enable gridSize to be set "Big" as "Default"
+
     }
 
 
-    /**
-     * Next generation, no animation
-     */
+
+    private void setCellSize(int cellSize) {
+        this.board.setCellSize(cellSize);
+    }
+
     @FXML
     public void nextGeneration(){
+
         board.nextGeneration();
     }
 
+
     @FXML
     public void randomGeneration(){
+
         board.makeRandomGenerations();
     }
 
-    private void setCellSize(int cellSize) {this.board.setCellSize(cellSize);}
 
     @FXML
     public void setCellColor(){
+
         board.setCellColor(cellColor.getValue());
         board.drawGrid();
     }
+
+
     @FXML
     public void setGridColor(){
+
         board.setGridColor(gridColor.getValue());
         board.drawGrid();
     }
 
     @FXML
     public void setBackgroundColor(){
+
         board.setBcColor(backgroundColor.getValue());
         board.drawGrid();
     }
 
+    @FXML
+    public void setRandomColor(){
+        Random rand = new Random();
+        Color randColor = Color.rgb(rand.nextInt(175),rand.nextInt(255),rand.nextInt(175) );
+        board.setCellColor(randColor);
+        board.drawGrid();
+
+    }
 
 
     /**
@@ -219,7 +241,7 @@ public class MainController implements Initializable {
      * Increase animation rate
      */
     @FXML public void increaseRate(){
-        timeline.setRate(timeline.getCurrentRate() + 0.5);
+        timeline.setRate(timeline.getCurrentRate() + 1);
     }
 
 
@@ -228,7 +250,7 @@ public class MainController implements Initializable {
      * Decrease animation rate
      */
     @FXML public void decreaseRate(){
-        timeline.setRate(timeline.getCurrentRate() - 0.5);
+        timeline.setRate(timeline.getCurrentRate() - 15);
     }
 
 
@@ -257,6 +279,8 @@ public class MainController implements Initializable {
         board.drawGrid();
         sizeSlider.setValue(cellSize);
         play.setText("Play");
+
+
     }
 
 
@@ -288,13 +312,7 @@ public class MainController implements Initializable {
     }
     */
 
-       @FXML
-       public void randomColor(){
-           Random rand = new Random();
-           Color randColor = Color.rgb(rand.nextInt(175),rand.nextInt(255),rand.nextInt(175) );
-           board.setCellColor(randColor);
 
-       }
 
 
 

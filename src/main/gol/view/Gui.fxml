@@ -107,7 +107,7 @@
             </MenuItem>
             <MenuItem mnemonicParsing="false" text="Random">
                <graphic>
-                  <Button fx:id="randomSingle" onAction="#randomColor" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Random" />
+                  <Button fx:id="randomSingle" onAction="#setRandomColor" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Random" />
                </graphic>
             </MenuItem>
 
