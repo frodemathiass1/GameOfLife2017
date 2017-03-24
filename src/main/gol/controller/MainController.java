@@ -33,7 +33,7 @@ public class MainController implements Initializable {
     private Timeline timeline = new Timeline();
     private Board board;
     private final int cellSize = 5;
-
+    
     /**
      * Internal FXML objects
      */
