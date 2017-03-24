@@ -3,11 +3,8 @@ package main.gol.model;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.*;
 import javafx.scene.paint.Color;
-import main.gol.controller.MainController;
-
 import java.util.ArrayList;
 import java.util.Random;
-
 
 public class Board {
 
@@ -16,20 +13,16 @@ public class Board {
         return "Ping!";
     }
 
-
     private int cellSize;
     private int columns = 160;
     private int rows = 110;
     private Cell[][] grid;
     private final GraphicsContext graphics;
 
-    // Does not belong in this class
-    private Color gridColor = Color.DARKGRAY;
+    // Does not belong in this class (Why not fix it then?)
+    private Color gridColor = Color.LIGHTGREY;
     private Color cellColor = Color.BLACK;
     private Color backgroundColor = Color.WHITE;
-
-
-
 
     /**
      *
@@ -41,8 +34,6 @@ public class Board {
         this.graphics = graphics;
         this.initialize();
     }
-
-
 
     /**
      * Instantiate grid with cells and set each neighbor
@@ -64,10 +55,6 @@ public class Board {
             }
         }
     }
-
-
-
-
 
     /**
      * Generate next generation of cells and draw to canvas
@@ -105,11 +92,8 @@ public class Board {
        // Draw next generation
        for(Cell cell : generationList){
            drawCell(cell);
-
        }
-
     }
-
 
     /**
      *
@@ -124,33 +108,24 @@ public class Board {
         return ds;
     }
 
-
     /**
      *
      * @param cell Cell
      */
     public void drawCell(Cell cell) {
-        Random rand = new Random();
         if (cell.getNextState()){
-
-            graphics.setFill(cellColor);
-            //graphics.setFill(Color.rgb(rand.nextInt(175),rand.nextInt(255),rand.nextInt(125)));
-            //graphics.setEffect(makeShadow());
+            graphics.setFill(cellColor); // Set cell color
+            graphics.setStroke(cellColor); // Sets grid color to cell color
             cell.setState(true);
         }
         else {
-            graphics.setFill(backgroundColor);
+            graphics.setFill(backgroundColor); // Set background color
+            graphics.setStroke(gridColor); // Sets selected grid color
             cell.setState(false);
         }
-        // graphics.setEffect(new DropShadow());
-        graphics.setStroke(gridColor); // Sets grid color
         graphics.fillRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
         graphics.strokeRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
     }
-
-
-
-
 
     /**
      * Draw grid to canvas
@@ -159,15 +134,9 @@ public class Board {
         for (int i = 0; i < grid.length; i++){
             for (int j = 0; j < grid[i].length; j++){
                 drawCell(grid[i][j]);
-
-                //System.out.println(grid[i][j].getX()+" "+grid[i][j].getY());
-
             }
         }
     }
-
-
-
 
     /**
      * Loops through array of cells and toggles alive cells to dead
@@ -182,13 +151,18 @@ public class Board {
         }
     }
 
-
     // Setters
-    public void setCellColor(Color color){this.cellColor = color;}
+    public void setCellColor(Color color){
+        this.cellColor = color;
+    }
 
-    public void setGridColor(Color color){this.gridColor = color;}
+    public void setGridColor(Color color){
+        this.gridColor = color;
+    }
 
-    public void setBcColor(Color color){this.backgroundColor = color;}
+    public void setBcColor(Color color){
+        this.backgroundColor = color;
+    }
 
     public void setCellSize(int cellSize) {
         this.cellSize = cellSize;
@@ -203,10 +177,13 @@ public class Board {
     }
 
     // Getters
-    public Cell[][] getGrid(){ return this.grid;}
+    public Cell[][] getGrid(){
+        return this.grid;
+    }
 
-    public int getCellSize(){return this.cellSize;}
-
+    public int getCellSize(){
+        return this.cellSize;
+    }
 
     /**
      * Returns a cell within the array index
@@ -223,10 +200,6 @@ public class Board {
         }
     }
 
-
-
-
-
     /**
      * Generates a random set of alive Cells
      */
@@ -239,27 +212,20 @@ public class Board {
                 Cell cell = grid[x][y];
 
                 if (cell.getState() && cell.countAliveNeighbors() < rand.nextInt(8) ){
-
                     cell.setNextState(rand.nextBoolean());
                     generationList.add(cell);
                 }
                else if(cell.getState() && (cell.countAliveNeighbors() == rand.nextInt(8) || cell.countAliveNeighbors() == rand.nextInt(4))){
-
                     cell.setNextState(rand.nextBoolean());
                     generationList.add(cell);
-
                 }
                 else if(cell.getState() && cell.countAliveNeighbors() > rand.nextInt(8)){
-
                     cell.setNextState(rand.nextBoolean());
                     generationList.add(cell);
-
                 }
                 else if(!cell.getState() && cell.countAliveNeighbors() == rand.nextInt(4)){
-
                     cell.setNextState(rand.nextBoolean());
                     generationList.add(cell);
-
                 }
             }
         }
