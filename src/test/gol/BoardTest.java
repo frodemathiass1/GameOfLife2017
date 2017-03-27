@@ -3,43 +3,50 @@ package test.gol;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import main.gol.GameOfLife;
+//import main.gol.GameOfLife;
 import main.gol.model.Board;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-
+import static org.junit.Assert.*;
 
 
 class BoardTest {
 
-    /// fuckkings dritt...
+
+    @FXML private GraphicsContext gc;
+    @FXML public Canvas canvas;
+
+    Board board = new Board(gc, 5);
 
     @Test
-    public void testNextGeneration() {
-        byte[][] board = {
+    public void testNextGeneration2() {
+        byte[][] testBoard2 = {
+                { 0, 0, 0, 0 },
+                { 0, 1, 0, 0 },
+                { 0, 1, 1, 0 },
+                { 0, 0, 0, 0 }
+        };
+        board.setBoard(testBoard2);
+        board.nextGeneration();
+        String actual = board.toString();
+        String expected = "0000011000100000";
+        org.junit.Assert.assertEquals(actual,expected);
+    }
+
+    @Test
+    public void testNextGeneration1() {
+        byte[][] testBoard1 = {
                 { 0, 0, 0, 0 },
                 { 0, 1, 1, 0 },
                 { 0, 1, 1, 0 },
                 { 0, 0, 0, 0 }
         };
-
-        //GameOfLife gol = new GameOfLife();
-        //gol.setBoard(board);
-        //gol.nextGeneration();
-        //org.junit.Assert.assertEquals(gol.toString(),"0000011001100000");
+        board.setBoard(testBoard1);
+        board.nextGeneration();
+        String actual = board.toString();
+        String expected = "0000011001100000";
+        org.junit.Assert.assertEquals(actual,expected);
     }
 
-    /**
-     *  bare for å teste
-     */
-    public GraphicsContext gc;
 
-    @Test
-    public void pingTest(){
-        Board board = new Board(gc,10);
-        String result = board.ping();
-        System.out.println(result);
-    }
+
 }

@@ -23,15 +23,21 @@ public class Cell{
         this.y = y;
     }
 
+
+    public void updateState() {
+        state = nextState;
+    }
     /**
      *
-     * @return neighborCount int
+     * @return count int
      */
     public int countAliveNeighbors(){
         int count = 0;
         for(int i = 0; i < this.getNeighbors().size(); i++ )
-            if(this.neighbors.get(i).getState())
+            if(this.neighbors.get(i).getState()) {
+                //System.out.println(this.neighbors.get(i));
                 count++;
+            }
         //System.out.println(neighborCount);
         return count;
     }
@@ -80,6 +86,8 @@ public class Cell{
     public boolean getState(){
         return this.state;
     }
+
+
 
     /**
      * Set next state (dead/alive)

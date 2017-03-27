@@ -1,30 +1,26 @@
 package main.gol.model;
 
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.*;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Board {
 
-    // testing the test
-    public String ping(){
-        return "Ping!";
-    }
-
     private int cellSize;
-    private int columns = 160;
-    private int rows = 110;
     private Cell[][] grid;
     private final GraphicsContext graphics;
+    private ArrayList<Cell> generationList;
 
-    // Does not belong in this class (Why not fix it then?)
     private Color gridColor = Color.LIGHTGREY;
     private Color cellColor = Color.BLACK;
     private Color backgroundColor = Color.WHITE;
 
+
+
     /**
+     * Board constructor. Takes graphicsContext and cellSize as argument
      *
      * @param graphics GraphicContext
      * @param cellSize int
@@ -32,18 +28,41 @@ public class Board {
     public Board(GraphicsContext graphics, int cellSize) {
         this.cellSize = cellSize;
         this.graphics = graphics;
-        this.initialize();
+    }
+
+
+    /**
+     *
+     * @param columns int
+     * @param rows int
+     */
+    public void setBoard(int columns, int rows) {
+        byte[][] board = new byte[rows][columns];
+        //System.out.println(board[2][3]);
+        this.setBoard(board);
     }
 
     /**
-     * Instantiate grid with cells and set each neighbor
+     *
+     * @param board byte[][]
      */
-    private void initialize() {
+    public void setBoard(byte[][] board) {
+
+        //System.out.println(board.length);
+        //System.out.println(board[0].length);
+
+        int rows = board.length;
+        int columns = board[0].length;
         grid = new Cell[columns][rows];
-        for (int x = 0; x < this.grid.length; x++) {
-            for (int y = 0; y < this.grid[x].length; y++) {
+        for (int x = 0; x < columns; x++) {
+            for (int y = 0; y < rows; y++) {
                 Cell cell = new Cell(x, y);
-                grid[x][y] = cell; // initialize cell grid
+                if (board[y][x] == 1) { // flip x and y axis. Why? because that's how it works
+                    cell.setState(true);
+                } else  {
+                    cell.setState(false);
+                }
+                grid[x][y] = cell; // setBoard cell grid
             }
         }
 
@@ -56,9 +75,11 @@ public class Board {
         }
     }
 
+
     /**
-     * Generate next generation of cells and draw to canvas
      * Game of Life rules
+     *
+     * Collect next generation of cells in generationList
      */
     public void nextGeneration(){
         ArrayList<Cell> generationList = new ArrayList<>();
@@ -89,65 +110,118 @@ public class Board {
                 }
             }
         }
-       // Draw next generation
+       // Update generation
        for(Cell cell : generationList){
-           drawCell(cell);
+            cell.updateState();
        }
+       this.generationList = generationList;
     }
 
+
     /**
-     *
-     * @return DropShadow
+     * Draw next generation
      */
-    public DropShadow makeShadow(){
-        DropShadow ds = new DropShadow();
-        ds.setRadius(5.0);
-        ds.setOffsetX(3.0);
-        ds.setOffsetY(3.0);
-        ds.setColor(Color.BLACK);
-        return ds;
+    public void drawGeneration(){
+        for(Cell cell : this.generationList){
+            //cell.updateState();
+            drawCell(cell);
+        }
     }
 
+
     /**
+     * Draw cell and gridLine
      *
      * @param cell Cell
      */
     public void drawCell(Cell cell) {
-        if (cell.getNextState()){
-            graphics.setFill(cellColor); // Set cell color
-            graphics.setStroke(cellColor); // Sets grid color to cell color
-            cell.setState(true);
+
+        if (cell.getState()){
+            graphics.setFill(cellColor);
+            graphics.setStroke(gridColor);
         }
         else {
-            graphics.setFill(backgroundColor); // Set background color
-            graphics.setStroke(gridColor); // Sets selected grid color
-            cell.setState(false);
+            graphics.setFill(backgroundColor);
+            graphics.setStroke(gridColor);
         }
         graphics.fillRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
         graphics.strokeRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
     }
 
+
     /**
-     * Draw grid to canvas
+     * Draw the whole grid with each cell to canvas
      */
     public void drawGrid() {
-        for (int i = 0; i < grid.length; i++){
-            for (int j = 0; j < grid[i].length; j++){
-                drawCell(grid[i][j]);
+        for (int x = 0; x < grid.length; x++){
+            for (int y = 0; y < grid[x].length; y++){
+                drawCell(grid[x][y]);
             }
         }
     }
 
+
     /**
      * Loops through array of cells and toggles alive cells to dead
      *
-     * @param cells Cell[x][y]
+     * @param grid Cell[x][y]
      */
-    public void clearBoard(Cell[][] cells){
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; j < cells[i].length; j++) {
-                cells[i][j].setNextState(false);
+    public void clearBoard(Cell[][] grid){
+        for (int x = 0; x < grid.length; x++) {
+            for (int y = 0; y < grid[x].length; y++) {
+                grid[x][y].setState(false);
             }
+        }
+    }
+
+
+
+    /**
+     * Generate a random set of alive Cells and add them to generationList
+     */
+    public void makeRandomGenerations(){
+        ArrayList<Cell> generationList = new ArrayList<>();
+        Random rand = new Random();
+
+        for (int x = 0; x < grid.length; x++) {
+            for (int y = 0; y < grid[x].length; y++) {
+                Cell cell = grid[x][y];
+
+                if (cell.getState() && cell.countAliveNeighbors() < rand.nextInt(8) ){
+                    cell.setState(rand.nextBoolean());
+                    generationList.add(cell);
+                }
+               else if(cell.getState() && (cell.countAliveNeighbors() == rand.nextInt(8) || cell.countAliveNeighbors() == rand.nextInt(4))){
+                    cell.setState(rand.nextBoolean());
+                    generationList.add(cell);
+                }
+                else if(cell.getState() && cell.countAliveNeighbors() > rand.nextInt(8)){
+                    cell.setState(rand.nextBoolean());
+                    generationList.add(cell);
+                }
+                else if(!cell.getState() && cell.countAliveNeighbors() == rand.nextInt(4)){
+                    cell.setState(rand.nextBoolean());
+                    generationList.add(cell);
+                }
+            }
+        }
+        this.generationList = generationList;
+    }
+
+
+    /**
+     * Returns a cell within the array index bounds.
+     * @param x int
+     * @param y int
+     * @return cell
+     */
+    public Cell getCell(int x, int y) {
+
+        if (x < 0 || y < 0 || x >= grid.length || y >= grid[x].length){
+            return null;
+        }
+        else {
+            return this.grid[x][y];
         }
     }
 
@@ -168,14 +242,6 @@ public class Board {
         this.cellSize = cellSize;
     }
 
-    public void setRows(int rows){
-        this.rows = rows;
-    }
-
-    public void setColumns(int cols){
-        this.columns = cols;
-    }
-
     // Getters
     public Cell[][] getGrid(){
         return this.grid;
@@ -185,54 +251,30 @@ public class Board {
         return this.cellSize;
     }
 
-    /**
-     * Returns a cell within the array index
-     * @param x int
-     * @param y int
-     * @return cell
-     */
-    public Cell getCell(int x, int y) {
-        if (x < 0 || y < 0 || x >= grid.length || y >= grid[x].length){
-            return null;
-        }
-        else {
-            return this.grid[x][y];
-        }
+
+    // For testing. Counts alive neighbors on board for given cell coordinates
+    public int countNeighbours(int x, int y) {
+        Cell cell = getCell(x, y);
+        return cell.countAliveNeighbors();
     }
 
+
     /**
-     * Generates a random set of alive Cells
+     * For testing
+     * returns a string of board byte values, 1 or 0
+     * @return String
      */
-    public void makeRandomGenerations(){
-        ArrayList<Cell> generationList = new ArrayList<>();
-        Random rand = new Random();
-
-        for (int x = 0; x < grid.length; x++) {
-            for (int y = 0; y < grid[x].length; y++) {
-                Cell cell = grid[x][y];
-
-                if (cell.getState() && cell.countAliveNeighbors() < rand.nextInt(8) ){
-                    cell.setNextState(rand.nextBoolean());
-                    generationList.add(cell);
-                }
-               else if(cell.getState() && (cell.countAliveNeighbors() == rand.nextInt(8) || cell.countAliveNeighbors() == rand.nextInt(4))){
-                    cell.setNextState(rand.nextBoolean());
-                    generationList.add(cell);
-                }
-                else if(cell.getState() && cell.countAliveNeighbors() > rand.nextInt(8)){
-                    cell.setNextState(rand.nextBoolean());
-                    generationList.add(cell);
-                }
-                else if(!cell.getState() && cell.countAliveNeighbors() == rand.nextInt(4)){
-                    cell.setNextState(rand.nextBoolean());
-                    generationList.add(cell);
-                }
+    @Override
+    public String toString() {
+        StringBuilder serialized = new StringBuilder();
+        for (int x = 0; x < this.grid.length; x++) {
+            for (int y = 0; y < this.grid[x].length; y++) {
+                String state = this.grid[x][y].getState() ? "1" : "0";
+                serialized.append(state);
             }
         }
-        // Draw the next generation
-        for(Cell cell : generationList){
-            drawCell(cell);
-        }
+        return serialized.toString();
     }
+
 
 }

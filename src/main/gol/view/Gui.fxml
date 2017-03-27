@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.MainController">
+<AnchorPane prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.MainController">
     <MenuBar layoutY="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#quitApp" text="Quit" />
@@ -65,7 +65,7 @@
             </HBox.margin>
         </Separator>
 
-        <MenuButton mnemonicParsing="false" onAction="#changeSizeHandler" prefHeight="25.0" prefWidth="60.0" styleClass="btn2" stylesheets="@../../style/stylesheet.css" text="Size">
+        <MenuButton mnemonicParsing="false" onAction="#changeBoardSize" prefHeight="25.0" prefWidth="60.0" styleClass="btn2" stylesheets="@../../style/stylesheet.css" text="Size">
             <items>
                 <MenuItem fx:id="small" mnemonicParsing="false" text="Small" />
                 <MenuItem fx:id="normal" mnemonicParsing="false" text="Normal" />
@@ -75,17 +75,6 @@
                 <Insets top="8.0" />
             </HBox.margin>
         </MenuButton>
-
-        <!--
-        <ColorPicker id="colorPicker" fx:id="colorPick" onAction="#pickColor" prefHeight="25.0" prefWidth="90.0" styleClass="colorPick" stylesheets="@../../style/stylesheet.css">
-            <HBox.margin>
-                <Insets right="5.0" top="12.0" />
-            </HBox.margin>
-            <cursor>
-                <Cursor fx:constant="DEFAULT" />
-            </cursor>
-        </ColorPicker>
-        -->
 
 
       <MenuButton mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" styleClass="colorPick" stylesheets="@../../style/stylesheet.css" text="Colors">
@@ -115,16 +104,11 @@
                   <Button fx:id="resetAll" mnemonicParsing="false" onAction="#resetColor" prefHeight="25.0" prefWidth="90.0" text="Default" />
                </graphic>
             </MenuItem>
-
         </items>
          <HBox.margin>
             <Insets top="8.0" />
          </HBox.margin>
       </MenuButton>
-
-
-
-
         <Separator orientation="VERTICAL" prefHeight="38.0">
             <HBox.margin>
                 <Insets bottom="4.0" />
@@ -156,7 +140,7 @@
                 <Font size="12.0" />
             </font>
         </Label>
-        <Slider fx:id="sizeSlider" blockIncrement="1.0" majorTickUnit="3.0" max="20" min="5" minorTickCount="1" prefHeight="26.0" prefWidth="90.0" showTickMarks="true">
+        <Slider fx:id="zoomSlider" blockIncrement="1.0" majorTickUnit="3.0" max="20" min="5" minorTickCount="1" prefHeight="26.0" prefWidth="90.0" showTickMarks="true">
             <HBox.margin>
                 <Insets right="15.0" top="10.0" />
             </HBox.margin>
