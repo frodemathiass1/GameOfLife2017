@@ -18,21 +18,6 @@ class BoardTest {
     Board board = new Board(gc, 5);
 
     @Test
-    public void testNextGeneration2() {
-        byte[][] testBoard2 = {
-                { 0, 0, 0, 0 },
-                { 0, 1, 0, 0 },
-                { 0, 1, 1, 0 },
-                { 0, 0, 0, 0 }
-        };
-        board.setBoard(testBoard2);
-        board.nextGeneration();
-        String actual = board.toString();
-        String expected = "0000011000100000";
-        org.junit.Assert.assertEquals(actual,expected);
-    }
-
-    @Test
     public void testNextGeneration1() {
         byte[][] testBoard1 = {
                 { 0, 0, 0, 0 },
@@ -47,6 +32,33 @@ class BoardTest {
         org.junit.Assert.assertEquals(actual,expected);
     }
 
+    @Test
+    public void testNextGeneration2() {
+        byte[][] testBoard2 = {
+                { 0, 0, 0, 0 },
+                { 0, 1, 0, 0 },
+                { 0, 1, 1, 0 },
+                { 0, 0, 0, 0 }
+        };
+        board.setBoard(testBoard2);
+        board.nextGeneration();
+        String actual = board.toString();
+        String expected = "0000011001100000";
+        org.junit.Assert.assertEquals(actual,expected);
+    }
 
-
+    @Test
+    public void testNextGeneration3() {
+        byte[][] testBoard3 = {
+                { 0, 1, 0, 0 },
+                { 0, 0, 1, 0 },
+                { 1, 1, 1, 0 },
+                { 0, 0, 0, 0 }
+        };
+        board.setBoard(testBoard3);
+        board.nextGeneration();
+        String actual = board.toString();
+        String expected = "0100001101100000";
+        org.junit.Assert.assertEquals(actual,expected);
+    }
 }

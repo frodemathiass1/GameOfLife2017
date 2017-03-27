@@ -75,8 +75,14 @@ public class MainController implements Initializable {
                 { 0, 1, 1, 0 },
                 { 0, 0, 0, 0 }
         };
-        this.board.setBoard(columns, rows);
-        //this.board.setBoard(testBoard1);
+        byte[][] testBoard3 =  {
+                { 0, 1, 0, 0 },
+                { 0, 0, 1, 0 },
+                { 1, 1, 1, 0 },
+                { 0, 0, 0, 0 }
+        };
+        //this.board.setBoard(columns, rows);
+        this.board.setBoard(testBoard3);
 
         System.out.println(this.board.countNeighbours(0,0));
         this.board.drawGrid();
