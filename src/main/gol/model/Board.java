@@ -275,6 +275,4 @@ public class Board {
         }
         return serialized.toString();
     }
-
-
 }

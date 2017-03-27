@@ -61,8 +61,7 @@ public class MainController implements Initializable {
         //graphics = new GOLGraphics();
         this.board = new Board(gc, cellSize);
 
-        // Use this board for testing, but test is a no go...
-        // Problem due to dependencies, canvas graphic fxml fx:controller (????)
+        // 4 cells in middle gives the same generation
         byte[][] testBoard1 =  {
                 { 0, 0, 0, 0 },
                 { 0, 1, 1, 0 },
@@ -75,6 +74,7 @@ public class MainController implements Initializable {
                 { 0, 1, 1, 0 },
                 { 0, 0, 0, 0 }
         };
+        //Glider
         byte[][] testBoard3 =  {
                 { 0, 1, 0, 0 },
                 { 0, 0, 1, 0 },
