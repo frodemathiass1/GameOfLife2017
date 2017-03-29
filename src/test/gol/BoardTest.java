@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 class BoardTest {
 
 
-/*
+
     private GraphicsContext gcTest;
     Board board = new Board(gcTest, 5);
 
@@ -154,33 +154,4 @@ class BoardTest {
         System.out.println("Unexpected: "+unexpected);
     }
 
-
-    // Glider
-    @Test
-    public void testNextGenerationFail2() throws Exception  {
-
-        // Arrange
-        byte[][] testBoard6 = {
-                { 0, 1, 0, 0 },
-                { 0, 0, 1, 0 },
-                { 1, 1, 1, 0 },
-                { 0, 0, 0, 0 }
-        };
-
-        // Act
-        board.setBoard(testBoard6);
-        board.nextGeneration();
-        board.nextGeneration();
-
-        // Assert
-        String expected = "0100001101100000";
-        String actual = board.toString();
-        org.junit.Assert.assertEquals(actual,expected);
-
-        // Console
-        System.out.println("Expected: " +expected);
-        System.out.println("Actual:   " +actual);
-    }
-
-*/
 }
