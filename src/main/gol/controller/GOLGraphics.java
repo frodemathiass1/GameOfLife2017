@@ -1,69 +1,115 @@
 package main.gol.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
 import main.gol.model.Board;
 import main.gol.model.Cell;
 
-
+import java.util.ArrayList;
 
 
 public class GOLGraphics {
 
-/*
+    private MainController mc;
+    private Canvas canvas;
+    private GraphicsContext gc;
+    private Board board;
+    private int cellSize = 5;
 
-    @FXML private GraphicsContext gc;
-    @FXML private Slider speedSlider;
-    @FXML private Button play;
     //@FXML private ColorPicker cellColor, gridColor, backgroundColor;
-    @FXML private Canvas canvas;
-    @FXML private Slider sizeSlider;
-    @FXML private MenuItem small, normal, large;
+    //@FXML private Canvas canvas;  // is this allowed? due to fxml fx:controller mapping??
 
     private Color gridColor = Color.LIGHTGREY;
     private Color cellColor = Color.BLACK;
     private Color backgroundColor = Color.WHITE;
 
-    private int cellSize = 5;
+
+
+    //private ArrayList<Cell> generationList;
+
+
+    // ******************************************* //
+    //                                             //
 
     // GOLGraphics constructor
     public GOLGraphics() {
+
+        //setGraphics();
+    }
+
+    public void setCanvas(){
+
+    }
+    public void setGraphics(){
+
         gc = canvas.getGraphicsContext2D();
     }
 
 
 
+
+
+
+    // Draw board
     public void drawBoard(Board board) {
+
         Cell[][] grid = board.getGrid();
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 drawCell(grid[i][j]);
-                //System.out.println(grid[i][j].getNextState());
             }
         }
     }
+
+    // Draw cell
     public void drawCell(Cell cell) {
-        //System.out.println(cell.getState());
+
         if (cell.getState()){
-            gc.setFill(cellColor); // Set cell color
-            gc.setStroke(cellColor); // Sets grid color to cell color
-            //cell.setState(true);
+            gc.setFill(Color.BLACK);
+            gc.setStroke(Color.BLUE);
         }
         else {
-            gc.setFill(backgroundColor); // Set background color
-            gc.setStroke(gridColor); // Sets selected grid color
-            //cell.setState(false);
+            gc.setFill(Color.LIGHTGRAY);
+            gc.setStroke(Color.BLUE);
         }
-        gc.fillRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
+          gc.fillRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
         gc.strokeRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
     }
-*/
 
+    // Draw generation
 
+    public void drawGeneration(ArrayList<Cell> genList){
+        int count = 0;
+        for (Cell cell : genList) {
+            drawCell(cell);
+            System.out.println(genList.get(count));
+            count++;
+        }
+    }
+
+    /****************************************/
+
+    // Setters & Getters
+    public void setCellColor(Color color){
+        this.cellColor = color;
+    }
+
+    public void setGridColor(Color color){
+        this.gridColor = color;
+    }
+
+    public void setBcColor(Color color){
+        this.backgroundColor = color;
+    }
+
+    public void setCellSize(int cellSize) {
+        this.cellSize = cellSize;
+    }
+
+    public int getCellSize(){
+        return this.cellSize;
+    }
 }

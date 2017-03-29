@@ -16,11 +16,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.MainController">
-    <MenuBar layoutY="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.MainController">
+    <MenuBar fx:id="menuBar" layoutY="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#quitApp" text="Quit" />
         </Menu>
+      <Menu mnemonicParsing="false" text="Pattern">
+         <items>
+            <MenuItem fx:id="fileSelect" mnemonicParsing="false" onAction="#selectFile" text="Open RLE" />
+         </items>
+      </Menu>
     </MenuBar>
     <Canvas fx:id="canvas" height="550.0" layoutY="27.0" onMouseClicked="#getCellPosition" onMouseDragged="#getCellPosition" width="800.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0" />
     <HBox layoutY="576.0" spacing="10.0" stylesheets="@../../style/stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

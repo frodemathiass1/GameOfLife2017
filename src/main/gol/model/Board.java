@@ -18,14 +18,8 @@ public class Board {
     private Color backgroundColor = Color.WHITE;
 
 
+   public Board(GraphicsContext graphics, int cellSize) {
 
-    /**
-     * Board constructor. Takes graphicsContext and cellSize as argument
-     *
-     * @param graphics GraphicContext
-     * @param cellSize int
-     */
-    public Board(GraphicsContext graphics, int cellSize) {
         this.cellSize = cellSize;
         this.graphics = graphics;
     }
@@ -37,9 +31,10 @@ public class Board {
      * @param rows int
      */
     public void setBoard(int columns, int rows) {
+
         byte[][] board = new byte[rows][columns];
-        //System.out.println(board[2][3]);
         this.setBoard(board);
+        //System.out.println(board[2][3]);
     }
 
     /**
@@ -75,13 +70,12 @@ public class Board {
         }
     }
 
-
     /**
-     * Game of Life rules
-     *
-     * Collect next generation of cells in generationList
+     * This method is handling the Game of Life rules.
+     * Collect the next generation of cells in an ArrayList
      */
     public void nextGeneration(){
+
         ArrayList<Cell> generationList = new ArrayList<>();
 
         for (int x = 0; x < grid.length; x++) {
@@ -117,20 +111,21 @@ public class Board {
        this.generationList = generationList;
     }
 
+    public ArrayList<Cell> getGenerationList(){
+        return this.generationList;
+    }
 
-    /**
-     * Draw next generation
-     */
-    public void drawGeneration(){
+
+   public void drawGeneration(){
+
         for(Cell cell : this.generationList){
             //cell.updateState();
             drawCell(cell);
         }
     }
 
-
-    /**
-     * Draw cell and gridLine
+     /**
+     * This method draw cell and gridLine to gui and sets the color variables.
      *
      * @param cell Cell
      */
@@ -149,10 +144,8 @@ public class Board {
     }
 
 
-    /**
-     * Draw the whole grid with each cell to canvas
-     */
     public void drawGrid() {
+
         for (int x = 0; x < grid.length; x++){
             for (int y = 0; y < grid[x].length; y++){
                 drawCell(grid[x][y]);
@@ -160,13 +153,8 @@ public class Board {
         }
     }
 
-
-    /**
-     * Loops through array of cells and toggles alive cells to dead
-     *
-     * @param grid Cell[x][y]
-     */
     public void clearBoard(Cell[][] grid){
+
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
                 grid[x][y].setState(false);
@@ -174,12 +162,11 @@ public class Board {
         }
     }
 
-
-
     /**
-     * Generate a random set of alive Cells and add them to generationList
+     * This method is a replica of next generation method but with random neighbor constrictions
      */
     public void makeRandomGenerations(){
+
         ArrayList<Cell> generationList = new ArrayList<>();
         Random rand = new Random();
 
@@ -207,7 +194,6 @@ public class Board {
         }
         this.generationList = generationList;
     }
-
 
     /**
      * Returns a cell within the array index bounds.
@@ -257,7 +243,6 @@ public class Board {
         Cell cell = getCell(x, y);
         return cell.countAliveNeighbors();
     }
-
 
     /**
      * For testing

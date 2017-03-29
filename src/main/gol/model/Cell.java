@@ -14,7 +14,6 @@ public class Cell{
 
     /**
      * Cell Constructor
-     *
      * @param x int
      * @param y int
      */
@@ -27,8 +26,8 @@ public class Cell{
     public void updateState() {
         state = nextState;
     }
+
     /**
-     *
      * @return count int
      */
     public int countAliveNeighbors(){
@@ -44,7 +43,6 @@ public class Cell{
 
     /**
      * List of neighbors
-     *
      * @param board Board
      */
     public void initNeighbors(Board board) {
@@ -64,7 +62,6 @@ public class Cell{
     }
 
     /**
-     *
      * @return List neighbors
      */
     private List<Cell> getNeighbors(){
@@ -72,7 +69,6 @@ public class Cell{
     }
 
     /**
-     *
      * @param state boolean
      */
     public void setState(boolean state){
@@ -80,18 +76,14 @@ public class Cell{
     }
 
     /**
-     *
      * @return state boolean
      */
     public boolean getState(){
         return this.state;
     }
 
-
-
     /**
      * Set next state (dead/alive)
-     *
      * @param ns boolean
      */
     public void setNextState(boolean ns){
@@ -99,7 +91,6 @@ public class Cell{
     }
 
     /**
-     *
      * @return nextState boolean
      */
     public boolean getNextState(){
@@ -107,7 +98,6 @@ public class Cell{
     }
 
     /**
-     *
      * @return x int
      */
     public int getX(){
@@ -115,7 +105,6 @@ public class Cell{
     }
 
     /**
-     *
      * @return y int
      */
     public int getY(){

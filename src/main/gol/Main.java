@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class GameOfLife extends Application {
+public class Main extends Application {
 
     // Stage Dimensions
     private static final int WIDTH = 800;
