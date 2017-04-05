@@ -1,31 +1,34 @@
-package main.gol.model;
-
-import javafx.scene.canvas.Canvas;
+package main.gol.model.Boards;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import main.gol.model.Cell;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Board {
+
+public class FixedBoard {
 
     private int cellSize;
     private Cell[][] grid;
     private final GraphicsContext graphics;
     private ArrayList<Cell> generationList;
 
+
+    // Cell, grid, background Color
     private Color gridColor = Color.LIGHTGREY;
     private Color cellColor = Color.BLACK;
     private Color backgroundColor = Color.WHITE;
 
 
-   public Board(GraphicsContext graphics, int cellSize) {
+    public FixedBoard(GraphicsContext graphics, int cellSize) {
 
         this.cellSize = cellSize;
         this.graphics = graphics;
     }
 
-
     /**
+     * Sets the rows and column and instantiates byte[][] array
+     * which is calls the initializer setBoard method
      *
      * @param columns int
      * @param rows int
@@ -38,7 +41,7 @@ public class Board {
     }
 
     /**
-     *
+     * Initialize board, populate cells and neighbors
      * @param board byte[][]
      */
     public void setBoard(byte[][] board) {
@@ -46,15 +49,22 @@ public class Board {
         //System.out.println(board.length);
         //System.out.println(board[0].length);
 
+
+       /* for (int x = 0; x < board.length; x++) {
+            for (int y = 0; < board[x].length; y++) {
+            }
+        }*/
+
         int rows = board.length;
         int columns = board[0].length;
+
         grid = new Cell[columns][rows];
         for (int x = 0; x < columns; x++) {
             for (int y = 0; y < rows; y++) {
                 Cell cell = new Cell(x, y);
                 if (board[y][x] == 1) { // flip x and y axis. Why? because that's how it works
                     cell.setState(true);
-                } else  {
+                } else  if(board[y][x] == 0){
                     cell.setState(false);
                 }
                 grid[x][y] = cell; // setBoard cell grid
@@ -71,8 +81,9 @@ public class Board {
     }
 
     /**
-     * This method is handling the Game of Life rules.
-     * Collect the next generation of cells in an ArrayList
+     * This method handles the Game of Life rules.
+     * Checks each cell for it state counts and checks each neighbors state.
+     * Collects the next generation of cells in a ArrayList of Cell objects.
      */
     public void nextGeneration(){
 
@@ -111,11 +122,10 @@ public class Board {
        this.generationList = generationList;
     }
 
-    public ArrayList<Cell> getGenerationList(){
-        return this.generationList;
-    }
-
-
+    /**
+     * This method loops through the generation list and draw each cell to canvas
+     *
+     */
    public void drawGeneration(){
 
         for(Cell cell : this.generationList){
@@ -124,26 +134,28 @@ public class Board {
         }
     }
 
-     /**
-     * This method draw cell and gridLine to gui and sets the color variables.
-     *
+    /**
+     * This method toggles the individual cells state and
+     * Sets corresponding color on the canvas grid
      * @param cell Cell
      */
     public void drawCell(Cell cell) {
 
         if (cell.getState()){
-            graphics.setFill(cellColor);
-            graphics.setStroke(gridColor);
+            graphics.setFill(getCellColor());
+            graphics.setStroke(getGridColor());
         }
         else {
-            graphics.setFill(backgroundColor);
-            graphics.setStroke(gridColor);
+            graphics.setFill(getBackgroundColor());
+            graphics.setStroke(getGridColor());
         }
         graphics.fillRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
         graphics.strokeRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
     }
 
-
+    /**
+     * This method draws the grid of cells to canvas.
+     */
     public void drawGrid() {
 
         for (int x = 0; x < grid.length; x++){
@@ -153,6 +165,11 @@ public class Board {
         }
     }
 
+    /**
+     * This method loop through the cell grid and set all living cells to dead/false
+     *
+     * @param grid cell[][]
+     */
     public void clearBoard(Cell[][] grid){
 
         for (int x = 0; x < grid.length; x++) {
@@ -196,9 +213,11 @@ public class Board {
     }
 
     /**
-     * Returns a cell within the array index bounds.
-     * @param x int
-     * @param y int
+     * This method handles cells within the cell grid (array) borders
+     * and the corresponding cell coordinates bound to grid dimensions
+     *
+     * @param x int Cell x position
+     * @param y int Cell y position
      * @return cell
      */
     public Cell getCell(int x, int y) {
@@ -211,42 +230,104 @@ public class Board {
         }
     }
 
-    // Setters
+    /**
+     *
+     * @param color cellColor
+     */
     public void setCellColor(Color color){
         this.cellColor = color;
     }
 
+    /**
+     *
+     * @param color gridColor
+     */
     public void setGridColor(Color color){
         this.gridColor = color;
     }
 
+    /**
+     *
+     * @param color backgroundColor
+     */
     public void setBcColor(Color color){
         this.backgroundColor = color;
     }
 
+    /**
+     *
+     * @param cellSize cellSize
+     */
     public void setCellSize(int cellSize) {
         this.cellSize = cellSize;
     }
 
-    // Getters
+    /**
+     *
+     * @return cell[][] grid
+     */
     public Cell[][] getGrid(){
         return this.grid;
     }
 
+    /**
+     *
+     * @return int cellSize
+     */
     public int getCellSize(){
         return this.cellSize;
     }
 
+    /**
+     *
+     * @return Color gridColor
+     */
+    public Color getGridColor() {
+        return gridColor;
+    }
 
-    // For testing. Counts alive neighbors on board for given cell coordinates
+    /**
+     *
+     * @return Color cellColor
+     */
+    public Color getCellColor() {
+        return cellColor;
+    }
+
+    /**
+     *
+     * @return Color backgroundColor
+     */
+    public Color getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    /**
+     * List with the next generation of Cells
+     * @return ArrayList generationList
+     */
+    public ArrayList<Cell> getGenerationList(){
+        return this.generationList;
+    }
+
+    /**
+     * Testing method: This method takes Cell x/y coordinates and counts
+     * alive surrounding neighbor cells.
+     *
+     * @param x int Cell X position
+     * @param y int Cell Y Position
+     * @return int
+     */
     public int countNeighbours(int x, int y) {
         Cell cell = getCell(x, y);
         return cell.countAliveNeighbors();
     }
 
     /**
-     * For testing
-     * returns a string of board byte values, 1 or 0
+     * Testing method: This method takes a generation of cells
+     * and serialize each cell state on the testBoard to a string.
+     * e.g."0010100101010"
+     *
      * @return String
      */
     @Override

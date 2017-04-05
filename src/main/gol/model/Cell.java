@@ -1,5 +1,7 @@
 package main.gol.model;
 
+import main.gol.model.Boards.FixedBoard;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -22,7 +24,9 @@ public class Cell{
         this.y = y;
     }
 
-
+    /**
+     * Updates the Cell state to remember its state for the next generation
+     */
     public void updateState() {
         state = nextState;
     }
@@ -43,9 +47,9 @@ public class Cell{
 
     /**
      * List of neighbors
-     * @param board Board
+     * @param board FixedBoard
      */
-    public void initNeighbors(Board board) {
+    public void initNeighbors(FixedBoard board) {
         Cell topLeft = board.getCell(this.x - 1, this.y - 1);
         Cell top = board.getCell(this.x, this.y - 1);
         Cell topRight = board.getCell(this.x + 1, this.y - 1);
@@ -91,13 +95,6 @@ public class Cell{
     }
 
     /**
-     * @return nextState boolean
-     */
-    public boolean getNextState(){
-        return nextState;
-    }
-
-    /**
      * @return x int
      */
     public int getX(){
@@ -109,6 +106,15 @@ public class Cell{
      */
     public int getY(){
         return this.y;
+    }
+
+    /**
+     * Returns a string with Cell object data
+     * @return String
+     */
+    @Override
+    public String toString() {
+        return state+" ";
     }
 
 }

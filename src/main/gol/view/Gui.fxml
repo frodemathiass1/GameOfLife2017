@@ -16,19 +16,32 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.MainController">
+<AnchorPane prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.MainController">
     <MenuBar fx:id="menuBar" layoutY="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#quitApp" text="Quit" />
         </Menu>
       <Menu mnemonicParsing="false" text="Pattern">
          <items>
-            <MenuItem fx:id="fileSelect" mnemonicParsing="false" onAction="#selectFile" text="Open RLE" />
+            <MenuItem fx:id="fileSelect" mnemonicParsing="false" onAction="#initFileBoard" text="Open text file" />
+         </items>
+      </Menu>
+      <Menu mnemonicParsing="false" text="Info">
+         <items>
+            <MenuItem fx:id="contact" mnemonicParsing="false" onAction="#showInfo" text="Contact" />
          </items>
       </Menu>
     </MenuBar>
     <Canvas fx:id="canvas" height="550.0" layoutY="27.0" onMouseClicked="#getCellPosition" onMouseDragged="#getCellPosition" width="800.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0" />
-    <HBox layoutY="576.0" spacing="10.0" stylesheets="@../../style/stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <!--
+    <VBox>
+        <children>
+            <Button fx:id="urlBtn" layoutX="14.0" layoutY="160.0" onAction="#handleURL" prefHeight="26.0" prefWidth="100.0" text="Choose" />
+            <ListView fx:id="myListView" layoutX="14.0" layoutY="21.0" prefHeight="109.0" prefWidth="100.0" />
+        </children>
+    </VBox>
+    -->
+    <HBox layoutY="576.0" prefWidth="800.0" spacing="10.0" stylesheets="@../../style/stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <Button fx:id="play" mnemonicParsing="false" onAction="#play" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../../style/stylesheet.css" text="Play">
             <HBox.margin>
                 <Insets left="15.0" top="8.0" />
@@ -42,19 +55,6 @@
             <Insets top="8.0" />
          </HBox.margin>
       </Button>
-        <Separator layoutX="338.0" layoutY="10.0" orientation="VERTICAL" prefHeight="38.0">
-            <HBox.margin>
-                <Insets bottom="4.0" />
-            </HBox.margin>
-        </Separator>
-        <Button contentDisplay="CENTER" layoutX="169.0" layoutY="22.0" mnemonicParsing="false" onAction="#randomGeneration" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../../style/stylesheet.css" text="Random">
-            <font>
-                <Font size="10.0" />
-            </font>
-            <HBox.margin>
-                <Insets top="8.0" />
-            </HBox.margin>
-        </Button>
         <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#clearBoard" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../../style/stylesheet.css" text="Reset">
             <font>
                 <Font size="10.0" />
@@ -63,14 +63,47 @@
                 <Insets top="8.0" />
             </HBox.margin>
         </Button>
+      <Separator orientation="VERTICAL" prefHeight="38.0" />
+        <!--
+        <Separator layoutX="338.0" layoutY="10.0" orientation="VERTICAL" prefHeight="38.0">
+            <HBox.margin>
+                <Insets bottom="4.0" />
+            </HBox.margin>
+        </Separator>
+        -->
+        <MenuButton mnemonicParsing="false" onAction="#urlSelector" prefHeight="25.0" prefWidth="75.0" styleClass="btn2" stylesheets="@../../style/stylesheet.css" text="Select">
+            <items>
+                <MenuItem fx:id="url1" mnemonicParsing="false" text="Airforce" />
+                <MenuItem fx:id="url2" mnemonicParsing="false" text="B52" />
+                <MenuItem fx:id="url3" mnemonicParsing="false" text="Backrake" />
+                <MenuItem fx:id="url4" mnemonicParsing="false" text="Beacon maker" />
+                <MenuItem fx:id="url5" mnemonicParsing="false" text="Big Glider" />
+                <MenuItem fx:id="url6" mnemonicParsing="false" text="Bottle" />
+                <MenuItem fx:id="url7" mnemonicParsing="false" text="Brain" />
+                <MenuItem fx:id="url8" mnemonicParsing="false" text="Cordership" />
+                <MenuItem fx:id="url9" mnemonicParsing="false" text="Cow" />
+                <MenuItem fx:id="url10" mnemonicParsing="false" text="Loaflipflop" />
+            </items>
+            <HBox.margin>
+                <Insets top="8.0" />
+            </HBox.margin>
+        </MenuButton>
 
+        <Button contentDisplay="CENTER" layoutX="169.0" layoutY="22.0" mnemonicParsing="false" onAction="#randomGeneration" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../../style/stylesheet.css" text="Chaos">
+            <font>
+                <Font size="10.0" />
+            </font>
+            <HBox.margin>
+                <Insets top="8.0" />
+            </HBox.margin>
+        </Button>
         <Separator layoutX="338.0" layoutY="10.0" orientation="VERTICAL" prefHeight="38.0">
             <HBox.margin>
                 <Insets bottom="4.0" />
             </HBox.margin>
         </Separator>
 
-        <MenuButton mnemonicParsing="false" onAction="#changeBoardSize" prefHeight="25.0" prefWidth="60.0" styleClass="btn2" stylesheets="@../../style/stylesheet.css" text="Size">
+        <MenuButton mnemonicParsing="false" onAction="#boardSizeObserver" prefHeight="25.0" prefWidth="60.0" styleClass="btn2" stylesheets="@../../style/stylesheet.css" text="Size">
             <items>
                 <MenuItem fx:id="small" mnemonicParsing="false" text="Small" />
                 <MenuItem fx:id="normal" mnemonicParsing="false" text="Normal" />
@@ -80,8 +113,6 @@
                 <Insets top="8.0" />
             </HBox.margin>
         </MenuButton>
-
-
       <MenuButton mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" styleClass="colorPick" stylesheets="@../../style/stylesheet.css" text="Colors">
         <items>
           <MenuItem mnemonicParsing="false" text="Cell">
@@ -124,12 +155,12 @@
                 <Font size="12.0" />
             </font>
             <HBox.margin>
-                <Insets left="5.0" right="10.0" top="12.0" />
+                <Insets left="5.0" top="12.0" />
             </HBox.margin>
         </Label>
-      <Slider fx:id="speedSlider" majorTickUnit="6.0" max="2.5" min="0.5" minorTickCount="60" prefHeight="26.0" prefWidth="90.0" showTickMarks="true" value="1.5">
+      <Slider fx:id="speedSlider" majorTickUnit="6.0" max="2.5" min="0.5" minorTickCount="60" prefHeight="26.0" prefWidth="70.0" value="1.5">
          <HBox.margin>
-            <Insets top="10.0" />
+            <Insets top="5.0" />
          </HBox.margin>
       </Slider>
         <Separator orientation="VERTICAL" prefHeight="38.0">
@@ -139,15 +170,15 @@
         </Separator>
         <Label prefHeight="13.0" prefWidth="37.0" styleClass="btn2" text="Zoom:">
             <HBox.margin>
-                <Insets left="5.0" right="10.0" top="12.0" />
+                <Insets top="12.0" />
             </HBox.margin>
             <font>
                 <Font size="12.0" />
             </font>
         </Label>
-        <Slider fx:id="zoomSlider" blockIncrement="1.0" majorTickUnit="3.0" max="20" min="5" minorTickCount="1" prefHeight="26.0" prefWidth="90.0" showTickMarks="true">
+        <Slider fx:id="zoomSlider" blockIncrement="1.0" majorTickUnit="3.0" max="20" min="5" minorTickCount="1" prefHeight="26.0" prefWidth="70.0">
             <HBox.margin>
-                <Insets right="15.0" top="10.0" />
+                <Insets right="10.0" top="5.0" />
             </HBox.margin>
         </Slider>
     </HBox>

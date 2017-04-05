@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.gol.model.Boards.DynamicBoard;
+
 import java.io.IOException;
 
 public class Main extends Application {
@@ -13,6 +15,7 @@ public class Main extends Application {
     // Stage Dimensions
     private static final int WIDTH = 800;
     private static final int HEIGHT = 625;
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -25,11 +28,16 @@ public class Main extends Application {
         }
         catch(IOException ioe){
             ioe.printStackTrace();
-            // System.out.println(ioe);
         }
     }
 
     public static void main(String[] args) {
+
+
+        DynamicBoard db = new DynamicBoard(10,10);
+        db.printGrid();
+
+
         launch(args);
     }
 

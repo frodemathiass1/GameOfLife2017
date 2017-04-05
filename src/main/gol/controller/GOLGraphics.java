@@ -1,22 +1,21 @@
 package main.gol.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import main.gol.model.Board;
+import main.gol.model.Boards.FixedBoard;
 import main.gol.model.Cell;
 
 import java.util.ArrayList;
 
 
-public class GOLGraphics {
+public class GOLGraphics  {
 
-    private MainController mc;
-    private Canvas canvas;
+  /*  private MainController mc;
+    @FXML private Canvas canvas;
     private GraphicsContext gc;
-    private Board board;
+    private FixedBoard board;
     private int cellSize = 5;
 
     //@FXML private ColorPicker cellColor, gridColor, backgroundColor;
@@ -26,6 +25,13 @@ public class GOLGraphics {
     private Color cellColor = Color.BLACK;
     private Color backgroundColor = Color.WHITE;
 
+    public GOLGraphics(MainController mc, Canvas canvas, GraphicsContext gc, FixedBoard board, int cellSize) {
+        this.mc = mc;
+        this.canvas = canvas;
+        this.gc = gc;
+        this.board=board;
+        this.cellSize = cellSize;
+    }
 
 
     //private ArrayList<Cell> generationList;
@@ -33,17 +39,16 @@ public class GOLGraphics {
 
     // ******************************************* //
     //                                             //
+//
+//    // GOLGraphics constructor
+//    public GOLGraphics() {
+//
+//        getGraphicContext();
+//    }
 
-    // GOLGraphics constructor
-    public GOLGraphics() {
 
-        //setGraphics();
-    }
+    public void getGraphicContext(){
 
-    public void setCanvas(){
-
-    }
-    public void setGraphics(){
 
         gc = canvas.getGraphicsContext2D();
     }
@@ -54,7 +59,7 @@ public class GOLGraphics {
 
 
     // Draw board
-    public void drawBoard(Board board) {
+    public void drawBoard(FixedBoard board) {
 
         Cell[][] grid = board.getGrid();
         for (int i = 0; i < grid.length; i++) {
@@ -68,12 +73,12 @@ public class GOLGraphics {
     public void drawCell(Cell cell) {
 
         if (cell.getState()){
-            gc.setFill(Color.BLACK);
-            gc.setStroke(Color.BLUE);
+            gc.setFill(cellColor);
+            gc.setStroke(gridColor);
         }
         else {
-            gc.setFill(Color.LIGHTGRAY);
-            gc.setStroke(Color.BLUE);
+            gc.setFill(backgroundColor);
+            gc.setStroke(Color.WHITE);
         }
           gc.fillRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
         gc.strokeRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
@@ -90,7 +95,7 @@ public class GOLGraphics {
         }
     }
 
-    /****************************************/
+    *//****************************************//*
 
     // Setters & Getters
     public void setCellColor(Color color){
@@ -111,5 +116,5 @@ public class GOLGraphics {
 
     public int getCellSize(){
         return this.cellSize;
-    }
+    }*/
 }
