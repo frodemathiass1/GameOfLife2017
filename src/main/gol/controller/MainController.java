@@ -17,10 +17,20 @@ import javafx.util.Duration;
 import main.gol.model.Boards.TestBoards;
 import main.gol.model.Cell;
 import main.gol.model.Boards.FixedBoard;
-import main.gol.model.FileManagement.TextDecoder;
+import main.gol.model.FileManagement.FileReader;
+
 import java.util.Random;
 
 
+/**
+ * The MainController class contains a series of functions that handles the GUI-elements of the Game of Life
+ * application to make them do the things they're supposed to do.
+ *
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Møllerud
+ * @version 1.0
+ */
 public class MainController implements Initializable {
 
 
@@ -36,12 +46,12 @@ public class MainController implements Initializable {
     private GraphicsContext gc;
     private Timeline timeline = new Timeline();
     private FixedBoard board;
-    private TextDecoder td;
+    private FileReader reader;
     private int cellSize = 5;
     private int columns = 160;
     private int rows = 110;
     private TestBoards tb;
-
+    //private Draw draw = new Draw();
 
 //    List view URLs
 //    @FXML public ListView myListView;
@@ -60,22 +70,71 @@ public class MainController implements Initializable {
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
 
+        //Open chooser at start for testing the files faster
+        //FileReader reader = new FileReader();
+        //reader.chooseFile();
+        //reader.parseAndPopulateList();
+        //reader.getInfo();
+
+
         //initTestBoard();
-        initBoard();
+        makeDefaultBoard();
         initAnimation();
         setDefaultColors();
         cellSizeObserver();
         boardSizeObserver();
-        fileSelect.setOnAction(e-> initFileBoard());
-        urlSelector();
+        fileSelect.setOnAction(e-> selectFile());
+        handleWebBoards();
         //initListViewSelector();
         //System.out.println(this.board.countNeighbours(0,0)); // for testing neighbors
     }
 
     /**
-     * This method handles the URL menu items
+     * This method initializes the Default FixedBoard
      */
-    @FXML public void urlSelector(){
+    public void makeDefaultBoard(){
+
+        board = new FixedBoard(getGraphics(), cellSize);
+        board.setBoard(columns, rows);
+        board.drawGrid();
+        //draw.drawGrid(board.getGrid(),getGraphics());
+    }
+
+    /**
+     * Helper method, for setting up and drawing new board to canvas
+     *
+     * @param matrix byte[][]
+     * @param rows int
+     * @param columns int
+     */
+    public void makeNewBoard(byte[][] matrix, int rows, int columns){
+
+        board = new FixedBoard(getGraphics(), cellSize);
+        board.setBoard(rows,columns);
+        board.setBoard(matrix);
+        board.drawGrid();
+        //draw.drawGrid(board.getGrid(),getGraphics());
+    }
+
+    /**
+     * Initialize and run GOL pattern from ContextMenu file Selector
+     */
+    @FXML public void selectFile(){
+
+        stopAnimation();
+        clearBoard();
+
+        reader = new FileReader();
+        reader.chooseFile();
+        reader.readGameBoardFromDisk(reader.getInFile(), reader.getMatrix());
+
+        makeNewBoard(reader.getMatrix(), reader.getRows(), reader.getColumns());
+    }
+
+    /**
+     * ActionEvent handler for WebBoards in context menu
+     */
+    @FXML public void handleWebBoards(){
 
          url1.setOnAction(e-> initWebBoard("https://bitstorm.org/gameoflife/lexicon/cells/airforce.cells"));
          url2.setOnAction(e-> initWebBoard("http://www.conwaylife.com/patterns/gosperglidergun.cells"));
@@ -91,72 +150,49 @@ public class MainController implements Initializable {
     }
 
     /**
-     * This Controller run GOL pattern from ContextMenu file Selector
-     */
-    @FXML public void initFileBoard(){
-
-        stopAnimation();
-        gc.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
-
-        td = new TextDecoder();
-        td.chooseFile();
-        td.runFile(td.getInFile(),td.getMatrix());
-
-        board = new FixedBoard(gc,cellSize);
-        board.setBoard(td.getRows(),td.getColumns());
-        board.setBoard(td.getMatrix());
-        board.drawGrid();
-    }
-
-    /**
+     * Initialize WebBoard pattern
      *
-     * @param url Takes web url argument to read read
+     * @param url Takes url for valid GOL text/cells file patterns
      */
-    @FXML public void initWebBoard(String url){
+    public void initWebBoard(String url){
 
         stopAnimation();
-        gc.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
-
-        td = new TextDecoder();
-        td.runURL(url, td.getMatrix());
-
-        board = new FixedBoard(gc, cellSize);
-        board.setBoard(td.getRows(), td.getColumns());
-        board.setBoard(td.getMatrix());
-        board.drawGrid();
-    }
-
-    /**
-     * This method initialize the Default FixedBoard
-     */
-    public void initBoard(){
-        gc = canvas.getGraphicsContext2D();
-        board = new FixedBoard(gc, cellSize);
-        board.setBoard(columns, rows);
-        board.drawGrid();
+        clearBoard();
+        reader = new FileReader();
+        reader.readGameBoardFromURL(url, reader.getMatrix());
+        makeNewBoard(reader.getMatrix(), reader.getRows(), reader.getColumns());
     }
 
     /**
      * @deprecated init method for the test Board
      */
     public void initTestBoard(){
-        gc = canvas.getGraphicsContext2D();
+
         board = new FixedBoard(gc, 20);
         TestBoards tb = new TestBoards();
 
-        // TestBoards class has several testBoards, each with getters to grab them
-        // Need to check the testBoard for dimensions data before row/col data
-        // are injected into the setBoard method with the byte array
         tb.findDimensions(tb.getTestBoard());
         board.setBoard(tb.getRows(), tb.getCols());
         this.board.setBoard(tb.getTestBoard());
         board.drawGrid();
+        //draw.drawGrid(board.getGrid(),getGraphics());
+    }
+
+    /**
+     * Returns the canvas graphic object
+     *
+     * @return GraphicContext
+     */
+    public GraphicsContext getGraphics(){
+
+        return gc = canvas.getGraphicsContext2D();
     }
 
     /**
      * Initialize timeline animation
      */
     public void initAnimation(){
+
         timeline = new Timeline();
         KeyFrame frame = new KeyFrame(Duration.seconds(0.1), event -> nextGeneration());
         timeline.getKeyFrames().add(frame);
@@ -167,6 +203,7 @@ public class MainController implements Initializable {
      * Set all colors to default settings
      */
     public void setDefaultColors(){
+
         cellColor.setValue(Color.BLACK);
         backgroundColor.setValue(Color.WHITE);
         gridColor.setValue(Color.LIGHTGRAY);
@@ -177,10 +214,11 @@ public class MainController implements Initializable {
      */
     @FXML
     public void nextGeneration(){
+
         timeline.setRate(speedSlider.getValue());
         board.nextGeneration();
         board.drawGeneration();
-        //graphics.drawGeneration(this.board.getGenerationList());
+        //draw.drawGeneration(board.getGenerationList(),getGraphics());
     }
 
     /**
@@ -188,14 +226,17 @@ public class MainController implements Initializable {
      */
     @FXML
     public void randomGeneration(){
+
         board.makeRandomGenerations();
         board.drawGeneration();
+        //draw.drawGeneration(board.getGenerationList(),getGraphics());
     }
 
     /**
      * Stop timeline animation
      */
     public void stopAnimation(){
+
         if (timeline.getStatus() == Animation.Status.RUNNING){
             timeline.stop();
             play.setText("Play");
@@ -203,10 +244,19 @@ public class MainController implements Initializable {
     }
 
     /**
-     * MenuButton handler for grid and cellSize settings.
+     * Clear canvas GUI graphics
+     */
+    public void clearCanvas(){
+
+        gc.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
+    }
+
+    /**
+     * Action event handler for GridSize settings
      */
     @FXML
     private void boardSizeObserver(){
+
         small.setOnAction(e -> {
 
             stopAnimation();
@@ -214,8 +264,7 @@ public class MainController implements Initializable {
             board.setBoard(160, 110);
             zoomSlider.setValue(5); //Set slider to same cell value
             board.drawGrid();
-
-            //graphics.drawBoard(this.board);
+            //draw.drawGrid(board.getGrid(),getGraphics());
         });
 
         normal.setOnAction(e -> {
@@ -224,7 +273,7 @@ public class MainController implements Initializable {
             board.setBoard(80, 55);
             zoomSlider.setValue(10); //Set slider to same cell value
             board.drawGrid();
-            //graphics.drawBoard(this.board);
+            //draw.drawGrid(board.getGrid(),getGraphics());
         });
 
         large.setOnAction(e -> {
@@ -233,7 +282,7 @@ public class MainController implements Initializable {
             board.setBoard(40, 28);
             zoomSlider.setValue(20); //Set slider to same cell value
             board.drawGrid();
-            //graphics.drawBoard(this.board);
+            //draw.drawGrid(board.getGrid(),getGraphics());
         });
     }
 
@@ -241,11 +290,12 @@ public class MainController implements Initializable {
      * This method observes the zoomSlider values and updates the canvas accordingly.
      */
     public void cellSizeObserver(){
+
         zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             board.setCellSize(newValue.intValue());
-            gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            clearCanvas();
             board.drawGrid();// Need this to update the board live....
-            //graphics.drawBoard(this.board);
+            //draw.drawGrid(board.getGrid(),getGraphics());
         });
     }
 
@@ -256,7 +306,7 @@ public class MainController implements Initializable {
      * @param event MouseEvent
      */
     @FXML
-    public void getCellPosition(MouseEvent event){
+    public void getCell(MouseEvent event){
         // Get mouseClick coordinates
       try{
           double x = event.getX(); // mouse x pos
@@ -286,12 +336,13 @@ public class MainController implements Initializable {
 
           // Draw the cell
           this.board.drawCell(cell);
-          //graphics.drawCell(cell);
+          //draw.drawCell(cell,getGraphics());
       }
       catch(NullPointerException ne){
 
           ne.printStackTrace();
       }
+
     }
 
     /**
@@ -299,6 +350,7 @@ public class MainController implements Initializable {
      */
     @FXML
     public void play(){
+
         if (timeline.getStatus() == Animation.Status.RUNNING){
             timeline.stop();
             play.setText("Play");
@@ -314,24 +366,28 @@ public class MainController implements Initializable {
      */
     @FXML
     public void clearBoard(){
+
         timeline.stop();
-        gc.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
+        clearCanvas();
+
         board.clearBoard(board.getGrid());
         board.setBoard(160,110);
         board.drawGrid();
-        //graphics.drawBoard(this.board);
+        //draw.drawGrid(board.getGrid(),getGraphics());
+
         zoomSlider.setValue(cellSize);
         play.setText("Play");
     }
 
     /**
-     * Set the cell color
+     * Sets the cell color
      */
     @FXML
     public void setCellColor(){
+
         board.setCellColor(cellColor.getValue());
         board.drawGrid();
-        //graphics.drawBoard(this.board);
+        //draw.drawGrid(board.getGrid(),getGraphics());
     }
 
     /**
@@ -339,9 +395,10 @@ public class MainController implements Initializable {
      */
     @FXML
     public void setBackgroundColor(){
+
         board.setBcColor(backgroundColor.getValue());
         board.drawGrid();
-        //graphics.drawBoard(this.board);
+        //draw.drawGrid(board.getGrid(),getGraphics());
     }
 
     /**
@@ -349,9 +406,10 @@ public class MainController implements Initializable {
      */
     @FXML
     public void setGridColor(){
+
         board.setGridColor(gridColor.getValue());
         board.drawGrid();
-        //graphics.drawBoard(this.board);
+        //draw.drawGrid(board.getGrid(),getGraphics());
     }
 
     /**
@@ -359,20 +417,24 @@ public class MainController implements Initializable {
      */
     @FXML
     public void setRandomColor(){
+
         Random rand = new Random();
         Color randCellColor = Color.rgb(rand.nextInt(175),rand.nextInt(255),rand.nextInt(175) );
         Color randBcColor = Color.rgb(rand.nextInt(175),rand.nextInt(255),rand.nextInt(175) );
         Color randGridColor = Color.rgb(rand.nextInt(175),rand.nextInt(255),rand.nextInt(175) );
+
         // Set all colors to random
         board.setCellColor(randCellColor);
         board.setBcColor(randBcColor);
         board.setGridColor(randGridColor);
+
         // Update the color picker to correct color
         cellColor.setValue(randCellColor);
         backgroundColor.setValue(randBcColor);
         gridColor.setValue(randGridColor);
+
         board.drawGrid();
-        //graphics.drawBoard(this.board);
+        //draw.drawGrid(board.getGrid(),getGraphics());
     }
 
     /**
@@ -380,15 +442,18 @@ public class MainController implements Initializable {
      */
     @FXML
     public void resetColor(){
+
         // Reset all colors to original value
         board.setCellColor(Color.BLACK);
         board.setBcColor(Color.WHITE);
         board.setGridColor(Color.LIGHTGRAY);
+
         // Update the color picker to correct color
         cellColor.setValue(Color.BLACK);
         backgroundColor.setValue(Color.WHITE);
         gridColor.setValue(Color.LIGHTGRAY);
         board.drawGrid();
+        //draw.drawGrid(board.getGrid(),getGraphics());
         //graphics.drawBoard(this.board);
     }
 
@@ -404,6 +469,7 @@ public class MainController implements Initializable {
      * Show information dialog box when info button is clicked
      */
     @FXML public void showInfo(){
+
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("About this application");
         alert.setHeaderText("WARNING!!!!\nBeware of lethal injections!\nPlay at your own risk!");

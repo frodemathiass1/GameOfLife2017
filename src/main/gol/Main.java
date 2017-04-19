@@ -5,9 +5,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import main.gol.model.Boards.DynamicBoard;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Main extends Application {
@@ -34,11 +36,16 @@ public class Main extends Application {
     public static void main(String[] args) {
 
 
-        DynamicBoard db = new DynamicBoard(10,10);
-        db.printGrid();
+        //DynamicBoard db = new DynamicBoard(10,10);
+        //db.printGrid();
+        //db.print();
+
+        DynamicBoard db = new DynamicBoard(gc,10);
+        db.addRows(110);
+        db.setBoard();
 
 
         launch(args);
     }
-
+    private static GraphicsContext gc;
 }

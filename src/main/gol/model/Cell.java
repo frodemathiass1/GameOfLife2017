@@ -7,6 +7,14 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * This class handles each cell, it's state and its neighbors.
+ *
+ * @author  Frode Kristian Mathiassen
+ * @author  Tommy Pedersen
+ * @author  Magnus Kjernsli Hansen-Møllerud
+ * @version 1.0
+ */
 public class Cell{
 
     private final int x, y;

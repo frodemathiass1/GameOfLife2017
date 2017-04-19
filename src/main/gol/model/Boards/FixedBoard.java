@@ -6,6 +6,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
+/**
+ * This test class tests if the nextGeneration function works as intended. The nextGeneration function handles the
+ * Game of Life rules.
+ *
+ * @author  Frode Kristian Mathiassen
+ * @author  Tommy Pedersen
+ * @author  Magnus Kjernsli Hansen-Møllerud
+ * @version 1.0
+ */
 public class FixedBoard {
 
     private int cellSize;
@@ -27,8 +36,7 @@ public class FixedBoard {
     }
 
     /**
-     * Sets the rows and column and instantiates byte[][] array
-     * which is calls the initializer setBoard method
+     * Set up the byte[][] board and call init setBoard method for cell grid
      *
      * @param columns int
      * @param rows int
@@ -36,12 +44,13 @@ public class FixedBoard {
     public void setBoard(int columns, int rows) {
 
         byte[][] board = new byte[rows][columns];
-        this.setBoard(board);
+        setBoard(board);
         //System.out.println(board[2][3]);
     }
 
     /**
-     * Initialize board, populate cells and neighbors
+     * Initialize board with populated grid of cells, initialize each cell neighbors
+     *
      * @param board byte[][]
      */
     public void setBoard(byte[][] board) {
@@ -212,6 +221,7 @@ public class FixedBoard {
         this.generationList = generationList;
     }
 
+
     /**
      * This method handles cells within the cell grid (array) borders
      * and the corresponding cell coordinates bound to grid dimensions
@@ -223,9 +233,11 @@ public class FixedBoard {
     public Cell getCell(int x, int y) {
 
         if (x < 0 || y < 0 || x >= grid.length || y >= grid[x].length){
+
             return null;
         }
         else {
+
             return this.grid[x][y];
         }
     }

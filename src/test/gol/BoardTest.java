@@ -5,7 +5,15 @@ import javafx.scene.canvas.GraphicsContext;
 import main.gol.model.Boards.FixedBoard;
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * This test class tests if the nextGeneration method works as intended.
+ * The nextGeneration function handles the Game of Life rules.
+ *
+ * @author  Frode Kristian Mathiassen
+ * @author  Tommy Pedersen
+ * @author  Magnus Kjernsli Hansen-Møllerud
+ * @version 1.0
+ */
 class BoardTest {
 
 

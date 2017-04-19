@@ -23,7 +23,7 @@
         </Menu>
       <Menu mnemonicParsing="false" text="Pattern">
          <items>
-            <MenuItem fx:id="fileSelect" mnemonicParsing="false" onAction="#initFileBoard" text="Open text file" />
+            <MenuItem fx:id="fileSelect" mnemonicParsing="false" onAction="#selectFile" text="Open text file" />
          </items>
       </Menu>
       <Menu mnemonicParsing="false" text="Info">
@@ -32,7 +32,7 @@
          </items>
       </Menu>
     </MenuBar>
-    <Canvas fx:id="canvas" height="550.0" layoutY="27.0" onMouseClicked="#getCellPosition" onMouseDragged="#getCellPosition" width="800.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0" />
+    <Canvas fx:id="canvas" height="550.0" layoutY="27.0" onMouseClicked="#getCell" onMouseDragged="#getCell" width="800.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0" />
     <!--
     <VBox>
         <children>
@@ -71,7 +71,7 @@
             </HBox.margin>
         </Separator>
         -->
-        <MenuButton mnemonicParsing="false" onAction="#urlSelector" prefHeight="25.0" prefWidth="75.0" styleClass="btn2" stylesheets="@../../style/stylesheet.css" text="Select">
+        <MenuButton mnemonicParsing="false" onAction="#handleWebBoards" prefHeight="25.0" prefWidth="75.0" styleClass="btn2" stylesheets="@../../style/stylesheet.css" text="Select">
             <items>
                 <MenuItem fx:id="url1" mnemonicParsing="false" text="Airforce" />
                 <MenuItem fx:id="url2" mnemonicParsing="false" text="B52" />
