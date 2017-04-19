@@ -25,7 +25,7 @@ public class FileReader extends Reader {
     private static Charset charset = Charset.forName("US-ASCII");
 
     // File
-    private static File inFile;
+    private static File theFile;
 
     // Matrix byteBoard config
     private int rows = 0;
@@ -63,7 +63,7 @@ public class FileReader extends Reader {
     /**
      * Add fileChooser and select .txt / .cells file
      *
-     * @return inFile
+     * @return theFile
      */
     public File chooseFile() {
 
@@ -75,9 +75,9 @@ public class FileReader extends Reader {
                             "Text files", "*.txt", "*.cells");
 
             chooser.getExtensionFilters().add(fileExtensions);
-            inFile = chooser.showOpenDialog(null).getAbsoluteFile();
+            theFile = chooser.showOpenDialog(null).getAbsoluteFile();
 
-            return inFile;
+            return theFile;
     }
 
 
@@ -200,7 +200,7 @@ public class FileReader extends Reader {
     public void parseAndPopulateList(){
 
         try (BufferedReader br = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(inFile),charset))) {
+                    new InputStreamReader(new FileInputStream(theFile),charset))) {
 
             listOfBytes = new ArrayList<>();
             listOfInts = new ArrayList<>();
@@ -247,8 +247,8 @@ public class FileReader extends Reader {
      */
     public void getInfo(){
 
-        System.out.println(inFile.getPath());
-        System.out.println(inFile.getName());
+        System.out.println(theFile.getPath());
+        System.out.println(theFile.getName());
         printListOfInts();
         //printMatrixArray();
 
@@ -281,10 +281,10 @@ public class FileReader extends Reader {
 
     /**
      *
-     * @return File inFile
+     * @return File theFile
      */
-    public static File getInFile() {
-        return inFile;
+    public static File getTheFile() {
+        return theFile;
     }
 
     /**

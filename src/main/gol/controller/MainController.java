@@ -127,7 +127,7 @@ public class MainController implements Initializable {
 
         reader = new FileReader();
         reader.chooseFile();
-        reader.readGameBoardFromDisk(reader.getInFile(), reader.getMatrix());
+        reader.readGameBoardFromDisk(reader.getTheFile(), reader.getMatrix());
 
         makeNewBoard(reader.getMatrix(), reader.getRows(), reader.getColumns());
     }
