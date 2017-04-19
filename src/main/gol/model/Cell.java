@@ -12,7 +12,7 @@ import java.util.stream.Stream;
  *
  * @author  Frode Kristian Mathiassen
  * @author  Tommy Pedersen
- * @author  Magnus Kjernsli Hansen-Møllerud
+ * @author  Magnus Kjernsli Hansen-Mollerud
  * @version 1.0
  */
 public class Cell{

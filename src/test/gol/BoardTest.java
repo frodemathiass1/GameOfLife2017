@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author  Frode Kristian Mathiassen
  * @author  Tommy Pedersen
- * @author  Magnus Kjernsli Hansen-Møllerud
+ * @author  Magnus Kjernsli Hansen-Mollerud
  * @version 1.0
  */
 class BoardTest {
