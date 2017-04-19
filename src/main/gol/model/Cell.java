@@ -8,7 +8,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * This class handles each cell, it's state and its neighbors.
+ * This Cell class handles each cell, it's state and each neighbor of any cell.
+ * The array of cells represents the grid on the User-interface.
  *
  * @author  Frode Kristian Mathiassen
  * @author  Tommy Pedersen

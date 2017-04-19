@@ -17,6 +17,7 @@ import javafx.util.Duration;
 import main.gol.model.Boards.TestBoards;
 import main.gol.model.Cell;
 import main.gol.model.Boards.FixedBoard;
+import main.gol.model.FileManagement.Dialogs;
 import main.gol.model.FileManagement.FileReader;
 
 import java.util.Random;
@@ -470,11 +471,10 @@ public class MainController implements Initializable {
      */
     @FXML public void showInfo(){
 
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("About this application");
-        alert.setHeaderText("WARNING!!!!\nBeware of lethal injections!\nPlay at your own risk!");
-        alert.setContentText("Crafted & Coded by\nMagnus, Frode & Tommy\nHioA, Spring 2017");
-        alert.showAndWait();
+        Dialogs d = new Dialogs();
+        d.showInfo();
+
+
     }
 
     //    @FXML

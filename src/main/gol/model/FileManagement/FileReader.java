@@ -11,8 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * This class takes care of the plaintext files. It reads and parses a file/URL of text into live and dead cells so that
- * it can be loaded into the application as a pattern.
+ * FileReader class handles reading and parsing of plaintext files from disk and URL as well as
+ * population of the gameBoard matrix with the parsed character data.
  *
  * @author  Frode Kristian Mathiassen
  * @author  Tommy Pedersen
@@ -39,10 +39,15 @@ public class FileReader extends Reader {
     private List<List<Byte>> listOfBytes;
 
     //Decode helpers
-    char alive = 'O';
-    char dead = '.';
+    private char alive = 'O';
+    private char dead = '.';
+
+    //Dialogs
+    private Dialogs dialog;
 
 
+    // Methods that MUST be implemented from abstract class 'Reader'
+    // Not quite sure how to use this.......
     @Override
     public int read(char[] cbuf, int off, int len) throws IOException {
         return 0;
@@ -56,7 +61,7 @@ public class FileReader extends Reader {
 
 
     /**
-     * Choose file and return it
+     * Add fileChooser and select .txt / .cells file
      *
      * @return inFile
      */
@@ -75,8 +80,9 @@ public class FileReader extends Reader {
             return inFile;
     }
 
+
     /**
-     * Run GOL plaintext files from Web
+     * Read and parse plaintext files from URL and load pattern into gameBoard matrix
      *
      * @param inURL String
      * @param matrix byte[][]
@@ -91,7 +97,7 @@ public class FileReader extends Reader {
                     new InputStreamReader(conn.getInputStream()))) {
 
                 matrix = new byte[defRows][defCols];
-                ArrayList<Integer> columnSize =new ArrayList<>();
+                ArrayList<Integer> listOfColumnsSizes =new ArrayList<>();
 
                 int y = 0; // iteration handler
                 String line;
@@ -100,7 +106,7 @@ public class FileReader extends Reader {
                     if (!line.startsWith("!") ) {
 
                         y++;
-                        columnSize.add(line.length());
+                        listOfColumnsSizes.add(line.length());
 
                         for(int x = 0; x < line.length(); x++){
                             if (line.charAt(x) == dead){
@@ -115,13 +121,14 @@ public class FileReader extends Reader {
                         }
                     }
                 } // end while loop
-                Integer x_MAX = Collections.max(columnSize);
-                setColumns(x_MAX); // Update global variable
-                setRows(y);
-                setMatrix(matrix);
+                Integer columnsSize = Collections.max(listOfColumnsSizes); //Selects the max value from list of columnSizes
+                setColumns(columnsSize); // Update global variable
+                setRows(y); // Update global variable
+                setMatrix(matrix); // set gameBoard
             }
         }
         catch (FileNotFoundException fnf){
+            dialog.notFound();
             fnf.printStackTrace();
         }
         catch (IOException ioe){
@@ -130,7 +137,7 @@ public class FileReader extends Reader {
     }
 
     /**
-     * Read plaintext files from Disk and load pattern to gameBoard
+     * Read and parse plaintext files from disk and load pattern into gameBoard matrix
      *
      * @param inFile File,
      * @param matrix byte[][]
@@ -172,6 +179,7 @@ public class FileReader extends Reader {
         catch(FileNotFoundException fnf){
             //fnf.printStackTrace();
             System.out.println("File not found");
+            dialog.notFound();
         }
         catch (IOException ioe){
             //ioe.printStackTrace();
@@ -184,6 +192,8 @@ public class FileReader extends Reader {
     }
 
     /**
+     * NOT IN USE ATM.
+     *
      * Read file and populate ListOfIntegers and list of Bytes
      * Where to go from here
      */
@@ -223,6 +233,7 @@ public class FileReader extends Reader {
         }
         catch (FileNotFoundException fnf){
             fnf.printStackTrace();
+            dialog.notFound();
         }
         catch (IOException ioe){
             ioe.printStackTrace();
