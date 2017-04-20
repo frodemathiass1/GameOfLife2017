@@ -1,7 +1,8 @@
 package main.gol.model.FileManagement;
 
-import javafx.stage.FileChooser;
 import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * FileReader class handles reading and parsing of plaintext files from disk as well as
+ * URLReader class handles reading and parsing of URL links as well as
  * population of the gameBoard matrix with the parsed character data.
  *
  * @author  Frode Kristian Mathiassen
@@ -17,7 +18,7 @@ import java.util.List;
  * @author  Magnus Kjernsli Hansen-Mollerud
  * @version 1.0
  */
-public class FileReader extends Reader {
+public class URLReader extends Reader {
 
     // Character set
     private static Charset charset = Charset.forName("US-ASCII");
@@ -58,79 +59,48 @@ public class FileReader extends Reader {
     }
 
 
-    /**
-     * Add fileChooser and select .txt / .cells file
-     *
-     * @return theFile
-     */
-    public File chooseFile() {
-
-            FileChooser chooser = new FileChooser();
-            chooser.setTitle("Select file .txt /.cells");
-
-            FileChooser.ExtensionFilter fileExtensions =
-                    new FileChooser.ExtensionFilter(
-                            "Text files", "*.txt", "*.cells");
-
-            chooser.getExtensionFilters().add(fileExtensions);
-            theFile = chooser.showOpenDialog(null).getAbsoluteFile();
-
-            return theFile;
-    }
 
     /**
-     * Read and parse plaintext files from disk and load pattern into gameBoard matrix
-     *
-     * @param inFile File,
-     * @param matrix byte[][]
-     */
-    public void readGameBoardFromDisk(File inFile, byte[][] matrix){
+    * Read and parse plaintext files from URL and load pattern into gameBoard matrix
+    *
+    * @param inURL String
+    * @param matrix byte[][]
+    */
+    public void readGameBoardFromURL(String inURL, byte[][] matrix) throws Exception {
 
-        try(BufferedReader br = new BufferedReader(
-                new InputStreamReader(new FileInputStream(inFile),charset))) {
+        URL url = new URL(inURL);
+        URLConnection conn = url.openConnection();
 
-            matrix = new byte[this.defRows][this.defCols];
-            ArrayList<Integer> lineLengths =new ArrayList<>();
+        BufferedReader br = new BufferedReader(
+                new InputStreamReader(conn.getInputStream()));
+        matrix = new byte[defRows][defCols];
+        ArrayList<Integer> listOfColumnsSizes = new ArrayList<>();
 
-            int y = 0; // iteration handler
-            String line;
-            while ((line = br.readLine()) != null){
-                if (!line.startsWith("!") ) {
+        int y = 0; // iteration handler
+        String line;
+        while ((line = br.readLine()) != null) {
 
-                    y++;
-                    lineLengths.add(line.length());
+            if (!line.startsWith("!")) {
+                y++;
+                listOfColumnsSizes.add(line.length());
 
-                    for(int x = 0; x < line.length(); x++){
-                        if (line.charAt(x) == '.'){
-                            matrix[y + 25][x + 25] = 0;
-                        }
-                        if(line.charAt(x)== 'O'){
-                            matrix[y + 25][x + 25] = 1;
-                        }
-                        if(line.charAt(x) == ' '){
-                            y++;
-                        }
+                for (int x = 0; x < line.length(); x++) {
+                    if (line.charAt(x) == dead) {
+                        matrix[y + 25][x + 25] = 0; // Push cell position
+                    }
+                    if (line.charAt(x) == alive) {
+                        matrix[y + 25][x + 25] = 1; // Push cell position
+                    }
+                    if (line.charAt(x) == ' ') {
+                        y++;
                     }
                 }
-            } // end while loop
-            Integer x_MAX = Collections.max(lineLengths);
-            setColumns(x_MAX); // Update global variable
-            setRows(y);
-            setMatrix(matrix);
-        }
-        catch(FileNotFoundException fnf){
-            //fnf.printStackTrace();
-            System.out.println("File not found");
-            dialog.notFound();
-        }
-        catch (IOException ioe){
-            //ioe.printStackTrace();
-            System.out.println("Error reading file");
-        }
-        catch (ArrayIndexOutOfBoundsException oob){
-            //oob.printStackTrace();
-            System.out.println("Error loading file");
-        }
+            }
+        } // end while loop
+        Integer columnsSize = Collections.max(listOfColumnsSizes); //Selects the max value from list of columnSizes
+        setColumns(columnsSize); // Update global variable
+        setRows(y); // Update global variable
+        setMatrix(matrix); // set gameBoard
     }
 
     /**
@@ -142,7 +112,7 @@ public class FileReader extends Reader {
     public void parseAndPopulateList(){
 
         try (BufferedReader br = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(theFile),charset))) {
+                new InputStreamReader(new FileInputStream(theFile),charset))) {
 
             listOfBytes = new ArrayList<>();
             listOfInts = new ArrayList<>();

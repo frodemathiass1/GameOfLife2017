@@ -19,7 +19,8 @@ import main.gol.model.Cell;
 import main.gol.model.Boards.FixedBoard;
 import main.gol.model.FileManagement.Dialogs;
 import main.gol.model.FileManagement.FileReader;
-
+import main.gol.model.FileManagement.URLReader;
+import java.util.Optional;
 import java.util.Random;
 
 
@@ -43,11 +44,11 @@ public class MainController implements Initializable {
     @FXML private Slider zoomSlider;
     @FXML private MenuItem small, normal, large, fileSelect, url1,url2,url3,url4,url5,url6,url7,url8,url9,url10;
 
-
     private GraphicsContext gc;
     private Timeline timeline = new Timeline();
     private FixedBoard board;
-    private FileReader reader;
+    private FileReader fileReader;
+    private URLReader urlReader;
     private int cellSize = 5;
     private int columns = 160;
     private int rows = 110;
@@ -125,11 +126,43 @@ public class MainController implements Initializable {
         stopAnimation();
         clearBoard();
 
-        reader = new FileReader();
-        reader.chooseFile();
-        reader.readGameBoardFromDisk(reader.getTheFile(), reader.getMatrix());
+        fileReader = new FileReader();
+        fileReader.chooseFile();
+        fileReader.readGameBoardFromDisk(FileReader.getTheFile(), fileReader.getMatrix());
 
-        makeNewBoard(reader.getMatrix(), reader.getRows(), reader.getColumns());
+        makeNewBoard(fileReader.getMatrix(), fileReader.getRows(), fileReader.getColumns());
+    }
+
+    /**
+     * Initialize and run GOL pattern from ContextMenu URL Selector
+     */
+    @FXML public void selectURL(){
+
+        stopAnimation();
+        clearBoard();
+
+        urlReader = new URLReader();
+        TextInputDialog inputURL = new TextInputDialog();
+        inputURL.setTitle("Open URL");
+        inputURL.setHeaderText("Enter the URL you want to open here");
+        inputURL.setContentText("URL:");
+        Optional<String> result = inputURL.showAndWait();
+
+        if (result.isPresent()){
+            if (!result.get().toLowerCase().startsWith("http")) {
+                Dialogs h = new Dialogs();
+                h.httpError();
+            } else {
+                try {
+                    urlReader.readGameBoardFromURL(result.get(), urlReader.getMatrix());
+                    makeNewBoard(urlReader.getMatrix(), urlReader.getRows(), urlReader.getColumns());
+                }
+                catch (Exception e) {
+                    Dialogs u = new Dialogs();
+                    u.urlError();
+                }
+            }
+        }
     }
 
     /**
@@ -159,9 +192,15 @@ public class MainController implements Initializable {
 
         stopAnimation();
         clearBoard();
-        reader = new FileReader();
-        reader.readGameBoardFromURL(url, reader.getMatrix());
-        makeNewBoard(reader.getMatrix(), reader.getRows(), reader.getColumns());
+        try {
+            urlReader = new URLReader();
+            urlReader.readGameBoardFromURL(url, urlReader.getMatrix());
+            makeNewBoard(urlReader.getMatrix(), urlReader.getRows(), urlReader.getColumns());
+        }
+        catch (Exception e) {
+            Dialogs u = new Dialogs();
+            u.urlError();
+        }
     }
 
     /**

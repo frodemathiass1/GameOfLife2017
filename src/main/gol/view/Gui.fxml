@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.MainController">
+<AnchorPane prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.MainController">
     <MenuBar fx:id="menuBar" layoutY="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#quitApp" text="Quit" />
@@ -24,6 +24,7 @@
       <Menu mnemonicParsing="false" text="Pattern">
          <items>
             <MenuItem fx:id="fileSelect" mnemonicParsing="false" onAction="#selectFile" text="Open text file" />
+            <MenuItem fx:id="URLSelect" mnemonicParsing="false" onAction="#selectURL" text="Open URL" />
          </items>
       </Menu>
       <Menu mnemonicParsing="false" text="Info">
@@ -41,7 +42,7 @@
         </children>
     </VBox>
     -->
-    <HBox layoutY="576.0" prefWidth="800.0" spacing="10.0" stylesheets="@../../style/stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <HBox layoutY="576.0" prefWidth="800.0" spacing="10.0" stylesheets="@../../style/stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="579.0">
         <Button fx:id="play" mnemonicParsing="false" onAction="#play" prefHeight="25.0" prefWidth="60.0" styleClass="buttons" stylesheets="@../../style/stylesheet.css" text="Play">
             <HBox.margin>
                 <Insets left="15.0" top="8.0" />
