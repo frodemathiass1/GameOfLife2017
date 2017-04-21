@@ -17,7 +17,6 @@ public class Sounds {
     private final File beep1 = new File("resources/beep1.wav");
     private final File beep2 = new File("resources/beep2.wav");
     private final File rattle = new File("resources/rattle.wav");
-
     private double vol = 0.2;
 
 

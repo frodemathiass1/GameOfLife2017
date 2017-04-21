@@ -49,7 +49,7 @@ public class MainController implements Initializable {
     @FXML
     private Slider zoomSlider;
     @FXML
-    private MenuItem small, normal, large, fileSelect, url1, url2, url3, url4, url5, url6, url7, url8, url9, url10, soundToggle;
+    private MenuItem small, normal, large, fileSelect, url1, url2, url3, url4, url5, url6, url7, url8, url9, url10;
     @FXML
     private ToggleButton toggleButton;
 
@@ -63,7 +63,7 @@ public class MainController implements Initializable {
     private int rows = 110;
     private TestBoards tb;
     private Sounds sound = new Sounds();
-
+    private Dialogs dialog = new Dialogs();
     //private Draw draw = new Draw();
 
 
@@ -579,16 +579,13 @@ public class MainController implements Initializable {
     @FXML
     public void showInfo() {
 
-        Dialogs d = new Dialogs();
-        d.showInfo();
-
-
+        dialog.showInfo();
     }
 
     @FXML
     public void aboutGol() {
-        Dialogs d = new Dialogs();
-        d.aboutGol();
+
+        dialog.aboutGol();
     }
 
     // Getters

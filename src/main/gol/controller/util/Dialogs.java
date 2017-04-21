@@ -57,6 +57,10 @@ public class Dialogs {
         alert.showAndWait();
     }
 
+
+    /**
+     * This method show a information dialogBox with general Game of Life description
+     */
     public void aboutGol() {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -73,6 +77,4 @@ public class Dialogs {
                 "4: Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.\n");
         alert.showAndWait();
     }
-
-
 }
