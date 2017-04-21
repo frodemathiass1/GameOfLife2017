@@ -4,6 +4,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -584,6 +585,12 @@ public class MainController implements Initializable {
 
     }
 
+    @FXML
+    public void aboutGol() {
+        Dialogs d = new Dialogs();
+        d.aboutGol();
+    }
+
     // Getters
     public int getColumns() {
         return columns;
@@ -592,4 +599,6 @@ public class MainController implements Initializable {
     public int getRows() {
         return rows;
     }
+
+
 }

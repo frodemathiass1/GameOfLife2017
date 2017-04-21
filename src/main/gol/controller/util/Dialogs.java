@@ -56,4 +56,23 @@ public class Dialogs {
         alert.setHeaderText("Something went wrong.\nPlease try again, or enter another URL.");
         alert.showAndWait();
     }
+
+    public void aboutGol() {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About Game of Life");
+        alert.setHeaderText("Game of life rules:");
+        alert.setContentText("From Wikipedia\n\n" +
+                "The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells,\n" +
+                " each of which is in one of two possible states, alive or dead, or populated or unpopulated.\n " +
+                "Every cell interacts with its eight neighbours, which are the cells that are horizontally,\n " +
+                "vertically, or diagonally adjacent. At each step in time, the following transitions occur:\n\n" +
+                "1: Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.\n\n" +
+                "2: Any live cell with two or three live neighbours lives on to the next generation.\n\n" +
+                "3: Any live cell with more than three live neighbours dies, as if by overpopulation.\n\n" +
+                "4: Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.\n");
+        alert.showAndWait();
+    }
+
+
 }

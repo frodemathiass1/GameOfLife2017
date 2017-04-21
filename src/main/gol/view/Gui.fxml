@@ -22,7 +22,7 @@
 
         <Menu text="Info">
             <items>
-                <MenuItem fx:id="gol" onAction="#showInfo" text="About Game of Life"/>
+                <MenuItem fx:id="gol" onAction="#aboutGol" text="About Game of Life"/>
                 <MenuItem fx:id="contact" onAction="#showInfo" text="Contact"/>
             </items>
         </Menu>
