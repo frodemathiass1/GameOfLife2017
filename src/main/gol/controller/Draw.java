@@ -4,6 +4,7 @@
 //import javafx.scene.paint.Color;
 //import main.gol.model.Boards.FixedBoard;
 //import main.gol.model.Cell;
+//
 //import java.util.ArrayList;
 //
 //
@@ -22,49 +23,47 @@
 //    private Color backgroundColor = Color.WHITE;
 //
 //
-//
 //    // Draw grid - Working
-//    public void drawGrid(Cell[][] grid,GraphicsContext gc) {
+//    public void drawGrid(Cell[][] grid, GraphicsContext gc) {
 //
-//        for (int x = 0; x < grid.length; x++){
-//            for (int y = 0; y < grid[x].length; y++){
-//                drawCell(grid[x][y],gc);
+//        for (int x = 0; x < grid.length; x++) {
+//            for (int y = 0; y < grid[x].length; y++) {
+//                drawCell(grid[x][y], gc);
 //            }
 //        }
 //    }
 //
 //    // Draw board - Working
-//    public void drawBoard(FixedBoard board,GraphicsContext gc) {
+//    public void drawBoard(FixedBoard board, GraphicsContext gc) {
 //
 //        Cell[][] grid = board.getGrid();
 //        for (int i = 0; i < grid.length; i++) {
 //            for (int j = 0; j < grid[i].length; j++) {
-//                drawCell(grid[i][j],gc);
+//                drawCell(grid[i][j], gc);
 //            }
 //        }
 //    }
 //
 //    // Draw cell - Working
-//    public void drawCell(Cell cell,GraphicsContext gc) {
+//    public void drawCell(Cell cell, GraphicsContext gc) {
 //
-//        if (cell.getState()){
+//        if (cell.getState()) {
 //            gc.setFill(Color.BLACK); // ColorPicker values should be set here (Wrong type to use getter)
 //            gc.setStroke(Color.LIGHTGRAY);
-//        }
-//        else {
+//        } else {
 //            gc.setFill(Color.WHITE);
 //            gc.setStroke(Color.LIGHTGRAY);
 //        }
-//          gc.fillRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
+//        gc.fillRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
 //        gc.strokeRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
 //    }
 //
 //
 //    // Draw generation - Working
-//    public void drawGeneration(ArrayList<Cell> genList,GraphicsContext gc){
+//    public void drawGeneration(ArrayList<Cell> genList, GraphicsContext gc) {
 //
 //        for (Cell cell : genList) {
-//            drawCell(cell,gc);
+//            drawCell(cell, gc);
 //        }
 //    }
 //}

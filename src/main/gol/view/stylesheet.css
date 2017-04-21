@@ -1,0 +1,49 @@
+/*
+* Game of life GUI stylesheet
+*/
+
+.btnStyle {
+    -fx-background-radius: 5, 5, 5;
+    -fx-text-fill: black;
+    -fx-font-size: 10px;
+}
+
+.pick-colors {
+
+    -fx-graphic: url("http://icons.iconarchive.com/icons/iconshock/brilliant-graphics/16/colors-icon.png");
+}
+
+.toggle-button {
+
+    -fx-graphic: url("http://icons.iconarchive.com/icons/iconshock/super-vista-general/16/music-icon.png");
+}
+
+.toggle-button:selected {
+
+    -fx-graphic: url("http://icons.iconarchive.com/icons/dryicons/aesthetica-2/16/sound-off-icon.png");
+}
+
+.speedSlider-label {
+
+    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/windows-8/16/Science-Speed-icon.png");
+}
+
+.zoomSlider-label {
+
+    -fx-graphic: url("http://icons.iconarchive.com/icons/tatice/cristal-intense/16/Loupe-icon.png");
+}
+
+.gridSize-button {
+
+    -fx-graphic: url("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-transform-scale-icon.png");
+}
+
+.highlight-label {
+
+    -fx-background-color: lightgrey;
+}
+
+.pattern-button {
+
+    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/windows-8/16/Data-Grid-icon.png");
+}

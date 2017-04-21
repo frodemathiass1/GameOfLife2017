@@ -1,4 +1,7 @@
-package main.gol.model.FileManagement;
+package main.gol.model.FileManager;
+
+import main.gol.controller.MainController;
+import main.gol.controller.util.Dialogs;
 
 import java.io.*;
 import java.net.URL;
@@ -13,12 +16,14 @@ import java.util.List;
  * URLReader class handles reading and parsing of URL links as well as
  * population of the gameBoard matrix with the parsed character data.
  *
- * @author  Frode Kristian Mathiassen
- * @author  Tommy Pedersen
- * @author  Magnus Kjernsli Hansen-Mollerud
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.0
  */
-public class URLReader extends Reader {
+public class URLReader {
+
+    private MainController mc = new MainController();
 
     // Character set
     private static Charset charset = Charset.forName("US-ASCII");
@@ -37,43 +42,23 @@ public class URLReader extends Reader {
     private List<List<Integer>> listOfInts;
     private List<List<Byte>> listOfBytes;
 
-    //Decode helpers
-    private char alive = 'O';
-    private char dead = '.';
-
     //Dialogs
     private Dialogs dialog;
 
 
-    // Methods that MUST be implemented from abstract class 'Reader'
-    // Not quite sure how to use this.......
-    @Override
-    public int read(char[] cbuf, int off, int len) throws IOException {
-        return 0;
-        // dont know how to use this
-    }
-
-    @Override
-    public void close() throws IOException {
-        // dont know how to use this
-    }
-
-
-
     /**
-    * Read and parse plaintext files from URL and load pattern into gameBoard matrix
-    *
-    * @param inURL String
-    * @param matrix byte[][]
-    */
-    public void readGameBoardFromURL(String inURL, byte[][] matrix) throws Exception {
+     * Read and parse plaintext files from URL and load pattern into gameBoard matrix
+     *
+     * @param inURL String
+     */
+    public void readGameBoardFromURL(String inURL) throws Exception {
 
         URL url = new URL(inURL);
         URLConnection conn = url.openConnection();
 
         BufferedReader br = new BufferedReader(
                 new InputStreamReader(conn.getInputStream()));
-        matrix = new byte[defRows][defCols];
+        byte[][] matrix = new byte[mc.getRows()][mc.getColumns()];
         ArrayList<Integer> listOfColumnsSizes = new ArrayList<>();
 
         int y = 0; // iteration handler
@@ -85,9 +70,11 @@ public class URLReader extends Reader {
                 listOfColumnsSizes.add(line.length());
 
                 for (int x = 0; x < line.length(); x++) {
+                    char dead = '.';
                     if (line.charAt(x) == dead) {
                         matrix[y + 25][x + 25] = 0; // Push cell position
                     }
+                    char alive = 'O';
                     if (line.charAt(x) == alive) {
                         matrix[y + 25][x + 25] = 1; // Push cell position
                     }
@@ -105,35 +92,34 @@ public class URLReader extends Reader {
 
     /**
      * NOT IN USE ATM.
-     *
+     * <p>
      * Read file and populate ListOfIntegers and list of Bytes
      * Where to go from here
      */
-    public void parseAndPopulateList(){
+    public void parseAndPopulateList() {
 
         try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(new FileInputStream(theFile),charset))) {
+                new InputStreamReader(new FileInputStream(theFile), charset))) {
 
             listOfBytes = new ArrayList<>();
             listOfInts = new ArrayList<>();
             String line;
-            while ((line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 if (!line.startsWith("!")) {
                     line = line.trim();
                     // Add new row, add string to row, then finally add row to list
 
                     List<Byte> bytes = new ArrayList<>();
                     List<Integer> ints = new ArrayList<>();
-                    for (int i = 0; i < line.length(); i++){
-                        if ( line.charAt(i) == '.'){
+                    for (int i = 0; i < line.length(); i++) {
+                        if (line.charAt(i) == '.') {
 
-                            ints.add(i,0);
+                            ints.add(i, 0);
                             bytes.add(i, (byte) 0);
 
-                        }
-                        else if (line.charAt(i) == 'O'){
+                        } else if (line.charAt(i) == 'O') {
 
-                            ints.add(i,1);
+                            ints.add(i, 1);
                             bytes.add(i, (byte) 1);
                         }
                     }
@@ -142,12 +128,10 @@ public class URLReader extends Reader {
                 }
             } // End while loop
             setListOfInts(listOfInts);
-        }
-        catch (FileNotFoundException fnf){
+        } catch (FileNotFoundException fnf) {
             fnf.printStackTrace();
             dialog.notFound();
-        }
-        catch (IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
 
@@ -157,7 +141,7 @@ public class URLReader extends Reader {
     /**
      * Print file,filename and array/list details to console
      */
-    public void getInfo(){
+    public void getInfo() {
 
         System.out.println(theFile.getPath());
         System.out.println(theFile.getName());
@@ -169,10 +153,10 @@ public class URLReader extends Reader {
     /**
      * Print the populated 2d Array to console (Debugger)
      */
-    public void printMatrixArray(){
+    public void printMatrixArray() {
 
-        for(int y = 0; y < this.matrix.length; y++){
-            for(int x = 0; x < this.matrix[y].length; x++){
+        for (int y = 0; y < this.matrix.length; y++) {
+            for (int x = 0; x < this.matrix[y].length; x++) {
                 System.out.print(this.matrix[y][x]);
             }
             System.out.println();
@@ -182,17 +166,16 @@ public class URLReader extends Reader {
     /**
      * Print the populated List of Lists to console (Debugger)
      */
-    public void printListOfInts(){
+    public void printListOfInts() {
 
         Iterator it = this.listOfInts.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             System.out.println(it.next());
         }
 
     }
 
     /**
-     *
      * @return File theFile
      */
     public static File getTheFile() {
@@ -200,31 +183,27 @@ public class URLReader extends Reader {
     }
 
     /**
-     *
      * @return byte[][] matrix
      */
-    public byte[][] getMatrix(){
+    public byte[][] getMatrix() {
         return this.matrix;
     }
 
     /**
-     *
      * @return int Rows
      */
-    public int getRows(){
+    public int getRows() {
         return this.rows;
     }
 
     /**
-     *
      * @return int columns
      */
-    public int getColumns(){
+    public int getColumns() {
         return this.columns;
     }
 
     /**
-     *
      * @param rows int
      */
     public void setRows(int rows) {
@@ -232,7 +211,6 @@ public class URLReader extends Reader {
     }
 
     /**
-     *
      * @param columns int
      */
     public void setColumns(int columns) {
@@ -240,7 +218,6 @@ public class URLReader extends Reader {
     }
 
     /**
-     *
      * @param matrix byte[][]
      */
     public void setMatrix(byte[][] matrix) {
@@ -248,7 +225,6 @@ public class URLReader extends Reader {
     }
 
     /**
-     *
      * @param listInts list ArrayList
      */
     public void setListOfInts(List<List<Integer>> listInts) {

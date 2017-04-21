@@ -1,14 +1,17 @@
-package main.gol.model.FileManagement;
+package main.gol.controller.util;
 
 import javafx.scene.control.Alert;
 
 /**
- * Created by Frode Mathiassen on 19.04.2017
- * Added more to by Tommy Pedersen 19.04.2017
+ * This class contains a collection of Dialog boxes with messages presented to the user on GUI
  */
 public class Dialogs {
 
-    public void showInfo(){
+
+    /**
+     * This method show info dialogBox about the creators of this application
+     */
+    public void showInfo() {
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("About this application");
@@ -17,17 +20,24 @@ public class Dialogs {
         alert.showAndWait();
     }
 
-    public void notFound(){
+
+    /**
+     * This method show dialogBox if File cannot be loaded
+     */
+    public void notFound() {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information message");
         alert.setHeaderText("File not found");
         alert.setContentText("Sorry, can't open file. Try other file\nSupported formats: .txt / .cells");
         alert.showAndWait();
-
     }
 
-    public void httpError(){
+
+    /**
+     * This method show a warning dialogBox if URL does not start with a http string
+     */
+    public void httpError() {
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Open URL");
@@ -35,12 +45,15 @@ public class Dialogs {
         alert.showAndWait();
     }
 
-    public void urlError(){
+
+    /**
+     * This method show a warning dialogBox if something went wrong with loading URL
+     */
+    public void urlError() {
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Open URL");
         alert.setHeaderText("Something went wrong.\nPlease try again, or enter another URL.");
         alert.showAndWait();
     }
-
 }

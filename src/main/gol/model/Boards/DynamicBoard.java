@@ -4,10 +4,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.gol.model.Cell;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class DynamicBoard  {
+public class DynamicBoard {
 
 
     // Cell, grid, background Color
@@ -19,8 +20,8 @@ public class DynamicBoard  {
     private int cellSize;
     private Cell[][] grid;
 
-    List<List<Byte>> bytes;
-    List<List<Cell>> listOfCells;
+    private List<List<Byte>> bytes;
+    private List<List<Cell>> listOfCells;
     private final int MAX_COL = 160;
     private final int MAX_ROW = 110;
     private boolean state = false;
@@ -29,41 +30,37 @@ public class DynamicBoard  {
     private List<Integer> coord;
 
 
-
-
     public void setBoard() {
 
-            // GridSize
-            int outerSize = 5;
-            int innerSize = 5;
+        // GridSize
+        int outerSize = 5;
+        int innerSize = 5;
 
-            // Master grid
-            List<List<Cell>> outer = new ArrayList<>();
+        // Master grid
+        List<List<Cell>> outer = new ArrayList<>();
 
-            // Inner grid
-            List<Cell> inner = null;
+        // Inner grid
+        List<Cell> inner = null;
 
-            for (int i = 0; i < outerSize; i++){
+        for (int i = 0; i < outerSize; i++) {
 
-                inner = new ArrayList<>(innerSize);
+            inner = new ArrayList<>(innerSize);
 
-                for (int j = 0; j < innerSize; j++){
-                    inner.add(new Cell(i, j));
-                    System.out.print(j+" ");
-                }
-                outer.add(inner);
-                System.out.println();
-
+            for (int j = 0; j < innerSize; j++) {
+                inner.add(new Cell(i, j));
+                System.out.print(j + " ");
             }
+            outer.add(inner);
+            System.out.println();
 
-        for (List<Cell> c: outer)
-        {
+        }
+
+        for (List<Cell> c : outer) {
             System.out.println(c);
         }
 
 
         //System.out.println(cells.get(0).get(0));
-
 
 
 //        for (int x = 0; x < MAX_COL; x++) {
@@ -111,25 +108,24 @@ public class DynamicBoard  {
         //System.out.println(board[2][3]);
     }*/
 
-    public void nextGeneration(){
+    public void nextGeneration() {
         // implemented from interface
     }
 
 
     // Dynamic board constructor
-    public DynamicBoard(GraphicsContext gc, int cellSize){
+    public DynamicBoard(GraphicsContext gc, int cellSize) {
 
-           this.gc = gc;
-           this.cellSize = cellSize;
+        this.gc = gc;
+        this.cellSize = cellSize;
     }
 
 
-
     // Instantiate ListOfList and add rows to list
-    public void addRows(int rows){
+    public void addRows(int rows) {
 
         listOfCells = new ArrayList<>();
-        for(int i = 0; i < rows; i++){
+        for (int i = 0; i < rows; i++) {
 
             List<Cell> row = new ArrayList<>();
             this.listOfCells.add(row);
@@ -137,20 +133,20 @@ public class DynamicBoard  {
     }
 
     // Fill rows with (byte) values 0||1
-   public void fillRows(int columns){
-        for(int x = 0; x < listOfCells.size(); x++){
-            for(int y = 0; y < columns; y++){
+    public void fillRows(int columns) {
+        for (int x = 0; x < listOfCells.size(); x++) {
+            for (int y = 0; y < columns; y++) {
 
-                this.listOfCells.get(x).add(new Cell(x,y));
+                this.listOfCells.get(x).add(new Cell(x, y));
             }
         }
     }
 
     // Instantiate ListOfList and add rows to list
-    public void addByteRows(int rows){
+    public void addByteRows(int rows) {
 
         bytes = new ArrayList<>();
-        for(int i = 0; i < rows; i++){
+        for (int i = 0; i < rows; i++) {
 
             List<Byte> row = new ArrayList<>();
             this.bytes.add(row);
@@ -158,26 +154,26 @@ public class DynamicBoard  {
     }
 
     // Fill rows with (byte) values 0||1
-    public void fillByteRows(int columns){
-        for(int x = 0; x < bytes.size(); x++){
-            for(int y = 0; y < columns; y++){
+    public void fillByteRows(int columns) {
+        for (int x = 0; x < bytes.size(); x++) {
+            for (int y = 0; y < columns; y++) {
 
-                this.bytes.get(x).add((byte)0);
+                this.bytes.get(x).add((byte) 0);
             }
         }
     }
 
 
     // Print byteGrid
-    public void printGrid(){
-        for(int i = 0; i < listOfCells.size(); i++){
+    public void printGrid() {
+        for (int i = 0; i < listOfCells.size(); i++) {
             System.out.println(listOfCells.get(i));
 
         }
     }
 
     // Fancy looper
-    public void print(){
+    public void print() {
 
         listOfCells.forEach(System.out::println);
     }
@@ -186,9 +182,6 @@ public class DynamicBoard  {
     public void setListOfCells(List<List<Byte>> listOfCells) {
         this.listOfCells = listOfCells;
     }*/
-
-
-
 
 
 }

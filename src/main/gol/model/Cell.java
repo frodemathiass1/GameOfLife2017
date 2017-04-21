@@ -11,12 +11,12 @@ import java.util.stream.Stream;
  * This Cell class handles each cell, it's state and each neighbor of any cell.
  * The array of cells represents the grid on the User-interface.
  *
- * @author  Frode Kristian Mathiassen
- * @author  Tommy Pedersen
- * @author  Magnus Kjernsli Hansen-Mollerud
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.0
  */
-public class Cell{
+public class Cell {
 
     private final int x, y;
     private boolean state = false;
@@ -25,6 +25,7 @@ public class Cell{
 
     /**
      * Cell Constructor
+     *
      * @param x int
      * @param y int
      */
@@ -43,10 +44,10 @@ public class Cell{
     /**
      * @return count int
      */
-    public int countAliveNeighbors(){
+    public int countAliveNeighbors() {
         int count = 0;
-        for(int i = 0; i < this.getNeighbors().size(); i++ )
-            if(this.neighbors.get(i).getState()) {
+        for (int i = 0; i < this.getNeighbors().size(); i++)
+            if (this.neighbors.get(i).getState()) {
                 //System.out.println(this.neighbors.get(i));
                 count++;
             }
@@ -56,6 +57,7 @@ public class Cell{
 
     /**
      * List of neighbors
+     *
      * @param board FixedBoard
      */
     public void initNeighbors(FixedBoard board) {
@@ -77,53 +79,55 @@ public class Cell{
     /**
      * @return List neighbors
      */
-    private List<Cell> getNeighbors(){
+    private List<Cell> getNeighbors() {
         return this.neighbors;
     }
 
     /**
      * @param state boolean
      */
-    public void setState(boolean state){
+    public void setState(boolean state) {
         this.state = state;
     }
 
     /**
      * @return state boolean
      */
-    public boolean getState(){
+    public boolean getState() {
         return this.state;
     }
 
     /**
      * Set next state (dead/alive)
+     *
      * @param ns boolean
      */
-    public void setNextState(boolean ns){
+    public void setNextState(boolean ns) {
         this.nextState = ns;
     }
 
     /**
      * @return x int
      */
-    public int getX(){
+    public int getX() {
         return this.x;
     }
 
     /**
      * @return y int
      */
-    public int getY(){
+    public int getY() {
         return this.y;
     }
 
     /**
      * Returns a string with Cell object data
+     *
      * @return String
      */
     @Override
     public String toString() {
-        return state+" ";
+        return state + " ";
     }
 
 }

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 class CellTest {
 
-    private final Cell cell = new Cell(0,0);
+    private final Cell cell = new Cell(0, 0);
 
     @Test
     void toggleStateTest() {

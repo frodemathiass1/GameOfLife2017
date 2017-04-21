@@ -2,9 +2,9 @@ package main.gol.model.Boards;
 
 
 /**
- * Obsolete Class used for visual confirmation of testable Boards in GUI for JUnit BoardTests.
+ * Class used for visual confirmation of testable Boards in GUI for JUnit BoardTests.
  *
- * @deprecated
+ *
  */
 public class TestBoards {
 
@@ -13,25 +13,25 @@ public class TestBoards {
     public int cols;
 
 
-    byte[][] testBoard =  {
-            { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 },
-            { 1, 1, 1, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+    private byte[][] testBoard = {
+            {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+            {1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     };
 
 
-    byte[][] testBoard2 = {
-            {0,0,0,0},
-            {0,1,1,0},
-            {0,0,1,0},
-            {0,0,0,0},
+    private byte[][] testBoard2 = {
+            {0, 0, 0, 0},
+            {0, 1, 1, 0},
+            {0, 0, 1, 0},
+            {0, 0, 0, 0},
     };
 
     /**

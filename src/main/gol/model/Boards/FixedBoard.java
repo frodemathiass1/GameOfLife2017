@@ -1,7 +1,9 @@
 package main.gol.model.Boards;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.gol.model.Cell;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,9 +12,9 @@ import java.util.Random;
  * This test class tests if the nextGeneration function works as intended. The nextGeneration function handles the
  * Game of Life rules.
  *
- * @author  Frode Kristian Mathiassen
- * @author  Tommy Pedersen
- * @author  Magnus Kjernsli Hansen-Mollerud
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.0
  */
 public class FixedBoard {
@@ -22,24 +24,30 @@ public class FixedBoard {
     private final GraphicsContext graphics;
     private ArrayList<Cell> generationList;
 
-
     // Cell, grid, background Color
     private Color gridColor = Color.LIGHTGREY;
     private Color cellColor = Color.BLACK;
     private Color backgroundColor = Color.WHITE;
 
 
+    /**
+     * Board constructor
+     *
+     * @param graphics GraphicContext
+     * @param cellSize int
+     */
     public FixedBoard(GraphicsContext graphics, int cellSize) {
 
         this.cellSize = cellSize;
         this.graphics = graphics;
     }
 
+
     /**
      * Set up the byte[][] board and call init setBoard method for cell grid
      *
      * @param columns int
-     * @param rows int
+     * @param rows    int
      */
     public void setBoard(int columns, int rows) {
 
@@ -47,6 +55,7 @@ public class FixedBoard {
         setBoard(board);
         //System.out.println(board[2][3]);
     }
+
 
     /**
      * Initialize board with populated grid of cells, initialize each cell neighbors
@@ -73,7 +82,7 @@ public class FixedBoard {
                 Cell cell = new Cell(x, y);
                 if (board[y][x] == 1) { // flip x and y axis. Why? because that's how it works
                     cell.setState(true);
-                } else  if(board[y][x] == 0){
+                } else if (board[y][x] == 0) {
                     cell.setState(false);
                 }
                 grid[x][y] = cell; // setBoard cell grid
@@ -89,12 +98,13 @@ public class FixedBoard {
         }
     }
 
+
     /**
      * This method handles the Game of Life rules.
      * Checks each cell for it state counts and checks each neighbors state.
      * Collects the next generation of cells in a ArrayList of Cell objects.
      */
-    public void nextGeneration(){
+    public void nextGeneration() {
 
         ArrayList<Cell> generationList = new ArrayList<>();
 
@@ -103,58 +113,59 @@ public class FixedBoard {
                 Cell cell = grid[x][y];
 
                 // dies, as if by underpopulation.
-                if (cell.getState() && cell.countAliveNeighbors() < 2 ){
+                if (cell.getState() && cell.countAliveNeighbors() < 2) {
                     cell.setNextState(false);
                     generationList.add(cell);
                 }
                 // lives on to the next generation.
-                else if(cell.getState() && (cell.countAliveNeighbors() == 2 || cell.countAliveNeighbors() == 3)){
+                else if (cell.getState() && (cell.countAliveNeighbors() == 2 || cell.countAliveNeighbors() == 3)) {
                     cell.setNextState(true);
                     generationList.add(cell);
                 }
                 // dies, as if by overpopulation.
-                else if(cell.getState() && cell.countAliveNeighbors() > 3){
+                else if (cell.getState() && cell.countAliveNeighbors() > 3) {
                     cell.setNextState(false);
                     generationList.add(cell);
                 }
                 // becomes a live cell, as if by reproduction.
-                else if(!cell.getState() && cell.countAliveNeighbors() == 3){
+                else if (!cell.getState() && cell.countAliveNeighbors() == 3) {
                     cell.setNextState(true);
                     generationList.add(cell);
                 }
             }
         }
-       // Update generation
-       for(Cell cell : generationList){
+        // Update generation
+        for (Cell cell : generationList) {
             cell.updateState();
-       }
-       this.generationList = generationList;
+        }
+        this.generationList = generationList;
     }
+
 
     /**
      * This method loops through the generation list and draw each cell to canvas
-     *
      */
-   public void drawGeneration(){
+    public void drawGeneration() {
 
-        for(Cell cell : this.generationList){
+        for (Cell cell : this.generationList) {
             //cell.updateState();
             drawCell(cell);
         }
     }
 
+
     /**
      * This method toggles the individual cells state and
      * Sets corresponding color on the canvas grid
+     *
      * @param cell Cell
      */
     public void drawCell(Cell cell) {
 
-        if (cell.getState()){
+        if (cell.getState()) {
             graphics.setFill(getCellColor());
             graphics.setStroke(getGridColor());
-        }
-        else {
+        } else {
             graphics.setFill(getBackgroundColor());
             graphics.setStroke(getGridColor());
         }
@@ -162,24 +173,26 @@ public class FixedBoard {
         graphics.strokeRect(cell.getX() * cellSize, cell.getY() * cellSize, cellSize, cellSize);
     }
 
+
     /**
      * This method draws the grid of cells to canvas.
      */
     public void drawGrid() {
 
-        for (int x = 0; x < grid.length; x++){
-            for (int y = 0; y < grid[x].length; y++){
+        for (int x = 0; x < grid.length; x++) {
+            for (int y = 0; y < grid[x].length; y++) {
                 drawCell(grid[x][y]);
             }
         }
     }
+
 
     /**
      * This method loop through the cell grid and set all living cells to dead/false
      *
      * @param grid cell[][]
      */
-    public void clearBoard(Cell[][] grid){
+    public void clearBoard(Cell[][] grid) {
 
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
@@ -188,10 +201,11 @@ public class FixedBoard {
         }
     }
 
+
     /**
      * This method is a replica of next generation method but with random neighbor constrictions
      */
-    public void makeRandomGenerations(){
+    public void makeRandomGenerations() {
 
         ArrayList<Cell> generationList = new ArrayList<>();
         Random rand = new Random();
@@ -200,19 +214,16 @@ public class FixedBoard {
             for (int y = 0; y < grid[x].length; y++) {
                 Cell cell = grid[x][y];
 
-                if (cell.getState() && cell.countAliveNeighbors() < rand.nextInt(8) ){
+                if (cell.getState() && cell.countAliveNeighbors() < rand.nextInt(8)) {
                     cell.setState(rand.nextBoolean());
                     generationList.add(cell);
-                }
-               else if(cell.getState() && (cell.countAliveNeighbors() == rand.nextInt(8) || cell.countAliveNeighbors() == rand.nextInt(4))){
+                } else if (cell.getState() && (cell.countAliveNeighbors() == rand.nextInt(8) || cell.countAliveNeighbors() == rand.nextInt(8))) {
                     cell.setState(rand.nextBoolean());
                     generationList.add(cell);
-                }
-                else if(cell.getState() && cell.countAliveNeighbors() > rand.nextInt(8)){
+                } else if (cell.getState() && cell.countAliveNeighbors() > rand.nextInt(8)) {
                     cell.setState(rand.nextBoolean());
                     generationList.add(cell);
-                }
-                else if(!cell.getState() && cell.countAliveNeighbors() == rand.nextInt(4)){
+                } else if (!cell.getState() && cell.countAliveNeighbors() == rand.nextInt(8)) {
                     cell.setState(rand.nextBoolean());
                     generationList.add(cell);
                 }
@@ -232,95 +243,96 @@ public class FixedBoard {
      */
     public Cell getCell(int x, int y) {
 
-        if (x < 0 || y < 0 || x >= grid.length || y >= grid[x].length){
+        if (x < 0 || y < 0 || x >= grid.length || y >= grid[x].length) {
 
             return null;
-        }
-        else {
+        } else {
 
             return this.grid[x][y];
         }
     }
 
     /**
-     *
      * @param color cellColor
      */
-    public void setCellColor(Color color){
+    public void setCellColor(Color color) {
         this.cellColor = color;
     }
 
+
     /**
-     *
      * @param color gridColor
      */
-    public void setGridColor(Color color){
+    public void setGridColor(Color color) {
         this.gridColor = color;
     }
 
+
     /**
-     *
      * @param color backgroundColor
      */
-    public void setBcColor(Color color){
+    public void setBcColor(Color color) {
         this.backgroundColor = color;
     }
 
+
     /**
-     *
      * @param cellSize cellSize
      */
     public void setCellSize(int cellSize) {
         this.cellSize = cellSize;
     }
 
+
     /**
-     *
      * @return cell[][] grid
      */
-    public Cell[][] getGrid(){
+    public Cell[][] getGrid() {
         return this.grid;
     }
 
+
     /**
-     *
      * @return int cellSize
      */
-    public int getCellSize(){
+    public int getCellSize() {
         return this.cellSize;
     }
 
+
     /**
-     *
      * @return Color gridColor
      */
     public Color getGridColor() {
         return gridColor;
     }
 
+
     /**
-     *
      * @return Color cellColor
      */
     public Color getCellColor() {
         return cellColor;
     }
 
+
     /**
-     *
      * @return Color backgroundColor
      */
     public Color getBackgroundColor() {
         return backgroundColor;
     }
 
+
     /**
      * List with the next generation of Cells
+     *
      * @return ArrayList generationList
      */
-    public ArrayList<Cell> getGenerationList(){
+    public ArrayList<Cell> getGenerationList() {
         return this.generationList;
     }
+
 
     /**
      * Testing method: This method takes Cell x/y coordinates and counts
@@ -334,6 +346,7 @@ public class FixedBoard {
         Cell cell = getCell(x, y);
         return cell.countAliveNeighbors();
     }
+
 
     /**
      * Testing method: This method takes a generation of cells

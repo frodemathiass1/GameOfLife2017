@@ -1,6 +1,9 @@
-package main.gol.model.FileManagement;
+package main.gol.model.FileManager;
 
 import javafx.stage.FileChooser;
+import main.gol.controller.MainController;
+import main.gol.controller.util.Dialogs;
+
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -12,15 +15,17 @@ import java.util.List;
  * FileReader class handles reading and parsing of plaintext files from disk as well as
  * population of the gameBoard matrix with the parsed character data.
  *
- * @author  Frode Kristian Mathiassen
- * @author  Tommy Pedersen
- * @author  Magnus Kjernsli Hansen-Mollerud
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.0
  */
 public class FileReader extends Reader {
 
+    private MainController mc = new MainController();
+
     // Character set
-    private static Charset charset = Charset.forName("US-ASCII");
+    private static final Charset charset = Charset.forName("US-ASCII");
 
     // File
     private static File theFile;
@@ -61,53 +66,49 @@ public class FileReader extends Reader {
     /**
      * Add fileChooser and select .txt / .cells file
      *
-     * @return theFile
      */
-    public File chooseFile() {
+    public void chooseFile() {
 
-            FileChooser chooser = new FileChooser();
-            chooser.setTitle("Select file .txt /.cells");
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Select file .txt /.cells");
 
-            FileChooser.ExtensionFilter fileExtensions =
-                    new FileChooser.ExtensionFilter(
-                            "Text files", "*.txt", "*.cells");
+        FileChooser.ExtensionFilter fileExtensions =
+                new FileChooser.ExtensionFilter(
+                        "Text files", "*.txt", "*.cells");
 
-            chooser.getExtensionFilters().add(fileExtensions);
-            theFile = chooser.showOpenDialog(null).getAbsoluteFile();
-
-            return theFile;
+        chooser.getExtensionFilters().add(fileExtensions);
+        theFile = chooser.showOpenDialog(null).getAbsoluteFile();
     }
 
     /**
      * Read and parse plaintext files from disk and load pattern into gameBoard matrix
      *
      * @param inFile File,
-     * @param matrix byte[][]
      */
-    public void readGameBoardFromDisk(File inFile, byte[][] matrix){
+    public void readGameBoardFromDisk(File inFile) {
 
-        try(BufferedReader br = new BufferedReader(
-                new InputStreamReader(new FileInputStream(inFile),charset))) {
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(new FileInputStream(inFile), charset))) {
 
-            matrix = new byte[this.defRows][this.defCols];
-            ArrayList<Integer> lineLengths =new ArrayList<>();
+            byte[][] matrix = new byte[mc.getRows()][mc.getColumns()];
+            ArrayList<Integer> lineLengths = new ArrayList<>();
 
             int y = 0; // iteration handler
             String line;
-            while ((line = br.readLine()) != null){
-                if (!line.startsWith("!") ) {
+            while ((line = br.readLine()) != null) {
+                if (!line.startsWith("!")) {
 
                     y++;
                     lineLengths.add(line.length());
 
-                    for(int x = 0; x < line.length(); x++){
-                        if (line.charAt(x) == '.'){
+                    for (int x = 0; x < line.length(); x++) {
+                        if (line.charAt(x) == '.') {
                             matrix[y + 25][x + 25] = 0;
                         }
-                        if(line.charAt(x)== 'O'){
+                        if (line.charAt(x) == 'O') {
                             matrix[y + 25][x + 25] = 1;
                         }
-                        if(line.charAt(x) == ' '){
+                        if (line.charAt(x) == ' ') {
                             y++;
                         }
                     }
@@ -117,17 +118,14 @@ public class FileReader extends Reader {
             setColumns(x_MAX); // Update global variable
             setRows(y);
             setMatrix(matrix);
-        }
-        catch(FileNotFoundException fnf){
+        } catch (FileNotFoundException fnf) {
             //fnf.printStackTrace();
             System.out.println("File not found");
             dialog.notFound();
-        }
-        catch (IOException ioe){
+        } catch (IOException ioe) {
             //ioe.printStackTrace();
             System.out.println("Error reading file");
-        }
-        catch (ArrayIndexOutOfBoundsException oob){
+        } catch (ArrayIndexOutOfBoundsException oob) {
             //oob.printStackTrace();
             System.out.println("Error loading file");
         }
@@ -135,35 +133,34 @@ public class FileReader extends Reader {
 
     /**
      * NOT IN USE ATM.
-     *
+     * <p>
      * Read file and populate ListOfIntegers and list of Bytes
      * Where to go from here
      */
-    public void parseAndPopulateList(){
+    public void parseAndPopulateList() {
 
         try (BufferedReader br = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(theFile),charset))) {
+                new InputStreamReader(new FileInputStream(theFile), charset))) {
 
             listOfBytes = new ArrayList<>();
             listOfInts = new ArrayList<>();
             String line;
-            while ((line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 if (!line.startsWith("!")) {
                     line = line.trim();
                     // Add new row, add string to row, then finally add row to list
 
                     List<Byte> bytes = new ArrayList<>();
                     List<Integer> ints = new ArrayList<>();
-                    for (int i = 0; i < line.length(); i++){
-                        if ( line.charAt(i) == '.'){
+                    for (int i = 0; i < line.length(); i++) {
+                        if (line.charAt(i) == '.') {
 
-                            ints.add(i,0);
+                            ints.add(i, 0);
                             bytes.add(i, (byte) 0);
 
-                        }
-                        else if (line.charAt(i) == 'O'){
+                        } else if (line.charAt(i) == 'O') {
 
-                            ints.add(i,1);
+                            ints.add(i, 1);
                             bytes.add(i, (byte) 1);
                         }
                     }
@@ -172,12 +169,10 @@ public class FileReader extends Reader {
                 }
             } // End while loop
             setListOfInts(listOfInts);
-        }
-        catch (FileNotFoundException fnf){
+        } catch (FileNotFoundException fnf) {
             fnf.printStackTrace();
             dialog.notFound();
-        }
-        catch (IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
 
@@ -187,7 +182,7 @@ public class FileReader extends Reader {
     /**
      * Print file,filename and array/list details to console
      */
-    public void getInfo(){
+    public void getInfo() {
 
         System.out.println(theFile.getPath());
         System.out.println(theFile.getName());
@@ -199,10 +194,10 @@ public class FileReader extends Reader {
     /**
      * Print the populated 2d Array to console (Debugger)
      */
-    public void printMatrixArray(){
+    public void printMatrixArray() {
 
-        for(int y = 0; y < this.matrix.length; y++){
-            for(int x = 0; x < this.matrix[y].length; x++){
+        for (int y = 0; y < this.matrix.length; y++) {
+            for (int x = 0; x < this.matrix[y].length; x++) {
                 System.out.print(this.matrix[y][x]);
             }
             System.out.println();
@@ -212,17 +207,16 @@ public class FileReader extends Reader {
     /**
      * Print the populated List of Lists to console (Debugger)
      */
-    public void printListOfInts(){
+    public void printListOfInts() {
 
         Iterator it = this.listOfInts.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             System.out.println(it.next());
         }
 
     }
 
     /**
-     *
      * @return File theFile
      */
     public static File getTheFile() {
@@ -230,31 +224,27 @@ public class FileReader extends Reader {
     }
 
     /**
-     *
      * @return byte[][] matrix
      */
-    public byte[][] getMatrix(){
+    public byte[][] getMatrix() {
         return this.matrix;
     }
 
     /**
-     *
      * @return int Rows
      */
-    public int getRows(){
+    public int getRows() {
         return this.rows;
     }
 
     /**
-     *
      * @return int columns
      */
-    public int getColumns(){
+    public int getColumns() {
         return this.columns;
     }
 
     /**
-     *
      * @param rows int
      */
     public void setRows(int rows) {
@@ -262,7 +252,6 @@ public class FileReader extends Reader {
     }
 
     /**
-     *
      * @param columns int
      */
     public void setColumns(int columns) {
@@ -270,7 +259,6 @@ public class FileReader extends Reader {
     }
 
     /**
-     *
      * @param matrix byte[][]
      */
     public void setMatrix(byte[][] matrix) {
@@ -278,7 +266,6 @@ public class FileReader extends Reader {
     }
 
     /**
-     *
      * @param listInts list ArrayList
      */
     public void setListOfInts(List<List<Integer>> listInts) {

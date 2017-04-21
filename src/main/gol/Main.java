@@ -9,7 +9,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import main.gol.model.Boards.DynamicBoard;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Main extends Application {
@@ -27,8 +26,7 @@ public class Main extends Application {
             primaryStage.setOnCloseRequest(e -> Platform.exit());
             primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
             primaryStage.show();
-        }
-        catch(IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
@@ -36,16 +34,18 @@ public class Main extends Application {
     public static void main(String[] args) {
 
 
+        // Testing.............
         //DynamicBoard db = new DynamicBoard(10,10);
         //db.printGrid();
         //db.print();
-
-        DynamicBoard db = new DynamicBoard(gc,10);
+        DynamicBoard db = new DynamicBoard(gc, 10);
         db.addRows(110);
         db.setBoard();
 
 
         launch(args);
     }
+
+    // Temp for testing
     private static GraphicsContext gc;
 }
