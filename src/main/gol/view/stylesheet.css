@@ -88,10 +88,10 @@
 
 
 .background {
-    -fx-background-image:url('images/background.png');
+    -fx-background-image:url('../../../../images/background.png');
     -fx-background-repeat: no-repeat;
 }
 
 .background2 {
-    -fx-background-image:url('images/background2.png');
+    -fx-background-image:url('../../../../images/background2.png');
 }
