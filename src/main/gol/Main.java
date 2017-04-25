@@ -7,21 +7,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
-import main.gol.model.Boards.DynamicBoard;
 
 import java.io.IOException;
 
 public class Main extends Application {
 
     // Stage Dimensions
-    private static final int WIDTH = 800;
+    private static final int WIDTH =  800;
     private static final int HEIGHT = 625;
 
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("view/Gui.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("view/view.fxml"));
             primaryStage.setTitle("Game Of Life");
             primaryStage.setOnCloseRequest(e -> Platform.exit());
             primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
@@ -35,13 +34,17 @@ public class Main extends Application {
 
 
         // Testing.............
-        //DynamicBoard db = new DynamicBoard(10,10);
-        //db.printGrid();
-        //db.print();
-        DynamicBoard db = new DynamicBoard(gc, 10);
-        db.addRows(110);
-        db.setBoard();
-
+//        DynamicBoard dbCells = new DynamicBoard(gc, 10);
+//        dbCells.addCellRows(10);
+//        dbCells.fillCellRows(10);
+//        //dbCells.newBoard();
+//        dbCells.printCellGrid();
+//
+//        DynamicBoard dbBytes = new DynamicBoard(gc, 10);
+//        dbBytes.addByteRows(10);
+//        dbBytes.fillByteRows(10);
+//        //dbBytes.newBoard();
+//        dbBytes.printByteGrid();
 
         launch(args);
     }

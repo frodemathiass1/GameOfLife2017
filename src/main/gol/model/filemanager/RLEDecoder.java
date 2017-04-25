@@ -1,4 +1,4 @@
-package main.gol.model.FileManager;
+package main.gol.model.filemanager;
 
 
 public class RLEDecoder {

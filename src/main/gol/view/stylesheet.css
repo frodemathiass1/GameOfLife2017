@@ -2,40 +2,73 @@
 * Game of life GUI stylesheet
 */
 
+
+.btn-border{
+
+    -fx-border-color: grey;
+    -fx-border-style: solid;
+    -fx-border-radius: 5px;
+}
 .btnStyle {
+
     -fx-background-radius: 5, 5, 5;
     -fx-text-fill: black;
     -fx-font-size: 10px;
+    -fx-background-color: dimgray;
+}
+
+
+.menu-box{
+
+    //-fx-background-image:url('images/menubars3.png');
+    -fx-background-repeat: no-repeat;
+    -fx-text-fill: whitesmoke;
+    -fx-font-size: 10px;
+    -fx-background-color: dimgray;
 }
 
 .pick-colors {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/iconshock/brilliant-graphics/16/colors-icon.png");
+    -fx-graphic: url("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/24/Actions-fill-color-icon.png");
 }
 
-.toggle-button {
+.toggle-sound {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/iconshock/super-vista-general/16/music-icon.png");
+    -fx-graphic: url("http://icons.iconarchive.com/icons/dryicons/aesthetica-2/24/sound-off-icon.png");
 }
 
-.toggle-button:selected {
+.toggle-sound:selected {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/dryicons/aesthetica-2/16/sound-off-icon.png");
+    -fx-graphic: url("http://icons.iconarchive.com/icons/iconshock/super-vista-general/24/music-icon.png");
 }
 
+.toggle-play{
+
+
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center-left;
+
+}
+
+.toggle-play:selected{
+
+    -fx-background-image: url("http://icons.iconarchive.com/icons/iconshock/super-vista-general/24/music-icon.png");
+    -fx-background-repeat: no-repeat;
+}
 .speedSlider-label {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/windows-8/16/Science-Speed-icon.png");
+    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/windows-8/24/Science-Speed-icon.png");
 }
 
 .zoomSlider-label {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/tatice/cristal-intense/16/Loupe-icon.png");
+    -fx-graphic: url("http://icons.iconarchive.com/icons/tatice/cristal-intense/24/Loupe-icon.png");
 }
 
 .gridSize-button {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-transform-scale-icon.png");
+    -fx-graphic: url("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/32/Actions-transform-scale-icon.png");
+
 }
 
 .highlight-label {
@@ -45,5 +78,20 @@
 
 .pattern-button {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/windows-8/16/Data-Grid-icon.png");
+    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/windows-8/24/Data-Grid-icon.png");
+}
+
+.mystery-button{
+
+    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/ios7/24/Military-Bomb-icon.png");
+}
+
+
+.background {
+    -fx-background-image:url('images/background.png');
+    -fx-background-repeat: no-repeat;
+}
+
+.background2 {
+    -fx-background-image:url('images/background2.png');
 }

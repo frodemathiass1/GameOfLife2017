@@ -1,27 +1,21 @@
 package test.gol;
 
-import javafx.scene.canvas.GraphicsContext;
-import main.gol.model.Boards.FixedBoard;
+import main.gol.model.boards.FixedBoard;
 import org.junit.jupiter.api.Test;
 
-//import main.gol.GameOfLife;
 
 /**
- * This test class tests if the nextGeneration method works as intended.
- * The nextGeneration function handles the Game of Life rules.
+ * This test class tests if the next generation algorithm works as intended.
+ * Returns a string of boolean values for hardcoded gameBoards and assert if the algorithm method
+ * returns the correct set of values.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
- * @version 1.0
+ * @see org.junit.jupiter.api.Test
  */
-class BoardTest {
+class FixedBoardTest {
 
 
-    private GraphicsContext gc;
 
-
-    private final FixedBoard board = new FixedBoard(gc, 5);
+    private final FixedBoard board = new FixedBoard(10,10);
 
     @Test
     public void testNextGeneration1() {
@@ -216,5 +210,47 @@ class BoardTest {
         System.out.println("testNextGenerationFail3");
         System.out.println("Actual:   " + actual);
         System.out.println("Expected: " + unexpected + "\n");
+    }
+
+    @Test
+    public void testCountNeighbours()  {
+
+        //Arrange
+        byte[][] testBoard6 = {
+                {1, 1, 1, 0},
+                {1, 1, 1, 0},
+                {1, 1, 1, 0},
+                {0, 0, 0, 0},
+        };
+
+        //Act
+        board.setBoard(testBoard6);
+        int actual =  board.countNeighbours(1, 1);
+        int expected = 8;
+
+        //Assert
+        org.junit.Assert.assertEquals(expected, actual);
+        System.out.println("Expected: "+expected+" Actual: " + actual);
+    }
+
+    @Test
+    public void testCountNeighbours2()  {
+
+        //Arrange
+        byte[][] testBoard = {
+                {0, 0, 0, 0},
+                {0, 1, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+        };
+
+        //Act
+        board.setBoard(testBoard);
+        int actual =  board.countNeighbours(0, 1);
+        int expected = 1;
+
+        //Assert
+        org.junit.Assert.assertEquals(expected, actual);
+        System.out.println("Expected: "+expected+" Actual: " + actual);
     }
 }

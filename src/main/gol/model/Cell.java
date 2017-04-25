@@ -1,6 +1,7 @@
 package main.gol.model;
 
-import main.gol.model.Boards.FixedBoard;
+import main.gol.model.boards.DynamicBoard;
+import main.gol.model.boards.FixedBoard;
 
 import java.util.List;
 import java.util.Objects;
@@ -30,6 +31,7 @@ public class Cell {
      * @param y int
      */
     public Cell(int x, int y) {
+
         this.x = x;
         this.y = y;
     }
@@ -38,6 +40,7 @@ public class Cell {
      * Updates the Cell state to remember its state for the next generation
      */
     public void updateState() {
+
         state = nextState;
     }
 
@@ -45,6 +48,7 @@ public class Cell {
      * @return count int
      */
     public int countAliveNeighbors() {
+
         int count = 0;
         for (int i = 0; i < this.getNeighbors().size(); i++)
             if (this.neighbors.get(i).getState()) {
@@ -60,7 +64,30 @@ public class Cell {
      *
      * @param board FixedBoard
      */
-    public void initNeighbors(FixedBoard board) {
+    public void initNeighbors(DynamicBoard board) {
+
+        Cell topLeft = board.getCell(this.x - 1, this.y - 1);
+        Cell top = board.getCell(this.x, this.y - 1);
+        Cell topRight = board.getCell(this.x + 1, this.y - 1);
+        Cell left = board.getCell(this.x - 1, this.y);
+        Cell right = board.getCell(this.x + 1, this.y);
+        Cell bottomLeft = board.getCell(this.x - 1, this.y + 1);
+        Cell bottom = board.getCell(this.x, this.y + 1);
+        Cell bottomRight = board.getCell(this.x + 1, this.y + 1);
+
+        // Makes a stream of adjacent cells and filters out null cells(not on the map), then it collects it in a list.
+        this.neighbors = Stream.of(topLeft, top, topRight, left, right, bottomLeft, bottom, bottomRight)
+                .filter(Objects::nonNull) // Filter out non-existent neighbors
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * FIX SUPPORT FOR FIXED BOARD OLD VERSION
+     *
+     * @param board FixedBoard
+     */
+    public void initNeighborsFixed(FixedBoard board) {
+
         Cell topLeft = board.getCell(this.x - 1, this.y - 1);
         Cell top = board.getCell(this.x, this.y - 1);
         Cell topRight = board.getCell(this.x + 1, this.y - 1);
@@ -80,6 +107,7 @@ public class Cell {
      * @return List neighbors
      */
     private List<Cell> getNeighbors() {
+
         return this.neighbors;
     }
 
@@ -87,6 +115,7 @@ public class Cell {
      * @param state boolean
      */
     public void setState(boolean state) {
+
         this.state = state;
     }
 
@@ -94,6 +123,7 @@ public class Cell {
      * @return state boolean
      */
     public boolean getState() {
+
         return this.state;
     }
 
@@ -103,6 +133,7 @@ public class Cell {
      * @param ns boolean
      */
     public void setNextState(boolean ns) {
+
         this.nextState = ns;
     }
 
@@ -110,6 +141,7 @@ public class Cell {
      * @return x int
      */
     public int getX() {
+
         return this.x;
     }
 
@@ -117,16 +149,18 @@ public class Cell {
      * @return y int
      */
     public int getY() {
+
         return this.y;
     }
 
     /**
-     * Returns a string with Cell object data
+     * Returns a string with Cell object state data
      *
      * @return String
      */
     @Override
     public String toString() {
+
         return state + " ";
     }
 
