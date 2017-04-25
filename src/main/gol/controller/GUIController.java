@@ -118,7 +118,6 @@ public class GUIController implements Initializable {
             dialog.oops();
             quit();
         }
-
     }
 
     //================================================================================
