@@ -1,97 +1,115 @@
 /*
-* Game of life GUI stylesheet
+* GUI stylesheet
 */
 
 
+.font-style{
+    -fx-text-fill: lightgray;
+    -fx-font-size: 10px;
+    -fx-background-color: dimgray;
+}
 .btn-border{
 
-    -fx-border-color: grey;
+    -fx-border-color: darkgray;
     -fx-border-style: solid;
     -fx-border-radius: 5px;
 }
 .btnStyle {
 
-    -fx-background-radius: 5, 5, 5;
-    -fx-text-fill: black;
+    -fx-background-radius: 3, 3;
+    -fx-text-fill: lightgray;
     -fx-font-size: 10px;
     -fx-background-color: dimgray;
 }
 
+.btnStyle:hover{
+    -fx-background-color: grey;
+    -fx-opacity: 0.9;
+    -fx-text-fill: white;
+    -fx-border-color: darkslategray;
+    -fx-blend-mode: hard-light;
+}
 
-.menu-box{
+.blend{
+    -fx-blend-mode: hard-light;
+}
 
-    //-fx-background-image:url('images/menubars3.png');
-    -fx-background-repeat: no-repeat;
-    -fx-text-fill: whitesmoke;
+.highlight{
+
+    -fx-background-radius: 3, 3;
+    -fx-text-fill: white;
     -fx-font-size: 10px;
     -fx-background-color: dimgray;
+
+}
+.highlight:hover{
+
+    -fx-background-color: dimgray;
+    -fx-text-fill: white;
+    -fx-blend-mode: hard-light;
 }
 
-.pick-colors {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/24/Actions-fill-color-icon.png");
+.menu, .menu-item, .context-menu{
+    -fx-background-color: dimgray;
+    -fx-border-style: none;
+
 }
 
-.toggle-sound {
+.colors-icon {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/dryicons/aesthetica-2/24/sound-off-icon.png");
+    -fx-graphic: url("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-fill-color-icon.png");
 }
-
-.toggle-sound:selected {
-
-    -fx-graphic: url("http://icons.iconarchive.com/icons/iconshock/super-vista-general/24/music-icon.png");
-}
-
 .toggle-play{
 
 
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center-left;
+    -fx-background-color: dimgray;
 
 }
 
 .toggle-play:selected{
-
-    -fx-background-image: url("http://icons.iconarchive.com/icons/iconshock/super-vista-general/24/music-icon.png");
-    -fx-background-repeat: no-repeat;
-}
-.speedSlider-label {
-
-    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/windows-8/24/Science-Speed-icon.png");
-}
-
-.zoomSlider-label {
-
-    -fx-graphic: url("http://icons.iconarchive.com/icons/tatice/cristal-intense/24/Loupe-icon.png");
-}
-
-.gridSize-button {
-
-    -fx-graphic: url("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/32/Actions-transform-scale-icon.png");
+    -fx-background-color: darkgray;
 
 }
+.sound-icon {
 
-.highlight-label {
-
-    -fx-background-color: lightgrey;
+    -fx-graphic: url("http://icons.iconarchive.com/icons/dryicons/aesthetica-2/16/sound-off-icon.png");
 }
 
-.pattern-button {
+.sound-icon:selected {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/windows-8/24/Data-Grid-icon.png");
-}
-
-.mystery-button{
-
-    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/ios7/24/Military-Bomb-icon.png");
+    -fx-graphic: url("http://icons.iconarchive.com/icons/iconshock/super-vista-general/16/music-icon.png");
 }
 
 
-.background {
-    -fx-background-image:url('../../../../images/background.png');
-    -fx-background-repeat: no-repeat;
+.speed-icon {
+
+    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/windows-8/16/Science-Speed-icon.png");
 }
 
-.background2 {
-    -fx-background-image:url('../../../../images/background2.png');
+.zoom-icon {
+
+    -fx-graphic: url("http://icons.iconarchive.com/icons/designcontest/outline/16/Magnifier-icon.png");
 }
+
+.size-icon {
+
+    -fx-graphic: url("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-transform-scale-icon.png");
+
+}
+
+
+.pattern-icon {
+
+    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/windows-8/16/Data-Grid-icon.png");
+}
+
+.bomb-icon{
+
+    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/ios7/16/Military-Bomb-icon.png");
+}
+
+
+
+
+

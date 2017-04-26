@@ -23,6 +23,7 @@ public class Main extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("view/view.fxml"));
             primaryStage.setTitle("Game Of Life");
             primaryStage.setOnCloseRequest(e -> Platform.exit());
+            primaryStage.setResizable(false);
             primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
             primaryStage.show();
         } catch (IOException ioe) {

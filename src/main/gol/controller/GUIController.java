@@ -21,12 +21,12 @@ import main.gol.model.boards.Config;
 import main.gol.model.boards.DynamicBoard;
 import main.gol.model.Cell;
 import main.gol.model.boards.FixedBoard;
+import main.gol.model.filemanager.Decoder;
 import main.gol.model.filemanager.FileHandler;
 import main.gol.model.filemanager.URLHandler;
 
 import javax.xml.ws.http.HTTPException;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.Optional;
 import java.util.Random;
@@ -46,7 +46,7 @@ public class GUIController implements Initializable {
 
 
 
-    @FXML private Label zoomIcon,getSpeedIcon;
+    @FXML private Label zoomIcon,speedIcon;
     @FXML private Slider speedSlider;
     @FXML private Button next;
     @FXML private ColorPicker cpCell, cpGrid, cpBackground;
@@ -106,10 +106,15 @@ public class GUIController implements Initializable {
             timeline.getKeyFrames().add(kf);
             timeline.setCycleCount(Timeline.INDEFINITE);
 
-            initializeObservables(); // Init observable gui components
+            initializeObservables(); // Initialize observable gui components
+
+            // Initialize start board
+            File file = new File("patterns/spaceship.cells");
+            FileHandler fh = new FileHandler();
+            fh.readAndParse(file);
+            newBoard(fh.getTheMatrix());
 
             //url8.fire();
-
 
         }
         catch(Exception e){
@@ -146,8 +151,8 @@ public class GUIController implements Initializable {
         handleGridSizeEvents();         // Initialize "Select grid size" menu. Select Size on GUI.
         handlePatternSelector();        // Initialize "Select pattern" menu. Select pattern on GUI
         handleZoomSlider();             // Initialize Zoom slider. Zoom by changing CellSize
-        handleToggleSound();            // Initialize soundToggleButton. Toggle Sound on/off by
-        updateColorPickerValues();
+        handleToggleSound();            // Initialize soundToggleButton.
+        updateColorPickerValues();      // Initialize colorPickers
     }
 
 
@@ -237,8 +242,9 @@ public class GUIController implements Initializable {
     public void loadFileFromDisk() throws Exception  {
 
         try{
-            FileHandler reader = new FileHandler();
-            newBoard(reader.getTheMatrix());
+            FileHandler fh = new FileHandler();
+            fh.readAndParse(fh.choose());
+            newBoard(fh.getTheMatrix());
         }
         catch (NullPointerException ne){
             dialog.oops();
@@ -467,10 +473,15 @@ public class GUIController implements Initializable {
 
         toggleSound.setOnAction(e -> {
             if (toggleSound.isSelected()) {
+                sound.play(sound.getPop3());
                 sound.setVol(0.0);
+
 
             } else {
                 sound.setVol(0.2);
+                sound.play(sound.getPop1());
+
+
             }
         });
     }
@@ -658,6 +669,9 @@ public class GUIController implements Initializable {
         cpCell.setValue(colors.getCell());
         cpBackground.setValue(colors.getBc());
         cpGrid.setValue(colors.getGridLine());
+        cpCell.setStyle("-fx-color-label-visible: false ;");
+        cpBackground.setStyle("-fx-color-label-visible: false ;");
+        cpGrid.setStyle("-fx-color-label-visible: false ;");
 
     }
 
@@ -711,7 +725,7 @@ public class GUIController implements Initializable {
     }
 
     @FXML
-    public void resetZoom() {
+    public void flipZoom() {
 
         zoomIcon.setOnMouseClicked(event -> {
             if(event.getClickCount() == 1){
@@ -724,18 +738,17 @@ public class GUIController implements Initializable {
 
     }
 
+    @FXML
+    public void flipSpeed() {
 
-/*    @FXML
-    public void resetSpeed() {
-
-        getSpeedIcon.setOnMouseClicked(event -> {
+        speedIcon.setOnMouseClicked(event -> {
             if(event.getClickCount() == 1){
-                speedSlider.setValue(2.5);
+                speedSlider.setValue(speedSlider.getMax());
             }
             else if(event.getClickCount() == 2) {
-                speedSlider.setValue(0.5);
+                speedSlider.setValue(speedSlider.getMin());
             }
         });
 
-    }*/
+    }
 }

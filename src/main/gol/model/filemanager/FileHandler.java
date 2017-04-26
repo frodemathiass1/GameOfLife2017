@@ -28,15 +28,15 @@ public class FileHandler {
      * Constructs a new FileHandler object and new board from parsed from fileData
      */
     public FileHandler() throws Exception{
-        choose();
-        readAndParse(theFile);
+        //choose();
+        //readAndParse(theFile);
     }
 
     /**
      * Add fileChooser and select .txt / .cells file
      *
      */
-     public void choose() {
+     public File choose() {
 
          try{
              FileChooser chooser = new FileChooser();
@@ -50,6 +50,7 @@ public class FileHandler {
          catch (Exception e){
              System.err.println("Something wrong with file selection");
          }
+         return theFile;
 
      }
 
