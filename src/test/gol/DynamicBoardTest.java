@@ -1,23 +1,15 @@
 package test.gol;
 
+import main.gol.model.Cell;
 import main.gol.model.boards.DynamicBoard;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 
-/**
- * Created by frodemathiassen on 24.04.2017.
- */
 public class DynamicBoardTest {
 
 
     DynamicBoard db = new DynamicBoard(10,10);
 
-
-    @Test
-    public void setCellState() throws Exception {
-
-    }
 
     @Test
     public void testNextGeneration1() {
@@ -87,5 +79,46 @@ public class DynamicBoardTest {
         //Assert
         org.junit.Assert.assertEquals(expected, actual);
         System.out.println("Expected: "+expected+" Actual: " + actual);
+    }
+
+    @Test
+    public void testGetCell(){
+
+        //Arrange
+        byte[][] testBoard6 = {
+                {1, 1, 0, 0},
+                {1, 1, 0, 0},
+                {1, 1, 0, 0},
+                {0, 0, 0, 0},
+        };
+
+        //Act
+        db.setGrid(testBoard6);
+        Cell actual = db.getCell(1, 1);
+
+        //Assert
+        org.junit.Assert.assertTrue(actual.getState());
+        System.out.println(actual.getState());
+
+    }
+
+    @Test
+    public void testGetCellFalse(){
+
+        //Arrange
+        byte[][] testBoard7 = {
+                {1, 1, 0, 0},
+                {1, 0, 0, 0},
+                {1, 1, 0, 0},
+                {0, 0, 0, 0},
+        };
+
+        //Act
+        db.setGrid(testBoard7);
+        Cell actual = db.getCell(1, 1);
+
+        //Assert
+        org.junit.Assert.assertFalse(actual.getState());
+        System.out.println(actual.getState());
     }
 }

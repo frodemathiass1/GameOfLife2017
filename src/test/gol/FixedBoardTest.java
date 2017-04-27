@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
  * returns the correct set of values.
  *
  * @see org.junit.jupiter.api.Test
+ *
  */
 class FixedBoardTest {
-
 
 
     private final FixedBoard board = new FixedBoard(10,10);
@@ -41,8 +41,6 @@ class FixedBoardTest {
         System.out.println("testNextGeneration1");
         System.out.println("Actual:   " + actual);
         System.out.println("Expected: " + expected + "\n");
-
-
     }
 
     @Test
