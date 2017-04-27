@@ -15,7 +15,6 @@ import main.gol.model.Cell;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Draw {
 
     private GraphicsContext context;
@@ -29,7 +28,7 @@ public class Draw {
      * @param context GraphicsContext
      * @param colors Colors
      */
-    public Draw(GraphicsContext context, Colors colors){
+    public Draw(GraphicsContext context, Colors colors) {
         this.context = context;
         this.colors = colors;
         config = new Config();
@@ -85,13 +84,11 @@ public class Draw {
             context.setFill(colors.getBc());
             //context.setLineWidth(0.2);
             context.setStroke(colors.getGridLine());
-
         }
-          context.fillRect(x * dim, y * dim, dim, dim);
+
+        context.fillRect(x * dim, y * dim, dim, dim);
         context.strokeRect(x * dim, y * dim, dim, dim);
-
     }
-
 
     /**
      * This method draws next generation of Cells.

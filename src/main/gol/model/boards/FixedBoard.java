@@ -6,7 +6,6 @@ import main.gol.model.Rules;
 import java.util.ArrayList;
 import java.util.Random;
 
-
 /**
  * This test class tests if the playStop function works as intended. The playStop function handles the
  * Game of Life rules.
@@ -26,10 +25,8 @@ public class FixedBoard {
     //private final GraphicsContext graphics;
     //private int cellSize;
 
-
     private Cell[][] grid;
     private ArrayList<Cell> generation;
-
 
     /**
      * FixedBoard Constructor
@@ -38,10 +35,8 @@ public class FixedBoard {
      * @param rows int
      */
     public FixedBoard(int columns, int rows) {
-
       setBoard(columns, rows);
     }
-
 
     /**
      * API: Method for creating a new fixed board.
@@ -61,7 +56,6 @@ public class FixedBoard {
         };
         setBoard(board);
     }
-
 
     /**
      * Initialize Grid and instantiate Cells with its neighbors.
@@ -94,7 +88,6 @@ public class FixedBoard {
         }
     }
 
-
     /**
      * This method handles the Game of Life rules.
      * Checks each cell for it state counts and checks each neighbors state.
@@ -118,9 +111,6 @@ public class FixedBoard {
         this.generation = generationList;
     }
 
-
-
-
     /**
      * This method iterates through the cell grid and set all living cells to dead/false
      *
@@ -134,7 +124,6 @@ public class FixedBoard {
             }
         }
     }
-
 
     /**
      * This method generates a random set of alive cells and adds them to the generation list
@@ -156,7 +145,6 @@ public class FixedBoard {
         this.generation = generationList;
     }
 
-
     /**
      * This method handles cells within the cell grid (array) borders
      * and the corresponding cell coordinates bound to grid dimensions
@@ -168,10 +156,8 @@ public class FixedBoard {
     public Cell getCell(int x, int y) {
 
         if (x < 0 || y < 0 || x >= grid.length || y >= grid[x].length) {
-
             return null;
         } else {
-
             return this.grid[x][y];
         }
     }
@@ -183,7 +169,6 @@ public class FixedBoard {
         return this.grid;
     }
 
-
     /**
      * List with the next generation of Cells
      *
@@ -192,7 +177,6 @@ public class FixedBoard {
     public ArrayList<Cell> getGeneration() {
         return this.generation;
     }
-
 
     /**
      * Testing method: This method takes Cell x/y coordinates and counts
@@ -203,10 +187,10 @@ public class FixedBoard {
      * @return int
      */
     public int countNeighbours(int x, int y) {
+
         Cell cell = getCell(x, y);
         return cell.countAliveNeighbors();
     }
-
 
     /**
      * Testing method: This method takes a generation of cells
@@ -217,6 +201,7 @@ public class FixedBoard {
      */
     @Override
     public String toString() {
+
         StringBuilder serialized = new StringBuilder();
         for (int x = 0; x < this.grid.length; x++) {
             for (int y = 0; y < this.grid[x].length; y++) {
@@ -226,12 +211,6 @@ public class FixedBoard {
         }
         return serialized.toString();
     }
-
-
-
-
-
-
 
 //    /**
 //     * @param color cellColor
@@ -263,8 +242,8 @@ public class FixedBoard {
 //    public void setCellSize(int cellSize) {
 //        this.cellSize = cellSize;
 //    }
-
-    //    /**
+//
+//    /**
 //     * This method loops through the generation list and draw each cell to canvas
 //     */
 //    public void generation() {
@@ -307,6 +286,4 @@ public class FixedBoard {
 //            }
 //        }
 //    }
-
-
 }

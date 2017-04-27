@@ -2,57 +2,75 @@
 * GUI stylesheet
 */
 
+.picker-arrow {
 
-.font-style{
-    -fx-text-fill: lightgray;
-    -fx-font-size: 10px;
-    -fx-background-color: dimgray;
+    -fx-color-label-visible: false;
 }
-.btn-border{
 
-    -fx-border-color: darkgray;
+.font-style {
+    -fx-text-fill: black;
+    -fx-font-size: 10px;
+    -fx-background-color: lightgray;
+}
+
+.btn-border {
+
+    -fx-border-color: black;
     -fx-border-style: solid;
     -fx-border-radius: 5px;
 }
+
 .btnStyle {
 
     -fx-background-radius: 3, 3;
-    -fx-text-fill: lightgray;
+    -fx-text-fill: black;
     -fx-font-size: 10px;
-    -fx-background-color: dimgray;
+    -fx-background-color: lightgray;
 }
 
-.btnStyle:hover{
+.btnStyle:hover {
     -fx-background-color: grey;
     -fx-opacity: 0.9;
-    -fx-text-fill: white;
-    -fx-border-color: darkslategray;
+    -fx-text-fill: black;
+    -fx-border-color: white;
+    -fx-blend-mode: hard-light;
+    -fx-font-weight: bold;
+}
+
+.blend {
     -fx-blend-mode: hard-light;
 }
 
-.blend{
-    -fx-blend-mode: hard-light;
-}
-
-.highlight{
+.highlight {
 
     -fx-background-radius: 3, 3;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-size: 10px;
-    -fx-background-color: dimgray;
+    -fx-background-color: lightgray;
 
 }
-.highlight:hover{
+
+.highlight:hover {
 
     -fx-background-color: dimgray;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-blend-mode: hard-light;
 }
 
-
-.menu, .menu-item, .context-menu{
-    -fx-background-color: dimgray;
+.menu, .menu-item, .context-menu {
+    -fx-background-color: lightgray;
     -fx-border-style: none;
+
+}
+
+.toggle-play {
+
+    -fx-background-color: lightgray;
+
+}
+
+.toggle-play:selected {
+    -fx-background-color: darkgray;
 
 }
 
@@ -60,27 +78,16 @@
 
     -fx-graphic: url("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-fill-color-icon.png");
 }
-.toggle-play{
 
-
-    -fx-background-color: dimgray;
-
-}
-
-.toggle-play:selected{
-    -fx-background-color: darkgray;
-
-}
 .sound-icon {
-
-    -fx-graphic: url("http://icons.iconarchive.com/icons/dryicons/aesthetica-2/16/sound-off-icon.png");
-}
-
-.sound-icon:selected {
 
     -fx-graphic: url("http://icons.iconarchive.com/icons/iconshock/super-vista-general/16/music-icon.png");
 }
 
+.sound-icon:selected {
+
+    -fx-graphic: url("http://icons.iconarchive.com/icons/dryicons/aesthetica-2/16/sound-off-icon.png");
+}
 
 .speed-icon {
 
@@ -98,18 +105,12 @@
 
 }
 
-
 .pattern-icon {
 
     -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/windows-8/16/Data-Grid-icon.png");
 }
 
-.bomb-icon{
+.bomb-icon {
 
     -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/ios7/16/Military-Bomb-icon.png");
 }
-
-
-
-
-

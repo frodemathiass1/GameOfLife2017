@@ -40,7 +40,6 @@ public class Cell {
      * Updates the Cell state to remember its state for the next generation
      */
     public void updateState() {
-
         state = nextState;
     }
 
@@ -107,7 +106,6 @@ public class Cell {
      * @return List neighbors
      */
     private List<Cell> getNeighbors() {
-
         return this.neighbors;
     }
 
@@ -115,7 +113,6 @@ public class Cell {
      * @param state boolean
      */
     public void setState(boolean state) {
-
         this.state = state;
     }
 
@@ -123,7 +120,6 @@ public class Cell {
      * @return state boolean
      */
     public boolean getState() {
-
         return this.state;
     }
 
@@ -133,7 +129,6 @@ public class Cell {
      * @param ns boolean
      */
     public void setNextState(boolean ns) {
-
         this.nextState = ns;
     }
 
@@ -141,7 +136,6 @@ public class Cell {
      * @return x int
      */
     public int getX() {
-
         return this.x;
     }
 
@@ -149,7 +143,6 @@ public class Cell {
      * @return y int
      */
     public int getY() {
-
         return this.y;
     }
 
@@ -160,8 +153,6 @@ public class Cell {
      */
     @Override
     public String toString() {
-
         return state + " ";
     }
-
 }

@@ -16,9 +16,9 @@ public class Main extends Application {
     private static final int WIDTH =  800;
     private static final int HEIGHT = 625;
 
-
     @Override
     public void start(Stage primaryStage) {
+
         try {
             Parent root = FXMLLoader.load(getClass().getResource("view/view.fxml"));
             primaryStage.setTitle("Game Of Life");
@@ -26,13 +26,13 @@ public class Main extends Application {
             primaryStage.setResizable(false);
             primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
             primaryStage.show();
+            primaryStage.setResizable(false);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-
 
         // Testing.............
 //        DynamicBoard dbCells = new DynamicBoard(gc, 10);

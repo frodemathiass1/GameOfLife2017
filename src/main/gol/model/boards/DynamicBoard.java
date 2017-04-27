@@ -7,22 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
-
 public class DynamicBoard {
 
     private List<List<Cell>> grid;
     private ArrayList<Cell>  generation;
-
 
     /**
      * DynamicBoard constructor
      *
      */
     public DynamicBoard(int rows, int columns) {
-
         setBoard(rows,columns);
-
     }
 
     /**
@@ -129,15 +124,11 @@ public class DynamicBoard {
     public Cell getCell(int x, int y) {
 
         if (x < 0 || y < 0 || x >= grid.size() || y >= grid.get(x).size()) {
-
             return null;
-        }
-        else {
-
+        } else {
             return grid.get(x).get(y);
         }
     }
-
 
     /**
      * This method handles the Game of Life rules.
@@ -162,7 +153,6 @@ public class DynamicBoard {
         this.generation = generationList;
     }
 
-
     /**
      * This method generates a random set of alive cells
      */
@@ -182,8 +172,6 @@ public class DynamicBoard {
         this.generation = generationList;
     }
 
-
-
     /**
      * This method loop through the cell grid and set all living cells to dead/false
      */
@@ -195,7 +183,6 @@ public class DynamicBoard {
             }
         }
     }
-
 
     /**
      * @return ArrayList grid
@@ -213,7 +200,6 @@ public class DynamicBoard {
         return this.generation;
     }
 
-
     /**
      * Testing method: This method takes Cell x/y coordinates and counts
      * alive surrounding neighbor cells.
@@ -223,10 +209,10 @@ public class DynamicBoard {
      * @return int
      */
     public int countNeighbours(int x, int y) {
+
         Cell cell = getCell(x, y);
         return cell.countAliveNeighbors();
     }
-
 
     /**
      * Testing method: This method takes a generation of cells

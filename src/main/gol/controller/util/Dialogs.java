@@ -7,7 +7,6 @@ import javafx.scene.control.Alert;
  */
 public class Dialogs {
 
-
     /**
      * This method show info dialogBox about the creators of this application
      */
@@ -20,7 +19,6 @@ public class Dialogs {
         alert.showAndWait();
     }
 
-
     /**
      * This method show info dialogBox about the creators of this application
      */
@@ -29,10 +27,9 @@ public class Dialogs {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Ooops... Something went wrong");
-        alert.setContentText("Try again later....");
+        alert.setContentText("Try again later...");
         alert.showAndWait();
     }
-
 
     /**
      * This method show dialogBox if File cannot be loaded
@@ -42,10 +39,9 @@ public class Dialogs {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information message");
         alert.setHeaderText("File not found");
-        alert.setContentText("Sorry, can't open file. Try other file\nSupported formats: .txt / .cells");
+        alert.setContentText("Sorry, can't open file. Please try another file\nSupported formats: .txt / .cells / .rle");
         alert.showAndWait();
     }
-
 
     /**
      * This method show a warning dialogBox if URL does not start with a http string
@@ -54,10 +50,9 @@ public class Dialogs {
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Open URL");
-        alert.setHeaderText("URL must start with http!");
+        alert.setHeaderText("URL must start with http");
         alert.showAndWait();
     }
-
 
     /**
      * This method show a warning dialogBox if something went wrong with loading URL
@@ -77,11 +72,9 @@ public class Dialogs {
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Problems with playing audio");
-        alert.setHeaderText("Oops... Something went wrong with with the audio file.\nSome files tends to cause exceptions...");
+        alert.setHeaderText("Oops... Something went wrong with the audio file.\nSome files tends to cause exceptions...");
         alert.showAndWait();
     }
-
-
 
     /**
      * This method show a information dialogBox with general Game of Life description
@@ -90,16 +83,16 @@ public class Dialogs {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About Game of Life");
-        alert.setHeaderText("Game of life rules:");
-        alert.setContentText("From Wikipedia\n\n" +
-                "The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells,\n" +
-                " each of which is in one of two possible states, alive or dead, or populated or unpopulated.\n\n " +
-                "Every cell interacts with its eight neighbours, which are the cells that are horizontally,\n " +
-                "vertically, or diagonally adjacent. At each step in time, the following transitions occur:\n\n" +
+        alert.setHeaderText("Game of life rules");
+        alert.setContentText("From Wikipedia:\n\n" +
+                "The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells, " +
+                "each of which is in one of two possible states, alive or dead, or populated or unpopulated. " +
+                "Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, " +
+                "or diagonally adjacent. At each step in time, the following transitions occur:\n\n" +
                 "1: Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.\n\n" +
                 "2: Any live cell with two or three live neighbours lives on to the next generation.\n\n" +
                 "3: Any live cell with more than three live neighbours dies, as if by overpopulation.\n\n" +
-                "4: Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.\n");
+                "4: Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.\n\n");
         alert.showAndWait();
     }
 
@@ -110,10 +103,10 @@ public class Dialogs {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Instructions");
-        alert.setHeaderText("How to use this applications/game:");
-        alert.setContentText("Draw cells to canvas with mouse by clicking and dragging, doubliclick to enable drag erase\n" +
-                "Explore the menues for board manipulation..\n" +
-                "Load files from the web, predefined, or your own");
+        alert.setHeaderText("How to use this application/game");
+        alert.setContentText("Draw cells to canvas with mouse by clicking and dragging. Double click to enable drag-erase.\n\n" +
+                "Explore the menus for board manipulation.\n\n" +
+                "Load files from the web, predefined, or your own.");
         alert.showAndWait();
     }
 }

@@ -4,15 +4,14 @@ import main.gol.controller.util.Dialogs;
 
 import java.io.BufferedReader;
 
-
 public class Decoder {
 
-
-    public byte[][] decodePlainText(BufferedReader reader, byte[][] matrix) throws Exception{
+    public byte[][] decodePlainText(BufferedReader reader, byte[][] matrix) throws Exception {
 
         int y = 0;
         String line;
-        try{
+
+        try {
             while ((line = reader.readLine()) != null) {
                 if (!line.startsWith("!")) {
                     y++;
@@ -31,15 +30,11 @@ public class Decoder {
                     }
                 }
             }
-        }
-        catch (ArrayIndexOutOfBoundsException oob){
-            //oob.printStackTrace();
+        } catch (ArrayIndexOutOfBoundsException oob) {
             Dialogs d = new Dialogs();
             d.oops();
             System.err.println("ArrayIndex out of bounds!");
         }
         return matrix;
     }
-
-
 }

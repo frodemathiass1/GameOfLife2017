@@ -13,14 +13,12 @@ import java.io.IOException;
 
 import static java.lang.String.*;
 
-
 /**
  * This class handles audio files triggered by GUI action events.
  * Sound downloaded from www.freeSound.org under Creative common licence.
  *
  */
 public class Sound {
-
 
     private static double vol = 0.1;
     private static File theFile;
@@ -41,8 +39,6 @@ public class Sound {
     private static final File fx7 = new File("sounds/fx7.wav");
     private static final File fx8 = new File("sounds/fx8.wav");
 
-
-
     /**
      * This methods plays a audio clip from MediaPlayer and takes wav/mp3 file as parameter input
      *
@@ -56,19 +52,14 @@ public class Sound {
                             new File(valueOf(sound)).toURI().toString()));
             audio.setVolume(vol);
             audio.play();
-
-        }
-        catch (MediaException me){
+        } catch (MediaException me) {
             Dialogs dialogs = new Dialogs();
             dialogs.audioError();
             System.err.println("Cant load the damn file.. ");
-        }catch (RuntimeException re) {
+        } catch (RuntimeException re) {
             re.printStackTrace();
         }
-
     }
-
-
 
     /**
      * This method sets the volume of the file playing through mediaPlayer
@@ -76,7 +67,6 @@ public class Sound {
      * @param v double
      */
     public void setVol(double v) {
-
         this.vol = v;
     }
 

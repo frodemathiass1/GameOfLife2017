@@ -2,7 +2,6 @@ package main.gol.model;
 
 import java.util.ArrayList;
 
-
 /**
  * This class contains and executes the Game of Life algorithm for the cell automation.
  *
@@ -24,7 +23,6 @@ import java.util.ArrayList;
  *
  */
 public class Rules {
-
 
     /**
      * This method checks checks if the rules applies to each cell, by checking its neighbors

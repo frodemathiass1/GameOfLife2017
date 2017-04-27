@@ -21,9 +21,7 @@ import main.gol.model.boards.Config;
 import main.gol.model.boards.DynamicBoard;
 import main.gol.model.Cell;
 import main.gol.model.boards.FixedBoard;
-import main.gol.model.filemanager.Decoder;
-import main.gol.model.filemanager.FileHandler;
-import main.gol.model.filemanager.URLHandler;
+import main.gol.model.filemanager.*;
 
 import javax.xml.ws.http.HTTPException;
 import java.io.*;
@@ -31,7 +29,6 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
-
 
 /**
  * The GUIController class contains a series of functions that handles the GUI-elements and events
@@ -44,9 +41,9 @@ import java.util.ResourceBundle;
  */
 public class GUIController implements Initializable {
 
-
-
-    @FXML private Label zoomIcon,speedIcon;
+    @FXML private MenuItem f1, f2, f3, f4, f5, f6, f7, f8, f9, f10;
+    @FXML private Label speedIcon;
+    @FXML private Label zoomIcon,getSpeedIcon;
     @FXML private Slider speedSlider;
     @FXML private Button next;
     @FXML private ColorPicker cpCell, cpGrid, cpBackground;
@@ -55,11 +52,11 @@ public class GUIController implements Initializable {
     @FXML private MenuItem small, normal, large,mega,url1, url2, url3, url4, url5, url6, url7, url8, url9, url10;
     @FXML private ToggleButton play, toggleSound;
 
-
     private GraphicsContext context;
     private DynamicBoard dB;
     private FixedBoard fb;
     private URLHandler urlHandler;
+    private FileHandler fileHandler;
     private Timeline timeline;
     private Dialogs dialog;
     private Sound sound;
@@ -67,7 +64,6 @@ public class GUIController implements Initializable {
     private Colors colors;
     private Draw draw;
     private int cellsCounter = 0;
-
 
     /**
      * This method initializes the default gameBoard with it's default color settings.
@@ -79,19 +75,17 @@ public class GUIController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        try{
+        try {
             togglePlay();
             initializeGraphicsAndSounds();  // Initialize Dialogs, Sound, and GraphicsContext
             // FIXED BOARD TESTING
             //fb = new FixedBoard(50,50);
             //draw.fixedGrid(fb.getGrid(), getContext());
 
-
            // Set Default gameBoard and draw to canvas*
             dB = new DynamicBoard(config.getRows(), config.getColumns());
             dB.setCellState(200, 200, true); // Set cellState outside array bounds and fill empty slots
             draw.grid(dB.getGrid());
-
 
             // Initialize animation timeline.
             timeline = new Timeline();
@@ -106,20 +100,12 @@ public class GUIController implements Initializable {
             timeline.getKeyFrames().add(kf);
             timeline.setCycleCount(Timeline.INDEFINITE);
 
-            initializeObservables(); // Initialize observable gui components
-
-            // Initialize start board
-            File file = new File("patterns/spaceship.cells");
-            FileHandler fh = new FileHandler();
-            fh.readAndParse(file);
-            newBoard(fh.getTheMatrix());
+            initializeObservables(); // Init observable gui components
 
             //url8.fire();
-
-        }
-        catch(Exception e){
+        } catch(Exception e) {
             e.printStackTrace();
-            System.err.println("Oops. Something when wrong when firing up the application!");
+            System.err.println("Oops. Something went wrong when firing up the application!");
             dialog.oops();
             quit();
         }
@@ -132,29 +118,26 @@ public class GUIController implements Initializable {
     /**
      * This method is a wrapper method for instantiating needed objects
      */
-    public void initializeGraphicsAndSounds(){
+    public void initializeGraphicsAndSounds() {
 
         config = new Config();
         colors = new Colors();
         draw = new Draw(getContext(), colors);
         dialog = new Dialogs();
         sound = new Sound();
-
-
     }
 
     /**
      * This method is a wrapper method for initializing the observable GUI components
      */
-    public void initializeObservables(){
+    public void initializeObservables() {
 
         handleGridSizeEvents();         // Initialize "Select grid size" menu. Select Size on GUI.
         handlePatternSelector();        // Initialize "Select pattern" menu. Select pattern on GUI
         handleZoomSlider();             // Initialize Zoom slider. Zoom by changing CellSize
-        handleToggleSound();            // Initialize soundToggleButton.
-        updateColorPickerValues();      // Initialize colorPickers
+        handleToggleSound();            // Initialize soundToggleButton. Toggle Sound on/off by
+        updateColorPickerValues();
     }
-
 
     //================================================================================
     // Functions related to setting up new boards from : Files, URL's , byte[][]
@@ -167,9 +150,9 @@ public class GUIController implements Initializable {
      *
      * @param board byte[][]
      */
-    public void newBoard(byte[][] board)  {
+    public void newBoard(byte[][] board) {
 
-        try{
+        try {
             dB = new DynamicBoard(config.getRows(), config.getColumns());
             dB.setGrid(board);
             draw.grid(dB.getGrid());
@@ -178,28 +161,23 @@ public class GUIController implements Initializable {
             //fb.setBoard(board);
             //draw.fixedGrid(fb.getGrid());
 
-        }
-        catch (NullPointerException ne){
+        } catch (NullPointerException ne) {
             System.err.println("NullPointer Exception!");
             ne.printStackTrace();
-        }
-        catch (ArrayIndexOutOfBoundsException oob){
+        } catch (ArrayIndexOutOfBoundsException oob) {
             System.err.println("ArrayIndex out of bounds!");
             oob.printStackTrace();
         }
     }
-
-
-
 
     /**
      * API: Create boards with a Valid URL string as inputParameter.
      *
      * @param url Takes url for valid GOL .txt/.cells file patterns
      */
-
     public void handleURL(String url) {
 
+        reset();
 
         try {
             urlHandler = new URLHandler();
@@ -212,6 +190,22 @@ public class GUIController implements Initializable {
         }
     }
 
+    /**
+     * API: Create boards with a Valid path string as inputParameter.
+     *
+     * @param path String
+     *             Takes String filepath for valid GOL .txt/.cells file patterns
+     */
+    public void handleFile(String path) {
+        File file = new File(path);
+        try {
+            fileHandler = new FileHandler();
+            fileHandler.readAndParse(file);
+        } catch (Exception ex) {
+            dialog.notFoundException();
+        }
+        newBoard(fileHandler.getTheMatrix());
+    }
 
     /**
      * ActionEvent Handlers "Pattern Select Menu"
@@ -231,30 +225,39 @@ public class GUIController implements Initializable {
         url8.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/Cordership.cells"));
         url9.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/cow.cells"));
         url10.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/loaflipflop.cells"));
+        //File actions
+        f1.setOnAction(e -> handleFile("patterns/candelabra.cells"));
+        f2.setOnAction(e -> handleFile("patterns/candlefrobra.cells"));
+        f3.setOnAction(e -> handleFile("patterns/carnival_shuttle.cells"));
+        f4.setOnAction(e -> handleFile("patterns/caterer.cells"));
+        f5.setOnAction(e -> handleFile("patterns/centinal.cells"));
+        f6.setOnAction(e -> handleFile("patterns/chemist.cells"));
+        f7.setOnAction(e -> handleFile("patterns/chicken_wire2.cells"));
+        f8.setOnAction(e -> handleFile("patterns/clock_II.cells"));
+        f9.setOnAction(e -> handleFile("patterns/Cordership.cells"));
+        f10.setOnAction(e -> handleFile("patterns/spaceship.cells"));
     }
-
 
     /**
      * ActionEvent Handler "Load from Disk "
      * Set new dB by selecting file.
      */
     @FXML
-    public void loadFileFromDisk() throws Exception  {
+    public void loadFileFromDisk() throws Exception {
 
-        try{
+        reset();
+
+        try {
             FileHandler fh = new FileHandler();
             fh.readAndParse(fh.choose());
             newBoard(fh.getTheMatrix());
-        }
-        catch (NullPointerException ne){
+        } catch (NullPointerException ne) {
             dialog.oops();
             System.err.println("File cannot be parsed");
-        }
-        catch (FileNotFoundException fnf){
+        } catch (FileNotFoundException fnf) {
             dialog.notFoundException();
         }
     }
-
 
     /**
      * ActionEvent Handler: "Load from Url" MenuButton
@@ -263,25 +266,23 @@ public class GUIController implements Initializable {
     @FXML
     public void loadFileFromURL() throws HTTPException {
 
-        stopAnimationIfRunning();
+        reset();
 
         urlHandler = new URLHandler();
         TextInputDialog inputURL = new TextInputDialog();
         inputURL.setTitle("Open URL");
-        inputURL.setHeaderText("Resources: https://bitstorm.org/gameoflife/lexicon/");
+        inputURL.setHeaderText("Resources: http://conwaylife.com/wiki/Category:Patterns");
         inputURL.setContentText("Enter URL here");
         Optional<String> result = inputURL.showAndWait();
 
         if (result.isPresent()) {
-            if (!result.get().toLowerCase().startsWith("http")) {
+            if (!(result.get().toLowerCase().startsWith("http"))) {
                 dialog.httpError();
                 System.out.println("Wrong URL");
-            }
-            else {
+            } else {
                 try {
                     urlHandler.readAndParse(result.get());
                     newBoard(urlHandler.getMatrix());
-
                 } catch (Exception e) {
                     dialog.urlError();
                     System.err.println("Error trying to read URL");
@@ -290,16 +291,12 @@ public class GUIController implements Initializable {
         }
     }
 
-
-
     //================================================================================
     // Functions related to Play, Reset and Bomb Buttons
     //================================================================================
 
-
-
     @FXML
-    public void nextStep() throws MediaException{
+    public void nextStep() throws MediaException {
 
         dB.nextGeneration();
         draw.generation(dB.getGeneration());
@@ -310,12 +307,10 @@ public class GUIController implements Initializable {
 
         cellsCounter = dB.getGeneration().size();
         //cellsCounter = fb.getGeneration().size();
-        if (cellsCounter >= 0){
-
+        if (cellsCounter >= 0) {
             sound.play(sound.getFx3());
             next.setText("Cells "+ cellsCounter);
-        }
-        else{
+        } else {
             next.setText("Next");
         }
     }
@@ -347,10 +342,11 @@ public class GUIController implements Initializable {
      */
     public void stopAnimationIfRunning() {
 
-            if (timeline.getStatus() == Animation.Status.RUNNING) {
-                timeline.stop();
-                play.setText("Play");
-            }
+        if (timeline.getStatus() == Animation.Status.RUNNING) {
+            timeline.stop();
+            play.setText("Play");
+            play.setSelected(false);
+        }
     }
 
     /**
@@ -378,7 +374,6 @@ public class GUIController implements Initializable {
         sound.play(sound.getFx8());
     }
 
-
     /**
      * ActionEvent Handler: "Bomb Icon" button
      * Fills the grid with random alive cells. Simulates MadManPacMan sorta.....Cell consumer
@@ -386,11 +381,16 @@ public class GUIController implements Initializable {
     @FXML
     public void handleTheBomber() throws IOException {
 
-        stopAnimationIfRunning();
+        reset();
 
-        colors.setCell(Color.BLACK);
-        colors.setBc(Color.DARKCYAN);
-        colors.setGridLine(Color.BLACK);
+        try {
+            setRandomColor();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //colors.setCell(Color.BLACK);
+        //colors.setBc(Color.DARKCYAN);
+        //colors.setGridLine(Color.BLACK);
         updateColorPickerValues();
 
         // This combination of dB/draw calls enables the pac-man sort of Game simulation.
@@ -404,12 +404,9 @@ public class GUIController implements Initializable {
         sound.play(sound.getFx2());
     }
 
-
-
     //================================================================================
     // Functions related to Buttons and sliders for speed, sound and size
     //================================================================================
-
 
     /**
      * ActionEvent Handler for "Select Grid size" MenuButton
@@ -417,83 +414,71 @@ public class GUIController implements Initializable {
     @FXML
     private void handleGridSizeEvents() {
 
-
         stopAnimationIfRunning();
 
-        small.setOnAction(e -> {
-            DynamicBoard db = new DynamicBoard(110,160);
+        small.setOnAction(e -> {DynamicBoard db = new DynamicBoard(110,160);
             config.setCellSize(5);
             draw.grid(db.getGrid());
             zoomSlider.setValue(config.cellSize()); //Set slider to same cell value
         });
 
-        normal.setOnAction(e -> {
-            DynamicBoard db = new DynamicBoard(55,80);
+        normal.setOnAction(e -> {DynamicBoard db = new DynamicBoard(55,80);
             config.setCellSize(10);
             draw.grid(db.getGrid());
             zoomSlider.setValue(config.cellSize()); //Set slider to same cell value
         });
 
-        large.setOnAction(e -> {
-            DynamicBoard db = new DynamicBoard(28,40);
+        large.setOnAction(e -> {DynamicBoard db = new DynamicBoard(28,40);
             config.setCellSize(20);
             draw.grid(db.getGrid());
             zoomSlider.setValue(config.cellSize()); //Set slider to same cell value
         });
-        mega.setOnAction(e -> {
-            DynamicBoard db = new DynamicBoard(15,20);
+
+        mega.setOnAction(e -> {DynamicBoard db = new DynamicBoard(15,20);
             config.setCellSize(40);
             draw.grid(db.getGrid());
             zoomSlider.setValue(config.cellSize()); //Set slider to same cell value
         });
-
     }
-
 
     /**
      * ActionEvent Handler for the "Zoom" slider
      * Handles the Observable listener for the slider
      */
-    public void handleZoomSlider(){
+    public void handleZoomSlider() {
 
-        zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            config.setCellSize(newValue.intValue());
+        zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> {config.setCellSize(newValue.intValue());
             context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             draw.grid(dB.getGrid());
-
         });
     }
-
 
     /**
      * ActionEvent handler for the "sound Toggle IconButton".
      * Mute or turn up by setting the volume
      */
     public void handleToggleSound() {
-
         toggleSound.setOnAction(e -> {
             if (toggleSound.isSelected()) {
                 sound.play(sound.getPop3());
                 sound.setVol(0.0);
-
-
             } else {
                 sound.setVol(0.2);
                 sound.play(sound.getPop1());
-
-
             }
         });
     }
 
-    public void togglePlay(){
-
+    /**
+     * ActionEvent Handler for "Play/Stop Button" on GUI
+     * Toggles animation, changes buttonText and plays a one shot sound when triggered.
+     */
+    public void togglePlay() {
         play.setOnAction((event -> {
             if (timeline.getStatus() == Animation.Status.RUNNING) {
                 timeline.stop();
                 play.setText("Play");
                 sound.play(sound.getPop2());
-
             } else if (timeline.getStatus() == Animation.Status.STOPPED) {
                 timeline.play();
                 play.setText("Stop");
@@ -501,10 +486,7 @@ public class GUIController implements Initializable {
                 sound.play(sound.getPop1());
             }
         }));
-
     }
-
-
 
     //================================================================================
     // Functions related to Mouse events
@@ -553,30 +535,25 @@ public class GUIController implements Initializable {
             //sound.play(sound.getPop1(), 0.1);
             draw.cell(cell);
 
-
         } catch (NullPointerException ne) {
-
             System.out.println("Clicks draw of bounds !");
-
         }
     }
-
 
     //================================================================================
     // Methods related to Graphics and Color settings
     //================================================================================
-
 
     /**
      * Returns the Canvas graphicsContext (Use for Draw calls)
      *
      * @return GraphicContext getContext
      */
-    public GraphicsContext getContext(){
+    public GraphicsContext getContext() {
+
         context = canvas.getGraphicsContext2D();
         return context;
     }
-
 
     /**
      * Set cell color from ColorPicker
@@ -599,7 +576,6 @@ public class GUIController implements Initializable {
         colors.setGridLine(cpGrid.getValue());
         draw.grid(dB.getGrid());
         updateColorPickerValues();
-
     }
 
     /**
@@ -613,13 +589,11 @@ public class GUIController implements Initializable {
         updateColorPickerValues();
     }
 
-
-
     /**
      * This method sets and executes random colors to the Cells, GridLine and Background
      */
     @FXML
-    public void setRandomColor() throws Exception{
+    public void setRandomColor() throws Exception {
 
         Random rand = new Random();
         int b = 255; // int bounder
@@ -636,68 +610,52 @@ public class GUIController implements Initializable {
         draw.grid(dB.getGrid());
 
         sound.play(sound.getLaser());
-
     }
-
 
     /**
      * Reset all colors to default settings
      */
     @FXML
-    public void resetColor()  {
+    public void resetColor() {
         
         colors.reset();
         updateColorPickerValues();
         draw.grid(dB.getGrid());
-        try{
+        try {
             sound.play(sound.getFx8());
-        }
-        catch (MediaException me){
+        } catch (MediaException me) {
             dialog.audioError();
         }
-
     }
-
     
     /**
      * This method updates the colorPicker widget values
      *
      */
-    public void updateColorPickerValues(){
-
+    public void updateColorPickerValues() {
 
         cpCell.setValue(colors.getCell());
         cpBackground.setValue(colors.getBc());
         cpGrid.setValue(colors.getGridLine());
-        cpCell.setStyle("-fx-color-label-visible: false ;");
-        cpBackground.setStyle("-fx-color-label-visible: false ;");
-        cpGrid.setStyle("-fx-color-label-visible: false ;");
-
     }
-
-
 
     //================================================================================
     // Functions related to MenuBar and Information Dialogs
     //================================================================================
-
 
     /**
      * Show information dialog box when info button is clicked
      */
     @FXML
     public void showInfo() {
-
         dialog.showInfo();
     }
-
 
     /**
      * Show information dialog box with Game of Life rules and description when button is clicked
      */
     @FXML
     public void aboutGameOfLife() {
-
         dialog.aboutGol();
     }
 
@@ -714,41 +672,55 @@ public class GUIController implements Initializable {
     @FXML
     public void quit() {
 
-        try{
+        try {
             sound.play(sound.getFx3());
-        }
-        catch (MediaException me){
+        } catch (MediaException me) {
               dialog.audioError();
         }
         Platform.exit();
-
     }
 
+    /**
+     * Event Handler "Zoom icon"
+     * Zoom max/min by clicking the icon.
+     */
     @FXML
     public void flipZoom() {
-
         zoomIcon.setOnMouseClicked(event -> {
-            if(event.getClickCount() == 1){
+            if (event.getClickCount() == 1) {
                 zoomSlider.setValue(40);
-            }
-            else if(event.getClickCount() == 2) {
+            } else if (event.getClickCount() == 2) {
                 zoomSlider.setValue(5);
             }
         });
-
     }
 
+    /**
+     * Event Handler "Speed icon"
+     * Max/min animation speed by clicking the icon.
+     */
     @FXML
     public void flipSpeed() {
-
         speedIcon.setOnMouseClicked(event -> {
-            if(event.getClickCount() == 1){
+            if (event.getClickCount() == 1) {
                 speedSlider.setValue(speedSlider.getMax());
-            }
-            else if(event.getClickCount() == 2) {
+            } else if (event.getClickCount() == 2) {
                 speedSlider.setValue(speedSlider.getMin());
             }
         });
-
     }
+
+/*    @FXML
+    public void resetSpeed() {
+
+        getSpeedIcon.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 1){
+                speedSlider.setValue(2.5);
+            }
+            else if(event.getClickCount() == 2) {
+                speedSlider.setValue(0.5);
+            }
+        });
+
+    }*/
 }
