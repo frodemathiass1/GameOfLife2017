@@ -178,6 +178,7 @@ public class GUIController implements Initializable {
     public void handleURL(String url) {
 
         reset();
+        updateColorPickerValues();
 
         try {
             urlHandler = new URLHandler();
