@@ -16,7 +16,9 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="510.0" prefWidth="800.0" style="-fx-background-color: DIMGRAY;" styleClass="blend" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.GUIController">
+<AnchorPane prefHeight="510.0" prefWidth="800.0" style="-fx-background-color: DIMGRAY;" styleClass="blend"
+            xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="main.gol.controller.GUIController">
 
     <MenuBar prefWidth="800" styleClass="context-menu, menu, menu-item" stylesheets="@stylesheet.css">
         <Menu styleClass="context-menu, menu, menu-item" text="File">

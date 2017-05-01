@@ -96,14 +96,14 @@ public class Dialogs {
         alert.setTitle("About Game of Life");
         alert.setHeaderText("Game of life rules");
         alert.setContentText("From Wikipedia:\n\n" +
-                "The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells, " +
+                "The universe of the Game of Life is an infinite two-dimensional orthogonal drawBoard of square cells, " +
                 "each of which is in one of two possible states, alive or dead, or populated or unpopulated. " +
-                "Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, " +
+                "Every drawCell interacts with its eight neighbours, which are the cells that are horizontally, vertically, " +
                 "or diagonally adjacent. At each step in time, the following transitions occur:\n\n" +
-                "1: Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.\n\n" +
-                "2: Any live cell with two or three live neighbours lives on to the next generation.\n\n" +
-                "3: Any live cell with more than three live neighbours dies, as if by overpopulation.\n\n" +
-                "4: Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.\n\n");
+                "1: Any live drawCell with fewer than two live neighbours dies, as if caused by underpopulation.\n\n" +
+                "2: Any live drawCell with two or three live neighbours lives on to the next drawGeneration.\n\n" +
+                "3: Any live drawCell with more than three live neighbours dies, as if by overpopulation.\n\n" +
+                "4: Any dead drawCell with exactly three live neighbours becomes a live drawCell, as if by reproduction.\n\n");
         alert.showAndWait();
     }
 

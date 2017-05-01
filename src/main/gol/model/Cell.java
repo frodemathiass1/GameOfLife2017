@@ -9,13 +9,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * This Cell class handles each cell, it's state and each neighbor of any cell.
- * The array of cells represents the grid on the User-interface.
+ * This Cell class handles the cells in the grid, it's state and each neighbor of any cell.
+ * The array/list of cells represents the grid on the User-interface.
  *
  * @author Frode Kristian Mathiassen
  * @author Tommy Pedersen
  * @author Magnus Kjernsli Hansen-Mollerud
- * @version 1.0
+ * @version 1.2
  */
 public class Cell {
 
@@ -25,7 +25,7 @@ public class Cell {
     private List<Cell> neighbors;
 
     /**
-     * Cell Constructor
+     * This cell constructor constructs a cell with a given x/y coordinate.
      *
      * @param x int
      * @param y int
@@ -37,13 +37,14 @@ public class Cell {
     }
 
     /**
-     * Updates the Cell state to remember its state for the next generation
+     * Updates the Cell state to remember its state for the next drawGeneration
      */
     public void updateState() {
         state = nextState;
     }
 
     /**
+     * This method check each cell for surrounding live neighbors and return the amount as an int.
      * @return count int
      */
     public int countAliveNeighbors() {
@@ -51,15 +52,13 @@ public class Cell {
         int count = 0;
         for (int i = 0; i < this.getNeighbors().size(); i++)
             if (this.neighbors.get(i).getState()) {
-                //System.out.println(this.neighbors.get(i));
                 count++;
             }
-        //System.out.println(neighborCount);
         return count;
     }
 
     /**
-     * List of neighbors
+     * This method initialize each cell's neighbors in a given DynamicBoard.
      *
      * @param board FixedBoard
      */
@@ -81,7 +80,8 @@ public class Cell {
     }
 
     /**
-     * FIX SUPPORT FOR FIXED BOARD OLD VERSION
+     * This method initialize each cell's neighbors in a given FixedBoard.
+     * DUPLICATE CODE!
      *
      * @param board FixedBoard
      */
@@ -103,6 +103,8 @@ public class Cell {
     }
 
     /**
+     * This method returns the ArrayList of neighbors.
+     *
      * @return List neighbors
      */
     private List<Cell> getNeighbors() {
@@ -110,6 +112,8 @@ public class Cell {
     }
 
     /**
+     * This method sets the Cell state.
+     *
      * @param state boolean
      */
     public void setState(boolean state) {
@@ -117,6 +121,8 @@ public class Cell {
     }
 
     /**
+     * This method returns the Cell state.
+     *
      * @return state boolean
      */
     public boolean getState() {
@@ -124,7 +130,7 @@ public class Cell {
     }
 
     /**
-     * Set next state (dead/alive)
+     * This method sets the Cell's next state.
      *
      * @param ns boolean
      */
@@ -133,6 +139,8 @@ public class Cell {
     }
 
     /**
+     * This method returns the Cell's x coordinate.
+     *
      * @return x int
      */
     public int getX() {
@@ -140,6 +148,7 @@ public class Cell {
     }
 
     /**
+     * This method returns the Cell's y coordinate.
      * @return y int
      */
     public int getY() {
@@ -147,7 +156,8 @@ public class Cell {
     }
 
     /**
-     * Returns a string with Cell object state data
+     * This method returns a string with the Cell's object state data
+     * For debugging purposes.
      *
      * @return String
      */

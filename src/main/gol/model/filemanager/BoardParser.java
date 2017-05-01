@@ -23,7 +23,7 @@ public class BoardParser {
 
     private static final Charset charset = Charset.forName("US-ASCII");
     private Dialogs dialog = new Dialogs();
-    private byte[][] theMatrix;
+    private byte[][] theBoard;
 
     /**
      * ParseURL gets the URL as a string, and parse it along to the Parser method.
@@ -51,14 +51,15 @@ public class BoardParser {
     public void ParseFile(File inFile) throws Exception {
 
         BufferedReader reader = new BufferedReader(
-                new InputStreamReader(new FileInputStream(inFile), charset));
+                new InputStreamReader(
+                        new FileInputStream(inFile), charset));
         Parser(reader);
     }
 
     /**
      * This is the main parser method.
      * Config and byte is instantiated to correctly parse the matrix along to the main decoder.
-     * theMatrix is updated as a global value, and a getter is used by other classes to create the new board.
+     * theBoard is updated as a global value, and a getter is used by other classes to create the new board.
      *
      * @param reader BufferedReader
      */
@@ -69,7 +70,8 @@ public class BoardParser {
             byte[][] matrix = new byte[config.getRows()][config.getColumns()];
             Decoder decoder = new Decoder();
             decoder.decodePlainText(reader, matrix);
-            theMatrix = matrix; // update global variable
+            theBoard = matrix; // update global variable
+
         } catch (FileNotFoundException fnf) {
             System.out.println("File not found");
             dialog.notFoundException();
@@ -83,11 +85,11 @@ public class BoardParser {
     }
 
     /**
-     * Getter for theMatrix.
+     * This method returns the gameBoard byte[][] array
      *
-     * @return byte[][] theMatrix
+     * @return byte[][] theBoard
      */
-    public byte[][] getTheMatrix() {
-        return this.theMatrix;
+    public byte[][] getTheBoard() {
+        return this.theBoard;
     }
 }

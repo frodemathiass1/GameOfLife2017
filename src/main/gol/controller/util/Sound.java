@@ -10,36 +10,32 @@ import static java.lang.String.*;
 
 /**
  * This class handles audio files triggered by GUI action events.
+ * Contains filepath for each audio clip used in this application.
  * Sound downloaded from www.freeSound.org under Creative common licence.
  *
+ * @version 1.2
  */
 public class Sound {
 
+    // Volume
     private static double vol = 0.1;
-    private static File theFile;
 
-    // Files
-    private static final File pop1 = new File("sounds/pop1.wav");
-    private static final File pop2 = new File("sounds/pop2.wav");
-    private static final File pop3 = new File("sounds/pop3.wav");
-    private static final File popD = new File("sounds/popD.wav");
-    private static final File laser = new File("sounds/laser.wav");
-    private static final File rattle = new File("sounds/rattle.wav");
-    private static final File fx1 = new File("sounds/fx1.wav");
-    private static final File fx2 = new File("sounds/fx2.wav");
-    private static final File fx3 = new File("sounds/fx3.wav");
-    private static final File fx4 = new File("sounds/fx4.wav");
-    private static final File fx5 = new File("sounds/fx5.wav");
-    private static final File fx6 = new File("sounds/fx6.wav");
-    private static final File fx7 = new File("sounds/fx7.wav");
-    private static final File fx8 = new File("sounds/fx8.wav");
+    // Audio files
+    private static File pop1 = new File("sounds/pop1.wav");
+    private static File pop2 = new File("sounds/pop2.wav");
+    private static File pop3 = new File("sounds/pop3.wav");
+    private static File fx2 = new File("sounds/fx2.wav");
+    private static File fx3 = new File("sounds/fx3.wav");
+    private static File fx8 = new File("sounds/fx8.wav");
+    private static File laser = new File("sounds/laser.wav");
 
     /**
-     * This methods plays a audio clip from MediaPlayer and takes wav/mp3 file as parameter input
+     * This methods plays a audio clip from MediaPlayer and takes wav/mp3 file as parameter input.
+     * Parses value the audio File to to a String, then plays it when triggered by action events.
      *
      * @param sound File
      */
-    public void play(File sound) {
+    public static void play(File sound) {
 
         try {
             MediaPlayer audio = new MediaPlayer(
@@ -57,67 +53,66 @@ public class Sound {
     }
 
     /**
-     * This method sets the volume of the file playing through mediaPlayer
+     * This method sets the volume of the object instance in this class.
      *
-     * @param v double
+     * @param vol double
      */
-    public void setVol(double v) {
-        this.vol = v;
+    public void setVol(double vol) {
+        this.vol = vol;
     }
 
-    // Getters
+    /**
+     * This method returns the laser clip.
+     * @return File
+     */
     public File getLaser() {
         return laser;
     }
 
-    public File getRattle() {
-        return rattle;
-    }
-
+    /**
+     * This method returns the pop1 clip.
+     * @return File
+     */
     public File getPop1() {
         return pop1;
     }
 
+    /**
+     * This method returns the pop2 clip.
+     * @return File
+     */
     public File getPop2() {
         return pop2;
     }
 
+    /**
+     * This method returns the pop3 clip.
+     * @return File
+     */
     public File getPop3() {
         return pop3;
     }
 
-    public File getPopD() {
-        return popD;
-    }
-
-    public File getFx1() {
-        return fx1;
-    }
-
+    /**
+     * This method returns the fx2 clip.
+     * @return File
+     */
     public File getFx2() {
         return fx2;
     }
 
+    /**
+     * This method returns the fx3 clip.
+     * @return File
+     */
     public File getFx3() {
         return fx3;
     }
 
-    public File getFx4() {
-        return fx4;
-    }
-
-    public File getFx5() {
-        return fx5;
-    }
-
-    public File getFx6() {
-        return fx6;
-    }
-
-    public File getFx7() {
-        return fx7;
-    }
-
+    /**
+     * This method returns the fx8 clip.
+     * @return
+     */
     public File getFx8() {
         return fx8;
     }

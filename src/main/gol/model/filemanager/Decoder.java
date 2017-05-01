@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 
 public class Decoder {
 
-    public byte[][] decodePlainText(BufferedReader reader, byte[][] matrix) throws Exception {
+    public byte[][] decodePlainText(BufferedReader reader, byte[][] board) throws Exception {
 
         int y = 0;
         String line;
@@ -18,11 +18,11 @@ public class Decoder {
                     for (int x = 0; x < line.length(); x++) {
                         char dead = '.';
                         if (line.charAt(x) == dead) {
-                            matrix[y + 25][x + 25] = 0; // Push cell index position
+                            board[y + 25][x + 25] = 0; // Push cell index position
                         }
                         char alive = 'O';
                         if (line.charAt(x) == alive) {
-                            matrix[y + 25][x + 25] = 1; // Push cell index position
+                            board[y + 25][x + 25] = 1; // Push cell index position
                         }
                         if (line.charAt(x) == ' ') {
                             y++;
@@ -31,10 +31,10 @@ public class Decoder {
                 }
             }
         } catch (ArrayIndexOutOfBoundsException oob) {
-            Dialogs d = new Dialogs();
-            d.oops();
+            Dialogs dialog = new Dialogs();
+            dialog.oops();
             System.err.println("ArrayIndex out of bounds!");
         }
-        return matrix;
+        return board;
     }
 }

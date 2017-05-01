@@ -39,7 +39,7 @@ public class FileHandler {
             FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter
                     ("Text File / RLE File", "*.txt", "*.cells", "*.rle");
             chooser.getExtensionFilters().add(fileExtensions);
-            theFile = chooser.showOpenDialog(null).getAbsoluteFile();
+            this.theFile = chooser.showOpenDialog(null).getAbsoluteFile();
         } catch (Exception e) {
             System.err.println("Something went wrong with the file selection");
         }
@@ -58,10 +58,10 @@ public class FileHandler {
             String[] fileType = theFile.getName().split("[.]");
             if (fileType[1].contains("txt") || fileType[1].contains("cells")) {
                 System.out.println("Text File Loaded");
-                theFileType = "Text File";
+                this.theFileType = "Text File";
             } else if (fileType[1].contains("rle")) {
                 System.out.println("RLE File Loaded");
-                theFileType = "RLE File";
+                this.theFileType = "RLE File";
                 // Instantiate the RLEDecoder and parse the file
                 RLEDecoder RLE = new RLEDecoder();
                 RLE.RLEDecodeFile(this.theFile);
@@ -72,7 +72,7 @@ public class FileHandler {
     }
 
     /**
-     * Getter for the file.
+     * This method returns theFile
      *
      * @return File theFile
      */
@@ -81,7 +81,7 @@ public class FileHandler {
     }
 
     /**
-     * Getter for the file type.
+     * This method returns the fileType as a string.
      *
      * @return String theFileType
      */

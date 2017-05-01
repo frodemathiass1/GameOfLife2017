@@ -34,22 +34,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        // Testing.............
-//        DynamicBoard dbCells = new DynamicBoard(gc, 10);
-//        dbCells.addCellRows(10);
-//        dbCells.fillCellRows(10);
-//        //dbCells.newBoard();
-//        dbCells.printCellGrid();
-//
-//        DynamicBoard dbBytes = new DynamicBoard(gc, 10);
-//        dbBytes.addByteRows(10);
-//        dbBytes.fillByteRows(10);
-//        //dbBytes.newBoard();
-//        dbBytes.printByteGrid();
-
         launch(args);
     }
-
-    // Temp for testing
-    private static GraphicsContext gc;
 }

@@ -2,41 +2,74 @@ package main.gol.controller.util;
 
 import javafx.scene.paint.Color;
 
+/**
+ * This class is used for setting default colors and for manipulation of Board colors
+ * triggered by the GUI colorPickers.
+ *
+ * @version 1.0
+ */
 public class Colors {
 
-    // Cell, gridLine, background Color
+    // Cell, gridLine & background Color
     private Color gridLine = Color.LIGHTGRAY;
     private Color cell = Color.BLACK;
-    private Color bc = Color.WHITESMOKE;
+    private Color background = Color.WHITESMOKE;
 
-    public void reset() {
+    /**
+     * This method is used for resetting all the Board colors to default values.
+     */
+    public void resetAll() {
 
-        setBc(Color.WHITE);
+        setBackground(Color.WHITE);
         setCell(Color.BLACK);
         setGridLine(Color.LIGHTGRAY);
- }
+    }
 
+    /**
+     * This method returns the gridLine color.
+     * @return Color
+     */
     public Color getGridLine() {
         return gridLine;
     }
 
-    public void setGridLine(Color gridLine) {
-        this.gridLine = gridLine;
-    }
-
+    /**
+     * This method returns the Cell color.
+     * @return Color
+     */
     public Color getCell() {
         return cell;
     }
 
+    /**
+     * This method returns the background color.
+     * @return Color
+     */
+    public Color getBackground() {
+        return background;
+    }
+
+    /**
+     *
+     * @param gridLine Color
+     */
+    public void setGridLine(Color gridLine) {
+        this.gridLine = gridLine;
+    }
+
+    /**
+     * This method sets the Cell color.
+     * @param cell Color
+     */
     public void setCell(Color cell) {
         this.cell = cell;
     }
 
-    public Color getBc() {
-        return bc;
-    }
-
-    public void setBc(Color bc) {
-        this.bc = bc;
+    /**
+     * This method sets the background color.
+     * @param background Color
+     */
+    public void setBackground(Color background) {
+        this.background = background;
     }
 }
