@@ -24,6 +24,7 @@ public class RLEDecoder {
      * File is parsed to this method, and the RLEDecode method writes the temp file for further use.
      *
      * @param theFile File
+     * @throws Exception e
      */
     public void RLEDecodeFile(File theFile) throws Exception {
 
@@ -36,6 +37,7 @@ public class RLEDecoder {
      * URL is parsed to this method, and the RLEDecode method writes the temp file for further use.
      *
      * @param inURL String
+     * @throws Exception e
      */
     public void RLEDecodeURL(String inURL) throws Exception {
 
@@ -56,8 +58,9 @@ public class RLEDecoder {
      * In other words, RLEDecode converts RLE files to plaintext files.
      *
      * @param reader BufferedReader
+     * @throws Exception e
      */
-    public void RLEDecode(BufferedReader reader) {
+    public void RLEDecode(BufferedReader reader) throws Exception{
 
         try {
             // Variables for the loop

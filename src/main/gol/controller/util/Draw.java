@@ -36,7 +36,7 @@ public class Draw {
      * This method draws the entire Grid to canvas. Takes a 2Dimensional "ListOfLists" as inputParameter.
      * and the Graphic getContext.
      *
-     * @param board List<List<Cell>>
+     * @param board List
      */
     public void drawBoard(List<List<Cell>> board) {
 
@@ -89,7 +89,7 @@ public class Draw {
     /**
      * This method draws next generation of Cells to canvas.
      *
-     * @param gen ArrayList<Cell>
+     * @param gen ArrayList
      */
     public void drawGeneration(ArrayList<Cell> gen) {
 

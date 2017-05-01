@@ -159,7 +159,7 @@ public class FixedBoard {
     /**
      * This method returns the next generation of alive cells.
      *
-     * @return ArrayList<Cell>
+     * @return ArrayList
      */
     public ArrayList<Cell> getGeneration() {
         return this.generation;

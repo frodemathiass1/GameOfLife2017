@@ -240,11 +240,11 @@ public class GUIController implements Initializable {
     public void handlePatternSelector() {
 
         // URL actions plaintext URLs
-        url1.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/airforce.cells"));
-        url2.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/gosperglidergun.cells"));
-        url3.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/B-52_bomber.cells"));
-        url4.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/beacon_maker.cells"));
-        url5.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/big_glider.cells"));
+        url1.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/airforce.cells"));
+        url2.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/b52bomber.cells"));
+        url3.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/backrake1.cells"));
+        url4.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/beaconmaker.cells"));
+        url5.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/bigglider.cells"));
         // URL actions plaintext URLs
         url6.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/3enginecordership.rle"));
         url7.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/blinkership1.rle"));
@@ -368,27 +368,6 @@ public class GUIController implements Initializable {
             next.setText("Next");
         }
     }
-
-//    /**
-//     * ActionEvent Handler for "Play/Stop Button" on GUI.This method
-//     * Toggles animation , changes buttonText and plays a one shot sound when triggered.
-//     */
-//    @FXML
-//    public void toggleAnimation() throws IOException {
-//
-//
-//        if (timeline.getStatus() == Animation.Status.RUNNING) {
-//            timeline.stop();
-//            play.setText("Play");
-//            sound.play(sound.getPop2());
-//
-//        } else if (timeline.getStatus() == Animation.Status.STOPPED) {
-//            timeline.play();
-//            play.setText("Stop");
-//            //sound.play(sound.getPop1(),0.2);
-//            sound.play(sound.getPop1());
-//        }
-//    }
 
     /**
      * Helper method
@@ -718,7 +697,9 @@ public class GUIController implements Initializable {
         dialog.aboutGol();
     }
 
-    // trenger påfyll......
+    /**
+     * Show information dialog box about how to play the game
+     */
     @FXML
     public void howToPlay() {
         dialog.howToPlay();

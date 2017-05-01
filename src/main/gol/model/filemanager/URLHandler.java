@@ -24,6 +24,7 @@ public class URLHandler {
      * theUrlType is updated with the correct type value, and if it is RLE, the RLEDecoder is instantiated.
      *
      * @param inURL String
+     * @throws Exception e
      */
     public void selectUrlType(String inURL) throws Exception {
 

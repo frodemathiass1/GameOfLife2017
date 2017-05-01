@@ -11,7 +11,7 @@ public class Decoder {
      *
      * @param reader BufferedReader
      * @param board byte[][]
-     * @throws Exception
+     * @throws Exception e
      */
     public void decodePlainText(BufferedReader reader, byte[][] board) throws Exception {
 

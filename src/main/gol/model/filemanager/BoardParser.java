@@ -31,6 +31,7 @@ public class BoardParser {
      * BufferedReader is instantiated so the Parser can read the content of the URL.
      *
      * @param inURL String
+     * @throws Exception e
      */
     public void ParseURL(String inURL) throws Exception {
 
@@ -47,6 +48,7 @@ public class BoardParser {
      * To accomplish this, BufferedReader is instantiated so the Parser can read the content of the file.
      *
      * @param inFile File
+     * @throws Exception e
      */
     public void ParseFile(File inFile) throws Exception {
 

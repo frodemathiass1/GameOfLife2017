@@ -61,10 +61,10 @@
                 <MenuItem disable="true" styleClass="highlight" text="Load PlainText URL" />
                 <SeparatorMenuItem />
                 <MenuItem fx:id="url1" styleClass="highlight" text="Airforce" />
-                <MenuItem fx:id="url2" styleClass="highlight" text="B52" />
-                <MenuItem fx:id="url3" styleClass="highlight" text="Backrake" />
+                <MenuItem fx:id="url2" styleClass="highlight" text="B-52 bomber" />
+                <MenuItem fx:id="url3" styleClass="highlight" text="Backrake 1" />
                 <MenuItem fx:id="url4" styleClass="highlight" text="Beacon maker" />
-                <MenuItem fx:id="url5" styleClass="highlight" text="Big Glider" />
+                <MenuItem fx:id="url5" styleClass="highlight" text="Big glider" />
                 <SeparatorMenuItem />
                 <MenuItem disable="true" styleClass="highlight" text="Load RLE URL" />
                 <SeparatorMenuItem />
