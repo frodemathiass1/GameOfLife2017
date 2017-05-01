@@ -20,10 +20,8 @@ import main.gol.controller.util.Sound;
 import main.gol.model.boards.Config;
 import main.gol.model.boards.DynamicBoard;
 import main.gol.model.Cell;
-import main.gol.model.boards.FixedBoard;
 import main.gol.model.filemanager.*;
 
-import javax.xml.ws.http.HTTPException;
 import java.io.*;
 import java.net.URL;
 import java.util.Optional;
@@ -37,26 +35,24 @@ import java.util.ResourceBundle;
  * @author Frode Kristian Mathiassen
  * @author Tommy Pedersen
  * @author Magnus Kjernsli Hansen-Mollerud
- * @version 1.0
+ * @version 1.2
  */
 public class GUIController implements Initializable {
 
     @FXML private MenuItem f1, f2, f3, f4, f5, f6, f7, f8, f9, f10;
     @FXML private Label speedIcon;
-    @FXML private Label zoomIcon,getSpeedIcon;
+    @FXML private Label zoomIcon, getSpeedIcon;
     @FXML private Slider speedSlider;
     @FXML private Button next;
     @FXML private ColorPicker cpCell, cpGrid, cpBackground;
     @FXML private Canvas canvas;
     @FXML private Slider zoomSlider;
-    @FXML private MenuItem small, normal, large,mega,url1, url2, url3, url4, url5, url6, url7, url8, url9, url10;
+    @FXML private MenuItem small, normal, large, mega, url1, url2, url3, url4, url5, url6, url7, url8, url9, url10;
     @FXML private ToggleButton play, toggleSound;
 
     private GraphicsContext context;
     private DynamicBoard dB;
-    private FixedBoard fb;
-    private URLHandler urlHandler;
-    private FileHandler fileHandler;
+    //private FixedBoard fb;
     private Timeline timeline;
     private Dialogs dialog;
     private Sound sound;
@@ -171,20 +167,21 @@ public class GUIController implements Initializable {
     }
 
     /**
-     * API: Create boards with a Valid URL string as inputParameter.
+     * API: Create boards with a valid URL string as inputParameter.
+     * Takes url for valid GOL .txt/.cells file patterns.
      *
-     * @param url Takes url for valid GOL .txt/.cells file patterns
+     * @param url
      */
     public void handleURL(String url) {
 
-        reset();
-        updateColorPickerValues();
-
         try {
-            urlHandler = new URLHandler();
-            urlHandler.readAndParse(url);
-            newBoard(urlHandler.getMatrix());
-
+            BoardParser bp = new BoardParser();
+            bp.ParseURL(url);
+            // Reset the old board.
+            reset();
+            updateColorPickerValues();
+            // Draw the new board.
+            newBoard(bp.getTheMatrix());
         } catch (Exception e) {
             dialog.urlError();
             System.err.println("Something went wrong reading the URL.");
@@ -192,20 +189,25 @@ public class GUIController implements Initializable {
     }
 
     /**
-     * API: Create boards with a Valid path string as inputParameter.
+     * API: Create boards with a valid path string as inputParameter.
+     * Takes String filepath for valid GOL .txt/.cells file patterns.
      *
      * @param path String
-     *             Takes String filepath for valid GOL .txt/.cells file patterns
      */
     public void handleFile(String path) {
-        File file = new File(path);
+
         try {
-            fileHandler = new FileHandler();
-            fileHandler.readAndParse(file);
+            File file = new File(path);
+            BoardParser bp = new BoardParser();
+            bp.ParseFile(file);
+            // Reset the old board.
+            reset();
+            updateColorPickerValues();
+            // Draw the new board.
+            newBoard(bp.getTheMatrix());
         } catch (Exception ex) {
             dialog.notFoundException();
         }
-        newBoard(fileHandler.getTheMatrix());
     }
 
     /**
@@ -216,6 +218,7 @@ public class GUIController implements Initializable {
     @FXML
     public void handlePatternSelector() {
 
+        // URL actions
         url1.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/airforce.cells"));
         url2.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/gosperglidergun.cells"));
         url3.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/B-52_bomber.cells"));
@@ -226,7 +229,7 @@ public class GUIController implements Initializable {
         url8.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/Cordership.cells"));
         url9.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/cow.cells"));
         url10.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/loaflipflop.cells"));
-        //File actions
+        // File actions
         f1.setOnAction(e -> handleFile("patterns/candelabra.cells"));
         f2.setOnAction(e -> handleFile("patterns/candlefrobra.cells"));
         f3.setOnAction(e -> handleFile("patterns/carnival_shuttle.cells"));
@@ -240,36 +243,45 @@ public class GUIController implements Initializable {
     }
 
     /**
-     * ActionEvent Handler "Load from Disk "
-     * Set new dB by selecting file.
+     * ActionEvent Handler "Open File"
+     * Sets a new dB by selecting a file, parsing it to the correct decoder and creating a new board.
      */
     @FXML
     public void loadFileFromDisk() throws Exception {
 
-        reset();
-
         try {
+            // Get correct file type, and parse to BoardParser.
             FileHandler fh = new FileHandler();
-            fh.readAndParse(fh.choose());
-            newBoard(fh.getTheMatrix());
-        } catch (NullPointerException ne) {
-            dialog.oops();
-            System.err.println("File cannot be parsed");
-        } catch (FileNotFoundException fnf) {
-            dialog.notFoundException();
+            BoardParser bp = new BoardParser();
+            fh.fileSelect();
+            if (fh.getTheFileType().equals("RLE File")) {
+                // Instantiate a new temp file, and delete it after use.
+                File temp = new File("temp.gol");
+                bp.ParseFile(temp);
+                temp.delete();
+            } else if (fh.getTheFileType().equals("Text File")) {
+                // Plaintext files is parsed directly.
+                bp.ParseFile(fh.getTheFile());
+            }
+            // Reset the old board.
+            reset();
+            updateColorPickerValues();
+            // Draw the new board.
+            newBoard(bp.getTheMatrix());
+        } catch (Exception e) {
+            dialog.fileError();
+            System.err.println("Error: " + e);
         }
     }
 
     /**
-     * ActionEvent Handler: "Load from Url" MenuButton
-     *
+     * ActionEvent Handler "Open URL"
+     * Sets a new dB by getting the URL you type, parsing it to the correct decoder and creating a new board.
      */
     @FXML
-    public void loadFileFromURL() throws HTTPException {
+    public void loadFileFromURL() throws Exception {
 
-        reset();
-
-        urlHandler = new URLHandler();
+        // Opens a new input dialog window for URLs
         TextInputDialog inputURL = new TextInputDialog();
         inputURL.setTitle("Open URL");
         inputURL.setHeaderText("Resources: http://conwaylife.com/wiki/Category:Patterns");
@@ -277,13 +289,31 @@ public class GUIController implements Initializable {
         Optional<String> result = inputURL.showAndWait();
 
         if (result.isPresent()) {
+            // URLs must start with http for this method to work.
             if (!(result.get().toLowerCase().startsWith("http"))) {
                 dialog.httpError();
-                System.out.println("Wrong URL");
+                System.err.println("Wrong URL");
             } else {
                 try {
-                    urlHandler.readAndParse(result.get());
-                    newBoard(urlHandler.getMatrix());
+                    // Get correct URL type, and parse to BoardParser.
+                    BoardParser bp = new BoardParser();
+                    URLHandler uh = new URLHandler();
+                    uh.selectUrlType(result.get());
+                    System.out.println(result.get());
+                    if (uh.getUrlType().equals("RLE Url")) {
+                        // Instantiate a new temp file, and delete it after use.
+                        File temp = new File("temp.gol");
+                        bp.ParseFile(temp);
+                        temp.delete();
+                    } else if (uh.getUrlType().equals("Text Url")) {
+                        // Plaintext URLs is parsed directly.
+                        bp.ParseURL(result.get());
+                    }
+                    // Reset the old board.
+                    reset();
+                    updateColorPickerValues();
+                    // Draw the new board.
+                    newBoard(bp.getTheMatrix());
                 } catch (Exception e) {
                     dialog.urlError();
                     System.err.println("Error trying to read URL");
@@ -600,12 +630,12 @@ public class GUIController implements Initializable {
         int b = 255; // int bounder
         Color cell = Color.rgb(rand.nextInt(b), rand.nextInt(b), rand.nextInt(b));
         Color grid = Color.rgb(rand.nextInt(b), rand.nextInt(b), rand.nextInt(b));
-        Color backGround = Color.rgb(rand.nextInt(b), rand.nextInt(b), rand.nextInt(b));
+        Color background = Color.rgb(rand.nextInt(b), rand.nextInt(b), rand.nextInt(b));
 
         // Set Random colors
         colors.setCell(cell);
-        colors.setBc(backGround);
         colors.setGridLine(grid);
+        colors.setBc(background);
 
         updateColorPickerValues();
         draw.grid(dB.getGrid());
@@ -622,6 +652,7 @@ public class GUIController implements Initializable {
         colors.reset();
         updateColorPickerValues();
         draw.grid(dB.getGrid());
+
         try {
             sound.play(sound.getFx8());
         } catch (MediaException me) {
@@ -631,7 +662,6 @@ public class GUIController implements Initializable {
     
     /**
      * This method updates the colorPicker widget values
-     *
      */
     public void updateColorPickerValues() {
 

@@ -79,19 +79,16 @@ public class DynamicBoard {
         setGrid(board);
     }
 
-    public void setGrid(byte[][] matrix) throws NullPointerException {
-
+    public void setGrid(byte[][] matrix) {
 
         int rows = matrix.length;
         int columns = matrix[0].length;
 
         grid = new ArrayList<>();
         for (int i = 0; i < rows; i++) {
-
             List<Cell> row = new ArrayList<>();
             this.grid.add(row);
         }
-
         for (int x = 0; x < rows; x++) {
             for (int y = 0; y < columns; y++) {
                 Cell cell = new Cell(x, y);
@@ -103,14 +100,12 @@ public class DynamicBoard {
                 grid.get(x).add(cell);
             }
         }
-
         for (int x = 0; x < rows; x++) {
             for (int y = 0; y < columns; y++) {
                 grid.get(x).get(y).initNeighbors(this);
                 //System.out.println("Neighbors: " + grid[x][y].getNeighbors());
             }
         }
-
     }
 
     /**

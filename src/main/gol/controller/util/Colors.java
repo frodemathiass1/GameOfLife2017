@@ -10,6 +10,7 @@ public class Colors {
     private Color bc = Color.WHITESMOKE;
 
     public void reset() {
+
         setBc(Color.WHITE);
         setCell(Color.BLACK);
         setGridLine(Color.LIGHTGRAY);

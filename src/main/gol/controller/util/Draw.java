@@ -1,14 +1,6 @@
 package main.gol.controller.util;
 
-import com.sun.javafx.geom.BaseBounds;
-import com.sun.javafx.geom.transform.BaseTransform;
-import com.sun.javafx.scene.BoundsAccessor;
-import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.Blend;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.effect.Effect;
-import javafx.scene.paint.Color;
 import main.gol.model.boards.Config;
 import main.gol.model.Cell;
 
@@ -64,7 +56,6 @@ public class Draw {
         }
     }
 
-
     /**
      * This method draws a single cell on the Board grid by toggling it alive/dead
      *
@@ -85,7 +76,6 @@ public class Draw {
             //context.setLineWidth(0.2);
             context.setStroke(colors.getGridLine());
         }
-
         context.fillRect(x * dim, y * dim, dim, dim);
         context.strokeRect(x * dim, y * dim, dim, dim);
     }

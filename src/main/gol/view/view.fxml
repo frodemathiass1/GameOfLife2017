@@ -1,123 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?language javascript?>
-
 <?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="510.0" prefWidth="800.0" style="-fx-background-color: DIMGRAY;" styleClass="blend"
-            xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="main.gol.controller.GUIController">
+<AnchorPane prefHeight="510.0" prefWidth="800.0" style="-fx-background-color: DIMGRAY;" styleClass="blend" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.GUIController">
 
-    <MenuBar styleClass="context-menu, menu, menu-item" prefWidth="800" stylesheets="@stylesheet.css">
+    <MenuBar prefWidth="800" styleClass="context-menu, menu, menu-item" stylesheets="@stylesheet.css">
         <Menu styleClass="context-menu, menu, menu-item" text="File">
-            <MenuItem onAction="#loadFileFromDisk" styleClass="context-menu, menu, menu-item" text="Load file from disk"/>
-            <MenuItem styleClass="context-menu, menu, menu-item" onAction="#loadFileFromURL" text="Load file from URL"/>
-            <SeparatorMenuItem/>
-            <MenuItem styleClass="context-menu, menu, menu-item" onAction="#quit" text="Quit"/>
+            <MenuItem onAction="#loadFileFromDisk" styleClass="context-menu, menu, menu-item" text="Open File" />
+            <MenuItem onAction="#loadFileFromURL" styleClass="context-menu, menu, menu-item" text="Open URL" />
+            <SeparatorMenuItem />
+            <MenuItem onAction="#quit" styleClass="context-menu, menu, menu-item" text="Quit" />
         </Menu>
         <Menu styleClass="context-menu, menu, menu-item" text="Patterns">
-            <MenuItem styleClass="highlight" fx:id="f1" text="Candlebra"/>
-            <MenuItem styleClass="highlight" fx:id="f2" text="Candlefrobra"/>
-            <MenuItem styleClass="highlight" fx:id="f3" text="Carnival shuttle"/>
-            <MenuItem styleClass="highlight" fx:id="f4" text="Caterer"/>
-            <MenuItem styleClass="highlight" fx:id="f5" text="Centinal"/>
-            <MenuItem styleClass="highlight" fx:id="f6" text="Chemist"/>
-            <MenuItem styleClass="highlight" fx:id="f7" text="Chicken wire"/>
-            <MenuItem styleClass="highlight" fx:id="f8" text="Clock II"/>
-            <MenuItem styleClass="highlight" fx:id="f9" text="Cordersgip"/>
-            <MenuItem styleClass="highlight" fx:id="f10" text="Spaceship"/>
+            <MenuItem fx:id="f1" styleClass="highlight" text="Candlebra" />
+            <MenuItem fx:id="f2" styleClass="highlight" text="Candlefrobra" />
+            <MenuItem fx:id="f3" styleClass="highlight" text="Carnival shuttle" />
+            <MenuItem fx:id="f4" styleClass="highlight" text="Caterer" />
+            <MenuItem fx:id="f5" styleClass="highlight" text="Centinal" />
+            <MenuItem fx:id="f6" styleClass="highlight" text="Chemist" />
+            <MenuItem fx:id="f7" styleClass="highlight" text="Chicken wire" />
+            <MenuItem fx:id="f8" styleClass="highlight" text="Clock II" />
+            <MenuItem fx:id="f9" styleClass="highlight" text="Cordersgip" />
+            <MenuItem fx:id="f10" styleClass="highlight" text="Spaceship" />
         </Menu>
         <Menu styleClass="context-menu, menu, menu-item" text="Info">
-            <MenuItem styleClass="context-menu, menu, menu-item" onAction="#aboutGameOfLife" text="About Game of Life"/>
-            <MenuItem styleClass="context-menu, menu, menu-item" onAction="#howToPlay" text="How to play"/>
-            <MenuItem styleClass="context-menu, menu, menu-item" onAction="#showInfo" text="Info"/>
+            <MenuItem onAction="#aboutGameOfLife" styleClass="context-menu, menu, menu-item" text="About Game of Life" />
+            <MenuItem onAction="#howToPlay" styleClass="context-menu, menu, menu-item" text="How to play" />
+            <MenuItem onAction="#showInfo" styleClass="context-menu, menu, menu-item" text="Info" />
         </Menu>
     </MenuBar>
 
-    <Canvas fx:id="canvas" width="780.0" height="520.0" layoutX="10" layoutY="50.0"
-            onMouseClicked="#handleMouseEvent"
-            onMouseDragged="#handleMouseEvent" />
+    <Canvas fx:id="canvas" height="520.0" layoutX="10" layoutY="50.0" onMouseClicked="#handleMouseEvent" onMouseDragged="#handleMouseEvent" width="780.0" />
 
-    <ToolBar styleClass="menu, blend" layoutY="580.0" prefHeight="45.0" prefWidth="800.0"
-             stylesheets="@stylesheet.css">
-        <ToggleButton styleClass="btnStyle, btn-border, toggle-play" fx:id="play" prefHeight="20.0" prefWidth="65.0" text="Play"/>
-        <Button styleClass="btnStyle, btn-border" fx:id="next" onAction="#nextStep" prefHeight="20.0" prefWidth="75.0" text="Next"/>
-        <Button styleClass="btnStyle, btn-border" onAction="#reset" prefHeight="20.0" prefWidth="65.0" text="Clear"/>
-        <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL"/>
-        <MenuButton styleClass="pattern-icon, highlight" onAction="#handlePatternSelector" prefHeight="25.0">
+    <ToolBar layoutY="580.0" prefHeight="45.0" prefWidth="800.0" styleClass="menu, blend" stylesheets="@stylesheet.css">
+        <ToggleButton fx:id="play" prefHeight="20.0" prefWidth="65.0" styleClass="btnStyle, btn-border, toggle-play" text="Play" />
+        <Button fx:id="next" onAction="#nextStep" prefHeight="20.0" prefWidth="75.0" styleClass="btnStyle, btn-border" text="Next" />
+        <Button onAction="#reset" prefHeight="20.0" prefWidth="65.0" styleClass="btnStyle, btn-border" text="Clear" />
+        <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL" />
+        <MenuButton onAction="#handlePatternSelector" prefHeight="25.0" styleClass="pattern-icon, highlight">
             <items>
-                <MenuItem text="Load URL"/>
-                <SeparatorMenuItem/>
-                <MenuItem styleClass="highlight" fx:id="url1" text="Airforce"/>
-                <MenuItem styleClass="highlight" fx:id="url2" text="B52"/>
-                <MenuItem styleClass="highlight" fx:id="url3" text="Backrake"/>
-                <MenuItem styleClass="highlight" fx:id="url4" text="Beacon maker"/>
-                <MenuItem styleClass="highlight" fx:id="url5" text="Big Glider"/>
-                <MenuItem styleClass="highlight" fx:id="url6" text="Bottle"/>
-                <MenuItem styleClass="highlight" fx:id="url7" text="Brain"/>
-                <MenuItem styleClass="highlight" fx:id="url8" text="Cordership"/>
-                <MenuItem styleClass="highlight" fx:id="url9" text="Cow"/>
-                <MenuItem styleClass="highlight" fx:id="url10" text="Loaflipflop"/>
+                <MenuItem text="Load URL" />
+                <SeparatorMenuItem />
+                <MenuItem fx:id="url1" styleClass="highlight" text="Airforce" />
+                <MenuItem fx:id="url2" styleClass="highlight" text="B52" />
+                <MenuItem fx:id="url3" styleClass="highlight" text="Backrake" />
+                <MenuItem fx:id="url4" styleClass="highlight" text="Beacon maker" />
+                <MenuItem fx:id="url5" styleClass="highlight" text="Big Glider" />
+                <MenuItem fx:id="url6" styleClass="highlight" text="Bottle" />
+                <MenuItem fx:id="url7" styleClass="highlight" text="Brain" />
+                <MenuItem fx:id="url8" styleClass="highlight" text="Cordership" />
+                <MenuItem fx:id="url9" styleClass="highlight" text="Cow" />
+                <MenuItem fx:id="url10" styleClass="highlight" text="Loaflipflop" />
             </items>
         </MenuButton>
-        <Button styleClass="bomb-icon, highlight" layoutX="169.0" layoutY="22.0" onAction="#handleTheBomber" prefHeight="20.0"/>
-        <MenuButton styleClass="size-icon, highlight" onAction="#handleGridSizeEvents" prefHeight="20.0" prefWidth="25.0">
+        <Button layoutX="169.0" layoutY="22.0" onAction="#handleTheBomber" prefHeight="20.0" styleClass="bomb-icon, highlight" />
+        <MenuButton onAction="#handleGridSizeEvents" prefHeight="20.0" prefWidth="25.0" styleClass="size-icon, highlight">
             <items>
-                <MenuItem styleClass="highlight" text="Select gridsize"/>
-                <SeparatorMenuItem/>
-                <MenuItem styleClass="highlight" fx:id="small" text="Small"/>
-                <MenuItem styleClass="highlight" fx:id="normal" text="Normal"/>
-                <MenuItem styleClass="highlight" fx:id="large" text="Large"/>
-                <MenuItem styleClass="highlight" fx:id="mega" text="Larger"/>
+                <MenuItem styleClass="highlight" text="Select gridsize" />
+                <SeparatorMenuItem />
+                <MenuItem fx:id="small" styleClass="highlight" text="Small" />
+                <MenuItem fx:id="normal" styleClass="highlight" text="Normal" />
+                <MenuItem fx:id="large" styleClass="highlight" text="Large" />
+                <MenuItem fx:id="mega" styleClass="highlight" text="Larger" />
             </items>
         </MenuButton>
         <MenuButton styleClass="colors-icon, highlight">
             <items>
                 <MenuItem styleClass="highlight" text="Type ">
                     <graphic>
-                        <Label text="  Select colors"/>
+                        <Label text="  Select colors" />
                     </graphic>
                 </MenuItem>
                 <MenuItem styleClass="highlight" text="Cell">
                     <graphic>
-                        <ColorPicker styleClass="highlight, picker-arrow" fx:id="cpCell" onAction="#setCellColor"/>
+                        <ColorPicker fx:id="cpCell" onAction="#setCellColor" styleClass="highlight, picker-arrow" />
                     </graphic>
                 </MenuItem>
                 <MenuItem styleClass="highlight" text="Grid">
                     <graphic>
-                        <ColorPicker styleClass="highlight, picker-arrow" fx:id="cpGrid" onAction="#setGridColor"/>
+                        <ColorPicker fx:id="cpGrid" onAction="#setGridColor" styleClass="highlight, picker-arrow" />
                     </graphic>
                 </MenuItem>
                 <MenuItem styleClass="highlight" text="Background">
                     <graphic>
-                        <ColorPicker styleClass="highlight, picker-arrow" fx:id="cpBackground" onAction="#setBackgroundColor"/>
+                        <ColorPicker fx:id="cpBackground" onAction="#setBackgroundColor" styleClass="highlight, picker-arrow" />
                     </graphic>
                 </MenuItem>
-                <SeparatorMenuItem/>
+                <SeparatorMenuItem />
                 <MenuItem styleClass="highlight" text="Random">
                     <graphic>
-                        <Button styleClass="btnStyle,btn-border, highlight" onAction="#setRandomColor" prefWidth="70" text="Random"/>
+                        <Button onAction="#setRandomColor" prefWidth="70" styleClass="btnStyle,btn-border, highlight" text="Random" />
                     </graphic>
                 </MenuItem>
                 <MenuItem styleClass="highlight" text="Default">
                     <graphic>
-                        <Button onAction="#resetColor" prefWidth="70" styleClass="btnStyle,btn-border, highlight" text="Default"/>
+                        <Button onAction="#resetColor" prefWidth="70" styleClass="btnStyle,btn-border, highlight" text="Default" />
                     </graphic>
                 </MenuItem>
             </items>
         </MenuButton>
-        <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL"/>
+        <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL" />
 
-        <Label styleClass="speed-icon,highlight" fx:id="speedIcon" onMouseClicked="#flipSpeed" prefHeight="20.0"/>
-        <Slider fx:id="speedSlider" majorTickUnit="10.0" max="2.5" min="0.5" minorTickCount="60" value="1.5"/>
-        <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL"/>
+        <Label fx:id="speedIcon" onMouseClicked="#flipSpeed" prefHeight="20.0" styleClass="speed-icon,highlight" />
+        <Slider fx:id="speedSlider" majorTickUnit="10.0" max="2.5" min="0.5" minorTickCount="60" value="1.5" />
+        <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL" />
 
-        <Label styleClass="zoom-icon,highlight" fx:id="zoomIcon" onMouseClicked="#flipZoom" prefHeight="20.0"/>
-        <Slider fx:id="zoomSlider" blockIncrement="3.0" majorTickUnit="5.0" max="40" min="5" minorTickCount="1" value="20"/>
-        <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL"/>
+        <Label fx:id="zoomIcon" onMouseClicked="#flipZoom" prefHeight="20.0" styleClass="zoom-icon,highlight" />
+        <Slider fx:id="zoomSlider" blockIncrement="3.0" majorTickUnit="5.0" max="40" min="5" minorTickCount="1" value="20" />
+        <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL" />
 
-        <ToggleButton styleClass="sound-icon, highlight" fx:id="toggleSound" prefHeight="20.0"/>
+        <ToggleButton fx:id="toggleSound" prefHeight="20.0" styleClass="sound-icon, highlight" />
     </ToolBar>
 </AnchorPane>

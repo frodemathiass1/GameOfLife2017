@@ -55,7 +55,7 @@ public class Dialogs {
     }
 
     /**
-     * This method show a warning dialogBox if something went wrong with loading URL
+     * This method show a warning dialogBox if something went wrong when loading the URL
      */
     public void urlError() {
 
@@ -66,7 +66,18 @@ public class Dialogs {
     }
 
     /**
-     * This method show a warning dialogBox if something went wrong with loading URL
+     * This method show a warning dialogBox if something went wrong when loading the file
+     */
+    public void fileError() {
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Open File");
+        alert.setHeaderText("Something went wrong.\nPlease try again, or select another file.");
+        alert.showAndWait();
+    }
+
+    /**
+     * This method show a warning dialogBox if something went wrong with the audio output
      */
     public void audioError() {
 
@@ -101,7 +112,7 @@ public class Dialogs {
      */
     public void howToPlay() {
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Instructions");
         alert.setHeaderText("How to use this application/game");
         alert.setContentText("Draw cells to canvas with mouse by clicking and dragging. Double click to enable drag-erase.\n\n" +

@@ -33,23 +33,20 @@ public class Rules {
      */
     public void checkRules(Cell cell, ArrayList<Cell> generations) {
 
-        // dies, as if by underpopulation.
         if (cell.getState() && cell.countAliveNeighbors() < 2) {
+            // dies, as if by underpopulation.
             cell.setNextState(false);
             generations.add(cell);
-        }
-        // lives on to the next generation.
-        else if (cell.getState() && (cell.countAliveNeighbors() == 2 || cell.countAliveNeighbors() == 3)) {
+        } else if (cell.getState() && (cell.countAliveNeighbors() == 2 || cell.countAliveNeighbors() == 3)) {
+            // lives on to the next generation.
             cell.setNextState(true);
             generations.add(cell);
-        }
-        // dies, as if by overpopulation.
-        else if (cell.getState() && cell.countAliveNeighbors() > 3) {
+        } else if (cell.getState() && cell.countAliveNeighbors() > 3) {
+            // dies, as if by overpopulation.
             cell.setNextState(false);
             generations.add(cell);
-        }
-        // becomes a live cell, as if by reproduction.
-        else if (!cell.getState() && cell.countAliveNeighbors() == 3) {
+        } else if (!cell.getState() && cell.countAliveNeighbors() == 3) {
+            // becomes a live cell, as if by reproduction.
             cell.setNextState(true);
             generations.add(cell);
         }
