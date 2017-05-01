@@ -67,10 +67,10 @@ public class BoardParser {
 
         try {
             Config config = new Config();
-            byte[][] matrix = new byte[config.getRows()][config.getColumns()];
+            byte[][] board = new byte[config.getRows()][config.getColumns()];
             Decoder decoder = new Decoder();
-            decoder.decodePlainText(reader, matrix);
-            theBoard = matrix; // update global variable
+            decoder.decodePlainText(reader, board);
+            theBoard = board; // update global variable
 
         } catch (FileNotFoundException fnf) {
             System.out.println("File not found");

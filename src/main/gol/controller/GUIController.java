@@ -164,6 +164,7 @@ public class GUIController implements Initializable {
         }
     }
 
+
     /**
      * API: Create boards with a valid URL string as inputParameter.
      * Takes url for valid GOL .txt/.cells file patterns.
@@ -173,8 +174,18 @@ public class GUIController implements Initializable {
     public void handleURL(String url) {
 
         try {
+            URLHandler uh = new URLHandler();
             BoardParser bp = new BoardParser();
-            bp.ParseURL(url);
+            uh.selectUrlType(url);
+            if (uh.getUrlType().equals("RLE Url")) {
+                // Instantiate a new temp file, and delete it after use.
+                File temp = new File("temp.gol");
+                bp.ParseFile(temp);
+                temp.delete();
+            } else if (uh.getUrlType().equals("Text Url")) {
+                // Plaintext URLs is parsed directly.
+                bp.ParseURL(url);
+            }
             // Reset the old board.
             reset();
             updateColorPickerValues();
@@ -195,16 +206,29 @@ public class GUIController implements Initializable {
     public void handleFile(String path) {
 
         try {
+            // Get correct file type, and parse to BoardParser.
             File file = new File(path);
+            FileHandler fh = new FileHandler();
             BoardParser bp = new BoardParser();
-            bp.ParseFile(file);
+            fh.setTheFile(file);
+            fh.fileSelectType(file);
+            if (fh.getTheFileType().equals("RLE File")) {
+                // Instantiate a new temp file, and delete it after use.
+                File temp = new File("temp.gol");
+                bp.ParseFile(temp);
+                temp.delete();
+            } else if (fh.getTheFileType().equals("Text File")) {
+                // Plaintext files is parsed directly.
+                bp.ParseFile(file);
+            }
             // Reset the old board.
             reset();
             updateColorPickerValues();
             // Draw the new board.
             newBoard(bp.getTheBoard());
-        } catch (Exception ex) {
-            dialog.notFoundException();
+        } catch (Exception e) {
+            dialog.fileError();
+            System.out.println("Error: " + e);
         }
     }
 
@@ -216,28 +240,30 @@ public class GUIController implements Initializable {
     @FXML
     public void handlePatternSelector() {
 
-        // URL actions
+        // URL actions plaintext URLs
         url1.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/airforce.cells"));
         url2.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/gosperglidergun.cells"));
         url3.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/B-52_bomber.cells"));
         url4.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/beacon_maker.cells"));
         url5.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/big_glider.cells"));
-        url6.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/bottle.cells"));
-        url7.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/brain.cells"));
-        url8.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/Cordership.cells"));
-        url9.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/cow.cells"));
-        url10.setOnAction(e -> handleURL("https://bitstorm.org/gameoflife/lexicon/cells/loaflipflop.cells"));
-        // File actions
+        // URL actions plaintext URLs
+        url6.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/3enginecordership.rle"));
+        url7.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/blinkership1.rle"));
+        url8.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/brain.rle"));
+        url9.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/chemist.rle"));
+        url10.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/jolson.rle"));
+        // File actions plaintext files
         f1.setOnAction(e -> handleFile("patterns/candelabra.cells"));
         f2.setOnAction(e -> handleFile("patterns/candlefrobra.cells"));
         f3.setOnAction(e -> handleFile("patterns/carnival_shuttle.cells"));
         f4.setOnAction(e -> handleFile("patterns/caterer.cells"));
         f5.setOnAction(e -> handleFile("patterns/centinal.cells"));
-        f6.setOnAction(e -> handleFile("patterns/chemist.cells"));
-        f7.setOnAction(e -> handleFile("patterns/chicken_wire2.cells"));
-        f8.setOnAction(e -> handleFile("patterns/clock_II.cells"));
-        f9.setOnAction(e -> handleFile("patterns/Cordership.cells"));
-        f10.setOnAction(e -> handleFile("patterns/spaceship.cells"));
+        // File actions RLE files
+        f6.setOnAction(e -> handleFile("patterns/mirage.rle"));
+        f7.setOnAction(e -> handleFile("patterns/loaflipflop.rle"));
+        f8.setOnAction(e -> handleFile("patterns/pinwheel.rle"));
+        f9.setOnAction(e -> handleFile("patterns/ringoffire.rle"));
+        f10.setOnAction(e -> handleFile("patterns/sailboat.rle"));
     }
 
     /**
@@ -445,27 +471,31 @@ public class GUIController implements Initializable {
 
         stopAnimationIfRunning();
 
-        small.setOnAction(e -> {DynamicBoard db = new DynamicBoard(110,160);
+        small.setOnAction(e -> {
+            board = new DynamicBoard(110,160);
             config.setCellSize(5);
-            draw.drawBoard(db.getGrid());
+            draw.drawBoard(board.getGrid());
             zoomSlider.setValue(config.cellSize()); //Set slider to same drawCell value
         });
 
-        normal.setOnAction(e -> {DynamicBoard db = new DynamicBoard(55,80);
+        normal.setOnAction(e -> {
+            board = new DynamicBoard(55,80);
             config.setCellSize(10);
-            draw.drawBoard(db.getGrid());
+            draw.drawBoard(board.getGrid());
             zoomSlider.setValue(config.cellSize()); //Set slider to same drawCell value
         });
 
-        large.setOnAction(e -> {DynamicBoard db = new DynamicBoard(28,40);
+        large.setOnAction(e -> {
+            board = new DynamicBoard(28,40);
             config.setCellSize(20);
-            draw.drawBoard(db.getGrid());
+            draw.drawBoard(board.getGrid());
             zoomSlider.setValue(config.cellSize()); //Set slider to same drawCell value
         });
 
-        mega.setOnAction(e -> {DynamicBoard db = new DynamicBoard(15,20);
+        mega.setOnAction(e -> {
+            board = new DynamicBoard(15,20);
             config.setCellSize(40);
-            draw.drawBoard(db.getGrid());
+            draw.drawBoard(board.getGrid());
             zoomSlider.setValue(config.cellSize()); //Set slider to same drawCell value
         });
     }

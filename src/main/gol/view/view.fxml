@@ -16,9 +16,7 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="510.0" prefWidth="800.0" style="-fx-background-color: DIMGRAY;" styleClass="blend"
-            xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="main.gol.controller.GUIController">
+<AnchorPane prefHeight="510.0" prefWidth="800.0" style="-fx-background-color: DIMGRAY;" styleClass="blend" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.GUIController">
 
     <MenuBar prefWidth="800" styleClass="context-menu, menu, menu-item" stylesheets="@stylesheet.css">
         <Menu styleClass="context-menu, menu, menu-item" text="File">
@@ -28,16 +26,21 @@
             <MenuItem onAction="#quit" styleClass="context-menu, menu, menu-item" text="Quit" />
         </Menu>
         <Menu styleClass="context-menu, menu, menu-item" text="Patterns">
+            <MenuItem disable="true" styleClass="highlight" text="Load PlainText URL" />
+            <SeparatorMenuItem />
             <MenuItem fx:id="f1" styleClass="highlight" text="Candlebra" />
             <MenuItem fx:id="f2" styleClass="highlight" text="Candlefrobra" />
             <MenuItem fx:id="f3" styleClass="highlight" text="Carnival shuttle" />
             <MenuItem fx:id="f4" styleClass="highlight" text="Caterer" />
             <MenuItem fx:id="f5" styleClass="highlight" text="Centinal" />
-            <MenuItem fx:id="f6" styleClass="highlight" text="Chemist" />
-            <MenuItem fx:id="f7" styleClass="highlight" text="Chicken wire" />
-            <MenuItem fx:id="f8" styleClass="highlight" text="Clock II" />
-            <MenuItem fx:id="f9" styleClass="highlight" text="Cordersgip" />
-            <MenuItem fx:id="f10" styleClass="highlight" text="Spaceship" />
+            <SeparatorMenuItem />
+            <MenuItem disable="true" styleClass="highlight" text="Load RLE URL" />
+            <SeparatorMenuItem />
+            <MenuItem fx:id="f6" styleClass="highlight" text="Mirage" />
+            <MenuItem fx:id="f7" styleClass="highlight" text="Loaflipflop" />
+            <MenuItem fx:id="f8" styleClass="highlight" text="Pinwheel" />
+            <MenuItem fx:id="f9" styleClass="highlight" text="Ring of fire" />
+            <MenuItem fx:id="f10" styleClass="highlight" text="Sailboat" />
         </Menu>
         <Menu styleClass="context-menu, menu, menu-item" text="Info">
             <MenuItem onAction="#aboutGameOfLife" styleClass="context-menu, menu, menu-item" text="About Game of Life" />
@@ -55,18 +58,21 @@
         <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL" />
         <MenuButton onAction="#handlePatternSelector" prefHeight="25.0" styleClass="pattern-icon, highlight">
             <items>
-                <MenuItem text="Load URL" />
+                <MenuItem disable="true" styleClass="highlight" text="Load PlainText URL" />
                 <SeparatorMenuItem />
                 <MenuItem fx:id="url1" styleClass="highlight" text="Airforce" />
                 <MenuItem fx:id="url2" styleClass="highlight" text="B52" />
                 <MenuItem fx:id="url3" styleClass="highlight" text="Backrake" />
                 <MenuItem fx:id="url4" styleClass="highlight" text="Beacon maker" />
                 <MenuItem fx:id="url5" styleClass="highlight" text="Big Glider" />
-                <MenuItem fx:id="url6" styleClass="highlight" text="Bottle" />
-                <MenuItem fx:id="url7" styleClass="highlight" text="Brain" />
-                <MenuItem fx:id="url8" styleClass="highlight" text="Cordership" />
-                <MenuItem fx:id="url9" styleClass="highlight" text="Cow" />
-                <MenuItem fx:id="url10" styleClass="highlight" text="Loaflipflop" />
+                <SeparatorMenuItem />
+                <MenuItem disable="true" styleClass="highlight" text="Load RLE URL" />
+                <SeparatorMenuItem />
+                <MenuItem fx:id="url6" styleClass="highlight" text="3-engine Cordership" />
+                <MenuItem fx:id="url7" styleClass="highlight" text="Blinker ship 1" />
+                <MenuItem fx:id="url8" styleClass="highlight" text="Brain" />
+                <MenuItem fx:id="url9" styleClass="highlight" text="Chemist" />
+                <MenuItem fx:id="url10" styleClass="highlight" text="Jolson" />
             </items>
         </MenuButton>
         <Button layoutX="169.0" layoutY="22.0" onAction="#handleTheBomber" prefHeight="20.0" styleClass="bomb-icon, highlight" />

@@ -64,8 +64,8 @@ public class Draw {
 
     /**
      * This method draw individual cells to the canvas triggered by canvas mouse-events.
-     * The drawCell is toggled to dead/alive by clicking on the canvas drawCell coordinate.
-     * Sets 'dead' cells to the drawBoard background color, and 'alive' cells to defined drawCell color.
+     * The drawCell is toggled to dead/alive by clicking on the canvas cell coordinate.
+     * Sets 'dead' cells to the drawBoard background color, and 'alive' cells to defined cell color.
      *
      * @param cell Cell
      */

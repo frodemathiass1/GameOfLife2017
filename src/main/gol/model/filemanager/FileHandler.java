@@ -72,7 +72,16 @@ public class FileHandler {
     }
 
     /**
-     * This method returns theFile
+     * This method sets the file.
+     *
+     * @param theFile File
+     */
+    public void setTheFile(File theFile) {
+        this.theFile = theFile;
+    }
+
+    /**
+     * This method returns theFile.
      *
      * @return File theFile
      */
