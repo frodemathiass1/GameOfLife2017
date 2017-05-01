@@ -57,7 +57,7 @@ public class RLEDecoder {
      *
      * @param reader BufferedReader
      */
-    public void RLEDecode(BufferedReader reader) throws Exception {
+    public void RLEDecode(BufferedReader reader) {
 
         try {
             // Variables for the loop

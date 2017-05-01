@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class Draw {
 
-    private GraphicsContext context;
-    private Colors colors;
-    private Config config;
+    private final GraphicsContext context;
+    private final Colors colors;
+    private final Config config;
 
     /**
      * This constructor takes the graphicsContext and colors as inputParameters to instantiate new Draw objects.

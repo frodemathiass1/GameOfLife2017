@@ -36,8 +36,8 @@
             <SeparatorMenuItem />
             <MenuItem disable="true" styleClass="highlight" text="Load RLE URL" />
             <SeparatorMenuItem />
-            <MenuItem fx:id="f6" styleClass="highlight" text="Mirage" />
-            <MenuItem fx:id="f7" styleClass="highlight" text="Loaflipflop" />
+            <MenuItem fx:id="f6" styleClass="highlight" text="Loaflipflop" />
+            <MenuItem fx:id="f7" styleClass="highlight" text="Mirage" />
             <MenuItem fx:id="f8" styleClass="highlight" text="Pinwheel" />
             <MenuItem fx:id="f9" styleClass="highlight" text="Ring of fire" />
             <MenuItem fx:id="f10" styleClass="highlight" text="Sailboat" />

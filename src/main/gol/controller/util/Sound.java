@@ -21,13 +21,13 @@ public class Sound {
     private static double vol = 0.1;
 
     // Audio files
-    private static File pop1 = new File("sounds/pop1.wav");
-    private static File pop2 = new File("sounds/pop2.wav");
-    private static File pop3 = new File("sounds/pop3.wav");
-    private static File fx2 = new File("sounds/fx2.wav");
-    private static File fx3 = new File("sounds/fx3.wav");
-    private static File fx8 = new File("sounds/fx8.wav");
-    private static File laser = new File("sounds/laser.wav");
+    private static final File pop1 = new File("sounds/pop1.wav");
+    private static final File pop2 = new File("sounds/pop2.wav");
+    private static final File pop3 = new File("sounds/pop3.wav");
+    private static final File fx2 = new File("sounds/fx2.wav");
+    private static final File fx3 = new File("sounds/fx3.wav");
+    private static final File fx8 = new File("sounds/fx8.wav");
+    private static final File laser = new File("sounds/laser.wav");
 
     /**
      * This methods plays a audio clip from MediaPlayer and takes wav/mp3 file as parameter input.
@@ -111,7 +111,7 @@ public class Sound {
 
     /**
      * This method returns the fx8 clip.
-     * @return
+     * @return File
      */
     public File getFx8() {
         return fx8;

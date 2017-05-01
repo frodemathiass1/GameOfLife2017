@@ -87,7 +87,7 @@ public class DynamicBoard {
     /**
      * This method initialize the gameBoard with cells and initialize each cell neighbors.
      *
-     * @param board
+     * @param board byte[][]
      */
     public void setGrid(byte[][] board) {
 
@@ -193,7 +193,7 @@ public class DynamicBoard {
     /**
      * Returns the grid.
      *
-     * @return List<List<Cell>>
+     * @return List
      */
     public List<List<Cell>> getGrid() {
         return this.grid;

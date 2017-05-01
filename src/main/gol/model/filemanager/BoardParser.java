@@ -22,7 +22,7 @@ import java.nio.charset.Charset;
 public class BoardParser {
 
     private static final Charset charset = Charset.forName("US-ASCII");
-    private Dialogs dialog = new Dialogs();
+    private final Dialogs dialog = new Dialogs();
     private byte[][] theBoard;
 
     /**
@@ -63,7 +63,7 @@ public class BoardParser {
      *
      * @param reader BufferedReader
      */
-    public void Parser(BufferedReader reader) throws Exception {
+    public void Parser(BufferedReader reader)  {
 
         try {
             Config config = new Config();

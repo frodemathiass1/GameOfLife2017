@@ -6,7 +6,14 @@ import java.io.BufferedReader;
 
 public class Decoder {
 
-    public byte[][] decodePlainText(BufferedReader reader, byte[][] board) throws Exception {
+    /**
+     * This method is a parser for plaintext pattern files.
+     *
+     * @param reader BufferedReader
+     * @param board byte[][]
+     * @throws Exception
+     */
+    public void decodePlainText(BufferedReader reader, byte[][] board) throws Exception {
 
         int y = 0;
         String line;
@@ -35,6 +42,5 @@ public class Decoder {
             dialog.oops();
             System.err.println("ArrayIndex out of bounds!");
         }
-        return board;
     }
 }

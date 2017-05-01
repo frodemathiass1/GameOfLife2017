@@ -22,7 +22,7 @@ public class FileHandler {
     /**
      * fileSelect lets you choose a file and gets the file type value.
      */
-    public void fileSelect() throws Exception {
+    public void fileSelect() {
 
         choose();
         fileSelectType(this.theFile);
@@ -31,7 +31,7 @@ public class FileHandler {
     /**
      * This method opens a new fileChooser and let you select .txt / .cells / .rle files.
      */
-    public void choose() throws Exception {
+    public void choose()  {
 
         try {
             FileChooser chooser = new FileChooser();
@@ -52,7 +52,7 @@ public class FileHandler {
      *
      * @param theFile File
      */
-    public void fileSelectType(File theFile) throws Exception {
+    public void fileSelectType(File theFile)  {
 
         try {
             String[] fileType = theFile.getName().split("[.]");

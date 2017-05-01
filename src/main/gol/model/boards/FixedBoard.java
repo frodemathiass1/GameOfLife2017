@@ -40,13 +40,6 @@ public class FixedBoard {
     public void setBoard(int columns, int rows) {
 
         byte[][] board = new byte[columns][rows];
-
-        byte[][] testBoard3 = {
-                {0, 1, 0, 0},
-                {0, 0, 1, 0},
-                {1, 1, 1, 0},
-                {0, 0, 0, 0}
-        };
         setBoard(board);
     }
 

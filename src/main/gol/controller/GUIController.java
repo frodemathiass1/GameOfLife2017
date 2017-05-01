@@ -41,7 +41,7 @@ public class GUIController implements Initializable {
 
     @FXML private MenuItem f1, f2, f3, f4, f5, f6, f7, f8, f9, f10;
     @FXML private Label speedIcon;
-    @FXML private Label zoomIcon, getSpeedIcon;
+    @FXML private Label zoomIcon;
     @FXML private Slider speedSlider;
     @FXML private Button next;
     @FXML private ColorPicker cpCell, cpGrid, cpBackground;
@@ -59,7 +59,6 @@ public class GUIController implements Initializable {
     private Config config;
     private Colors colors;
     private Draw draw;
-    private int cellsCounter = 0;
 
     /**
      * This method initializes the default gameBoard with it's default color settings.
@@ -169,7 +168,7 @@ public class GUIController implements Initializable {
      * API: Create boards with a valid URL string as inputParameter.
      * Takes url for valid GOL .txt/.cells file patterns.
      *
-     * @param url
+     * @param url String
      */
     public void handleURL(String url) {
 
@@ -271,7 +270,7 @@ public class GUIController implements Initializable {
      * Sets a new board by selecting a file, parsing it to the correct decoder and creating a new board.
      */
     @FXML
-    public void loadFileFromDisk() throws Exception {
+    public void loadFileFromDisk() {
 
         try {
             // Get correct file type, and parse to BoardParser.
@@ -303,7 +302,7 @@ public class GUIController implements Initializable {
      * Sets a new board by getting the URL you type, parsing it to the correct decoder and creating a new board.
      */
     @FXML
-    public void loadFileFromURL() throws Exception {
+    public void loadFileFromURL() {
 
         // Opens a new input dialog window for URLs
         TextInputDialog inputURL = new TextInputDialog();
@@ -360,7 +359,7 @@ public class GUIController implements Initializable {
         //fb.nextGeneration();
         //draw.drawGeneration(fb.getGeneration(), getContext());
 
-        cellsCounter = board.getGeneration().size();
+        int cellsCounter = board.getGeneration().size();
         //cellsCounter = fb.getGeneration().size();
         if (cellsCounter >= 0) {
             sound.play(sound.getFx3());
@@ -370,10 +369,10 @@ public class GUIController implements Initializable {
         }
     }
 
-    /**
-     * ActionEvent Handler for "Play/Stop Button" on GUI.This method
-     * Toggles animation , changes buttonText and plays a one shot sound when triggered.
-     */
+//    /**
+//     * ActionEvent Handler for "Play/Stop Button" on GUI.This method
+//     * Toggles animation , changes buttonText and plays a one shot sound when triggered.
+//     */
 //    @FXML
 //    public void toggleAnimation() throws IOException {
 //
@@ -434,7 +433,7 @@ public class GUIController implements Initializable {
      * Fills the drawBoard with random alive cells. Simulates MadManPacMan sorta.....Cell consumer
      */
     @FXML
-    public void handleTheBomber() throws IOException {
+    public void handleTheBomber() {
 
         reset();
 
@@ -506,7 +505,8 @@ public class GUIController implements Initializable {
      */
     public void handleZoomSlider() {
 
-        zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> {config.setCellSize(newValue.intValue());
+        zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            config.setCellSize(newValue.intValue());
             context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             draw.drawBoard(board.getGrid());
         });
@@ -652,7 +652,7 @@ public class GUIController implements Initializable {
      * This method sets and executes random colors to the Cells, GridLine and Background
      */
     @FXML
-    public void setRandomColor() throws Exception {
+    public void setRandomColor() {
 
         Random rand = new Random();
         int b = 255; // int bounder
@@ -768,18 +768,4 @@ public class GUIController implements Initializable {
             }
         });
     }
-
-/*    @FXML
-    public void resetSpeed() {
-
-        getSpeedIcon.setOnMouseClicked(event -> {
-            if(event.getClickCount() == 1){
-                speedSlider.setValue(2.5);
-            }
-            else if(event.getClickCount() == 2) {
-                speedSlider.setValue(0.5);
-            }
-        });
-
-    }*/
 }

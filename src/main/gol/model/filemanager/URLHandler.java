@@ -15,7 +15,7 @@ import java.net.URL;
  */
 public class URLHandler {
 
-    Dialogs dialog = new Dialogs();
+    private final Dialogs dialog = new Dialogs();
     private String theUrlType;
 
     /**
