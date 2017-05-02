@@ -2,15 +2,36 @@ package main.gol.model.filemanager;
 
 import main.gol.controller.util.Dialogs;
 
-import java.io.BufferedReader;
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
 
+/**
+ * Decoder class reads plaintext and RLE files and URLs
+ * <p>
+ * RLE files are converted to plaintext files before they are decoded.
+ * We put so much work into the Decoder class, so this was the best way for us to decode RLE files,
+ * given the short time had left to finish the project. It preforms well, but the drawback is of course the temp file.
+ * To avoid multiple temp files or files being stored at your hdd after application exit, they are set to delete on exit,
+ * but are preferably deleted after use in the try/catch block where they are used.
+ *
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
+ * @version 2.0
+ */
 public class Decoder {
+
+    private static String Name = "No name";
+    private static String Origin = "Unknown.";
+    private static String Content = "No content in this file.";
+    private static String Link = "No links in this file.";
 
     /**
      * This method is a parser for plaintext pattern files.
      *
      * @param reader BufferedReader
-     * @param board byte[][]
+     * @param board  byte[][]
      * @throws Exception e
      */
     public void decodePlainText(BufferedReader reader, byte[][] board) throws Exception {
@@ -20,6 +41,18 @@ public class Decoder {
 
         try {
             while ((line = reader.readLine()) != null) {
+                // Set the file info
+                if (line.startsWith("!Name")) {
+                    Name = line.substring(7);
+                } else if (line.startsWith("!Author")) {
+                    Origin = line.substring(9);
+                } else if (line.startsWith("!")) {
+                    if (line.startsWith("!www") || (line.startsWith("!http"))) {
+                        Link = line.substring(1);
+                    } else {
+                        Content = line.substring(1);
+                    }
+                }
                 if (!line.startsWith("!")) {
                     y++;
                     for (int x = 0; x < line.length(); x++) {
@@ -42,5 +75,165 @@ public class Decoder {
             dialog.oops();
             System.err.println("ArrayIndex out of bounds!");
         }
+    }
+
+    /**
+     * Files is parsed to this method, and the RLEDecode method writes the temp files for further use.
+     *
+     * @param theFile File
+     * @throws Exception e
+     */
+    public void RLEDecodeFile(File theFile) throws Exception {
+
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(new FileInputStream(theFile)));
+        RLEDecode(reader);
+    }
+
+    /**
+     * URLs is parsed to this method, and the RLEDecode method writes the temp files for further use.
+     *
+     * @param inURL String
+     * @throws Exception e
+     */
+    public void RLEDecodeURL(String inURL) throws Exception {
+
+        URL url = new URL(inURL);
+        URLConnection conn = url.openConnection();
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(conn.getInputStream()));
+        RLEDecode(reader);
+    }
+
+    /**
+     * When Decoder is instantiated, either a file or URL is parsed to this class.
+     * <p>
+     * This is the main RLE decoder that writes the temp files from the parsed files or URLs.
+     * It takes a BufferedReader as a parameter which is decided when you instantiate the Decoder.
+     * <p>
+     * The plaintext decoder uses '.' for dead cells, and 'O' for live cells.
+     * Therefor the StringBuilder builds the matrix after these criteria.
+     * In other words, RLEDecode converts RLE files to plaintext files.
+     *
+     * @param reader BufferedReader
+     * @throws Exception e
+     */
+    public void RLEDecode(BufferedReader reader) throws Exception {
+
+        try {
+            // Variables for the loop
+            String line;
+            int number = 0;
+            StringBuilder boardString = new StringBuilder();
+
+            // While loop to read all line.
+            while ((line = reader.readLine()) != null) {
+                // Set the file info
+                if (line.startsWith("#N")) {
+                    Name = line.substring(2);
+                } else if (line.startsWith("#O")) {
+                    Origin = line.substring(2);
+                } else if (line.startsWith("#C")) {
+                    if (line.startsWith("#C www") || (line.startsWith("#C http"))) {
+                        Link = line.substring(2);
+                    } else {
+                        Content = line.substring(2);
+                    }
+                }
+                // For loop to read all chars in the line.
+                for (int i = 0; i < line.length(); i++) {
+                    //Content = String.valueOf(contLines) + "\n";
+                    if (!(line.startsWith("#") || line.startsWith("x"))) {
+                        if (Character.isDigit(line.charAt(i))) {
+                            // For all digits, set the number to add that many elements to the string.
+                            if (number == 0) {
+                                number = Character.getNumericValue(line.charAt(i));
+                            } else {
+                                // For digits that has a higher value than  9.
+                                number *= 10;
+                                number += Character.getNumericValue(line.charAt(i));
+                            }
+                        } else if (line.charAt(i) == 'b') {
+                            // For all the dead cells, get the number value and add cells.
+                            if (number != 0) {
+                                while (number != 0) {
+                                    boardString.append(".");
+                                    number--;
+                                }
+                            } else {
+                                boardString.append(".");
+                            }
+                        } else if (line.charAt(i) == 'o') {
+                            // For all the live cells, get the number value and add cells.
+                            if (number != 0) {
+                                while (number != 0) {
+                                    boardString.append("O");
+                                    number--;
+                                }
+                            } else {
+                                boardString.append("O");
+                            }
+                        } else if (line.charAt(i) == '$') {
+                            // Add a new line to the string at the RLE new line char '$'
+                            if (number != 0) {
+                                while (number != 0) {
+                                    boardString.append("\n");
+                                    number--;
+                                }
+                            } else {
+                                boardString.append("\n");
+                            }
+                        }
+                    }
+                }
+            }
+            // Create the temp file.
+            FileWriter tempFile = new FileWriter("temp.gol");
+            BufferedWriter out = new BufferedWriter(tempFile);
+            out.write(String.valueOf(boardString));
+            // Close the output stream after use.
+            out.close();
+            File temp = new File("temp.gol");
+            // Delete on exit as a fail-safe if the handler fails.
+            temp.deleteOnExit();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
+
+    /**
+     * This method returns the Name as a string.
+     *
+     * @return String Name
+     */
+    public String getName() {
+        return Name;
+    }
+
+    /**
+     * This method returns the Origin as a string.
+     *
+     * @return String Origin
+     */
+    public String getOrigin() {
+        return Origin;
+    }
+
+    /**
+     * This method returns the Content as a string.
+     *
+     * @return String Content
+     */
+    public String getContent() {
+        return Content;
+    }
+
+    /**
+     * This method returns the Link as a string.
+     *
+     * @return String Link
+     */
+    public String getLink() {
+        return Link;
     }
 }

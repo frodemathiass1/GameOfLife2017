@@ -1,6 +1,7 @@
 package main.gol.controller.util;
 
 import javafx.scene.control.Alert;
+import main.gol.model.filemanager.Decoder;
 
 /**
  * This class contains a collection of Dialog boxes with information presented to the user on GUI
@@ -118,6 +119,17 @@ public class Dialogs {
         alert.setContentText("Draw cells to canvas with mouse by clicking and dragging. Double click to enable drag-erase.\n\n" +
                 "Explore the menus for board manipulation.\n\n" +
                 "Load files from the web, predefined, or your own.");
+        alert.showAndWait();
+    }
+
+    public void fileInfo() {
+
+        Decoder info = new Decoder();
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("File info");
+        alert.setHeaderText(info.getName());
+        alert.setContentText("By: " + info.getOrigin() + "\n\n" + info.getContent() + "\n\n" + info.getLink() + "\n\n");
         alert.showAndWait();
     }
 }

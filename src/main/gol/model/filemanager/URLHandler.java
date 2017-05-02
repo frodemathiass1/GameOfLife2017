@@ -6,6 +6,7 @@ import java.net.URL;
 
 /**
  * URLHandler class handles the selection of the correct URL type.
+ * <p>
  * It make sure that plaintext and RLE content is handled accordingly.
  *
  * @author Frode Kristian Mathiassen
@@ -20,6 +21,7 @@ public class URLHandler {
 
     /**
      * selectUrlType gets the URL as a string and sets the correspondent URL as a new value.
+     * <p>
      * This value is split at each dot, and the last index contains the type.
      * theUrlType is updated with the correct type value, and if it is RLE, the RLEDecoder is instantiated.
      *
@@ -34,13 +36,10 @@ public class URLHandler {
             String[] fileType = url.getFile().split("[.]");
             int itemCount = fileType.length;
             if (fileType[itemCount - 1].contains("txt") || fileType[itemCount - 1].contains("cells")) {
-                System.out.println("Text Url Loaded");
                 theUrlType = "Text Url";
             } else if (fileType[itemCount - 1].contains("rle")) {
-                System.out.println("RLE Url Loaded");
                 theUrlType = "RLE Url";
-                // Instantiate the RLEDecoder and parse the URL.
-                RLEDecoder RLE = new RLEDecoder();
+                Decoder RLE = new Decoder();
                 RLE.RLEDecodeURL(inURL);
             }
         } catch (Exception e) {

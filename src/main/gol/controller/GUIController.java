@@ -49,6 +49,7 @@ public class GUIController implements Initializable {
     @FXML private Slider zoomSlider;
     @FXML private MenuItem small, normal, large, mega, url1, url2, url3, url4, url5, url6, url7, url8, url9, url10;
     @FXML private ToggleButton play, toggleSound;
+    @FXML private Menu fileInfo;
 
     private GraphicsContext context;
     private DynamicBoard board;
@@ -163,7 +164,6 @@ public class GUIController implements Initializable {
         }
     }
 
-
     /**
      * API: Create boards with a valid URL string as inputParameter.
      * Takes url for valid GOL .txt/.cells file patterns.
@@ -190,6 +190,10 @@ public class GUIController implements Initializable {
             updateColorPickerValues();
             // Draw the new board.
             newBoard(bp.getTheBoard());
+            // Show file info.
+            Decoder info = new Decoder();
+            fileInfo.setDisable(false);
+            fileInfo.setText(info.getName());
         } catch (Exception e) {
             dialog.urlError();
             System.err.println("Something went wrong reading the URL.");
@@ -225,6 +229,10 @@ public class GUIController implements Initializable {
             updateColorPickerValues();
             // Draw the new board.
             newBoard(bp.getTheBoard());
+            // Show file info.
+            Decoder info = new Decoder();
+            fileInfo.setDisable(false);
+            fileInfo.setText(info.getName());
         } catch (Exception e) {
             dialog.fileError();
             System.out.println("Error: " + e);
@@ -239,24 +247,24 @@ public class GUIController implements Initializable {
     @FXML
     public void handlePatternSelector() {
 
-        // URL actions plaintext URLs
+        // URL actions PlainText URLs
         url1.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/airforce.cells"));
         url2.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/b52bomber.cells"));
         url3.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/backrake1.cells"));
         url4.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/beaconmaker.cells"));
         url5.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/bigglider.cells"));
-        // URL actions plaintext URLs
+        // URL actions RLE URLs
         url6.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/3enginecordership.rle"));
         url7.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/blinkership1.rle"));
         url8.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/brain.rle"));
         url9.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/chemist.rle"));
         url10.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/jolson.rle"));
-        // File actions plaintext files
+        // File actions PlainText files
         f1.setOnAction(e -> handleFile("patterns/candelabra.cells"));
         f2.setOnAction(e -> handleFile("patterns/candlefrobra.cells"));
         f3.setOnAction(e -> handleFile("patterns/carnival_shuttle.cells"));
-        f4.setOnAction(e -> handleFile("patterns/caterer.cells"));
-        f5.setOnAction(e -> handleFile("patterns/centinal.cells"));
+        f4.setOnAction(e -> handleFile("patterns/centinal.cells"));
+        f5.setOnAction(e -> handleFile("patterns/cow.cells"));
         // File actions RLE files
         f6.setOnAction(e -> handleFile("patterns/mirage.rle"));
         f7.setOnAction(e -> handleFile("patterns/loaflipflop.rle"));
@@ -291,6 +299,10 @@ public class GUIController implements Initializable {
             updateColorPickerValues();
             // Draw the new board.
             newBoard(bp.getTheBoard());
+            // Show file info.
+            Decoder info = new Decoder();
+            fileInfo.setDisable(false);
+            fileInfo.setText(info.getName());
         } catch (Exception e) {
             dialog.fileError();
             System.err.println("Error: " + e);
@@ -315,14 +327,12 @@ public class GUIController implements Initializable {
             // URLs must start with http for this method to work.
             if (!(result.get().toLowerCase().startsWith("http"))) {
                 dialog.httpError();
-                System.err.println("Wrong URL");
             } else {
                 try {
                     // Get correct URL type, and parse to BoardParser.
                     BoardParser bp = new BoardParser();
                     URLHandler uh = new URLHandler();
                     uh.selectUrlType(result.get());
-                    System.out.println(result.get());
                     if (uh.getUrlType().equals("RLE Url")) {
                         // Instantiate a new temp file, and delete it after use.
                         File temp = new File("temp.gol");
@@ -337,12 +347,24 @@ public class GUIController implements Initializable {
                     updateColorPickerValues();
                     // Draw the new board.
                     newBoard(bp.getTheBoard());
+                    // Show file info.
+                    Decoder info = new Decoder();
+                    fileInfo.setDisable(false);
+                    fileInfo.setText(info.getName());
                 } catch (Exception e) {
                     dialog.urlError();
                     System.err.println("Error trying to read URL");
                 }
             }
         }
+    }
+
+    /**
+     * Shows the dialog box with the loaded file information.
+     */
+    @FXML
+    public void showFileInfo() {
+        dialog.fileInfo();
     }
 
     //================================================================================
@@ -403,6 +425,8 @@ public class GUIController implements Initializable {
         zoomSlider.setValue(20);
         play.setText("Play");
         next.setText("Next");
+        fileInfo.setDisable(true);
+        fileInfo.setText("");
 
         sound.play(sound.getFx8());
     }
@@ -496,6 +520,7 @@ public class GUIController implements Initializable {
      * Mute or turn up by setting the volume
      */
     public void handleToggleSound() {
+
         toggleSound.setOnAction(e -> {
             if (toggleSound.isSelected()) {
                 sound.play(sound.getPop3());
@@ -512,6 +537,7 @@ public class GUIController implements Initializable {
      * Toggles animation, changes buttonText and plays a one shot sound when triggered.
      */
     public void togglePlay() {
+
         play.setOnAction((event -> {
             if (timeline.getStatus() == Animation.Status.RUNNING) {
                 timeline.stop();
@@ -726,6 +752,7 @@ public class GUIController implements Initializable {
      */
     @FXML
     public void flipZoom() {
+
         zoomIcon.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
                 zoomSlider.setValue(40);
@@ -741,6 +768,7 @@ public class GUIController implements Initializable {
      */
     @FXML
     public void flipSpeed() {
+
         speedIcon.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
                 speedSlider.setValue(speedSlider.getMax());

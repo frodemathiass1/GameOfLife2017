@@ -6,6 +6,7 @@ import java.io.*;
 
 /**
  * FileHandler class lets you choose a file, and gets the file type of the chosen file.
+ * <p>
  * theFileType and theFile gets updated with the correct file type values,
  * and getters is used by other classes to retrieve the values.
  *
@@ -57,13 +58,10 @@ public class FileHandler {
         try {
             String[] fileType = theFile.getName().split("[.]");
             if (fileType[1].contains("txt") || fileType[1].contains("cells")) {
-                System.out.println("Text File Loaded");
                 this.theFileType = "Text File";
             } else if (fileType[1].contains("rle")) {
-                System.out.println("RLE File Loaded");
                 this.theFileType = "RLE File";
-                // Instantiate the RLEDecoder and parse the file
-                RLEDecoder RLE = new RLEDecoder();
+                Decoder RLE = new Decoder();
                 RLE.RLEDecodeFile(this.theFile);
             }
         } catch (Exception e) {

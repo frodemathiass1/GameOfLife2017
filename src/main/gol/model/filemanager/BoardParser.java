@@ -10,7 +10,7 @@ import java.nio.charset.Charset;
 
 /**
  * The BoardParser class gets files and URLs, and parses them to the main decoder.
- *
+ * <p>
  * It is separated into tree different methods. ParseURL, ParseFile an Parser.
  * The first two is to separate files and URLs, and the third is the parser itself.
  *
@@ -27,6 +27,7 @@ public class BoardParser {
 
     /**
      * ParseURL gets the URL as a string, and parse it along to the Parser method.
+     * <p>
      * To accomplish this, the string is converted to a URL, and a connection is opened.
      * BufferedReader is instantiated so the Parser can read the content of the URL.
      *
@@ -45,6 +46,7 @@ public class BoardParser {
 
     /**
      * ParseFile gets the file, and parse it along to the Parser method.
+     * <p>
      * To accomplish this, BufferedReader is instantiated so the Parser can read the content of the file.
      *
      * @param inFile File
@@ -60,6 +62,7 @@ public class BoardParser {
 
     /**
      * This is the main parser method.
+     * <p>
      * Config and byte is instantiated to correctly parse the matrix along to the main decoder.
      * theBoard is updated as a global value, and a getter is used by other classes to create the new board.
      *

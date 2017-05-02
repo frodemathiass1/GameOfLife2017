@@ -16,9 +16,9 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="510.0" prefWidth="800.0" style="-fx-background-color: DIMGRAY;" styleClass="blend" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.GUIController">
+<AnchorPane style="-fx-background-color: DIMGRAY;" styleClass="blend" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.GUIController">
 
-    <MenuBar prefWidth="800" styleClass="context-menu, menu, menu-item" stylesheets="@stylesheet.css">
+    <MenuBar prefHeight="35.0" prefWidth="800" styleClass="context-menu, menu, menu-item" stylesheets="@stylesheet.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Menu styleClass="context-menu, menu, menu-item" text="File">
             <MenuItem onAction="#loadFileFromDisk" styleClass="context-menu, menu, menu-item" text="Open File" />
             <MenuItem onAction="#loadFileFromURL" styleClass="context-menu, menu, menu-item" text="Open URL" />
@@ -31,13 +31,13 @@
             <MenuItem fx:id="f1" styleClass="highlight" text="Candlebra" />
             <MenuItem fx:id="f2" styleClass="highlight" text="Candlefrobra" />
             <MenuItem fx:id="f3" styleClass="highlight" text="Carnival shuttle" />
-            <MenuItem fx:id="f4" styleClass="highlight" text="Caterer" />
-            <MenuItem fx:id="f5" styleClass="highlight" text="Centinal" />
+            <MenuItem fx:id="f4" styleClass="highlight" text="Centinal" />
+            <MenuItem fx:id="f5" styleClass="highlight" text="Cow" />
             <SeparatorMenuItem />
             <MenuItem disable="true" styleClass="highlight" text="Load RLE URL" />
             <SeparatorMenuItem />
-            <MenuItem fx:id="f6" styleClass="highlight" text="Loaflipflop" />
-            <MenuItem fx:id="f7" styleClass="highlight" text="Mirage" />
+            <MenuItem fx:id="f6" styleClass="highlight" text="Mirage" />
+            <MenuItem fx:id="f7" styleClass="highlight" text="Loaflipflop" />
             <MenuItem fx:id="f8" styleClass="highlight" text="Pinwheel" />
             <MenuItem fx:id="f9" styleClass="highlight" text="Ring of fire" />
             <MenuItem fx:id="f10" styleClass="highlight" text="Sailboat" />
@@ -47,11 +47,16 @@
             <MenuItem onAction="#howToPlay" styleClass="context-menu, menu, menu-item" text="How to play" />
             <MenuItem onAction="#showInfo" styleClass="context-menu, menu, menu-item" text="Info" />
         </Menu>
+      <Menu fx:id="fileInfo" disable="true" mnemonicParsing="false">
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#showFileInfo" text="Show file info" />
+         </items>
+      </Menu>
     </MenuBar>
 
-    <Canvas fx:id="canvas" height="520.0" layoutX="10" layoutY="50.0" onMouseClicked="#handleMouseEvent" onMouseDragged="#handleMouseEvent" width="780.0" />
+    <Canvas fx:id="canvas" height="510.0" onMouseClicked="#handleMouseEvent" onMouseDragged="#handleMouseEvent" width="800.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0" />
 
-    <ToolBar layoutY="580.0" prefHeight="45.0" prefWidth="800.0" styleClass="menu, blend" stylesheets="@stylesheet.css">
+    <ToolBar prefHeight="45.0" prefWidth="800.0" styleClass="menu, blend" stylesheets="@stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <ToggleButton fx:id="play" prefHeight="20.0" prefWidth="65.0" styleClass="btnStyle, btn-border, toggle-play" text="Play" />
         <Button fx:id="next" onAction="#nextStep" prefHeight="20.0" prefWidth="75.0" styleClass="btnStyle, btn-border" text="Next" />
         <Button onAction="#reset" prefHeight="20.0" prefWidth="65.0" styleClass="btnStyle, btn-border" text="Clear" />

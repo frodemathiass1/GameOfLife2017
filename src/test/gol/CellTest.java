@@ -2,8 +2,8 @@ package test.gol;
 
 import main.gol.model.Cell;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
-//import org.junit.Test;
+//import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 class CellTest {
 

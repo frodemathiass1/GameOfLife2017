@@ -12,8 +12,8 @@ import java.io.IOException;
 public class Main extends Application {
 
     // Stage Dimensions
-    private static final int WIDTH =  800;
-    private static final int HEIGHT = 625;
+    private static final int WIDTH =  810;
+    private static final int HEIGHT = 600;
 
     @Override
     public void start(Stage primaryStage) {
@@ -22,10 +22,9 @@ public class Main extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("view/view.fxml"));
             primaryStage.setTitle("Game Of Life");
             primaryStage.setOnCloseRequest(e -> Platform.exit());
-            primaryStage.setResizable(false);
             primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
             primaryStage.show();
-            primaryStage.setResizable(false);
+            //primaryStage.setResizable(false);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
