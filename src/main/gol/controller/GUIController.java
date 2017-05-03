@@ -40,7 +40,7 @@ import java.util.ResourceBundle;
 public class GUIController implements Initializable {
 
     @FXML private MenuItem url1, url2, url3, url4, url5, url6, url7, url8, url9, url10;
-    @FXML private MenuItem file1, file2, file3, file4, file5, file6, file7, file8, file9, file10;
+    @FXML private MenuItem file1, file2, file3, file4, file5, file6, file7, file8, file9, file10, fileBlock;
     @FXML private MenuItem small, medium, large, largest;
     @FXML private ColorPicker cpCell, cpGrid, cpBackground;
     @FXML private Slider speedSlider,zoomSlider;
@@ -240,6 +240,7 @@ public class GUIController implements Initializable {
         file3.setOnAction(e -> handleFile("resources/patterns/carnival_shuttle.cells"));
         file4.setOnAction(e -> handleFile("resources/patterns/centinal.cells"));
         file5.setOnAction(e -> handleFile("resources/patterns/cow.cells"));
+        fileBlock.setOnAction(e -> handleFile("resources/patterns/block.txt"));
         // File actions RLE files
         file6.setOnAction(e -> handleFile("resources/patterns/mirage.rle"));
         file7.setOnAction(e -> handleFile("resources/patterns/loaflipflop.rle"));

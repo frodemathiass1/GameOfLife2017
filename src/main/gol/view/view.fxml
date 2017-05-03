@@ -36,6 +36,7 @@
                     <MenuItem fx:id="file3" styleClass="context-menu, menu, menu-item, highlight" text="Carnival shuttle" />
                     <MenuItem fx:id="file4" styleClass="context-menu, menu, menu-item, highlight" text="Centinal" />
                     <MenuItem fx:id="file5" styleClass="context-menu, menu, menu-item, highlight" text="Cow" />
+                    <MenuItem fx:id="fileBlock" styleClass="context-menu, menu, menu-item, highlight" text="A BIG BLOCK" />
                     <SeparatorMenuItem />
                     <MenuItem fx:id="url1" styleClass="context-menu, menu, menu-item, highlight" text="Airforce" />
                     <MenuItem fx:id="url2" styleClass="context-menu, menu, menu-item, highlight" text="B-52 bomber" />
