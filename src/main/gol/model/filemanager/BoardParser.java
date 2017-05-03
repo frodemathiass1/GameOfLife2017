@@ -14,9 +14,6 @@ import java.nio.charset.Charset;
  * It is separated into tree different methods. parseURL, parseFile an parser.
  * The first two is to separate files and URLs, and the third is the parser itself.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.1
  */
 public class BoardParser {
@@ -24,6 +21,8 @@ public class BoardParser {
     private static final Charset charset = Charset.forName("US-ASCII");
     private final Dialogs dialog = new Dialogs();
     private byte[][] theBoard;
+    public static int rows = 0;
+    public static int cols = 0;
 
     /**
      * parseURL gets the URL as a string, and parse it along to the parser method.
@@ -38,6 +37,15 @@ public class BoardParser {
 
         URL url = new URL(inURL);
         URLConnection conn = url.openConnection();
+
+        // Count what is to be rows and cols of the board
+        BufferedReader count = new BufferedReader(
+                new InputStreamReader(conn.getInputStream(),charset));
+        int lines = 0;
+        cols = count.readLine().length();
+        while (count.readLine() != null) lines++;
+        rows = lines;
+        count.close();
 
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(conn.getInputStream(),charset));
@@ -54,6 +62,17 @@ public class BoardParser {
      */
     public void parseFile(File inFile) throws Exception {
 
+        // Count what is to be rows and cols of the board
+        BufferedReader count = new BufferedReader(
+                new InputStreamReader(
+                        new FileInputStream(inFile), charset));
+        int lines = 0;
+        cols = count.readLine().length();
+        while (count.readLine() != null) lines++;
+        rows = lines;
+        count.close();
+
+        // Parse the board
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(
                         new FileInputStream(inFile), charset));
@@ -68,15 +87,15 @@ public class BoardParser {
      *
      * @param reader BufferedReader
      */
-    public void parser(BufferedReader reader)  {
+    private void parser(BufferedReader reader)  {
 
         try {
             Config config = new Config();
             byte[][] board = new byte[config.getRows()][config.getColumns()];
             Decoder decoder = new Decoder();
+            //decoder.boardCounter(reader);
             decoder.TXTDecode(reader, board);
             theBoard = board; // update global variable
-
         } catch (FileNotFoundException fnf) {
             System.out.println("File not found");
             dialog.notFoundException();
@@ -96,5 +115,21 @@ public class BoardParser {
      */
     public byte[][] getTheBoard() {
         return this.theBoard;
+    }
+
+    public static int getRows() {
+        return rows;
+    }
+
+    public static int getCols() {
+        return cols;
+    }
+
+    public static void setRows(int rows) {
+        BoardParser.rows = rows;
+    }
+
+    public static void setCols(int cols) {
+        BoardParser.cols = cols;
     }
 }

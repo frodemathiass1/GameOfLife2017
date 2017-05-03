@@ -9,15 +9,12 @@ import java.net.URL;
  * <p>
  * It make sure that plaintext and RLE content is handled accordingly.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
  * @version 2.0
  */
 public class URLHandler {
 
+    private static String theUrlType;
     private final Dialogs dialog = new Dialogs();
-    private String theUrlType;
 
     /**
      * selectUrlType gets the URL as a string and sets the correspondent URL as a new value.
@@ -54,6 +51,6 @@ public class URLHandler {
      * @return String theUrlType
      */
     public String getUrlType() {
-        return this.theUrlType;
+        return theUrlType;
     }
 }

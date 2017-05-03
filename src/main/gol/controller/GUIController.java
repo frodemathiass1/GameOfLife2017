@@ -60,6 +60,9 @@ public class GUIController implements Initializable {
     private Config config;
     private Colors colors;
     private Draw draw;
+    private FileHandler fh = new FileHandler();
+    private URLHandler uh = new URLHandler();
+    private BoardParser bp = new BoardParser();
 
     /**
      * This method is overridden from initializable interface.
@@ -108,7 +111,7 @@ public class GUIController implements Initializable {
     /**
      * Wrapper: This method is a wrapper/container for instantiating needed objects.
      */
-    public void initializeGraphicsAndSounds() {
+    private void initializeGraphicsAndSounds() {
 
         config = new Config();
         colors = new Colors();
@@ -120,7 +123,7 @@ public class GUIController implements Initializable {
     /**
      * Wrapper: This method is a wrapper/container method for initializing the observable GUI components.
      */
-    public void initializeObservables() {
+    private void initializeObservables() {
 
         togglePlay();                   // Initialize play
         handleGridSizeEvents();         // Initialize "Select drawBoard size" menu. Select Size on GUI.
@@ -140,13 +143,12 @@ public class GUIController implements Initializable {
      *
      * @param board byte[][]
      */
-    public void newBoard(byte[][] board) {
+    private void newBoard(byte[][] board) {
 
         try {
             this.board = new DynamicBoard(config.getRows(), config.getColumns());
             this.board.setBoard(board);
             //this.board.setCellState(6, 8, true);
-
             draw.drawBoard(this.board.getGrid());
             zoomSlider.setValue(5);
         } catch (NullPointerException ne) {
@@ -158,17 +160,37 @@ public class GUIController implements Initializable {
         }
     }
 
-    /**
-     * This method create boards with a valid URL string as inputParameter.
-     * Takes url for valid GOL .txt/.cells file patterns.
-     *
-     * @param url String
-     */
-    public void handleURL(String url) {
+    private void fileParser() {
 
         try {
-            URLHandler uh = new URLHandler();
-            BoardParser bp = new BoardParser();
+            // Get correct file type, and parse to BoardParser.
+            if (fh.getTheFileType().equals("RLE File")) {
+                // Instantiate a new temp file, and delete it after use.
+                File temp = new File("temp.gol");
+                bp.parseFile(temp);
+                temp.delete();
+            } else if (fh.getTheFileType().equals("Text File")) {
+                // Plaintext files is parsed directly.
+                bp.parseFile(fh.getTheFile());
+            }
+            // Reset the old board
+            board.clearBoard();
+            updateColorPickerValues();
+            // Draw the new board.
+            newBoard(bp.getTheBoard());
+            // Show file info.
+            Decoder info = new Decoder();
+            fileInfo.setDisable(false);
+            fileInfo.setText("("+info.getName()+")");
+        } catch (Exception e) {
+            dialog.fileError();
+            System.err.println("Error: " + e);
+        }
+    }
+
+    private void urlParser(String url) {
+
+        try {
             uh.selectUrlType(url);
             if (uh.getUrlType().equals("RLE Url")) {
                 // Instantiate a new temp file, and delete it after use.
@@ -195,50 +217,10 @@ public class GUIController implements Initializable {
     }
 
     /**
-     * This method create boards with a valid path string as inputParameter.
-     * Takes String filepath for valid GOL .txt/.cells file patterns.
-     *
-     * @param path String
-     */
-    public void handleFile(String path) {
-
-        try {
-            // Get correct file type, and parse to BoardParser.
-            File file = new File(path);
-            FileHandler fh = new FileHandler();
-            BoardParser bp = new BoardParser();
-            fh.setTheFile(file);
-            fh.fileSelectType(file);
-            if (fh.getTheFileType().equals("RLE File")) {
-                // Instantiate a new temp file, and delete it after use.
-                File temp = new File("temp.gol");
-                bp.parseFile(temp);
-                temp.delete();
-            } else if (fh.getTheFileType().equals("Text File")) {
-                // Plaintext files is parsed directly.
-                bp.parseFile(file);
-            }
-            // Reset the old board.
-            board.clearBoard();
-            updateColorPickerValues();
-            // Draw the new board.
-            newBoard(bp.getTheBoard());
-            // Show file info.
-            Decoder info = new Decoder();
-            fileInfo.setDisable(false);
-            fileInfo.setText("("+info.getName()+")");
-
-        } catch (Exception e) {
-            dialog.fileError();
-            System.out.println("Error: " + e);
-        }
-    }
-
-    /**
      * Event Handlers "Patterns" menu-button. Set predefined boards from project resources.
      */
     @FXML
-    public void handlePatternSelector() {
+    private void handlePatternSelector() {
 
         // URL actions PlainText URLs
         url1.setOnAction(e -> handleURL("http://www.conwaylife.com/patterns/airforce.cells"));
@@ -267,39 +249,39 @@ public class GUIController implements Initializable {
     }
 
     /**
+     * This method create boards with a valid URL string as inputParameter.
+     * Takes url for valid GOL .txt/.cells file patterns.
+     *
+     * @param url String
+     */
+    private  void handleURL(String url) {
+
+        urlParser(url);
+    }
+
+    /**
+     * This method create boards with a valid path string as inputParameter.
+     * Takes String filepath for valid GOL .txt/.cells file patterns.
+     *
+     * @param path String
+     */
+    private void handleFile(String path) {
+
+        File file = new File(path);
+        fh.setTheFile(file);
+        fh.fileSelectType(file);
+        fileParser();
+    }
+
+    /**
      * EventHandler "Open File" menu-button.
      * Sets a new board by selecting a file, parsing it to the correct decoder and creating a new board.
      */
     @FXML
     public void loadFileFromDisk() {
 
-        try {
-            // Get correct file type, and parse to BoardParser.
-            FileHandler fh = new FileHandler();
-            BoardParser bp = new BoardParser();
-            fh.fileSelect();
-            if (fh.getTheFileType().equals("RLE File")) {
-                // Instantiate a new temp file, and delete it after use.
-                File temp = new File("temp.gol");
-                bp.parseFile(temp);
-                temp.delete();
-            } else if (fh.getTheFileType().equals("Text File")) {
-                // Plaintext files is parsed directly.
-                bp.parseFile(fh.getTheFile());
-            }
-            // Reset the old board
-            board.clearBoard();
-            updateColorPickerValues();
-            // Draw the new board.
-            newBoard(bp.getTheBoard());
-            // Show file info.
-            Decoder info = new Decoder();
-            fileInfo.setDisable(false);
-            fileInfo.setText("("+info.getName()+")");
-        } catch (Exception e) {
-            dialog.fileError();
-            System.err.println("Error: " + e);
-        }
+        fh.fileSelect();
+        fileParser();
     }
 
     /**
@@ -321,33 +303,7 @@ public class GUIController implements Initializable {
             if (!(result.get().toLowerCase().startsWith("http"))) {
                 dialog.httpError();
             } else {
-                try {
-                    // Get correct URL type, and parse to BoardParser.
-                    BoardParser bp = new BoardParser();
-                    URLHandler uh = new URLHandler();
-                    uh.selectUrlType(result.get());
-                    if (uh.getUrlType().equals("RLE Url")) {
-                        // Instantiate a new temp file, and delete it after use.
-                        File temp = new File("temp.gol");
-                        bp.parseFile(temp);
-                        temp.delete();
-                    } else if (uh.getUrlType().equals("Text Url")) {
-                        // Plaintext URLs is parsed directly.
-                        bp.parseURL(result.get());
-                    }
-                    // Reset the old board.
-                    board.clearBoard();
-                    updateColorPickerValues();
-                    // Draw the new board.
-                    newBoard(bp.getTheBoard());
-                    // Show file info.
-                    Decoder info = new Decoder();
-                    fileInfo.setDisable(false);
-                    fileInfo.setText("("+info.getName()+")");
-                } catch (Exception e) {
-                    dialog.urlError();
-                    System.err.println("Error trying to read URL");
-                }
+                urlParser(result.get());
             }
         }
     }
@@ -378,7 +334,7 @@ public class GUIController implements Initializable {
     /**
      * This method stop timeline animation if its running and changes the buttonText
      */
-    public void stopAnimationIfRunning() {
+    private void stopAnimationIfRunning() {
 
         if (timeline.getStatus() == Animation.Status.RUNNING) {
             timeline.stop();
@@ -469,7 +425,7 @@ public class GUIController implements Initializable {
     /**
      * EventHandler/Listener: "Zoom slider". Handles the slider listener.
      */
-    public void handleZoomSlider() {
+    private void handleZoomSlider() {
 
         zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             config.setCellSize(newValue.intValue());
@@ -481,7 +437,7 @@ public class GUIController implements Initializable {
     /**
      * EventHandler: "Sound icon". Toggle sound.
      */
-    public void handleToggleSound() {
+    private void handleToggleSound() {
 
         toggleSound.setOnAction(e -> {
             if (toggleSound.isSelected()) {
@@ -498,7 +454,7 @@ public class GUIController implements Initializable {
      * EventHandler: "Play/Stop Button".
      * Toggle animation, change buttonText and play a one shot sound when triggered.
      */
-    public void togglePlay() {
+    private void togglePlay() {
 
         play.setOnAction((event -> {
             if (timeline.getStatus() == Animation.Status.RUNNING) {
@@ -604,7 +560,7 @@ public class GUIController implements Initializable {
      *
      * @return GraphicContext
      */
-    public GraphicsContext getContext() {
+    private GraphicsContext getContext() {
 
         context = canvas.getGraphicsContext2D();
         return context;
@@ -686,7 +642,7 @@ public class GUIController implements Initializable {
     /**
      * This method updates the colorPicker widget values.
      */
-    public void updateColorPickerValues() {
+    private void updateColorPickerValues() {
 
         cpCell.setValue(colors.getCell());
         cpBackground.setValue(colors.getBackground());

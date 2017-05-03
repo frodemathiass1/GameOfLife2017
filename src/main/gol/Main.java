@@ -10,9 +10,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * This is the Main class to fire off the application with its stage and scenegraph.
- * Sets a primary stage with the fxml  document as the root node which contains all the nodes
- * for the GUI components.
+ * This is the Main class to fire off the standalone application.
+ * Sets a primary stage and scene with the fxml document as the root node containing all its children.
  */
 public class Main extends Application {
 
@@ -21,8 +20,8 @@ public class Main extends Application {
     private static final int HEIGHT = 600;
 
     /**
-     * This method maps the fxml file to the scenegraph root, and sets it to the stage,
-     * then shows it. Resizable is set to false to deactivate the scalable window.
+     * Main method and entry point to start the JavaFX application.
+     * Map the fxml file to the scenegraph root, and set it to the stage, then shows it in a stage window.
      *
      * @param primaryStage Stage
      */
@@ -33,8 +32,8 @@ public class Main extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("view/view.fxml"));
             primaryStage.setTitle("Game Of Life");
             primaryStage.setOnCloseRequest(e -> Platform.exit());
-            primaryStage.setResizable(false);
             primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
+            //primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -42,8 +41,9 @@ public class Main extends Application {
     }
 
     /**
-     * This method launches the application.
-     * @param args arguments
+     * This method launches the standalone application.
+     *
+     * @param args null
      */
     public static void main(String[] args) {
 

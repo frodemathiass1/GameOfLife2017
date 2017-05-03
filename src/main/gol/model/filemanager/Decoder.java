@@ -15,9 +15,6 @@ import java.net.URLConnection;
  * To avoid multiple temp files or files being stored at your hdd after application exit, they are set to delete on exit,
  * but are preferably deleted after use in the try/catch block where they are used.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
  * @version 2.0
  */
 public class Decoder {
@@ -34,12 +31,15 @@ public class Decoder {
      * @param board  byte[][]
      * @throws Exception e
      */
-    public void TXTDecode(BufferedReader reader, byte[][] board) throws Exception {
+    void TXTDecode(BufferedReader reader, byte[][] board) throws Exception {
 
         int y = 0;
         String line;
 
         try {
+            // Calculate the position of the loaded board
+            int colSpacer = (80 - (BoardParser.getCols() / 2));
+            int rowSpacer = (46 - (BoardParser.getRows() / 2));
             while ((line = reader.readLine()) != null) {
                 // Set the file info
                 if (line.startsWith("!Name")) {
@@ -53,16 +53,17 @@ public class Decoder {
                         Content = line.substring(1);
                     }
                 }
+                // Decode the file
                 if (!line.startsWith("!")) {
                     y++;
                     for (int x = 0; x < line.length(); x++) {
                         char dead = '.';
                         if (line.charAt(x) == dead) {
-                            board[y + 25][x + 25] = 0; // Push cell index position
+                            board[y + rowSpacer][x + colSpacer] = 0; // Push cell index position
                         }
                         char alive = 'O';
                         if (line.charAt(x) == alive) {
-                            board[y + 25][x + 25] = 1; // Push cell index position
+                            board[y + rowSpacer][x + colSpacer] = 1; // Push cell index position
                         }
                         if (line.charAt(x) == ' ') {
                             y++;
@@ -70,6 +71,9 @@ public class Decoder {
                     }
                 }
             }
+            // Reset the spacer calculations
+            BoardParser.setCols(0);
+            BoardParser.setRows(0);
         } catch (ArrayIndexOutOfBoundsException oob) {
             Dialogs dialog = new Dialogs();
             dialog.oops();
@@ -83,7 +87,7 @@ public class Decoder {
      * @param theFile File
      * @throws Exception e
      */
-    public void RLEDecodeFile(File theFile) throws Exception {
+    void RLEDecodeFile(File theFile) throws Exception {
 
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(new FileInputStream(theFile)));
@@ -96,7 +100,7 @@ public class Decoder {
      * @param inURL String
      * @throws Exception e
      */
-    public void RLEDecodeURL(String inURL) throws Exception {
+    void RLEDecodeURL(String inURL) throws Exception {
 
         URL url = new URL(inURL);
         URLConnection conn = url.openConnection();
@@ -118,7 +122,7 @@ public class Decoder {
      * @param reader BufferedReader
      * @throws Exception e
      */
-    public void RLEDecode(BufferedReader reader) throws Exception {
+    private void RLEDecode(BufferedReader reader) throws Exception {
 
         try {
             // Variables for the loop
@@ -130,58 +134,63 @@ public class Decoder {
             while ((line = reader.readLine()) != null) {
                 // Set the file info
                 if (line.startsWith("#N")) {
-                    Name = line.substring(2);
+                    Name = line.substring(3);
                 } else if (line.startsWith("#O")) {
-                    Origin = line.substring(2);
+                    Origin = line.substring(3);
                 } else if (line.startsWith("#C")) {
                     if (line.startsWith("#C www") || (line.startsWith("#C http"))) {
-                        Link = line.substring(2);
+                        Link = line.substring(3);
                     } else {
-                        Content = line.substring(2);
+                        Content = line.substring(3);
                     }
                 }
                 // For loop to read all chars in the line.
                 for (int i = 0; i < line.length(); i++) {
-                    //Content = String.valueOf(contLines) + "\n";
                     if (!(line.startsWith("#") || line.startsWith("x"))) {
                         if (Character.isDigit(line.charAt(i))) {
                             // For all digits, set the number to add that many elements to the string.
                             if (number == 0) {
                                 number = Character.getNumericValue(line.charAt(i));
-                            } else {
-                                // For digits that has a higher value than  9.
+                            } else if (number > 0){
+                                // For digits that has a higher value than 9.
                                 number *= 10;
                                 number += Character.getNumericValue(line.charAt(i));
                             }
-                        } else if (line.charAt(i) == 'b') {
-                            // For all the dead cells, get the number value and add cells.
-                            if (number != 0) {
-                                while (number != 0) {
+                        }
+                        // For all the dead cells, get the number value and add the given number of cells.
+                        char dead = 'b';
+                        if (line.charAt(i) == dead) {
+                            if (number == 0) {
+                                boardString.append(".");
+                            } else if (number > 0){
+                                while (number > 0) {
                                     boardString.append(".");
                                     number--;
                                 }
-                            } else {
-                                boardString.append(".");
                             }
-                        } else if (line.charAt(i) == 'o') {
-                            // For all the live cells, get the number value and add cells.
-                            if (number != 0) {
-                                while (number != 0) {
+                        }
+                        // For all the live cells, get the number value and add the given number of cells.
+                        char alive = 'o';
+                        if (line.charAt(i) == alive) {
+                            if (number == 0) {
+                                boardString.append("O");
+                            } else if (number > 0) {
+                                while (number > 0) {
                                     boardString.append("O");
                                     number--;
                                 }
-                            } else {
-                                boardString.append("O");
                             }
-                        } else if (line.charAt(i) == '$') {
-                            // Add a new line to the string at the RLE new line char '$'
-                            if (number != 0) {
-                                while (number != 0) {
+                        }
+                        // Add a new line to the string at the RLE new line
+                        char newline = '$';
+                        if (line.charAt(i) == newline) {
+                            if (number == 0) {
+                                boardString.append("\n");
+                            } else if (number > 0) {
+                                while (number > 0) {
                                     boardString.append("\n");
                                     number--;
                                 }
-                            } else {
-                                boardString.append("\n");
                             }
                         }
                     }
@@ -202,7 +211,7 @@ public class Decoder {
     }
 
     /**
-     * This method returns the Name as a string.
+     * This method returns the Name of the loaded board as a string.
      *
      * @return String Name
      */
@@ -211,7 +220,7 @@ public class Decoder {
     }
 
     /**
-     * This method returns the Origin as a string.
+     * This method returns the author of the file as a string.
      *
      * @return String Origin
      */
@@ -220,7 +229,7 @@ public class Decoder {
     }
 
     /**
-     * This method returns the Content as a string.
+     * This method returns the Content (Description) of the loaded board as a string.
      *
      * @return String Content
      */
@@ -229,7 +238,7 @@ public class Decoder {
     }
 
     /**
-     * This method returns the Link as a string.
+     * This method returns the Link in the file as a string.
      *
      * @return String Link
      */

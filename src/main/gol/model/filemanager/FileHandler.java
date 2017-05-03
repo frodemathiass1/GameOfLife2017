@@ -10,15 +10,12 @@ import java.io.*;
  * theFileType and theFile gets updated with the correct file type values,
  * and getters is used by other classes to retrieve the values.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
  * @version 2.0
  */
 public class FileHandler {
 
-    private File theFile;
-    private String theFileType;
+    private static File theFile;
+    private static String theFileType;
 
     /**
      * fileSelect lets you choose a file and gets the file type value.
@@ -26,7 +23,7 @@ public class FileHandler {
     public void fileSelect() {
 
         choose();
-        fileSelectType(this.theFile);
+        fileSelectType(theFile);
     }
 
     /**
@@ -40,7 +37,7 @@ public class FileHandler {
             FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter
                     ("Text File / RLE File", "*.txt", "*.cells", "*.rle");
             chooser.getExtensionFilters().add(fileExtensions);
-            this.theFile = chooser.showOpenDialog(null).getAbsoluteFile();
+            theFile = chooser.showOpenDialog(null).getAbsoluteFile();
         } catch (Exception e) {
             System.err.println("Something went wrong with the file selection");
         }
@@ -58,11 +55,11 @@ public class FileHandler {
         try {
             String[] fileType = theFile.getName().split("[.]");
             if (fileType[1].contains("txt") || fileType[1].contains("cells")) {
-                this.theFileType = "Text File";
+                theFileType = "Text File";
             } else if (fileType[1].contains("rle")) {
-                this.theFileType = "RLE File";
+                theFileType = "RLE File";
                 Decoder RLE = new Decoder();
-                RLE.RLEDecodeFile(this.theFile);
+                RLE.RLEDecodeFile(FileHandler.theFile);
             }
         } catch (Exception e) {
             System.err.println("Error:" + e);
@@ -75,7 +72,7 @@ public class FileHandler {
      * @param theFile File
      */
     public void setTheFile(File theFile) {
-        this.theFile = theFile;
+        FileHandler.theFile = theFile;
     }
 
     /**
@@ -84,7 +81,7 @@ public class FileHandler {
      * @return File theFile
      */
     public File getTheFile() {
-        return this.theFile;
+        return theFile;
     }
 
     /**
@@ -93,6 +90,6 @@ public class FileHandler {
      * @return String theFileType
      */
     public String getTheFileType() {
-        return this.theFileType;
+        return theFileType;
     }
 }
