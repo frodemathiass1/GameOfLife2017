@@ -3,6 +3,7 @@ package main.gol.model;
 import main.gol.model.boards.DynamicBoard;
 import main.gol.model.boards.FixedBoard;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -58,6 +59,21 @@ public class Cell {
     }
 
     /**
+     * This method check each cell for surrounding dead neighbors and return the amount as an int.
+     * Written for testing purposes.
+     * @return int
+     */
+    public int countDeadNeighbors() {
+
+        int count = 0;
+        for (int i = 0; i < this.getNeighbors().size(); i++)
+            if (!this.neighbors.get(i).getState()) {
+                count++;
+            }
+        return count;
+    }
+
+    /**
      * This method initialize each cell's neighbors in a given DynamicBoard.
      *
      * @param board FixedBoard
@@ -74,9 +90,9 @@ public class Cell {
         Cell bottomRight = board.getCell(this.x + 1, this.y + 1);
 
         // Makes a stream of adjacent cells and filters out null cells(not on the map), then it collects it in a list.
-        this.neighbors = Stream.of(topLeft, top, topRight, left, right, bottomLeft, bottom, bottomRight)
+        this.neighbors = Collections.unmodifiableList(Stream.of(topLeft, top, topRight, left, right, bottomLeft, bottom, bottomRight)
                 .filter(Objects::nonNull) // Filter out non-existent neighbors
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -107,7 +123,7 @@ public class Cell {
      *
      * @return List neighbors
      */
-    private List<Cell> getNeighbors() {
+    public List<Cell> getNeighbors() {
         return this.neighbors;
     }
 

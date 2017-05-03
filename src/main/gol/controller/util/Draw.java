@@ -29,7 +29,7 @@ public class Draw {
 
         this.context = context;
         this.colors = colors;
-        config = new Config();
+        this.config = new Config();
     }
 
     /**
@@ -40,9 +40,9 @@ public class Draw {
      */
     public void drawBoard(List<List<Cell>> board) {
 
-        for (int x = 0; x < board.size(); x++) {
-            for (int y = 0; y < board.get(x).size(); y++) {
-                drawCell(board.get(x).get(y));
+        for (int y = 0; y < board.size(); y++) {
+            for (int x = 0; x < board.get(y).size(); x++) {
+                drawCell(board.get(y).get(x));
             }
         }
     }
@@ -71,7 +71,7 @@ public class Draw {
      */
     public void drawCell(Cell cell) {
 
-        int cellSize = config.cellSize();
+        int cellSize = config.getCellSize();
         int x = cell.getX();
         int y = cell.getY();
 

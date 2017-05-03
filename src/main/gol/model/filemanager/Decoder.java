@@ -7,7 +7,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * Decoder class reads plaintext and RLE files and URLs
+ * Decoder class reads plaintext Files, RLE files and URLs
  * <p>
  * RLE files are converted to plaintext files before they are decoded.
  * We put so much work into the Decoder class, so this was the best way for us to decode RLE files,
@@ -34,7 +34,7 @@ public class Decoder {
      * @param board  byte[][]
      * @throws Exception e
      */
-    public void decodePlainText(BufferedReader reader, byte[][] board) throws Exception {
+    public void TXTDecode(BufferedReader reader, byte[][] board) throws Exception {
 
         int y = 0;
         String line;

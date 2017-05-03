@@ -13,13 +13,13 @@ import java.util.ArrayList;
  *      Every drawCell interacts with its eight neighbours, which are the cells that are horizontally,
  *      vertically, or diagonally adjacent. At each step in time, the following transitions occur:
  *
- *      1: Any live drawCell with fewer than two live neighbours dies, as if caused by underpopulation.
+ *      1: Any live Cell with fewer than two live neighbours dies, as if caused by underpopulation.
  *
- *      2: Any live drawCell with two or three live neighbours lives on to the next drawGeneration.
+ *      2: Any live Cell with two or three live neighbours lives on to the next drawGeneration.
  *
- *      3: Any live drawCell with more than three live neighbours dies, as if by overpopulation.
+ *      3: Any live Cell with more than three live neighbours dies, as if by overpopulation.
  *
- *      4: Any dead drawCell with exactly three live neighbours becomes a live drawCell, as if by reproduction.
+ *      4: Any dead Cell with exactly three live neighbours becomes a live drawCell, as if by reproduction.
  *
  */
 public class Rules {

@@ -11,7 +11,7 @@ import java.nio.charset.Charset;
 /**
  * The BoardParser class gets files and URLs, and parses them to the main decoder.
  * <p>
- * It is separated into tree different methods. ParseURL, ParseFile an Parser.
+ * It is separated into tree different methods. parseURL, parseFile an parser.
  * The first two is to separate files and URLs, and the third is the parser itself.
  *
  * @author Frode Kristian Mathiassen
@@ -26,38 +26,38 @@ public class BoardParser {
     private byte[][] theBoard;
 
     /**
-     * ParseURL gets the URL as a string, and parse it along to the Parser method.
+     * parseURL gets the URL as a string, and parse it along to the parser method.
      * <p>
      * To accomplish this, the string is converted to a URL, and a connection is opened.
-     * BufferedReader is instantiated so the Parser can read the content of the URL.
+     * BufferedReader is instantiated so the parser can read the content of the URL.
      *
      * @param inURL String
      * @throws Exception e
      */
-    public void ParseURL(String inURL) throws Exception {
+    public void parseURL(String inURL) throws Exception {
 
         URL url = new URL(inURL);
         URLConnection conn = url.openConnection();
 
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(conn.getInputStream(),charset));
-        Parser(reader);
+        parser(reader);
     }
 
     /**
-     * ParseFile gets the file, and parse it along to the Parser method.
+     * parseFile gets the file, and parse it along to the parser method.
      * <p>
-     * To accomplish this, BufferedReader is instantiated so the Parser can read the content of the file.
+     * To accomplish this, BufferedReader is instantiated so the parser can read the content of the file.
      *
      * @param inFile File
      * @throws Exception e
      */
-    public void ParseFile(File inFile) throws Exception {
+    public void parseFile(File inFile) throws Exception {
 
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(
                         new FileInputStream(inFile), charset));
-        Parser(reader);
+        parser(reader);
     }
 
     /**
@@ -68,13 +68,13 @@ public class BoardParser {
      *
      * @param reader BufferedReader
      */
-    public void Parser(BufferedReader reader)  {
+    public void parser(BufferedReader reader)  {
 
         try {
             Config config = new Config();
             byte[][] board = new byte[config.getRows()][config.getColumns()];
             Decoder decoder = new Decoder();
-            decoder.decodePlainText(reader, board);
+            decoder.TXTDecode(reader, board);
             theBoard = board; // update global variable
 
         } catch (FileNotFoundException fnf) {

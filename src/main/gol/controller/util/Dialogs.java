@@ -5,6 +5,7 @@ import main.gol.model.filemanager.Decoder;
 
 /**
  * This class contains a collection of Dialog boxes with information presented to the user on GUI
+ * @version 1.1
  */
 public class Dialogs {
 
@@ -113,7 +114,7 @@ public class Dialogs {
      */
     public void howToPlay() {
 
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Instructions");
         alert.setHeaderText("How to use this application/game");
         alert.setContentText("Draw cells to canvas with mouse by clicking and dragging. Double click to enable drag-erase.\n\n" +

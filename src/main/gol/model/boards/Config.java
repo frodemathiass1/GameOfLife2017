@@ -2,7 +2,7 @@ package main.gol.model.boards;
 
 /**
  * This class contains size configuration data for the gameBoard.
- * The variables and methods in this class are separated from th GUI controller
+ * The variables and methods in this class are separated from the GUI controller
  * for easier management, manipulation and readability.
  *
  * @version 1.2
@@ -10,11 +10,9 @@ package main.gol.model.boards;
 public class Config {
 
     private static int cellSize = 5;
-    private static int rows = 110;
     private static int columns = 160;
+    private static int rows = 110;
 
-    private static int MAX_ROWS = 200;      // for setting up dynamic board expansion
-    private static int MAX_COLUMNS = 200;   // for setting up dynamic board expansion
 
     /**
      * This method sets the default board configuration
@@ -49,7 +47,7 @@ public class Config {
      *
      * @return int
      */
-    public int cellSize() {
+    public int getCellSize() {
         return cellSize;
     }
 
@@ -59,7 +57,7 @@ public class Config {
      * @param cellSize int
      */
     public void setCellSize(int cellSize) {
-        this.cellSize = cellSize;
+        Config.cellSize = cellSize;
     }
 
     /**
@@ -68,7 +66,7 @@ public class Config {
      * @param rows int
      */
     public void setRows(int rows) {
-        this.rows = rows;
+        Config.rows = rows;
     }
 
     /**
@@ -76,6 +74,6 @@ public class Config {
      * @param columns int
      */
     public void setColumns(int columns) {
-        this.columns = columns;
+        Config.columns = columns;
     }
 }

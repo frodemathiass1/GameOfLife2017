@@ -4,11 +4,14 @@ import main.gol.model.Cell;
 import main.gol.model.Rules;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 /**
- * This class blablabla.....
+ * This class handles all the Board logic and the Cells which represents the Grid.
+ * @see Cell
+ * @version 2.0
  */
 public class DynamicBoard {
 
@@ -16,18 +19,20 @@ public class DynamicBoard {
     private ArrayList<Cell>  generation;
 
     /**
-     * This constructor constructs a new DynamicBoard with given number of rows and columns
+     * This constructor constructs a new DynamicBoard with given number of rows and columns.
      *
      * @param rows int
      * @param columns int
      */
     public DynamicBoard(int rows, int columns) {
 
-        setBoard(rows,columns);
+        setBoard(columns, rows);
     }
 
     /**
-     * This method sets a new cell outside the arrayIndex bounds.
+     * This method sets a new cell outside the arrayIndex bounds by expanding the
+     * grid and filling the empty slots in the ArrayList.
+     * Board expansion is enabled but not implemented, due to nick of time for the project deadline .
      *
      * @param x int
      * @param y int
@@ -73,7 +78,7 @@ public class DynamicBoard {
     }
 
     /**
-     * This method is the main method (API) for setting a new grid with byte[][] array as inputParameter.
+     * This method initializes a board based on width/height (columns/rows) with false values(Dead cells).
      *
      * @param columns int
      * @param rows    int
@@ -81,15 +86,15 @@ public class DynamicBoard {
     public void setBoard(int columns, int rows) {
 
         byte[][] board = new byte[rows][columns]; // flipped x/y
-        setGrid(board);
+        setBoard(board);
     }
 
     /**
-     * This method initialize the gameBoard with cells and initialize each cell neighbors.
+     * This method initializes a board based on a byte[][] board array containing values with both live and dead cells.
      *
      * @param board byte[][]
      */
-    public void setGrid(byte[][] board) {
+    public void setBoard(byte[][] board) {
 
         // Lock the columns size so each row has the same amounts of columns
         int rows = board.length;
@@ -102,27 +107,27 @@ public class DynamicBoard {
             this.grid.add(row);
         }
         // For each index position in the grid, check the given byte[][] array values and set each cell accordingly
-        for (int x = 0; x < rows; x++) {
-            for (int y = 0; y < columns; y++) {
+        for (int y = 0; y < rows; y++) {
+            for (int x = 0; x < columns; x++) {
                 Cell cell = new Cell(x, y);
-                if (board[x][y] == 1) { // flip x and y axis. Why? because that's how it works
+                if (board[y][x] == 1) {
                     cell.setState(true);
-                } else if (board[x][y] == 0) {
+                } else if (board[y][x] == 0) {
                     cell.setState(false);
                 }
-                this.grid.get(x).add(cell);
+                this.grid.get(y).add(cell);
             }
         }
         // Initialize each cell's neighbors
-        for (int x = 0; x < rows; x++) {
-            for (int y = 0; y < columns; y++) {
-                this.grid.get(x).get(y).initNeighbors(this);
+        for (int y = 0; y < rows; y++) {
+            for (int x = 0; x < columns; x++) {
+                this.grid.get(y).get(x).initNeighbors(this);
             }
         }
     }
 
     /**
-     * This method returns a cell within the (grid) array index bounds.
+     * This method returns a cell based on x/y coordinates.
      *
      * @param x int
      * @param y int
@@ -130,25 +135,26 @@ public class DynamicBoard {
      */
     public Cell getCell(int x, int y) {
 
-        if (x < 0 || y < 0 || x >= this.grid.size() || y >= this.grid.get(x).size()) {
+        if (x < 0 || y < 0 || y >= this.grid.size() || x >= this.grid.get(y).size()) {
             return null;
         } else {
-            return this.grid.get(x).get(y);
+            return this.grid.get(y).get(x);
         }
     }
 
     /**
      * This method populates the next generation of cells in a generation list.
-     * Checks each cell for its state, then checks each neighbors state and counts surrounding live cells.
-     * Collects the next generation of cells in an ArrayList of Cell objects.
+     * Checks each cell for its state, then checks each neighbors state and counts surrounding live cells,
+     * then finally collects the next generation of cells in an ArrayList.
      */
     public void nextGeneration() {
 
         Rules rules = new Rules();
         ArrayList<Cell> generationList = new ArrayList<>();
-        for (int x = 0; x < grid.size(); x++) {
-            for (int y = 0; y < grid.get(x).size(); y++) {
-                Cell cell = grid.get(x).get(y);
+
+        for (int y = 0; y < this.grid.size(); y++) {
+            for (int x = 0; x < this.grid.get(y).size(); x++) {
+                Cell cell = this.grid.get(y).get(x);
                 rules.checkRules(cell, generationList);
             }
         }
@@ -157,6 +163,7 @@ public class DynamicBoard {
             cell.updateState();
         }
         this.generation = generationList;
+
     }
 
     /**
@@ -166,9 +173,9 @@ public class DynamicBoard {
 
         ArrayList<Cell> generationList = new ArrayList<>();
         Random rand = new Random();
-        for (int x = 0; x < this.grid.size(); x++) {
-            for (int y = 0; y < this.grid.get(x).size(); y++) {
-                Cell cell = this.grid.get(x).get(y);
+        for (int y = 0; y < grid.size(); y++) {
+            for (int x = 0; x < grid.get(y).size(); x++) {
+                Cell cell = grid.get(y).get(x);
                 if (cell.countAliveNeighbors() < rand.nextInt(3)) {
                     cell.setState(rand.nextBoolean());
                     generationList.add(cell);
@@ -183,9 +190,9 @@ public class DynamicBoard {
      */
     public void clearBoard() {
 
-        for (int x = 0; x < grid.size(); x++) {
-            for (int y = 0; y < grid.get(x).size(); y++) {
-                grid.get(x).get(y).setState(false);
+        for (int y = 0; y < grid.size(); y++) {
+            for (int x = 0; x < grid.get(y).size(); x++) {
+                grid.get(y).get(x).setState(false);
             }
         }
     }
@@ -232,9 +239,9 @@ public class DynamicBoard {
     @Override
     public String toString() {
         StringBuilder serialized = new StringBuilder();
-        for (int x = 0; x < grid.size(); x++) {
-            for (int y = 0; y < grid.get(x).size(); y++) {
-                String state = this.grid.get(x).get(y).getState() ? "1" : "0";
+        for (int y = 0; y < grid.size(); y++) {
+            for (int x = 0; x < grid.get(y).size(); x++) {
+                String state = this.grid.get(y).get(x).getState() ? "1" : "0";
                 serialized.append(state);
             }
         }

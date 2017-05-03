@@ -2,6 +2,7 @@
 * GUI stylesheet
 */
 
+
 .picker-arrow {
 
     -fx-color-label-visible: false;
@@ -18,12 +19,15 @@
 
     -fx-background-radius: 3, 3;
     -fx-text-fill: black;
-    -fx-font-size: 10px;
+    -fx-font-size: 11px;
+    -fx-font-family: 'Segoe UI', sans-serif;
     -fx-background-color: lightgray;
+    -fx-border-radius: 2,2;
+    -fx-border-width: 50%;
 }
 
 .btnStyle:hover {
-    -fx-background-color: grey;
+    -fx-background-color: dimgray;
     -fx-opacity: 0.9;
     -fx-text-fill: black;
     -fx-border-color: white;
@@ -31,15 +35,12 @@
     -fx-font-weight: bold;
 }
 
-.blend {
-    -fx-blend-mode: hard-light;
-}
 
 .highlight {
 
     -fx-background-radius: 3, 3;
     -fx-text-fill: black;
-    -fx-font-size: 10px;
+    -fx-font-size: 12px;
     -fx-background-color: lightgray;
 
 }
@@ -54,6 +55,9 @@
 .menu, .menu-item, .context-menu {
     -fx-background-color: lightgray;
     -fx-border-style: none;
+    -fx-text-fill: black;
+    -fx-font-size: 11px;
+    -fx-font-family: 'Segoe UI', sans-serif;
 
 }
 

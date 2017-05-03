@@ -10,7 +10,8 @@ import static java.lang.String.*;
 
 /**
  * This class handles audio files triggered by GUI action events.
- * Contains filepath for each audio clip used in this application.
+ * Contains filepath for each audio clip used in this application and
+ * method for playing the audio files.
  * Sound downloaded from www.freeSound.org under Creative common licence.
  *
  * @version 1.2
@@ -18,16 +19,16 @@ import static java.lang.String.*;
 public class Sound {
 
     // Volume
-    private static double vol = 0.1;
+    private double vol = 0.1;
 
     // Audio files
-    private static final File pop1 = new File("sounds/pop1.wav");
-    private static final File pop2 = new File("sounds/pop2.wav");
-    private static final File pop3 = new File("sounds/pop3.wav");
-    private static final File fx2 = new File("sounds/fx2.wav");
-    private static final File fx3 = new File("sounds/fx3.wav");
-    private static final File fx8 = new File("sounds/fx8.wav");
-    private static final File laser = new File("sounds/laser.wav");
+    private final File pop1 = new File("resources/sounds/pop1.wav");
+    private final File pop2 = new File("resources/sounds/pop2.wav");
+    private final File pop3 = new File("resources/sounds/pop3.wav");
+    private final File fx2 = new File("resources/sounds/fx2.wav");
+    private final File fx3 = new File("resources/sounds/fx3.wav");
+    private final File fx8 = new File("resources/sounds/fx8.wav");
+    private final File laser = new File("resources/sounds/laser.wav");
 
     /**
      * This methods plays a audio clip from MediaPlayer and takes wav/mp3 file as parameter input.
@@ -35,7 +36,7 @@ public class Sound {
      *
      * @param sound File
      */
-    public static void play(File sound) {
+    public void play(File sound) {
 
         try {
             MediaPlayer audio = new MediaPlayer(
