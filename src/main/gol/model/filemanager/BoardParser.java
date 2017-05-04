@@ -36,19 +36,25 @@ public class BoardParser {
     public void parseURL(String inURL) throws Exception {
 
         URL url = new URL(inURL);
+        URLConnection countConn = url.openConnection();
         URLConnection conn = url.openConnection();
 
-        // Count what is to be rows and cols of the board
+        // Count what is to be approx rows and cols of the board
+        // Still some bugs!!!
+        // CHECK OUT http://conwaylife.com/wiki/258P3_on_Achim%27s_p11
         BufferedReader count = new BufferedReader(
-                new InputStreamReader(conn.getInputStream(),charset));
+                new InputStreamReader(countConn.getInputStream(), charset));
+
         int lines = 0;
-        cols = count.readLine().length();
+        cols = count.readLine().length() * 2;
+        System.out.println("Cols: " + cols);
         while (count.readLine() != null) lines++;
-        rows = lines;
+        rows = lines - 4;
+        System.out.println("Rows " + rows);
         count.close();
 
         BufferedReader reader = new BufferedReader(
-                new InputStreamReader(conn.getInputStream(),charset));
+                new InputStreamReader(conn.getInputStream(), charset));
         parser(reader);
     }
 
@@ -87,7 +93,7 @@ public class BoardParser {
      *
      * @param reader BufferedReader
      */
-    private void parser(BufferedReader reader)  {
+    private void parser(BufferedReader reader) {
 
         try {
             Config config = new Config();
