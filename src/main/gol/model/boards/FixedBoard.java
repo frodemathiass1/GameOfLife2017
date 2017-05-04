@@ -4,7 +4,6 @@ import main.gol.model.Cell;
 import main.gol.model.Rules;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -17,7 +16,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author Frode Kristian Mathiassen
  * @author Tommy Pedersen
  * @author Magnus Kjernsli Hansen-Mollerud
- * @version 1.0
+ * @version 1.2
  * @deprecated
  * @see DynamicBoard
  */
