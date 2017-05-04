@@ -579,8 +579,7 @@ public class GUIController implements Initializable {
             draw.drawCell(cell);
 
         } catch (NullPointerException ne) {
-            // Don´t print this...
-            // System.err.println("Clicks draw of bounds !");
+
         }
     }
 

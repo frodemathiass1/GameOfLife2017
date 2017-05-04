@@ -4,6 +4,7 @@ import main.gol.model.Cell;
 import main.gol.model.Rules;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -253,6 +254,17 @@ public class DynamicBoard {
 
         Cell cell = getCell(x, y);
         return cell.countAliveNeighbors();
+    }
+
+    /**
+     * Counts the alive cells for this board
+     * @return the number of alive cells
+     */
+    public int getAliveCells() {
+        return (int) this.grid.stream()
+                .flatMap(Collection::stream)
+                .filter(Cell::getState)
+                .count();
     }
 
     /**
