@@ -44,7 +44,6 @@ public class BoardParser {
         // CHECK OUT http://conwaylife.com/wiki/258P3_on_Achim%27s_p11
         BufferedReader count = new BufferedReader(
                 new InputStreamReader(countConn.getInputStream(), charset));
-
         int lines = 0;
         cols = count.readLine().length() * 2;
         System.out.println("Cols: " + cols);
