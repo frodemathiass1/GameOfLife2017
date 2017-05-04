@@ -7,9 +7,9 @@ import org.junit.Test;
 
 /**
  * The testNextGeneration tests makes sure the Game of Life rules works as intended. The test creates a board and
- * runs the nextGeneration method on it. Then it stores the outcome as a string in a "actual"-variable after nextGeneration has run.
- * Then we manually figure out what the string should look like after the rules have run and store it in a "expected"-variable.
- * When that is done we run a assertEquals to make sure the test was successful.
+ * runs the nextGeneration method on it. Then it stores the outcome as a string in a "actual"-variable after nextGeneration has chooseAndSelectType.
+ * Then we manually figure out what the string should look like after the rules have chooseAndSelectType and store it in a "expected"-variable.
+ * When that is done we chooseAndSelectType a assertEquals to make sure the test was successful.
  * @see org.junit.Test
  */
 public class DynamicBoardTest {

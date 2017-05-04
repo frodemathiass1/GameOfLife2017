@@ -312,7 +312,7 @@ public class GUIController implements Initializable {
     public void loadFileFromDisk() {
 
         FileHandler fileHandler = new FileHandler();
-        fileHandler.run(); // Todo: noe forvirrende med run først og parse etterpå
+        fileHandler.chooseAndSelectType();
         runFile();
     }
 

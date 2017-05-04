@@ -20,7 +20,7 @@ public class FileHandler extends Thread {
     /**
      * fileSelect lets you choose a file and gets the file type value.
      */
-    public void run() {
+    public void chooseAndSelectType() {
 
         choose();
         fileSelectType(theFile);
