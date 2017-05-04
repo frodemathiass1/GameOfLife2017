@@ -25,11 +25,10 @@ public class URLHandler {
      * @param inURL String
      * @throws Exception e
      */
-    public void selectUrlType(String inURL) throws Exception {
-
-        URL url = new URL(inURL);
+    public void selectUrlType(String inURL) {
 
         try {
+            URL url = new URL(inURL);
             String[] fileType = url.getFile().split("[.]");
             int itemCount = fileType.length;
             if (fileType[itemCount - 1].contains("txt") || fileType[itemCount - 1].contains("cells")) {
@@ -41,7 +40,6 @@ public class URLHandler {
             }
         } catch (Exception e) {
             dialog.urlError();
-            System.err.println("Error: " + e);
         }
     }
 

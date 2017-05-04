@@ -12,7 +12,7 @@ import java.io.*;
  *
  * @version 2.0
  */
-public class FileHandler {
+public class FileHandler extends Thread {
 
     private static File theFile;
     private static String theFileType;
@@ -20,7 +20,7 @@ public class FileHandler {
     /**
      * fileSelect lets you choose a file and gets the file type value.
      */
-    public void fileSelect() {
+    public void run() {
 
         choose();
         fileSelectType(theFile);
@@ -29,7 +29,7 @@ public class FileHandler {
     /**
      * This method opens a new fileChooser and let you select .txt / .cells / .rle files.
      */
-    public void choose()  {
+    public void choose() {
 
         try {
             FileChooser chooser = new FileChooser();
@@ -50,7 +50,7 @@ public class FileHandler {
      *
      * @param theFile File
      */
-    public void fileSelectType(File theFile)  {
+    public void fileSelectType(File theFile) {
 
         try {
             String[] fileType = theFile.getName().split("[.]");

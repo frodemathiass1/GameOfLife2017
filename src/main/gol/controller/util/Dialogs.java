@@ -129,7 +129,7 @@ public class Dialogs {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("File info");
-        alert.setHeaderText(info.getName());
+        alert.setHeaderText(info.getTheName());
         alert.setContentText("By: " + info.getOrigin() + "\n\n" + info.getContent() + "\n\n" + info.getLink() + "\n\n");
         alert.showAndWait();
     }

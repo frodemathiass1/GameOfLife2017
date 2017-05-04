@@ -215,7 +215,7 @@ public class Decoder {
      *
      * @return String Name
      */
-    public String getName() {
+    public String getTheName() {
         return Name;
     }
 
@@ -247,7 +247,7 @@ public class Decoder {
     }
 
     // MAKE JAVADOCS...
-    public static void setName(String name) {
+    public static void getTheName(String name) {
         Name = name;
     }
 

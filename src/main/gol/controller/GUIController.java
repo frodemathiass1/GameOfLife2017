@@ -165,7 +165,7 @@ public class GUIController implements Initializable {
         // Show the file info.
         Decoder info = new Decoder();
         fileInfo.setDisable(false);
-        fileInfo.setText("(" + info.getName() + ")");
+        fileInfo.setText("(" + info.getTheName() + ")");
         fileInfo.setStyle("-fx-font-weight: bold;");
     }
 
@@ -245,7 +245,7 @@ public class GUIController implements Initializable {
         file5.setOnAction(e -> handleFile("resources/patterns/cow.cells"));
         fileBlock.setOnAction(e -> {
             handleFile("resources/patterns/block.txt");
-            Decoder.setName("A BIG BLOCK!");
+            Decoder.getTheName("A BIG BLOCK!");
             Decoder.setOrigin("Tommy Pedersen");
             Decoder.setContent("This block was created by one of the coders for this project.");
             Decoder.setLink("Not published on internet");
@@ -290,7 +290,7 @@ public class GUIController implements Initializable {
     @FXML
     public void loadFileFromDisk() {
 
-        fh.fileSelect();
+        (new FileHandler()).run();
         fileParser();
     }
 
