@@ -97,7 +97,6 @@ public class Cell {
 
     /**
      * This method initialize each cell's neighbors in a given FixedBoard.
-     * DUPLICATE CODE!
      *
      * @param board FixedBoard
      */

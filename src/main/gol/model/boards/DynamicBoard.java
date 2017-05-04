@@ -149,7 +149,6 @@ public class DynamicBoard {
      * This method populates the next generation of cells in a generation list.
      * Checks each cell for its state, then checks each neighbors state and counts surrounding live cells,
      * then finally collects the next generation of cells in an ArrayList.
-     * @version 2.0 multi thread
      */
     public void nextGeneration() {
         // We use 4 worker threads for this task, we don't want to start too many threads because creating threads

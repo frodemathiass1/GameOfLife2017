@@ -95,7 +95,7 @@ public class FixedBoard {
         ArrayList<Cell> generationList = new ArrayList<>();
         Rules rules = new Rules();
 
-        // This method is re-written to enable thread support after updating the dynamic board.
+        // This loop is re-written to enable thread support after updating the dynamic board.
         for (int x = 0; x < grid.length; x++) {
             int finalX = x;
             threadPool.submit(()->{
