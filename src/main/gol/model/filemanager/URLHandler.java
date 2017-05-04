@@ -36,7 +36,7 @@ public class URLHandler {
             } else if (fileType[itemCount - 1].contains("rle")) {
                 theUrlType = "RLE Url";
                 Decoder RLE = new Decoder();
-                RLE.RLEDecodeURL(inURL);
+                RLE.readAndDecodeURL(inURL);
             }
         } catch (Exception e) {
             dialog.urlError();

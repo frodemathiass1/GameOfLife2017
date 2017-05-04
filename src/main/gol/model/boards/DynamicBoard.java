@@ -166,6 +166,8 @@ public class DynamicBoard {
 
     }
 
+
+
     /**
      * This method generates a random set of alive cells and adds them to the generation list.
      */

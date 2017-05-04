@@ -60,9 +60,9 @@ public class GUIController implements Initializable {
     private Config config;
     private Colors colors;
     private Draw draw;
-    private FileHandler fh = new FileHandler();
-    private URLHandler uh = new URLHandler();
-    private BoardParser bp = new BoardParser();
+    private FileHandler fileHandler;
+    private URLHandler urlHandler;
+    private BoardParser boardParser;
 
     /**
      * This method is overridden from initializable interface.
@@ -76,7 +76,8 @@ public class GUIController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         try {
-            initializeGraphicsAndSounds();  // Initialize Dialogs, Sound, and GraphicsContext
+            // Initialize needed objects
+            initializeObjects();
 
            // Set default gameBoard and draw it to canvas
             board = new DynamicBoard(config.getRows(), config.getColumns());
@@ -93,12 +94,14 @@ public class GUIController implements Initializable {
             timeline.getKeyFrames().add(kf);
             timeline.setCycleCount(Timeline.INDEFINITE);
 
-            initializeObservables(); // Init observable gui components
+            // Initialize observable gui components & fire off a pattern
+            initializeObservables();
+            file10.fire();
 
-            //url8.fire();
         } catch(Exception e) {
             e.printStackTrace();
             System.err.println("Oops. Something went wrong when firing up the application!");
+            System.out.println(e.getMessage());
             dialog.oops();
             quit();
         }
@@ -111,7 +114,7 @@ public class GUIController implements Initializable {
     /**
      * Wrapper: This method is a wrapper/container for instantiating needed objects.
      */
-    private void initializeGraphicsAndSounds() {
+    private void initializeObjects() {
 
         config = new Config();
         colors = new Colors();
@@ -148,18 +151,23 @@ public class GUIController implements Initializable {
         try {
             this.board = new DynamicBoard(config.getRows(), config.getColumns());
             this.board.setBoard(board);
-            //this.board.setCellState(6, 8, true);
+            //this.board.setCellState(6, 8, true); // Expand board
             draw.drawBoard(this.board.getGrid());
-            zoomSlider.setValue(5);
+            zoomSlider.setValue(zoomSlider.getMin());
+
         } catch (NullPointerException ne) {
             System.err.println("NullPointer Exception!");
             ne.printStackTrace();
+
         } catch (ArrayIndexOutOfBoundsException oob) {
             System.err.println("ArrayIndex out of bounds!");
             oob.printStackTrace();
         }
     }
 
+    /**
+     *  ToDo: lage egen styleClass og sette Bold font i CSS fila + javadoc
+     */
     private void setFileInfo() {
 
         // Show the file info.
@@ -167,52 +175,64 @@ public class GUIController implements Initializable {
         fileInfo.setDisable(false);
         fileInfo.setText("(" + info.getTheName() + ")");
         fileInfo.setStyle("-fx-font-weight: bold;");
+
     }
 
-    private void fileParser() {
+    /**
+     *  ToDo: lage egen styleClass og sette Bold font i CSS fila + javadoc
+     */
+    private void runFile() {
 
         try {
+            fileHandler = new FileHandler();
+            boardParser = new BoardParser();
+
             // Get correct file type, and parse to BoardParser.
-            if (fh.getTheFileType().equals("RLE File")) {
+            if (fileHandler.getTheFileType().equals("RLE File")) {
                 // Instantiate a new temp file, and delete it after use.
                 File temp = new File("temp.gol");
-                bp.parseFile(temp);
+                boardParser.readAndParseFile(temp);
                 temp.delete();
-            } else if (fh.getTheFileType().equals("Text File")) {
+            } else if (fileHandler.getTheFileType().equals("Text File")) {
                 // Plaintext files is parsed directly.
-                bp.parseFile(fh.getTheFile());
+                boardParser.readAndParseFile(fileHandler.getTheFile());
             }
             // Reset the old board
             board.clearBoard();
             updateColorPickerValues();
             // Draw the new board.
-            newBoard(bp.getTheBoard());
+            newBoard(boardParser.getTheBoard());
             setFileInfo();
+
         } catch (Exception e) {
             dialog.fileError();
-            System.err.println("Error: " + e);
+            System.err.println("Error: " + e.getMessage());
         }
     }
 
-    private void urlParser(String url) {
+    private void runURL(String url) {
 
         try {
-            uh.selectUrlType(url);
-            if (uh.getUrlType().equals("RLE Url")) {
+            urlHandler = new URLHandler();
+            boardParser = new BoardParser();
+            urlHandler.selectUrlType(url);
+
+            if (urlHandler.getUrlType().equals("RLE Url")) {
                 // Instantiate a new temp file, and delete it after use.
                 File temp = new File("temp.gol");
-                bp.parseFile(temp);
+                boardParser.readAndParseFile(temp);
                 temp.delete();
-            } else if (uh.getUrlType().equals("Text Url")) {
+            } else if (urlHandler.getUrlType().equals("Text Url")) {
                 // Plaintext URLs is parsed directly.
-                bp.parseURL(url);
+                boardParser.readAndParseURL(url);
             }
             // Reset the old board.
             board.clearBoard();
             updateColorPickerValues();
             // Draw the new board.
-            newBoard(bp.getTheBoard());
+            newBoard(boardParser.getTheBoard());
             setFileInfo();
+
         } catch (Exception e) {
             dialog.urlError();
             System.err.println("Something went wrong reading the URL.");
@@ -266,7 +286,7 @@ public class GUIController implements Initializable {
      */
     private  void handleURL(String url) {
 
-        urlParser(url);
+        runURL(url);
     }
 
     /**
@@ -278,9 +298,10 @@ public class GUIController implements Initializable {
     private void handleFile(String path) {
 
         File file = new File(path);
-        fh.setTheFile(file);
-        fh.fileSelectType(file);
-        fileParser();
+        fileHandler = new FileHandler();
+        fileHandler.setTheFile(file);
+        fileHandler.fileSelectType(file);
+        runFile();
     }
 
     /**
@@ -290,8 +311,9 @@ public class GUIController implements Initializable {
     @FXML
     public void loadFileFromDisk() {
 
-        (new FileHandler()).run();
-        fileParser();
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.run(); // Todo: noe forvirrende med run først og parse etterpå
+        runFile();
     }
 
     /**
@@ -313,7 +335,7 @@ public class GUIController implements Initializable {
             if (!(result.get().toLowerCase().startsWith("http"))) {
                 dialog.httpError();
             } else {
-                urlParser(result.get());
+                runURL(result.get());
             }
         }
     }
@@ -386,6 +408,7 @@ public class GUIController implements Initializable {
         board.clearBoard();
         try {
             setRandomColor();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

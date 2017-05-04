@@ -46,12 +46,15 @@ public class Sound {
                                 new File(valueOf(sound)).toURI().toString()));
                 audio.setVolume(vol);
                 audio.play();
+
             } catch (MediaException me) {
                 Dialogs dialogs = new Dialogs();
                 dialogs.audioError();
                 System.err.println("Cant load the damn file.. ");
+                System.err.println(me.getMessage());
+
             } catch (RuntimeException re) {
-                re.printStackTrace();
+                System.err.println(re.getMessage());
             }
         });
         thread.start();

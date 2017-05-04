@@ -59,7 +59,7 @@ public class FileHandler extends Thread {
             } else if (fileType[1].contains("rle")) {
                 theFileType = "RLE File";
                 Decoder RLE = new Decoder();
-                RLE.RLEDecodeFile(FileHandler.theFile);
+                RLE.readAndDecodeFile(FileHandler.theFile);
             }
         } catch (Exception e) {
             System.err.println("Error:" + e);

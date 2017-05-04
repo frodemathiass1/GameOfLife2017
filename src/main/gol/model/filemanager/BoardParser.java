@@ -11,7 +11,7 @@ import java.nio.charset.Charset;
 /**
  * The BoardParser class gets files and URLs, and parses them to the main decoder.
  * <p>
- * It is separated into tree different methods. parseURL, parseFile an parser.
+ * It is separated into tree different methods. readAndParseURL, readAndParseFile an parser.
  * The first two is to separate files and URLs, and the third is the parser itself.
  *
  * @version 1.1
@@ -21,11 +21,13 @@ public class BoardParser {
     private static final Charset charset = Charset.forName("US-ASCII");
     private final Dialogs dialog = new Dialogs();
     private byte[][] theBoard;
-    public static int rows = 0;
-    public static int cols = 0;
+    private static int rows = 0;
+    private static int cols = 0;
+
+
 
     /**
-     * parseURL gets the URL as a string, and parse it along to the parser method.
+     * readAndParseURL gets the URL as a string, and parse it along to the parser method.
      * <p>
      * To accomplish this, the string is converted to a URL, and a connection is opened.
      * BufferedReader is instantiated so the parser can read the content of the URL.
@@ -33,7 +35,7 @@ public class BoardParser {
      * @param inURL String
      * @throws Exception e
      */
-    public void parseURL(String inURL) throws Exception {
+    public void readAndParseURL(String inURL) throws Exception {
 
         URL url = new URL(inURL);
         URLConnection countConn = url.openConnection();
@@ -49,8 +51,10 @@ public class BoardParser {
                 lines++;
             }
             rows = lines - 3; // Most plaintext files have 3 lines of info, so remove those.
+
         } catch (IOException ioe) {
             System.out.println("Error occurred calculating rows and cols in this URL.");
+            System.out.println(ioe.getMessage());
         }
 
         // Parse the URL
@@ -58,20 +62,21 @@ public class BoardParser {
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(conn.getInputStream(), charset));
             parser(reader);
+
         } catch (IOException ioe) {
             dialog.urlError();
         }
     }
 
     /**
-     * parseFile gets the file, and parse it along to the parser method.
+     * readAndParseFile gets the file, and parse it along to the parser method.
      * <p>
      * To accomplish this, BufferedReader is instantiated so the parser can read the content of the file.
      *
      * @param inFile File
      * @throws Exception e
      */
-    public void parseFile(File inFile) throws Exception {
+    public void readAndParseFile(File inFile) throws Exception {
 
         // Count what is to be rows and cols of the board
         try {
@@ -84,8 +89,10 @@ public class BoardParser {
                 lines++;
             }
             rows = lines;
+
         } catch (IOException ioe) {
             System.out.println("Error occurred calculating rows and cols in this file.");
+            System.out.println(ioe.getMessage());
         }
 
         // Parse the board
@@ -94,6 +101,7 @@ public class BoardParser {
                     new InputStreamReader(
                             new FileInputStream(inFile), charset));
             parser(reader);
+
         } catch (IOException ioe) {
             dialog.fileError();
         }
@@ -113,21 +121,25 @@ public class BoardParser {
             Config config = new Config();
             byte[][] board = new byte[config.getRows()][config.getColumns()];
             Decoder decoder = new Decoder();
-            decoder.TXTDecode(reader, board);
+            decoder.decodeText(reader, board);
             theBoard = board; // update global variable
+
         } catch (FileNotFoundException fnf) {
             dialog.notFoundException();
+
         } catch (IOException ioe) {
             System.err.println("Error reading file");
+
         } catch (ArrayIndexOutOfBoundsException oob) {
             System.err.println("Error loading file. (Mismatch) Index out of bounds. ");
+
         } catch (Exception e) {
             System.err.println("Error: " + e);
         }
     }
 
     /**
-     * This method returns the gameBoard byte[][] array
+     * This method returns the gameBoard byte[][] array.
      *
      * @return byte[][] theBoard
      */
@@ -135,18 +147,38 @@ public class BoardParser {
         return this.theBoard;
     }
 
+    /**
+     * This method returns the number of rows.
+     *
+     * @return int
+     */
     public static int getRows() {
         return rows;
     }
 
+    /**
+     * This method returns the number of columns.
+     *
+     * @return int
+     */
     public static int getCols() {
         return cols;
     }
 
+    /**
+     * This method sets the number of rows.
+     *
+     * @param rows int
+     */
     public static void setRows(int rows) {
         BoardParser.rows = rows;
     }
 
+    /**
+     * This method sets the number of columns.
+     *
+     * @param cols int
+     */
     public static void setCols(int cols) {
         BoardParser.cols = cols;
     }

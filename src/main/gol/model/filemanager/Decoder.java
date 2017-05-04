@@ -23,90 +23,36 @@ public class Decoder {
     private static String Origin = "Unknown.";
     private static String Content = "No content in this file.";
     private static String Link = "No links in this file.";
+    private BufferedReader reader;
+
+
 
     /**
-     * This method is a parser for plaintext pattern files.
-     *
-     * @param reader BufferedReader
-     * @param board  byte[][]
-     * @throws Exception e
-     */
-    void TXTDecode(BufferedReader reader, byte[][] board) throws Exception {
-
-        int y = 0;
-        String line;
-
-        try {
-            // Calculate the position of the loaded board
-            int colSpacer = (80 - (BoardParser.getCols() / 2));
-            int rowSpacer = (48 - (BoardParser.getRows() / 2));
-            while ((line = reader.readLine()) != null) {
-                // Set the file info
-                if (line.startsWith("!Name")) {
-                    Name = line.substring(7);
-                } else if (line.startsWith("!Author")) {
-                    Origin = line.substring(9);
-                } else if (line.startsWith("!")) {
-                    if (line.startsWith("!www") || (line.startsWith("!http"))) {
-                        Link = line.substring(1);
-                    } else {
-                        Content = line.substring(1);
-                    }
-                }
-                // Decode the file
-                if (!line.startsWith("!")) {
-                    y++;
-                    for (int x = 0; x < line.length(); x++) {
-                        char dead = '.';
-                        if (line.charAt(x) == dead) {
-                            board[y + rowSpacer][x + colSpacer] = 0; // Push cell index position
-                        }
-                        char alive = 'O';
-                        if (line.charAt(x) == alive) {
-                            board[y + rowSpacer][x + colSpacer] = 1; // Push cell index position
-                        }
-                        if (line.charAt(x) == ' ') {
-                            y++;
-                        }
-                    }
-                }
-            }
-            // Reset the spacer calculations
-            BoardParser.setCols(0);
-            BoardParser.setRows(0);
-        } catch (ArrayIndexOutOfBoundsException oob) {
-            Dialogs dialog = new Dialogs();
-            dialog.oops();
-            System.err.println("ArrayIndex out of bounds!");
-        }
-    }
-
-    /**
-     * Files is parsed to this method, and the RLEDecode method writes the temp files for further use.
+     * Files is parsed to this method, and the decodeRLE method writes the temp files for further use.
      *
      * @param theFile File
      * @throws Exception e
      */
-    void RLEDecodeFile(File theFile) throws Exception {
+    public void readAndDecodeFile(File theFile) throws Exception {
 
-        BufferedReader reader = new BufferedReader(
+        reader = new BufferedReader(
                 new InputStreamReader(new FileInputStream(theFile)));
-        RLEDecode(reader);
+        decodeRLE(reader);
     }
 
     /**
-     * URLs is parsed to this method, and the RLEDecode method writes the temp files for further use.
+     * URLs is parsed to this method, and the decodeRLE method writes the temp files for further use.
      *
      * @param inURL String
      * @throws Exception e
      */
-    void RLEDecodeURL(String inURL) throws Exception {
+    public void readAndDecodeURL(String inURL) throws Exception {
 
         URL url = new URL(inURL);
         URLConnection conn = url.openConnection();
-        BufferedReader reader = new BufferedReader(
+        reader = new BufferedReader(
                 new InputStreamReader(conn.getInputStream()));
-        RLEDecode(reader);
+        decodeRLE(reader);
     }
 
     /**
@@ -117,12 +63,12 @@ public class Decoder {
      * <p>
      * The plaintext decoder uses '.' for dead cells, and 'O' for live cells.
      * Therefor the StringBuilder builds the matrix after these criteria.
-     * In other words, RLEDecode converts RLE files to plaintext files.
+     * In other words, decodeRLE converts RLE files to plaintext files.
      *
      * @param reader BufferedReader
      * @throws Exception e
      */
-    private void RLEDecode(BufferedReader reader) throws Exception {
+    public void decodeRLE(BufferedReader reader) throws Exception {
 
         try {
             // Variables for the loop
@@ -205,8 +151,67 @@ public class Decoder {
             File temp = new File("temp.gol");
             // Delete on exit as a fail-safe if the handler fails.
             temp.deleteOnExit();
+
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
+        }
+    }
+
+    /**
+     * This method is a parser for plaintext pattern files.
+     *
+     * @param reader BufferedReader
+     * @param board  byte[][]
+     * @throws Exception e
+     */
+    public void decodeText(BufferedReader reader, byte[][] board) throws Exception {
+
+        int y = 0;
+        String line;
+
+        try {
+            // Calculate the position of the loaded board
+            int colSpacer = (80 - (BoardParser.getCols() / 2));
+            int rowSpacer = (48 - (BoardParser.getRows() / 2));
+            while ((line = reader.readLine()) != null) {
+                // Set the file info
+                if (line.startsWith("!Name")) {
+                    Name = line.substring(7);
+                } else if (line.startsWith("!Author")) {
+                    Origin = line.substring(9);
+                } else if (line.startsWith("!")) {
+                    if (line.startsWith("!www") || (line.startsWith("!http"))) {
+                        Link = line.substring(1);
+                    } else {
+                        Content = line.substring(1);
+                    }
+                }
+                // Decode the file
+                if (!line.startsWith("!")) {
+                    y++;
+                    for (int x = 0; x < line.length(); x++) {
+                        char dead = '.';
+                        if (line.charAt(x) == dead) {
+                            board[y + rowSpacer][x + colSpacer] = 0; // Push cell index position
+                        }
+                        char alive = 'O';
+                        if (line.charAt(x) == alive) {
+                            board[y + rowSpacer][x + colSpacer] = 1; // Push cell index position
+                        }
+                        if (line.charAt(x) == ' ') {
+                            y++;
+                        }
+                    }
+                }
+            }
+            // Reset the spacer calculations
+            BoardParser.setCols(0);
+            BoardParser.setRows(0);
+
+        } catch (ArrayIndexOutOfBoundsException oob) {
+            Dialogs dialog = new Dialogs();
+            dialog.oops();
+            System.err.println("ArrayIndex out of bounds!");
         }
     }
 
@@ -246,19 +251,38 @@ public class Decoder {
         return Link;
     }
 
-    // MAKE JAVADOCS...
+    /**
+     * This method sets the name of the file.
+     *
+     * @param name String
+     */
     public static void getTheName(String name) {
         Name = name;
     }
 
+    /**
+     * This method sets the origin details of the file.
+     *
+     * @param origin String
+     */
     public static void setOrigin(String origin) {
         Origin = origin;
     }
 
+    /**
+     * This method sets the content text.
+     *
+     * @param content String
+     */
     public static void setContent(String content) {
         Content = content;
     }
 
+    /**
+     * This method sets the file link.
+     *
+     * @param link String
+     */
     public static void setLink(String link) {
         Link = link;
     }
