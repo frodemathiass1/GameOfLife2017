@@ -15,11 +15,11 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.BorderPane?>
 
-<FlowPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.GUIController">
-    <children>
-        <MenuBar maxHeight="35" maxWidth="800" prefHeight="35.0" prefWidth="800" styleClass="context-menu, menu, menu-item" stylesheets="@stylesheet.css">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.GUIController">
+    <top>
+        <MenuBar prefHeight="35.0" BorderPane.alignment="CENTER" styleClass="context-menu, menu, menu-item" stylesheets="@stylesheet.css">
             <Menu styleClass="context-menu, menu, menu-item, highlight" text="File">
                 <MenuItem onAction="#loadFileFromDisk" styleClass="context-menu, menu, menu-item, highlight" text="Open File" />
                 <MenuItem onAction="#loadFileFromURL" styleClass="context-menu, menu, menu-item, highlight" text="Open URL" />
@@ -75,10 +75,12 @@
                 <MenuItem onAction="#showFileInfo" styleClass="context-menu, menu, menu-item, highlight" text="Show file info" />
             </Menu>
         </MenuBar>
-
-        <Canvas fx:id="canvas" height="520" onMouseClicked="#handleMouseEvent" onMouseDragged="#handleMouseEvent" width="800.0" />
-
-        <ToolBar maxHeight="45" maxWidth="800" prefHeight="45.0" prefWidth="800.0" styleClass="context-menu, menu, menu-item" stylesheets="@stylesheet.css">
+    </top>
+    <center>
+        <Canvas fx:id="canvas" height="520.0" width="800.0" BorderPane.alignment="CENTER" onMouseClicked="#handleMouseEvent" onMouseDragged="#handleMouseEvent" />
+    </center>
+    <bottom>
+        <ToolBar prefHeight="45.0" BorderPane.alignment="CENTER" styleClass="context-menu, menu, menu-item" stylesheets="@stylesheet.css">
             <ToggleButton fx:id="play" prefHeight="20.0" prefWidth="65.0" styleClass="btnStyle, btn-border, toggle-play" text="Play" />
             <Button fx:id="next" onAction="#nextStep" prefHeight="20.0" prefWidth="75.0" styleClass="btnStyle, btn-border" text="Next" />
             <Button onAction="#reset" prefHeight="20.0" prefWidth="65.0" styleClass="btnStyle, btn-border" text="Clear" />
@@ -146,5 +148,5 @@
             <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL" />
             <ToggleButton fx:id="toggleSound" prefHeight="20.0" styleClass="sound-icon, highlight" translateX="1.0" />
         </ToolBar>
-    </children>
-</FlowPane>
+    </bottom>
+</BorderPane>

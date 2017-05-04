@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * This class handles all the Board logic and the Cells which represents the Grid.
+ * This class handles all the Board logic and its Cells which represents the Grid.
  * @see Cell
  * @version 2.0
  */
