@@ -160,6 +160,15 @@ public class GUIController implements Initializable {
         }
     }
 
+    private void setFileInfo() {
+
+        // Show the file info.
+        Decoder info = new Decoder();
+        fileInfo.setDisable(false);
+        fileInfo.setText("(" + info.getName() + ")");
+        fileInfo.setStyle("-fx-font-weight: bold;");
+    }
+
     private void fileParser() {
 
         try {
@@ -178,10 +187,7 @@ public class GUIController implements Initializable {
             updateColorPickerValues();
             // Draw the new board.
             newBoard(bp.getTheBoard());
-            // Show file info.
-            Decoder info = new Decoder();
-            fileInfo.setDisable(false);
-            fileInfo.setText("("+info.getName()+")");
+            setFileInfo();
         } catch (Exception e) {
             dialog.fileError();
             System.err.println("Error: " + e);
@@ -206,10 +212,7 @@ public class GUIController implements Initializable {
             updateColorPickerValues();
             // Draw the new board.
             newBoard(bp.getTheBoard());
-            // Show file info.
-            Decoder info = new Decoder();
-            fileInfo.setDisable(false);
-            fileInfo.setText("("+info.getName()+")");
+            setFileInfo();
         } catch (Exception e) {
             dialog.urlError();
             System.err.println("Something went wrong reading the URL.");
@@ -238,9 +241,15 @@ public class GUIController implements Initializable {
         file1.setOnAction(e -> handleFile("resources/patterns/candelabra.cells"));
         file2.setOnAction(e -> handleFile("resources/patterns/candlefrobra.cells"));
         file3.setOnAction(e -> handleFile("resources/patterns/carnival_shuttle.cells"));
-        file4.setOnAction(e -> handleFile("resources/patterns/centinal.cells"));
+        file4.setOnAction(e -> handleFile("resources/patterns/158P3.cells"));
         file5.setOnAction(e -> handleFile("resources/patterns/cow.cells"));
-        fileBlock.setOnAction(e -> handleFile("resources/patterns/block.txt"));
+        fileBlock.setOnAction(e -> {
+            handleFile("resources/patterns/block.txt");
+            Decoder.setName("A BIG BLOCK!");
+            Decoder.setOrigin("Tommy Pedersen");
+            Decoder.setContent("This block was created by one of the coders for this project.");
+            Decoder.setLink("Not published on internet");
+        });
         // File actions RLE files
         file6.setOnAction(e -> handleFile("resources/patterns/mirage.rle"));
         file7.setOnAction(e -> handleFile("resources/patterns/loaflipflop.rle"));

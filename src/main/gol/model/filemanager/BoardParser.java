@@ -40,21 +40,27 @@ public class BoardParser {
         URLConnection conn = url.openConnection();
 
         // Count what is to be approx rows and cols of the board
-        // Still some bugs!!!
-        // CHECK OUT http://conwaylife.com/wiki/258P3_on_Achim%27s_p11
-        BufferedReader count = new BufferedReader(
-                new InputStreamReader(countConn.getInputStream(), charset));
-        int lines = 0;
-        cols = count.readLine().length() * 2;
-        System.out.println("Cols: " + cols);
-        while (count.readLine() != null) lines++;
-        rows = lines - 4;
-        System.out.println("Rows " + rows);
-        count.close();
+        try {
+            BufferedReader count = new BufferedReader(
+                    new InputStreamReader(countConn.getInputStream(), charset));
+            int lines = 0;
+            cols = count.readLine().length() * 2; // This just works! Length always seems to be half the real length.
+            while (count.readLine() != null) {
+                lines++;
+            }
+            rows = lines - 3; // Most plaintext files have 3 lines of info, so remove those.
+        } catch (IOException ioe) {
+            System.out.println("Error occurred calculating rows and cols in this URL.");
+        }
 
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(conn.getInputStream(), charset));
-        parser(reader);
+        // Parse the URL
+        try {
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(conn.getInputStream(), charset));
+            parser(reader);
+        } catch (IOException ioe) {
+            dialog.urlError();
+        }
     }
 
     /**
@@ -68,20 +74,29 @@ public class BoardParser {
     public void parseFile(File inFile) throws Exception {
 
         // Count what is to be rows and cols of the board
-        BufferedReader count = new BufferedReader(
-                new InputStreamReader(
-                        new FileInputStream(inFile), charset));
-        int lines = 0;
-        cols = count.readLine().length();
-        while (count.readLine() != null) lines++;
-        rows = lines;
-        count.close();
+        try {
+            BufferedReader count = new BufferedReader(
+                    new InputStreamReader(
+                            new FileInputStream(inFile), charset));
+            int lines = 0;
+            cols = count.readLine().length();
+            while (count.readLine() != null) {
+                lines++;
+            }
+            rows = lines;
+        } catch (IOException ioe) {
+            System.out.println("Error occurred calculating rows and cols in this file.");
+        }
 
         // Parse the board
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(
-                        new FileInputStream(inFile), charset));
-        parser(reader);
+        try {
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(
+                            new FileInputStream(inFile), charset));
+            parser(reader);
+        } catch (IOException ioe) {
+            dialog.fileError();
+        }
     }
 
     /**
@@ -98,16 +113,14 @@ public class BoardParser {
             Config config = new Config();
             byte[][] board = new byte[config.getRows()][config.getColumns()];
             Decoder decoder = new Decoder();
-            //decoder.boardCounter(reader);
             decoder.TXTDecode(reader, board);
             theBoard = board; // update global variable
         } catch (FileNotFoundException fnf) {
-            System.out.println("File not found");
             dialog.notFoundException();
         } catch (IOException ioe) {
             System.err.println("Error reading file");
         } catch (ArrayIndexOutOfBoundsException oob) {
-            System.out.println("Error loading file. (Mismatch) Index out of bounds. ");
+            System.err.println("Error loading file. (Mismatch) Index out of bounds. ");
         } catch (Exception e) {
             System.err.println("Error: " + e);
         }

@@ -39,7 +39,7 @@ public class Decoder {
         try {
             // Calculate the position of the loaded board
             int colSpacer = (80 - (BoardParser.getCols() / 2));
-            int rowSpacer = (46 - (BoardParser.getRows() / 2));
+            int rowSpacer = (48 - (BoardParser.getRows() / 2));
             while ((line = reader.readLine()) != null) {
                 // Set the file info
                 if (line.startsWith("!Name")) {
@@ -244,5 +244,22 @@ public class Decoder {
      */
     public String getLink() {
         return Link;
+    }
+
+    // MAKE JAVADOCS...
+    public static void setName(String name) {
+        Name = name;
+    }
+
+    public static void setOrigin(String origin) {
+        Origin = origin;
+    }
+
+    public static void setContent(String content) {
+        Content = content;
+    }
+
+    public static void setLink(String link) {
+        Link = link;
     }
 }

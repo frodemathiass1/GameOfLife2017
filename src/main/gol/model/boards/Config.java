@@ -11,7 +11,7 @@ public class Config {
 
     private static int cellSize = 5;
     private static int columns = 160;
-    private static int rows = 110;
+    private static int rows = 104;
 
 
     /**

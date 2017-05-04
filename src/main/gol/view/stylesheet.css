@@ -27,6 +27,7 @@
 }
 
 .btnStyle:hover {
+
     -fx-background-color: dimgray;
     -fx-opacity: 0.9;
     -fx-text-fill: black;
@@ -35,14 +36,12 @@
     -fx-font-weight: bold;
 }
 
-
 .highlight {
 
     -fx-background-radius: 3, 3;
     -fx-text-fill: black;
     -fx-font-size: 12px;
     -fx-background-color: lightgray;
-
 }
 
 .highlight:hover {
@@ -58,18 +57,16 @@
     -fx-text-fill: black;
     -fx-font-size: 11px;
     -fx-font-family: 'Segoe UI', sans-serif;
-
 }
 
 .toggle-play {
 
     -fx-background-color: lightgray;
-
 }
 
 .toggle-play:selected {
-    -fx-background-color: darkgray;
 
+    -fx-background-color: darkgray;
 }
 
 .colors-icon {
