@@ -19,8 +19,25 @@ public class DynamicBoardTest {
 
 
     @Test
-    public void setCellState() throws Exception {
+    public void testSetCellStateTrue() throws Exception {
 
+        //Act
+        db.setCellState(15, 15, true);
+        Cell expected = db.getCell(15, 15);
+
+        //Assert
+        org.junit.Assert.assertEquals(expected.getState(), true);
+    }
+
+    @Test
+    public void testSetCellStateFalse() throws Exception{
+        //Act
+        db.setCellState(20, 20, true);
+        Cell expected1 = db.getCell(19, 19);
+
+        //Assert
+        org.junit.Assert.assertEquals(expected1.getState(), false);
+        System.out.println(expected1.getState());
     }
 
 

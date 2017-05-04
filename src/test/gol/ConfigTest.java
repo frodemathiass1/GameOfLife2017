@@ -11,7 +11,7 @@ public class ConfigTest {
     Config config;
 
     @Test
-    public void testDefault() throws Exception {
+    public void testSetDefault() throws Exception {
 
         // Arrange
         config = new Config();
@@ -35,7 +35,7 @@ public class ConfigTest {
         config.setColumns(100);
 
         // Assert
-        assertEquals(100,config.getColumns());
+        assertEquals(100, config.getColumns());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class ConfigTest {
         config.setRows(50);
 
         // Assert
-        assertEquals(50,config.getRows());
+        assertEquals(50, config.getRows());
     }
 
     @Test

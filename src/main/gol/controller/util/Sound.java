@@ -38,19 +38,23 @@ public class Sound {
      */
     public void play(File sound) {
 
-        try {
-            MediaPlayer audio = new MediaPlayer(
-                    new Media(
-                            new File(valueOf(sound)).toURI().toString()));
-            audio.setVolume(vol);
-            audio.play();
-        } catch (MediaException me) {
-            Dialogs dialogs = new Dialogs();
-            dialogs.audioError();
-            System.err.println("Cant load the damn file.. ");
-        } catch (RuntimeException re) {
-            re.printStackTrace();
-        }
+
+        Thread thread = new Thread(() -> {
+            try {
+                MediaPlayer audio = new MediaPlayer(
+                        new Media(
+                                new File(valueOf(sound)).toURI().toString()));
+                audio.setVolume(vol);
+                audio.play();
+            } catch (MediaException me) {
+                Dialogs dialogs = new Dialogs();
+                dialogs.audioError();
+                System.err.println("Cant load the damn file.. ");
+            } catch (RuntimeException re) {
+                re.printStackTrace();
+            }
+        });
+        thread.start();
     }
 
     /**
@@ -117,4 +121,5 @@ public class Sound {
     public File getFx8() {
         return fx8;
     }
+
 }
