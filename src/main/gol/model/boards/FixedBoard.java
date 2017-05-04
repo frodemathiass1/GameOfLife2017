@@ -4,7 +4,12 @@ import main.gol.model.Cell;
 import main.gol.model.Rules;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * This class is the class that was used for the old game board with fixed size.
@@ -79,17 +84,41 @@ public class FixedBoard {
      * This method populates the next generation of cells in a generation list.
      * Checks each cell for its state, then checks each neighbors state and counts surrounding live cells.
      * Collects the next generation of cells in a ArrayList of Cell objects.
+     * @version 2.0
      */
     public void nextGeneration() {
+
+        // We use 4 worker threads for this task, we don't want to start too many threads because creating threads
+        // is somewhat expensive and it might counteract the purpose of threading it in the first place
+        ExecutorService threadPool = Executors.newFixedThreadPool(4);
+        ReentrantLock lock = new ReentrantLock();
 
         ArrayList<Cell> generationList = new ArrayList<>();
         Rules rules = new Rules();
 
+        // This method is re-written to enable thread support after updating the dynamic board.
         for (int x = 0; x < grid.length; x++) {
-            for (int y = 0; y < grid[x].length; y++) {
-                Cell cell = grid[x][y];
-                rules.checkRules(cell, generationList);
-            }
+            int finalX = x;
+            threadPool.submit(()->{
+                for (int y = 0; y < grid[finalX].length; y++) {
+                    if(rules.checkRules(grid[finalX][y])){
+                        lock.lock();
+                        try{
+                            generationList.add(getCell(finalX,y));
+                        } finally{
+                            lock.unlock();
+                        }
+                    }
+                }
+            });
+
+        }
+        threadPool.shutdown();
+
+        try {
+            threadPool.awaitTermination(30, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         // Update drawGeneration
         for (Cell cell : generationList) {

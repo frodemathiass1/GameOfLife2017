@@ -24,31 +24,51 @@ import java.util.ArrayList;
  */
 public class Rules {
 
-    /**
-     * This method checks checks if the rules applies to each drawCell, by checking its neighbors
-     * then adds it to the list of Cells
-     *
-     * @param cell Cell
-     * @param generations ArrayList
-     */
-    public void checkRules(Cell cell, ArrayList<Cell> generations) {
+//    /**
+//     * This method checks checks if the rules applies to each drawCell, by checking its neighbors
+//     * then adds it to the list of Cells
+//     *
+//     * @param cell Cell
+//     * @param generations ArrayList
+//     */
+//    public void checkRules(Cell cell, ArrayList<Cell> generations) {
+//
+//        if (cell.getState() && cell.countAliveNeighbors() < 2) {
+//            // dies, as if by underpopulation.
+//            cell.setNextState(false);
+//            generations.add(cell);
+//        } else if (cell.getState() && (cell.countAliveNeighbors() == 2 || cell.countAliveNeighbors() == 3)) {
+//            // lives on to the next drawGeneration.
+//            cell.setNextState(true);
+//            generations.add(cell);
+//        } else if (cell.getState() && cell.countAliveNeighbors() > 3) {
+//            // dies, as if by overpopulation.
+//            cell.setNextState(false);
+//            generations.add(cell);
+//        } else if (!cell.getState() && cell.countAliveNeighbors() == 3) {
+//            // becomes a live drawCell, as if by reproduction.
+//            cell.setNextState(true);
+//            generations.add(cell);
+//        }
+//    }
+
+    public boolean checkRules(Cell cell) {
 
         if (cell.getState() && cell.countAliveNeighbors() < 2) {
             // dies, as if by underpopulation.
             cell.setNextState(false);
-            generations.add(cell);
         } else if (cell.getState() && (cell.countAliveNeighbors() == 2 || cell.countAliveNeighbors() == 3)) {
             // lives on to the next drawGeneration.
             cell.setNextState(true);
-            generations.add(cell);
         } else if (cell.getState() && cell.countAliveNeighbors() > 3) {
             // dies, as if by overpopulation.
             cell.setNextState(false);
-            generations.add(cell);
         } else if (!cell.getState() && cell.countAliveNeighbors() == 3) {
             // becomes a live drawCell, as if by reproduction.
             cell.setNextState(true);
-            generations.add(cell);
+        } else {
+            return false;
         }
+        return true;
     }
 }

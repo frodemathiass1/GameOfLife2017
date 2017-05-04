@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * This class handles all the Board logic and the Cells which represents the Grid.
@@ -146,18 +150,41 @@ public class DynamicBoard {
      * This method populates the next generation of cells in a generation list.
      * Checks each cell for its state, then checks each neighbors state and counts surrounding live cells,
      * then finally collects the next generation of cells in an ArrayList.
+     * @version 2.0 multi thread
      */
     public void nextGeneration() {
+        // We use 4 worker threads for this task, we don't want to start too many threads because creating threads
+        // is somewhat expensive and it might counteract the purpose of threading it in the first place
+        ExecutorService threadPool = Executors.newFixedThreadPool(4);
+        ReentrantLock lock = new ReentrantLock();
 
         Rules rules = new Rules();
+
         ArrayList<Cell> generationList = new ArrayList<>();
 
-        for (int y = 0; y < this.grid.size(); y++) {
-            for (int x = 0; x < this.grid.get(y).size(); x++) {
-                Cell cell = this.grid.get(y).get(x);
-                rules.checkRules(cell, generationList);
-            }
+        // Iterate through each row and start a worker that checks the rule per cell in that row
+        for (List<Cell> row : grid) {
+            threadPool.submit(() -> {
+                for (Cell cell : row) {
+                    if (rules.checkRules(cell)) {
+                        lock.lock();
+                        try {
+                            generationList.add(cell);
+                        } finally {
+                            lock.unlock();
+                        }
+                    }
+                }
+            });
         }
+        threadPool.shutdown();
+
+        try {
+            threadPool.awaitTermination(30, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         // Update drawGeneration
         for (Cell cell : generationList) {
             cell.updateState();
@@ -165,7 +192,6 @@ public class DynamicBoard {
         this.generation = generationList;
 
     }
-
 
 
     /**

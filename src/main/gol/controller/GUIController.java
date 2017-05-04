@@ -96,7 +96,6 @@ public class GUIController implements Initializable {
 
             // Initialize observable gui components & fire off a pattern
             initializeObservables();
-            file10.fire();
 
         } catch(Exception e) {
             e.printStackTrace();
