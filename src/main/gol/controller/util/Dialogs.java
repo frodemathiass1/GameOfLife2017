@@ -4,7 +4,11 @@ import javafx.scene.control.Alert;
 import main.gol.model.filemanager.Decoder;
 
 /**
- * This class contains a collection of Dialog boxes with information presented to the user on GUI
+ * This class contains a collection of Dialog boxes with information presented to the user on GUI.
+ *
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.1
  */
 public class Dialogs {
@@ -22,7 +26,7 @@ public class Dialogs {
     }
 
     /**
-     * This method show info dialogBox about the creators of this application.
+     * This method show info dialogBox when errors occur.
      */
     public void oops() {
 
@@ -118,14 +122,14 @@ public class Dialogs {
         alert.setTitle("Instructions");
         alert.setHeaderText("How to use this application/game");
         alert.setContentText("Draw cells to canvas with mouse by clicking and dragging. Double click to enable drag-erase.\n\n" +
-                "Explore the menus for board manipulation.\n\n" +
-                "Load files from the web, predefined, or your own.");
+                "Explore the menus for board manipulation with, zoom , colors, animation speed and so on.\n\n" +
+                "Predefined patterns can be loaded from the web or by file from the 'Patterns' menu-selection.");
         alert.showAndWait();
     }
 
 
     /**
-     * This method shows meta data about the loaded file.
+     * This method shows metadata about the loaded file.
      */
     public void fileInfo() {
 

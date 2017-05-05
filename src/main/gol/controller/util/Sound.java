@@ -14,6 +14,9 @@ import static java.lang.String.*;
  * method for playing the audio files.
  * Sound downloaded from www.freeSound.org under Creative common licence.
  *
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.2
  */
 public class Sound {
@@ -32,7 +35,7 @@ public class Sound {
 
     /**
      * This methods plays a audio clip from MediaPlayer and takes wav/mp3 file as parameter input.
-     * Parses value the audio File to to a String, then plays it when triggered by action events.
+     * Parses the value of the audio File to to a String, then plays it when triggered by events.
      *
      * @param sound File
      */
@@ -67,6 +70,7 @@ public class Sound {
 
     /**
      * This method returns the laser clip.
+     *
      * @return File
      */
     public File getLaser() {
@@ -75,6 +79,7 @@ public class Sound {
 
     /**
      * This method returns the pop1 clip.
+     *
      * @return File
      */
     public File getPop1() {
@@ -83,6 +88,7 @@ public class Sound {
 
     /**
      * This method returns the pop2 clip.
+     *
      * @return File
      */
     public File getPop2() {
@@ -91,6 +97,7 @@ public class Sound {
 
     /**
      * This method returns the pop3 clip.
+     *
      * @return File
      */
     public File getPop3() {
@@ -99,6 +106,7 @@ public class Sound {
 
     /**
      * This method returns the fx2 clip.
+     *
      * @return File
      */
     public File getFx2() {
@@ -107,6 +115,7 @@ public class Sound {
 
     /**
      * This method returns the fx3 clip.
+     *
      * @return File
      */
     public File getFx3() {
@@ -115,6 +124,7 @@ public class Sound {
 
     /**
      * This method returns the fx8 clip.
+     *
      * @return File
      */
     public File getFx8() {

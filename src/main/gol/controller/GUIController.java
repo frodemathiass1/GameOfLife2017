@@ -29,13 +29,13 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 /**
- * The GUIController class contains a series of functions that handles the GUI-elements and their
+ * The GUIController contains a series of functions that handles the GUI-elements and their
  * actionEvents to make the application do what its supposed to do.
  *
  * @author Frode Kristian Mathiassen
  * @author Tommy Pedersen
  * @author Magnus Kjernsli Hansen-Mollerud
- * @version 1.2
+ * @version 1.4
  */
 public class GUIController implements Initializable {
 
@@ -178,7 +178,7 @@ public class GUIController implements Initializable {
     }
 
     /**
-     *
+     * This method runs the files that are loaded from the File/Patterns menu-selection
      */
     private void runFile()  {
 
@@ -202,6 +202,8 @@ public class GUIController implements Initializable {
             // Draw the new board.
             newBoard(boardParser.getTheBoard());
             setFileInfo();
+            largest.fire();
+            zoomSlider.setValue(1);
 
         } catch (Exception e) {
             dialog.fileError();
@@ -209,6 +211,11 @@ public class GUIController implements Initializable {
         }
     }
 
+    /**
+     * This method runs the URL's that are loaded from the File/Patterns menu-selection
+     *
+     * @param url String
+     */
     private void runURL(String url) {
 
         try {
@@ -231,6 +238,9 @@ public class GUIController implements Initializable {
             // Draw the new board.
             newBoard(boardParser.getTheBoard());
             setFileInfo();
+            largest.fire();
+            zoomSlider.setValue(1);
+
 
         } catch (Exception e) {
             dialog.urlError();
@@ -313,6 +323,8 @@ public class GUIController implements Initializable {
         fileHandler = new FileHandler();
         fileHandler.chooseAndSelectType();
         runFile();
+        largest.fire();
+        zoomSlider.setValue(1);
     }
 
     /**

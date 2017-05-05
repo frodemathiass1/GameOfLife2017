@@ -5,17 +5,20 @@ import main.gol.model.boards.DynamicBoard;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * This testClass test the DynamicBoard methods, and that the algorithm works as intended.
+ * @see org.junit.Test
+ */
 public class DynamicBoardTest {
 
 
     final DynamicBoard db = new DynamicBoard(10,10);
 
     /**
-     * The testSetCellStateTrue and testSetCellStateFalse checks if the setCellState-method sets a new cell outside the
+     * These tests testSetCellStateTrue and testSetCellStateFalse checks if the setCellState-method sets a new cell outside the
      * arrayIndex bounds by expanding the grid and filling the empty slots in the ArrayList.
      * @throws Exception if exception occurred
      */
-
     @Test
     public void testSetCellStateTrue() throws Exception {
 
@@ -43,9 +46,7 @@ public class DynamicBoardTest {
      * runs the nextGeneration method on it. Then it stores the outcome as a string in a "actual"-variable after nextGeneration has chooseAndSelectType.
      * Then we manually figure out what the string should look like after the rules have chooseAndSelectType and store it in a "expected"-variable.
      * When that is done we chooseAndSelectType a assertEquals to make sure the test was successful.
-     * @see org.junit.Test
      */
-
     @Test
     public void testNextGeneration1() {
 
@@ -184,7 +185,6 @@ public class DynamicBoardTest {
         //Assert
         String actual = db.toString();
         String unexpected = "0000001001100001";
-        //actual = 0000011001110010
         Assert.assertNotEquals(unexpected, actual);
 
         //Console

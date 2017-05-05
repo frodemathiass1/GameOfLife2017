@@ -5,6 +5,9 @@ package main.gol.model.boards;
  * The variables and methods in this class are separated from the GUI controller
  * for easier management, manipulation and readability.
  *
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.2
  */
 public class Config {

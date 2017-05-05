@@ -11,7 +11,8 @@ import java.io.IOException;
 
 /**
  * This is the Main class to fire off the standalone application.
- * Sets a primary stage and scene with the fxml document as the root node containing all its children.
+ * Sets a primary stage and scene with the fxml document as the root node containing all its children
+ * in the overridden start method.
  */
 public class Main extends Application {
 

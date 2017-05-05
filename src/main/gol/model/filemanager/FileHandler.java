@@ -10,6 +10,9 @@ import java.io.*;
  * theFileType and theFile gets updated with the correct file type values,
  * and getters is used by other classes to retrieve the values.
  *
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
  * @version 2.0
  */
 public class FileHandler extends Thread {

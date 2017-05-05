@@ -12,16 +12,17 @@ import static org.junit.Assert.*;
 public class BoardParserTest {
 
     /**
-     *  This test checks that the boardParser method works as intended. The method is supposed to parse the
-     *  URL. The test checks if it gets the right amount of alive cells according to the pattern that is loaded.
+     * This test checks that the boardParser method works as intended. The method is supposed to parse the
+     * URL. The test checks if it gets the right amount of alive cells according to the pattern that is loaded.
      * @throws Exception if an exception occurred
      */
-
-
-
     @Test
     public void testBoardParser() throws Exception {
+
+        // Arrange
         BoardParser boardParser = new BoardParser();
+
+        // Act
         boardParser.readAndParseURL("http://www.conwaylife.com/patterns/beaconmaker.cells");
         DynamicBoard dynamicBoard = new DynamicBoard(32, 32);
         dynamicBoard.setBoard(boardParser.getTheBoard());

@@ -6,7 +6,7 @@ import org.junit.Test;
 
 
 /**
- * This test class tests if the next generation algorithm works as intended.
+ * This test class tests if the nextGeneration algorithm works as intended.
  * Returns a string of boolean values for hardcoded gameBoards and assert if the algorithm method
  * returns the correct set of values.
  * @see org.junit.Test

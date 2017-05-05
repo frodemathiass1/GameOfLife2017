@@ -6,6 +6,9 @@ import javafx.scene.paint.Color;
  * This class is used for setting default colors and for manipulation of Board colors
  * triggered by the GUI colorPickers.
  *
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.0
  */
 public class Colors {
@@ -28,6 +31,7 @@ public class Colors {
 
     /**
      * This method returns the gridLine color.
+     *
      * @return Color
      */
     public Color getGridLine() {
@@ -36,6 +40,7 @@ public class Colors {
 
     /**
      * This method returns the Cell color.
+     *
      * @return Color
      */
     public Color getCell() {
@@ -44,6 +49,7 @@ public class Colors {
 
     /**
      * This method returns the background color.
+     *
      * @return Color
      */
     public Color getBackground() {
@@ -51,6 +57,7 @@ public class Colors {
     }
 
     /**
+     * This method sets the gridLine color.
      *
      * @param gridLine Color
      */
@@ -60,6 +67,7 @@ public class Colors {
 
     /**
      * This method sets the Cell color.
+     *
      * @param cell Color
      */
     public void setCell(Color cell) {
@@ -68,6 +76,7 @@ public class Colors {
 
     /**
      * This method sets the background color.
+     *
      * @param background Color
      */
     public void setBackground(Color background) {

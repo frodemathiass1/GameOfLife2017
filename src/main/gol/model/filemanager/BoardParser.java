@@ -1,6 +1,5 @@
 package main.gol.model.filemanager;
 
-import main.gol.PatternFormatException;
 import main.gol.controller.util.Dialogs;
 import main.gol.model.boards.Config;
 
@@ -15,6 +14,9 @@ import java.nio.charset.Charset;
  * It is separated into tree different methods. readAndParseURL, readAndParseFile an parser.
  * The first two is to separate files and URLs, and the third is the parser itself.
  *
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.1
  */
 public class BoardParser {

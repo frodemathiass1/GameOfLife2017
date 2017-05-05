@@ -10,6 +10,9 @@ import java.util.List;
 /**
  * This class is used for drawing graphics to the GUI canvas.
  *
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.1
  */
 public class Draw {
@@ -20,7 +23,7 @@ public class Draw {
 
     /**
      * This constructor takes the graphicsContext and colors as inputParameters to instantiate new Draw objects.
-     * The constructor enables method calls for drawing individual cells or the entire board drawBoard to its context with defined colors.
+     * The constructor enables method calls for drawing individual cells or the entire board to its context with defined colors.
      *
      * @param context GraphicsContext
      * @param colors Colors
@@ -34,7 +37,6 @@ public class Draw {
 
     /**
      * This method draws the entire Grid to canvas. Takes a 2Dimensional "ListOfLists" as inputParameter.
-     * and the Graphic getContext.
      *
      * @param board List
      */
@@ -64,8 +66,8 @@ public class Draw {
 
     /**
      * This method draw individual cells to the canvas triggered by canvas mouse-events.
-     * The drawCell is toggled to dead/alive by clicking on the canvas cell coordinate.
-     * Sets 'dead' cells to the drawBoard background color, and 'alive' cells to defined cell color.
+     * The Cell is toggled to dead/alive by clicking on the canvas cell coordinate.
+     * Sets 'dead' cells to the background color, and 'alive' cells to defined cell color.
      *
      * @param cell Cell
      */

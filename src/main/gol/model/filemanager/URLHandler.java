@@ -9,6 +9,9 @@ import java.net.URL;
  * <p>
  * It make sure that plaintext and RLE content is handled accordingly.
  *
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
  * @version 2.0
  */
 public class URLHandler {

@@ -71,56 +71,56 @@
 
 .colors-icon {
 
-    -fx-background-image: url("./icons/color_icon.png");
+    -fx-background-image: url("resources/icons/color_icon.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
 }
 
 .sound-icon {
 
-    -fx-background-image: url("./icons/sound_on_icon.png");
+    -fx-background-image: url("resources/icons/sound_on_icon.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
 }
 
 .sound-icon:selected {
 
-    -fx-background-image: url("./icons/sound_off_icon.png");
+    -fx-background-image: url("resources/icons/sound_off_icon.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
 }
 
 .speed-icon {
 
-    -fx-graphic: url("./icons/speed_icon.png");
+    -fx-graphic: url("resources/icons/speed_icon.png");
     -fx-graphic-repeat: no-repeat;
     -fx-graphic-position: left;
 }
 
 .zoom-icon {
 
-    -fx-graphic: url("./icons/zoom_icon.png");
+    -fx-graphic: url("resources/icons/zoom_icon.png");
     -fx-graphic-repeat: no-repeat;
     -fx-graphic-position: left;
 }
 
 .size-icon {
 
-    -fx-background-image: url("./icons/size_icon.png");
+    -fx-background-image: url("resources/icons/size_icon.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
 }
 
 .pattern-icon {
 
-    -fx-background-image: url("./icons/grid_icon.png");
+    -fx-background-image: url("resources/icons/grid_icon.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
 }
 
 .bomb-icon {
 
-    -fx-background-image: url("./icons/bomb_icon.png");
+    -fx-background-image: url("resources/icons/bomb_icon.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
 }

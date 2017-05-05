@@ -14,8 +14,12 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * This class handles all the Board logic and its Cells which represents the Grid.
- * @see Cell
+ *
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
  * @version 2.0
+ * @see Cell
  */
 public class DynamicBoard {
 

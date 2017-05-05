@@ -8,9 +8,8 @@ import org.junit.Test;
 public class CellTest {
 
     /**
-     * testToggleState makes sure the setState method toggles the state of a given cell correctly.
+     * This test makes sure the setState method toggles the state of a given cell correctly.
      */
-
     @Test
     public void toggleStateTest(){
 
@@ -26,15 +25,11 @@ public class CellTest {
     }
 
     /**
-     * The testInitNeighbors tests checks if the initNeighbors method correctly initializes the right amount of neighbor-cells
+     * This test checks if the initNeighbors method correctly initializes the right amount of neighbor-cells
      * and the right state for a given cell.
-     */
-    /**
-     * The testInitNeighbors tests checks if the initNeighbors method correctly initializes the right amount of neighbor-cells
-     * and the right state for a given cell.
+     *
      * @throws Exception if exception occurred
      */
-
     @Test
     public void testInitNeighbors() throws Exception {
 
@@ -74,10 +69,10 @@ public class CellTest {
     }
 
     /**
-     * testGetY and testGetX makes sure the getY and getX methods returns the right coordinates.
+     * These tests testGetY and testGetX makes sure the getY and getX methods returns the right coordinates.
+     *
      * @throws Exception if exception occurred
      */
-
     @Test
     public void testGetX() throws Exception {
 
