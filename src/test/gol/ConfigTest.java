@@ -21,7 +21,7 @@ public class ConfigTest {
 
         // Assert
         assertEquals(160, config.getColumns());
-        assertEquals(110, config.getRows());
+        assertEquals(104, config.getRows());
         assertEquals(5, config.getCellSize());
     }
 
