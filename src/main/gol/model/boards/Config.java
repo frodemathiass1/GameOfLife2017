@@ -19,9 +19,9 @@ public class Config {
      */
     public void setDefault() {
 
-        setRows(110);
-        setColumns(160);
         setCellSize(5);
+        setColumns(160);
+        setRows(104);
     }
 
     /**

@@ -460,9 +460,8 @@ public class GUIController implements Initializable {
     private void handleZoomSlider() {
 
         zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            config.setCellSize(newValue.intValue());
-            context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-            draw.drawBoard(board.getGrid());
+            canvas.setScaleX(newValue.intValue());
+            canvas.setScaleY(newValue.intValue());
         });
     }
 
@@ -509,9 +508,9 @@ public class GUIController implements Initializable {
 
         zoomIcon.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
-                zoomSlider.setValue(40);
-            } else if (event.getClickCount() == 2) {
                 zoomSlider.setValue(5);
+            } else if (event.getClickCount() == 2) {
+                zoomSlider.setValue(1);
             }
         });
     }
