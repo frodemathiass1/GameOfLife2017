@@ -38,8 +38,6 @@ public class Sound {
      */
     public void play(File sound) {
 
-
-        Thread thread = new Thread(() -> {
             try {
                 MediaPlayer audio = new MediaPlayer(
                         new Media(
@@ -56,8 +54,6 @@ public class Sound {
             } catch (RuntimeException re) {
                 System.err.println(re.getMessage());
             }
-        });
-        thread.start();
     }
 
     /**

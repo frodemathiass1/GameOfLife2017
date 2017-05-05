@@ -89,8 +89,8 @@
                     <Insets left="10.0" right="10.0" />
                 </padding>
             </Separator>
-            <Button layoutX="169.0" layoutY="22.0" onAction="#handleTheBomber" prefHeight="20.0" styleClass="bomb-icon, highlight" />
-            <MenuButton onAction="#handleGridSizeEvents" prefHeight="20.0" prefWidth="25.0" styleClass="size-icon, highlight">
+            <Button layoutX="169.0" layoutY="22.0" onAction="#handleTheBomber" prefHeight="20.0" prefWidth="35.0" styleClass="bomb-icon, highlight" />
+            <MenuButton onAction="#handleGridSizeEvents" prefHeight="20.0" prefWidth="35.0" styleClass="size-icon, highlight">
                 <items>
                     <MenuItem styleClass="context-menu, menu, menu-item, highlight" text="Select gridsize" />
                     <SeparatorMenuItem />
@@ -100,7 +100,7 @@
                     <MenuItem fx:id="small" styleClass="context-menu, menu, menu-item, highlight" text="Small" />
                 </items>
             </MenuButton>
-            <MenuButton styleClass="colors-icon, highlight">
+            <MenuButton styleClass="colors-icon, highlight, picker-arrow" prefWidth="35.0">
                 <items>
                     <MenuItem styleClass="context-menu, menu, menu-item, highlight" text="Type ">
                         <graphic>
@@ -140,7 +140,7 @@
                     <Insets left="10.0" right="10.0" />
                 </padding>
             </Separator>
-            <Label fx:id="speedIcon" onMouseClicked="#flipSpeed" prefHeight="20.0" styleClass="speed-icon,highlight" />
+            <Label fx:id="speedIcon" onMouseClicked="#flipSpeed" prefHeight="20.0" styleClass="speed-icon, highlight" />
             <Slider fx:id="speedSlider" majorTickUnit="10.0" max="2.5" min="0.5" minorTickCount="60" value="1.5" />
             <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL" />
             <Label fx:id="zoomIcon" onMouseClicked="#flipZoom" prefHeight="20.0" styleClass="zoom-icon,highlight" />

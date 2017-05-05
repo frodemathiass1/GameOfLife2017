@@ -178,9 +178,9 @@ public class GUIController implements Initializable {
     }
 
     /**
-     *  ToDo: lage egen styleClass og sette Bold font i CSS fila + javadoc
+     *
      */
-    private void runFile() {
+    private void runFile()  {
 
         try {
             fileHandler = new FileHandler();
@@ -310,7 +310,7 @@ public class GUIController implements Initializable {
     @FXML
     public void loadFileFromDisk() {
 
-        FileHandler fileHandler = new FileHandler();
+        fileHandler = new FileHandler();
         fileHandler.chooseAndSelectType();
         runFile();
     }

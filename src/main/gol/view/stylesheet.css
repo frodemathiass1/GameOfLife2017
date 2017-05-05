@@ -71,41 +71,56 @@
 
 .colors-icon {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-fill-color-icon.png");
+    -fx-background-image: url("./icons/color_icon.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
 }
 
 .sound-icon {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/iconshock/super-vista-general/16/music-icon.png");
+    -fx-background-image: url("./icons/sound_on_icon.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
 }
 
 .sound-icon:selected {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/dryicons/aesthetica-2/16/sound-off-icon.png");
+    -fx-background-image: url("./icons/sound_off_icon.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
 }
 
 .speed-icon {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/windows-8/16/Science-Speed-icon.png");
+    -fx-graphic: url("./icons/speed_icon.png");
+    -fx-graphic-repeat: no-repeat;
+    -fx-graphic-position: left;
 }
 
 .zoom-icon {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/designcontest/outline/16/Magnifier-icon.png");
+    -fx-graphic: url("./icons/zoom_icon.png");
+    -fx-graphic-repeat: no-repeat;
+    -fx-graphic-position: left;
 }
 
 .size-icon {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-transform-scale-icon.png");
-
+    -fx-background-image: url("./icons/size_icon.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
 }
 
 .pattern-icon {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/windows-8/16/Data-Grid-icon.png");
+    -fx-background-image: url("./icons/grid_icon.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
 }
 
 .bomb-icon {
 
-    -fx-graphic: url("http://icons.iconarchive.com/icons/icons8/ios7/16/Military-Bomb-icon.png");
+    -fx-background-image: url("./icons/bomb_icon.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
 }

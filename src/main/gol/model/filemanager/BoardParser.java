@@ -1,5 +1,6 @@
 package main.gol.model.filemanager;
 
+import main.gol.PatternFormatException;
 import main.gol.controller.util.Dialogs;
 import main.gol.model.boards.Config;
 

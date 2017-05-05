@@ -48,7 +48,7 @@ public class Draw {
     }
 
     /**
-     * This method draws entire (old deprecated) drawBoard to canvas. Takes a 2Dimensional array as inputParameter.
+     * This method draws the entire (old deprecated) Board to canvas. Takes a 2Dimensional array as inputParameter.
      *
      * @deprecated
      * @param board Cell[][]

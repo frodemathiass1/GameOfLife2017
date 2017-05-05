@@ -10,7 +10,7 @@ import main.gol.model.filemanager.Decoder;
 public class Dialogs {
 
     /**
-     * This method show info dialogBox about the creators of this application
+     * This method show info dialogBox about the creators of this application.
      */
     public void showInfo() {
 
@@ -22,7 +22,7 @@ public class Dialogs {
     }
 
     /**
-     * This method show info dialogBox about the creators of this application
+     * This method show info dialogBox about the creators of this application.
      */
     public void oops() {
 
@@ -34,7 +34,7 @@ public class Dialogs {
     }
 
     /**
-     * This method show dialogBox if File cannot be loaded
+     * This method show dialogBox if File cannot be loaded.
      */
     public void notFoundException() {
 
@@ -46,7 +46,7 @@ public class Dialogs {
     }
 
     /**
-     * This method show a warning dialogBox if URL does not start with a http string
+     * This method show a warning dialogBox if URL does not start with a http string.
      */
     public void httpError() {
 
@@ -57,7 +57,7 @@ public class Dialogs {
     }
 
     /**
-     * This method show a warning dialogBox if something went wrong when loading the URL
+     * This method show a warning dialogBox if something went wrong when loading the URL.
      */
     public void urlError() {
 
@@ -68,7 +68,7 @@ public class Dialogs {
     }
 
     /**
-     * This method show a warning dialogBox if something went wrong when loading the file
+     * This method show a warning dialogBox if something went wrong when loading the file.
      */
     public void fileError() {
 
@@ -79,7 +79,7 @@ public class Dialogs {
     }
 
     /**
-     * This method show a warning dialogBox if something went wrong with the audio output
+     * This method show a warning dialogBox if something went wrong with the audio output.
      */
     public void audioError() {
 
@@ -90,7 +90,7 @@ public class Dialogs {
     }
 
     /**
-     * This method show a information dialogBox with general Game of Life description
+     * This method show a information dialogBox with general Game of Life description.
      */
     public void aboutGol() {
 
@@ -103,14 +103,14 @@ public class Dialogs {
                 "Every drawCell interacts with its eight neighbours, which are the cells that are horizontally, vertically, " +
                 "or diagonally adjacent. At each step in time, the following transitions occur:\n\n" +
                 "1: Any live drawCell with fewer than two live neighbours dies, as if caused by underpopulation.\n\n" +
-                "2: Any live drawCell with two or three live neighbours lives on to the next drawGeneration.\n\n" +
+                "2: Any live drawCell with two or three live neighbours lives on to the nextGeneration.\n\n" +
                 "3: Any live drawCell with more than three live neighbours dies, as if by overpopulation.\n\n" +
-                "4: Any dead drawCell with exactly three live neighbours becomes a live drawCell, as if by reproduction.\n\n");
+                "4: Any dead drawCell with exactly three live neighbours becomes a live Cell, as if by reproduction.\n\n");
         alert.showAndWait();
     }
 
     /**
-     * This method show a information dialogBox with general Game of Life description
+     * This method show a information dialogBox with general Game of Life description.
      */
     public void howToPlay() {
 
@@ -123,6 +123,10 @@ public class Dialogs {
         alert.showAndWait();
     }
 
+
+    /**
+     * This method shows meta data about the loaded file.
+     */
     public void fileInfo() {
 
         Decoder info = new Decoder();
