@@ -203,7 +203,8 @@ public class GUIController implements Initializable {
                 // Draw the new board.
                 newBoard(boardParser.getTheBoard());
                 setFileInfo();
-
+                largest.fire();
+                zoomSlider.setValue(1);
             } catch (Exception e) {
                 dialog.fileError();
             }
@@ -239,8 +240,6 @@ public class GUIController implements Initializable {
             setFileInfo();
             largest.fire();
             zoomSlider.setValue(1);
-
-
         } catch (Exception e) {
             dialog.urlError();
             System.err.println("Something went wrong reading the URL.");
