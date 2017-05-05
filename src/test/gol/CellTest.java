@@ -7,6 +7,9 @@ import org.junit.Test;
 
 public class CellTest {
 
+    /**
+     * testToggleState makes sure the setState method toggles the state of a given cell correctly.
+     */
 
     @Test
     public void toggleStateTest(){
@@ -21,6 +24,16 @@ public class CellTest {
         Assert.assertTrue(cell.getState());
         System.out.println(cell.getState());
     }
+
+    /**
+     * The testInitNeighbors tests checks if the initNeighbors method correctly initializes the right amount of neighbor-cells
+     * and the right state for a given cell.
+     */
+    /**
+     * The testInitNeighbors tests checks if the initNeighbors method correctly initializes the right amount of neighbor-cells
+     * and the right state for a given cell.
+     * @throws Exception if exception occurred
+     */
 
     @Test
     public void testInitNeighbors() throws Exception {
@@ -60,6 +73,10 @@ public class CellTest {
         System.out.println("Expected amount of neighbors: " + expectedAmount + " Actual amount of neighbors: " + actualAmount);
     }
 
+    /**
+     * testGetY and testGetX makes sure the getY and getX methods returns the right coordinates.
+     * @throws Exception if exception occurred
+     */
 
     @Test
     public void testGetX() throws Exception {

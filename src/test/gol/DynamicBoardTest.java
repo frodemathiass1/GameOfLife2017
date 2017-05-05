@@ -5,18 +5,16 @@ import main.gol.model.boards.DynamicBoard;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * The testNextGeneration tests makes sure the Game of Life rules works as intended. The test creates a board and
- * runs the nextGeneration method on it. Then it stores the outcome as a string in a "actual"-variable after nextGeneration has chooseAndSelectType.
- * Then we manually figure out what the string should look like after the rules have chooseAndSelectType and store it in a "expected"-variable.
- * When that is done we chooseAndSelectType a assertEquals to make sure the test was successful.
- * @see org.junit.Test
- */
 public class DynamicBoardTest {
 
 
     final DynamicBoard db = new DynamicBoard(10,10);
 
+    /**
+     * The testSetCellStateTrue and testSetCellStateFalse checks if the setCellState-method sets a new cell outside the
+     * arrayIndex bounds by expanding the grid and filling the empty slots in the ArrayList.
+     * @throws Exception if exception occurred
+     */
 
     @Test
     public void testSetCellStateTrue() throws Exception {
@@ -40,6 +38,13 @@ public class DynamicBoardTest {
         System.out.println(expected1.getState());
     }
 
+    /**
+     * The testNextGeneration tests makes sure the Game of Life rules works as intended. The test creates a board and
+     * runs the nextGeneration method on it. Then it stores the outcome as a string in a "actual"-variable after nextGeneration has chooseAndSelectType.
+     * Then we manually figure out what the string should look like after the rules have chooseAndSelectType and store it in a "expected"-variable.
+     * When that is done we chooseAndSelectType a assertEquals to make sure the test was successful.
+     * @see org.junit.Test
+     */
 
     @Test
     public void testNextGeneration1() {
@@ -289,11 +294,9 @@ public class DynamicBoardTest {
     }
 
     /**
-     * HVA SKAL JEG SKRIVE HER?
-     * FORSLAG: "testGetCell tests if the getCell method returns a cell which is alive."
+     * testGetCell tests if the getCell method returns a cell which is alive.
      */
 
-    //FORSLAG: Skal jeg endre getCell-testene til testGetCellAlive og testGetCellDead?
     @Test
     public void testGetCell(){
 
@@ -314,6 +317,10 @@ public class DynamicBoardTest {
         System.out.println(actual.getState());
 
     }
+
+    /**
+     * testGetCell tests if the getCell method returns a cell which is dead.
+     */
 
     @Test
     public void testGetCellFalse(){
@@ -337,7 +344,12 @@ public class DynamicBoardTest {
 
     }
 
-    // Not entirely sure what this asserition is supposed to do....it doesnt do anything ?
+    /**
+     * The testGetCellOutOfBounds tests test if it is possible to get a cell outside the board. We expect a
+     * NullPointerException because it shouldn't be able to do that.
+     * @throws NullPointerException if NullPointerException occurred
+     */
+
     @Test(expected = NullPointerException.class)
     public void testGetCellOutOfBounds1()throws NullPointerException{
 
@@ -352,14 +364,12 @@ public class DynamicBoardTest {
 
         //Act
         db.setBoard(testBoard);
-        Cell actual = db.getCell(4, 4);
+        Cell actual = db.getCell(6, 9);
 
         //Assert
-        Assert.assertTrue(actual.getState());
-        System.out.println(actual.getState());
+        Assert.assertFalse(actual.getState());
     }
 
-    // Test for nullPointer exceptions when cell does not exist
     @Test (expected = NullPointerException.class)
     public void testGetCellOutOfBounds2() throws NullPointerException{
 
@@ -378,6 +388,5 @@ public class DynamicBoardTest {
 
         //Assert
         Assert.assertFalse(actual.getState());
-        System.out.println(actual.getState());
     }
 }

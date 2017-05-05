@@ -10,6 +10,15 @@ import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class BoardParserTest {
+
+    /**
+     *  This test checks that the boardParser method works as intended. The method is supposed to parse the
+     *  URL. The test checks if it gets the right amount of alive cells according to the pattern that is loaded.
+     * @throws Exception if an exception occurred
+     */
+
+
+
     @Test
     public void testBoardParser() throws Exception {
         BoardParser boardParser = new BoardParser();
