@@ -508,7 +508,7 @@ public class GUIController implements Initializable {
 
         zoomIcon.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
-                zoomSlider.setValue(5);
+                zoomSlider.setValue(3);
             } else if (event.getClickCount() == 2) {
                 zoomSlider.setValue(1);
             }

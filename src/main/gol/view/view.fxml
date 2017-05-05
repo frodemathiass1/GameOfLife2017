@@ -151,7 +151,7 @@
             <Slider fx:id="speedSlider" majorTickUnit="10.0" max="2.5" min="0.5" minorTickCount="60" value="1.5" />
             <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL" />
             <Label fx:id="zoomIcon" onMouseClicked="#flipZoom" prefHeight="20.0" styleClass="zoom-icon,highlight" />
-            <Slider fx:id="zoomSlider" max="5" min="1" minorTickCount="1" value="1.0" />
+            <Slider fx:id="zoomSlider" max="3" min="1" minorTickCount="1" value="1.0" />
             <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL" />
             <ToggleButton fx:id="toggleSound" prefHeight="20.0" styleClass="sound-icon, highlight" translateX="1.0" />
         </ToolBar>
