@@ -107,12 +107,12 @@ public class FixedBoard {
                     }
                 }
             });
-
         }
         threadPool.shutdown();
 
         try {
             threadPool.awaitTermination(30, TimeUnit.SECONDS);
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -24,8 +24,6 @@ public class BoardParser {
     private static int rows = 0;
     private static int cols = 0;
 
-
-
     /**
      * readAndParseURL gets the URL as a string, and parse it along to the parser method.
      * <p>

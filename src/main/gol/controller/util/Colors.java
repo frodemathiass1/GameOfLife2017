@@ -15,7 +15,6 @@ public class Colors {
     private Color cell = Color.BLACK;
     private Color background = Color.WHITESMOKE;
 
-
     /**
      * This method is used for resetting all the Board colors to default values.
      */

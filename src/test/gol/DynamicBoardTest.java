@@ -11,7 +11,6 @@ import org.junit.Test;
  */
 public class DynamicBoardTest {
 
-
     final DynamicBoard db = new DynamicBoard(10,10);
 
     /**
@@ -71,8 +70,6 @@ public class DynamicBoardTest {
         System.out.println("testNextGeneration1");
         System.out.println("Actual:   " + actual);
         System.out.println("Expected: " + expected + "\n");
-
-
     }
 
     @Test
@@ -153,7 +150,6 @@ public class DynamicBoardTest {
         String actual = db.toString();
         Assert.assertEquals(expected, actual);
 
-
         // Console
         System.out.println("testNextGeneration4");
         System.out.println("Actual:   " + actual);
@@ -165,7 +161,6 @@ public class DynamicBoardTest {
      * indicates that the rule doesn't work) and the actual result doesn't match. If the rules doesn't work the tests
      * will fail.
      */
-
 
     @Test
     public void testNextGenerationFail1() {
@@ -296,7 +291,6 @@ public class DynamicBoardTest {
     /**
      * testGetCell tests if the getCell method returns a cell which is alive.
      */
-
     @Test
     public void testGetCell(){
 
@@ -315,13 +309,11 @@ public class DynamicBoardTest {
         //Assert
         Assert.assertTrue(actual.getState());
         System.out.println(actual.getState());
-
     }
 
     /**
      * testGetCell tests if the getCell method returns a cell which is dead.
      */
-
     @Test
     public void testGetCellFalse(){
 
@@ -337,11 +329,9 @@ public class DynamicBoardTest {
         db.setBoard(testBoard);
         Cell actual = db.getCell(1, 1);
 
-
         //Assert
         Assert.assertFalse(actual.getState());
         System.out.println(actual.getState());
-
     }
 
     /**
@@ -349,7 +339,6 @@ public class DynamicBoardTest {
      * NullPointerException because it shouldn't be able to do that.
      * @throws NullPointerException if NullPointerException occurred
      */
-
     @Test(expected = NullPointerException.class)
     public void testGetCellOutOfBounds1()throws NullPointerException{
 

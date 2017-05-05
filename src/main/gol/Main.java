@@ -41,6 +41,7 @@ public class Main extends Application {
             primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
             //primaryStage.setResizable(false);
             primaryStage.show();
+
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -52,7 +53,6 @@ public class Main extends Application {
      * @param args null
      */
     public static void main(String[] args) {
-
         launch(args);
     }
 }

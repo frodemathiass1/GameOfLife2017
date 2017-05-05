@@ -90,12 +90,12 @@ public class GUIController implements Initializable {
                 draw.drawGeneration(board.getGeneration());
 
                 int cellsCounter = board.getGeneration().size();
-                if (cellsCounter >= 0) {
 
+                if (cellsCounter >= 0) {
                     counter.setText("Cells: " + cellsCounter);
                 }
-
             });
+
             timeline.getKeyFrames().add(kf);
             timeline.setCycleCount(Timeline.INDEFINITE);
 
@@ -103,9 +103,6 @@ public class GUIController implements Initializable {
             initializeObservables();
 
         } catch(Exception e) {
-            e.printStackTrace();
-            System.err.println("Oops. Something went wrong when firing up the application!");
-            System.out.println(e.getMessage());
             dialog.oops();
             quit();
         }
@@ -161,16 +158,14 @@ public class GUIController implements Initializable {
 
         } catch (NullPointerException ne) {
             System.err.println("NullPointer Exception!");
-            ne.printStackTrace();
 
         } catch (ArrayIndexOutOfBoundsException oob) {
             System.err.println("ArrayIndex out of bounds!");
-            oob.printStackTrace();
         }
     }
 
     /**
-     *  ToDo: lage egen styleClass og sette Bold font i CSS fila + javadoc
+     *  This method sets the file info menu option.
      */
     private void setFileInfo() {
 
@@ -191,7 +186,7 @@ public class GUIController implements Initializable {
             try {
                 fileHandler = new FileHandler();
                 boardParser = new BoardParser();
-
+                largest.fire();
                 // Get correct file type, and parse to BoardParser.
                 if (fileHandler.getTheFileType().equals("RLE File")) {
                     // Instantiate a new temp file, and delete it after use.
@@ -208,8 +203,8 @@ public class GUIController implements Initializable {
                 // Draw the new board.
                 newBoard(boardParser.getTheBoard());
                 setFileInfo();
-                largest.fire();
                 zoomSlider.setValue(1);
+
             } catch (Exception e) {
                 dialog.fileError();
             }
@@ -227,7 +222,7 @@ public class GUIController implements Initializable {
             urlHandler = new URLHandler();
             boardParser = new BoardParser();
             urlHandler.selectUrlType(url);
-
+            largest.fire();
             if (urlHandler.getUrlType().equals("RLE Url")) {
                 // Instantiate a new temp file, and delete it after use.
                 File temp = new File("temp.gol");
@@ -243,8 +238,8 @@ public class GUIController implements Initializable {
             // Draw the new board.
             newBoard(boardParser.getTheBoard());
             setFileInfo();
-            largest.fire();
             zoomSlider.setValue(1);
+
         } catch (Exception e) {
             dialog.urlError();
             System.err.println("Something went wrong reading the URL.");
@@ -297,7 +292,6 @@ public class GUIController implements Initializable {
      * @param url String
      */
     private  void handleURL(String url) {
-
         runURL(url);
     }
 
@@ -326,8 +320,6 @@ public class GUIController implements Initializable {
         fileHandler = new FileHandler();
         fileHandler.chooseAndSelectType();
         runFile();
-        largest.fire();
-        zoomSlider.setValue(1);
     }
 
     /**
@@ -399,7 +391,6 @@ public class GUIController implements Initializable {
 
         stopAnimationIfRunning();
         colors.resetAll();
-        speedSlider.setValue(1);
         board.clearBoard();
         config.setDefault();
         board = new DynamicBoard(config.getRows(), config.getColumns());
@@ -431,7 +422,6 @@ public class GUIController implements Initializable {
         draw.drawBoard(board.getGrid());
         board.randomize();
         draw.drawGeneration(board.getGeneration());
-        speedSlider.setValue(speedSlider.getMax());
     }
 
     //================================================================================
@@ -459,7 +449,9 @@ public class GUIController implements Initializable {
         stopAnimationIfRunning();
 
         largest.setOnAction(e -> {
-            config.setCellSize(5);
+            resetBoard();
+            board = new DynamicBoard(104,160);
+            config.setDefault();
             draw.drawBoard(board.getGrid());
         });
         large.setOnAction(e -> {
@@ -693,6 +685,7 @@ public class GUIController implements Initializable {
 
         try {
             sound.play(sound.getFx8());
+
         } catch (MediaException me) {
             dialog.audioError();
         }

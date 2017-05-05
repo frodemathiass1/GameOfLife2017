@@ -14,7 +14,6 @@ public class Config {
     private static int columns = 160;
     private static int rows = 104;
 
-
     /**
      * This method sets the default board configuration
      */

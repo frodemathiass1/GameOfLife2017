@@ -86,7 +86,6 @@ public class CellTest {
         //Assert
         Assert.assertEquals(expected, actual);
         System.out.println("Expected: " + expected + " Actual: " + actual);
-
     }
 
     @Test

@@ -19,13 +19,12 @@ import java.net.URLConnection;
  */
 public class Decoder {
 
+    // These needs top be static to work as intended.
     private static String Name = "No name";
     private static String Origin = "Unknown.";
     private static String Content = "No content in this file.";
     private static String Link = "No links in this file.";
     private BufferedReader reader;
-
-
 
     /**
      * Files is parsed to this method, and the decodeRLE method writes the temp files for further use.

@@ -37,6 +37,7 @@ public class URLHandler {
                 Decoder RLE = new Decoder();
                 RLE.readAndDecodeURL(inURL);
             }
+
         } catch (Exception e) {
             dialog.urlError();
         }

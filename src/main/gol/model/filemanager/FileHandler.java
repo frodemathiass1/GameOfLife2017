@@ -44,6 +44,7 @@ public class FileHandler extends Thread {
 
     /**
      * This method checks the file type (RLE or plaintext), and sets theFileType to the correct value.
+     * <p>
      * RLEDecoder is instantiated if RLE file is selected.
      * Getters is used to retrieve the file tpye in other classes.
      *
@@ -60,6 +61,7 @@ public class FileHandler extends Thread {
                 Decoder RLE = new Decoder();
                 RLE.readAndDecodeFile(FileHandler.theFile);
             }
+
         } catch (Exception e) {
             Dialogs dialog = new Dialogs();
             dialog.fileError();

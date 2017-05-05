@@ -131,5 +131,4 @@ public class Sound {
     public File getFx8() {
         return fx8;
     }
-
 }

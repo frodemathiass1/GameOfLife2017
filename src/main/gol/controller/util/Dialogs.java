@@ -124,7 +124,6 @@ public class Dialogs {
         alert.showAndWait();
     }
 
-
     /**
      * This method shows metadata about the loaded file.
      */

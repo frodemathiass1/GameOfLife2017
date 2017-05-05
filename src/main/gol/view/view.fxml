@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
@@ -76,6 +77,7 @@
             </Menu>
         </MenuBar>
     </top>
+
     <center>
         <ScrollPane hbarPolicy="AS_NEEDED" pannable="false" prefHeight="520.0" prefWidth="800.0" vbarPolicy="AS_NEEDED" BorderPane.alignment="CENTER">
             <content>
@@ -85,12 +87,16 @@
             </content>
         </ScrollPane>
     </center>
+
     <bottom>
         <ToolBar prefHeight="45.0" styleClass="context-menu, menu, menu-item" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
             <ToggleButton fx:id="play" prefHeight="20.0" prefWidth="65.0" styleClass="btnStyle, btn-border, toggle-play" text="Play" />
             <Button fx:id="next" onAction="#nextStep" prefHeight="20.0" prefWidth="75.0" styleClass="btnStyle, btn-border" text="Next" />
             <Button onAction="#reset" prefHeight="20.0" prefWidth="65.0" styleClass="btnStyle, btn-border" text="Clear" />
-            <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL" />
+            <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL">
+            <padding>
+               <Insets left="5.0" right="5.0" />
+            </padding></Separator>
             <Button layoutX="169.0" layoutY="22.0" onAction="#handleTheBomber" prefHeight="20.0" prefWidth="30" styleClass="bomb-icon, highlight" />
             <MenuButton onAction="#handleGridSizeEvents" prefHeight="20.0" prefWidth="25.0" styleClass="size-icon, highlight">
                 <items>
@@ -137,16 +143,25 @@
                     </MenuItem>
                 </items>
             </MenuButton>
-            <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL" />
+            <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL">
+            <padding>
+               <Insets left="5.0" right="5.0" />
+            </padding></Separator>
             <Label fx:id="speedIcon" onMouseClicked="#flipSpeed" prefHeight="20.0" styleClass="speed-icon,highlight" />
             <Slider fx:id="speedSlider" majorTickUnit="10.0" max="2.5" min="0.5" minorTickCount="60" prefWidth="125.0" value="1.5" />
-            <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL" />
+            <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL">
+            <padding>
+               <Insets left="5.0" right="5.0" />
+            </padding></Separator>
             <Label fx:id="zoomIcon" onMouseClicked="#flipZoom" prefHeight="20.0" styleClass="zoom-icon,highlight" />
             <Slider fx:id="zoomSlider" max="3" min="1" minorTickCount="1" prefWidth="125.0" value="1.0" />
 
-            <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL" />
+            <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL">
+            <padding>
+               <Insets left="5.0" right="5.0" />
+            </padding></Separator>
 
-            <Label fx:id="counter" text="Cells: " maxWidth="100.0" prefWidth="100.0" />
+            <Label fx:id="counter" maxWidth="60.0" prefWidth="60.0" text="Cells: " />
 
             <ToggleButton fx:id="toggleSound" prefHeight="20.0" styleClass="sound-icon, highlight" />
         </ToolBar>

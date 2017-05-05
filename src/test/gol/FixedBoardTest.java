@@ -4,7 +4,6 @@ import main.gol.model.boards.FixedBoard;
 import org.junit.Assert;
 import org.junit.Test;
 
-
 /**
  * This test class tests if the nextGeneration algorithm works as intended.
  * Returns a string of boolean values for hardcoded gameBoards and assert if the algorithm method
@@ -12,7 +11,6 @@ import org.junit.Test;
  * @see org.junit.Test
  */
 public class FixedBoardTest {
-
 
     private final FixedBoard fb = new FixedBoard(10, 10);
 
@@ -76,7 +74,6 @@ public class FixedBoardTest {
         System.out.println("Expected: " + unexpected + "\n");
     }
 
-
     @Test
     public void testCountNeighbors(){
 
@@ -117,5 +114,4 @@ public class FixedBoardTest {
         Assert.assertEquals(expected, actual);
         System.out.println("Expected: "+expected+" Actual: " + actual);
     }
-
 }

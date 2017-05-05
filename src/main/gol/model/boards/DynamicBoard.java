@@ -149,12 +149,13 @@ public class DynamicBoard {
 
     /**
      * This method populates the next generation of cells in a generation list.
+     * <p>
      * Checks each cell for its state, then checks each neighbors state and counts surrounding live cells,
      * then finally collects the next generation of cells in an ArrayList.
      */
     public void nextGeneration() {
         // We use 4 worker threads for this task, we don't want to start too many threads because creating threads
-        // is somewhat expensive and it might counteract the purpose of threading it in the first place
+        // is somewhat expensive and it might counteract the purpose of threading it in the first place.
         ExecutorService threadPool = Executors.newFixedThreadPool(4);
         ReentrantLock lock = new ReentrantLock();
 
@@ -162,7 +163,7 @@ public class DynamicBoard {
 
         ArrayList<Cell> generationList = new ArrayList<>();
 
-        // Iterate through each row and start a worker that checks the rule per cell in that row
+        // Iterate through each row and start a worker that checks the rule per cell in that row.
         for (List<Cell> row : grid) {
             threadPool.submit(() -> {
                 for (Cell cell : row) {
@@ -181,6 +182,7 @@ public class DynamicBoard {
 
         try {
             threadPool.awaitTermination(30, TimeUnit.SECONDS);
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -190,9 +192,7 @@ public class DynamicBoard {
             cell.updateState();
         }
         this.generation = generationList;
-
     }
-
 
     /**
      * This method generates a random set of alive cells and adds them to the generation list.

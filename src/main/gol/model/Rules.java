@@ -1,6 +1,5 @@
 package main.gol.model;
 
-
 /**
  * This class contains and executes the Game of Life algorithm for the cell automation.
  * <p>
@@ -32,16 +31,16 @@ public class Rules {
     public boolean checkRules(Cell cell) {
 
         if (cell.getState() && cell.countAliveNeighbors() < 2) {
-            // dies, as if by underpopulation.
+            // Dies, as if by underpopulation.
             cell.setNextState(false);
         } else if (cell.getState() && (cell.countAliveNeighbors() == 2 || cell.countAliveNeighbors() == 3)) {
-            // lives on to the next drawGeneration.
+            // Lives on to the next drawGeneration.
             cell.setNextState(true);
         } else if (cell.getState() && cell.countAliveNeighbors() > 3) {
-            // dies, as if by overpopulation.
+            // Dies, as if by overpopulation.
             cell.setNextState(false);
         } else if (!cell.getState() && cell.countAliveNeighbors() == 3) {
-            // becomes a live drawCell, as if by reproduction.
+            // Becomes a live drawCell, as if by reproduction.
             cell.setNextState(true);
         } else {
             return false;
