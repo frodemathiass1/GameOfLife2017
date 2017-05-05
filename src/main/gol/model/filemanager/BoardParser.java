@@ -11,7 +11,7 @@ import java.nio.charset.Charset;
 /**
  * The BoardParser class gets files and URLs, and parses them to the main decoder.
  * <p>
- * It is separated into tree different methods. readAndParseURL, readAndParseFile an parser.
+ * It is separated into tree different methods. readAndParseURL, readAndParseFile and parser.
  * The first two is to separate files and URLs, and the third is the parser itself.
  *
  * @version 1.1

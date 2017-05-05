@@ -36,15 +36,13 @@ import java.util.ResourceBundle;
  */
 public class GUIController implements Initializable {
 
-    @FXML public Label counter;
     @FXML private MenuItem url1, url2, url3, url4, url5, url6, url7, url8, url9, url10;
     @FXML private MenuItem file1, file2, file3, file4, file5, file6, file7, file8, file9, file10, fileBlock;
     @FXML private MenuItem small, medium, large, largest;
     @FXML private ColorPicker cpCell, cpGrid, cpBackground;
     @FXML private Slider speedSlider,zoomSlider;
     @FXML private ToggleButton play, toggleSound;
-    @FXML private Label speedIcon;
-    @FXML private Label zoomIcon;
+    @FXML private Label speedIcon, counter, zoomIcon;
     @FXML private Button next;
     @FXML private Canvas canvas;
     @FXML private Menu fileInfo;
@@ -351,22 +349,14 @@ public class GUIController implements Initializable {
     //================================================================================
 
     /**
-     * EventHandler: "Next" button. Draw the next generation of cells(no animation).
-     * @throws MediaException me
+     * EventHandler: "Next" button. Draw the next generation of cells (no animation).
      */
     @FXML
-    public void nextStep() throws MediaException {
+    public void nextStep() {
 
         board.nextGeneration();
         draw.drawGeneration(board.getGeneration());
-        int cellsCounter = board.getGeneration().size();
-
-        if (cellsCounter >= 0) {
-            sound.play(sound.getFx3());
-            next.setText("Next "+ cellsCounter);
-        } else {
-            next.setText("Next");
-        }
+        sound.play(sound.getFx3());
     }
 
     /**
@@ -732,7 +722,7 @@ public class GUIController implements Initializable {
     }
 
     /**
-     * EventHandler: "How to play" menu-button. "Show information dialog box about how to play the game.
+     * EventHandler: "How to play" menu-button. Show information dialog box about how to play the game.
      */
     @FXML
     public void howToPlay() {

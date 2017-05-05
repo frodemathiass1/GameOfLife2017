@@ -46,7 +46,7 @@ public class FileHandler extends Thread {
      * This method checks the file type (RLE or plaintext), and sets theFileType to the correct value.
      * <p>
      * RLEDecoder is instantiated if RLE file is selected.
-     * Getters is used to retrieve the file tpye in other classes.
+     * Getters is used to retrieve the file type in other classes.
      *
      * @param theFile File
      */

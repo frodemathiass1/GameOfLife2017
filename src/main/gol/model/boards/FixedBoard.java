@@ -80,7 +80,6 @@ public class FixedBoard {
      * This method populates the next generation of cells in a generation list.
      * Checks each cell for its state, then checks each neighbors state and counts surrounding live cells.
      * Collects the next generation of cells in a ArrayList of Cell objects.
-     * @version 2.0
      */
     public void nextGeneration() {
 

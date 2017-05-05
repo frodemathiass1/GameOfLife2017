@@ -110,13 +110,6 @@
     -fx-background-position: left;
 }
 
-.pattern-icon {
-
-    -fx-background-image: url("resources/icons/grid_icon.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: left;
-}
-
 .bomb-icon {
 
     -fx-background-image: url("resources/icons/bomb_icon.png");

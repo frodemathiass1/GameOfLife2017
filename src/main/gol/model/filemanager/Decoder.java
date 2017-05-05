@@ -61,7 +61,7 @@ public class Decoder {
      * It takes a BufferedReader as a parameter which is decided when you instantiate the Decoder.
      * <p>
      * The plaintext decoder uses '.' for dead cells, and 'O' for live cells.
-     * Therefor the StringBuilder builds the matrix after these criteria.
+     * Therefor the StringBuilder builds the board after these criteria.
      * In other words, decodeRLE converts RLE files to plaintext files.
      *
      * @param reader BufferedReader
@@ -215,7 +215,7 @@ public class Decoder {
     }
 
     /**
-     * This method returns the Name of the loaded board as a string.
+     * This method returns the name of the loaded board as a string.
      *
      * @return String Name
      */
@@ -233,7 +233,7 @@ public class Decoder {
     }
 
     /**
-     * This method returns the Content (Description) of the loaded board as a string.
+     * This method returns the content (Description) of the loaded board as a string.
      *
      * @return String Content
      */
@@ -242,7 +242,7 @@ public class Decoder {
     }
 
     /**
-     * This method returns the Link in the file as a string.
+     * This method returns the link in the file as a string.
      *
      * @return String Link
      */

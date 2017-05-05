@@ -83,7 +83,7 @@ public class DynamicBoard {
     }
 
     /**
-     * This method initializes a board based on width/height (columns/rows) with false values(Dead cells).
+     * This method initializes a board based on width/height (columns/rows) with false values (Dead cells).
      *
      * @param columns int
      * @param rows    int
@@ -258,7 +258,8 @@ public class DynamicBoard {
     }
 
     /**
-     * Counts the alive cells for this board
+     * Counts the alive cells for this board.
+     *
      * @return the number of alive cells
      */
     public int getAliveCells() {

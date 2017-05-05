@@ -43,6 +43,7 @@ public class Cell {
 
     /**
      * This method check each cell for surrounding live neighbors and return the amount as an int.
+     *
      * @return count int
      */
     public int countAliveNeighbors() {
@@ -58,6 +59,7 @@ public class Cell {
     /**
      * This method check each cell for surrounding dead neighbors and return the amount as an int.
      * Written for testing purposes.
+     *
      * @return int
      */
     public int countDeadNeighbors() {
@@ -151,7 +153,7 @@ public class Cell {
     }
 
     /**
-     * This method returns the Cell's x coordinate.
+     * This method returns the Cell's x coordinates.
      *
      * @return x int
      */
@@ -160,7 +162,8 @@ public class Cell {
     }
 
     /**
-     * This method returns the Cell's y coordinate.
+     * This method returns the Cell's y coordinates.
+     *
      * @return y int
      */
     public int getY() {
@@ -168,7 +171,8 @@ public class Cell {
     }
 
     /**
-     * This method returns a string with the Cell's object state data
+     * This method returns a string with the Cell's object state data.
+     * <p>
      * For debugging purposes.
      *
      * @return String

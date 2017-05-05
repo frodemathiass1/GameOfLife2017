@@ -15,7 +15,7 @@ public class Config {
     private static int rows = 104;
 
     /**
-     * This method sets the default board configuration
+     * This method sets the default board configuration.
      */
     public void setDefault() {
 
@@ -52,7 +52,7 @@ public class Config {
     }
 
     /**
-     * This method sets the cellSize
+     * This method sets the cellSize.
      *
      * @param cellSize int
      */
@@ -71,6 +71,7 @@ public class Config {
 
     /**
      * This method sets the number of columns.
+     *
      * @param columns int
      */
     public void setColumns(int columns) {

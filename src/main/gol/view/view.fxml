@@ -18,7 +18,7 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.GUIController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gol.controller.GUIController">
     <top>
         <MenuBar prefHeight="35.0" styleClass="context-menu, menu, menu-item" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
             <Menu styleClass="context-menu, menu, menu-item, highlight" text="File">

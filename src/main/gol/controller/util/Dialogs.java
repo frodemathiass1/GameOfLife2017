@@ -111,7 +111,7 @@ public class Dialogs {
     }
 
     /**
-     * This method show a information dialogBox with general Game of Life description.
+     * This method contains information and descriptions on how to play the game.
      */
     public void howToPlay() {
 
@@ -119,8 +119,8 @@ public class Dialogs {
         alert.setTitle("Instructions");
         alert.setHeaderText("How to use this application/game");
         alert.setContentText("Draw cells to canvas with mouse by clicking and dragging. Double click to enable drag-erase.\n\n" +
-                "Explore the menus for board manipulation with, zoom , colors, animation speed and so on.\n\n" +
-                "Predefined patterns can be loaded from the web or by file from the 'Patterns' menu-selection.");
+                "Explore the menus for board manipulation with, zoom, colors, animation speed and so on.\n\n" +
+                "Predefined patterns can be loaded from the web or by files from the 'Patterns' menu-selection.");
         alert.showAndWait();
     }
 
