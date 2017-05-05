@@ -272,7 +272,7 @@ public class GUIController implements Initializable {
             Decoder.getTheName("A BIG BLOCK!");
             Decoder.setOrigin("Tommy Pedersen");
             Decoder.setContent("This block was created by one of the coders for this project.");
-            Decoder.setLink("Not published on internet");
+            Decoder.setLink("Not published on internet.");
         });
         // File actions RLE files
         file6.setOnAction(e -> handleFile("resources/patterns/mirage.rle"));
