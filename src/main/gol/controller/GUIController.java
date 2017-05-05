@@ -433,24 +433,20 @@ public class GUIController implements Initializable {
         stopAnimationIfRunning();
 
         largest.setOnAction(e -> {
-            config.setCellSize((int)zoomSlider.getMin());
+            config.setCellSize(5);
             draw.drawBoard(board.getGrid());
-            zoomSlider.setValue(config.getCellSize()); //Set slider to same drawCell value
         });
         large.setOnAction(e -> {
             config.setCellSize(15);
             draw.drawBoard(board.getGrid());
-            zoomSlider.setValue(config.getCellSize()); //Set slider to same drawCell value
         });
         medium.setOnAction(e -> {
-            config.setCellSize(27);
+            config.setCellSize(30);
             draw.drawBoard(board.getGrid());
-            zoomSlider.setValue(config.getCellSize()); //Set slider to same drawCell value
         });
         small.setOnAction(e -> {
-            config.setCellSize((int)zoomSlider.getMax());
+            config.setCellSize(40);
             draw.drawBoard(board.getGrid());
-            zoomSlider.setValue(config.getCellSize()); //Set slider to same drawCell value
         });
     }
 

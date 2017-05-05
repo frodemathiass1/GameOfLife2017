@@ -96,7 +96,7 @@
                     <Insets left="10.0" right="10.0" />
                 </padding>
             </Separator>
-            <Button layoutX="169.0" layoutY="22.0" onAction="#handleTheBomber" prefHeight="20.0" styleClass="bomb-icon, highlight" />
+            <Button layoutX="169.0" layoutY="22.0" onAction="#handleTheBomber" prefHeight="20.0" prefWidth="30" styleClass="bomb-icon, highlight" />
             <MenuButton onAction="#handleGridSizeEvents" prefHeight="20.0" prefWidth="25.0" styleClass="size-icon, highlight">
                 <items>
                     <MenuItem styleClass="context-menu, menu, menu-item, highlight" text="Select gridsize" />
