@@ -1,6 +1,7 @@
 package main.gol.model.filemanager;
 
 import javafx.stage.FileChooser;
+import main.gol.controller.util.Dialogs;
 
 import java.io.*;
 
@@ -10,9 +11,6 @@ import java.io.*;
  * theFileType and theFile gets updated with the correct file type values,
  * and getters is used by other classes to retrieve the values.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
  * @version 2.0
  */
 public class FileHandler extends Thread {
@@ -26,7 +24,9 @@ public class FileHandler extends Thread {
     public void chooseAndSelectType() {
 
         choose();
-        fileSelectType(theFile);
+        if (!(theFile == null)) {
+            fileSelectType(theFile);
+        }
     }
 
     /**
@@ -34,16 +34,12 @@ public class FileHandler extends Thread {
      */
     public void choose() {
 
-        try {
-            FileChooser chooser = new FileChooser();
-            chooser.setTitle("Select File .txt /.cells /.rle");
-            FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter
-                    ("Text File / RLE File", "*.txt", "*.cells", "*.rle");
-            chooser.getExtensionFilters().add(fileExtensions);
-            theFile = chooser.showOpenDialog(null).getAbsoluteFile();
-        } catch (Exception e) {
-            System.err.println("Something went wrong with the file selection");
-        }
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Select File .txt /.cells /.rle");
+        FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter
+                ("Text File / RLE File", "*.txt", "*.cells", "*.rle");
+        chooser.getExtensionFilters().add(fileExtensions);
+        theFile = chooser.showOpenDialog(null);
     }
 
     /**
@@ -65,7 +61,8 @@ public class FileHandler extends Thread {
                 RLE.readAndDecodeFile(FileHandler.theFile);
             }
         } catch (Exception e) {
-            System.err.println("Error:" + e);
+            Dialogs dialog = new Dialogs();
+            dialog.fileError();
         }
     }
 

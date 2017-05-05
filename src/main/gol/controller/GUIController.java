@@ -182,32 +182,31 @@ public class GUIController implements Initializable {
      */
     private void runFile()  {
 
-        try {
-            fileHandler = new FileHandler();
-            boardParser = new BoardParser();
+        if (!(fileHandler.getTheFile() == null)) {
+            try {
+                fileHandler = new FileHandler();
+                boardParser = new BoardParser();
 
-            // Get correct file type, and parse to BoardParser.
-            if (fileHandler.getTheFileType().equals("RLE File")) {
-                // Instantiate a new temp file, and delete it after use.
-                File temp = new File("temp.gol");
-                boardParser.readAndParseFile(temp);
-                temp.delete();
-            } else if (fileHandler.getTheFileType().equals("Text File")) {
-                // Plaintext files is parsed directly.
-                boardParser.readAndParseFile(fileHandler.getTheFile());
+                // Get correct file type, and parse to BoardParser.
+                if (fileHandler.getTheFileType().equals("RLE File")) {
+                    // Instantiate a new temp file, and delete it after use.
+                    File temp = new File("temp.gol");
+                    boardParser.readAndParseFile(temp);
+                    temp.delete();
+                } else if (fileHandler.getTheFileType().equals("Text File")) {
+                    // Plaintext files is parsed directly.
+                    boardParser.readAndParseFile(fileHandler.getTheFile());
+                }
+                // Reset the old board
+                board.clearBoard();
+                updateColorPickerValues();
+                // Draw the new board.
+                newBoard(boardParser.getTheBoard());
+                setFileInfo();
+
+            } catch (Exception e) {
+                dialog.fileError();
             }
-            // Reset the old board
-            board.clearBoard();
-            updateColorPickerValues();
-            // Draw the new board.
-            newBoard(boardParser.getTheBoard());
-            setFileInfo();
-            largest.fire();
-            zoomSlider.setValue(1);
-
-        } catch (Exception e) {
-            dialog.fileError();
-            System.err.println("Error: " + e.getMessage());
         }
     }
 

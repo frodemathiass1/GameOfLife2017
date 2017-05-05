@@ -57,7 +57,6 @@ public class BoardParser {
 
         } catch (IOException ioe) {
             System.out.println("Error occurred calculating rows and cols in this URL.");
-            System.out.println(ioe.getMessage());
         }
 
         // Parse the URL
@@ -95,7 +94,6 @@ public class BoardParser {
 
         } catch (IOException ioe) {
             System.out.println("Error occurred calculating rows and cols in this file.");
-            System.out.println(ioe.getMessage());
         }
 
         // Parse the board
