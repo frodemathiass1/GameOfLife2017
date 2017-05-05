@@ -88,7 +88,6 @@ public class GUIController implements Initializable {
                 draw.drawGeneration(board.getGeneration());
 
                 int cellsCounter = board.getGeneration().size();
-
                 if (cellsCounter >= 0) {
                     counter.setText("Cells: " + cellsCounter);
                 }
