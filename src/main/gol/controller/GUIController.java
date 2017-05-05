@@ -483,7 +483,7 @@ public class GUIController implements Initializable {
     }
 
     /**
-     * EventHandler/Listener: "Zoom slider". Handles the slider listener.
+     * EventHandler/Listener: "Zoom slider". Handle the slider listener.
      */
     private void handleZoomSlider() {
 
