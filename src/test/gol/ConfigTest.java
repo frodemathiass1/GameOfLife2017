@@ -10,6 +10,11 @@ public class ConfigTest {
 
     Config config;
 
+    /**
+     * This test makes sure the setDefault-method sets the default board configuration correctly.
+     * @throws Exception if exception occurred.
+     */
+
     @Test
     public void testSetDefault() throws Exception {
 
@@ -25,6 +30,11 @@ public class ConfigTest {
         assertEquals(5, config.getCellSize());
     }
 
+    /**
+     * This test makes sure the setColumns and getColumns methods work as intended. setColumns is supposed to set
+     * an amount of columns and getColumns is supposed to return the amount of set columns.
+     */
+
     @Test
     public void testColumns(){
 
@@ -38,6 +48,12 @@ public class ConfigTest {
         assertEquals(100, config.getColumns());
     }
 
+    /**
+     * This test makes sure the setRows and getRows methods work as intended. setRows is supposed to set
+     * an amount of rows and getRows is supposed to return the amount of set rows.
+     */
+
+
     @Test
     public void testRows(){
 
@@ -50,6 +66,11 @@ public class ConfigTest {
         // Assert
         assertEquals(50, config.getRows());
     }
+
+    /**
+     * This test makes sure the setCellSize and getCellSize methods work as intended. setCellSize is supposed to set
+     * the cell size and getCellSize is supposed to return the cell size.
+     */
 
     @Test
     public void testCellSize(){

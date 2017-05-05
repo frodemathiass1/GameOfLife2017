@@ -578,7 +578,7 @@ public class GUIController implements Initializable {
             draw.drawCell(cell);
 
         } catch (NullPointerException ne) {
-
+            // Do nothing!
         }
     }
 
