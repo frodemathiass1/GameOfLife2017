@@ -10,9 +10,6 @@ import java.util.List;
 /**
  * This class is used for drawing graphics to the GUI canvas.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.1
  */
 public class Draw {

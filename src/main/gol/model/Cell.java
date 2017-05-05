@@ -13,9 +13,6 @@ import java.util.stream.Stream;
  * This Cell class handles the cells in the grid, it's state and each neighbor of any cell.
  * The array/list of cells represents the grid on the User-interface.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.2
  */
 public class Cell {

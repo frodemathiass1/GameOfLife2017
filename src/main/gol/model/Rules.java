@@ -2,31 +2,23 @@ package main.gol.model;
 
 
 /**
- *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
- * @version 1.2
- * @see Cell;
- *
  * This class contains and executes the Game of Life algorithm for the cell automation.
- *
- *  From Wikipedia
- *
- *      The universe of the Game of Life is an infinite two-dimensional orthogonal drawBoard of square cells,
- *      each of which is in one of two possible states, alive or dead, or populated or unpopulated.
- *
- *      Every drawCell interacts with its eight neighbours, which are the cells that are horizontally,
- *      vertically, or diagonally adjacent. At each step in time, the following transitions occur:
- *
- *      1: Any live Cell with fewer than two live neighbours dies, as if caused by underpopulation.
- *
- *      2: Any live Cell with two or three live neighbours lives on to the next drawGeneration.
- *
- *      3: Any live Cell with more than three live neighbours dies, as if by overpopulation.
- *
- *      4: Any dead Cell with exactly three live neighbours becomes a live drawCell, as if by reproduction.
- *
+ * <p>
+ *     From Wikipedia
+ * <p>
+ *     The universe of the Game of Life is an infinite two-dimensional orthogonal drawBoard of square cells,
+ *     each of which is in one of two possible states, alive or dead, or populated or unpopulated.
+ * <p>
+ *     Every drawCell interacts with its eight neighbours, which are the cells that are horizontally,
+ *     vertically, or diagonally adjacent. At each step in time, the following transitions occur:
+ * <ol>
+ * <li>Any live Cell with fewer than two live neighbours dies, as if caused by underpopulation.
+ * <li>Any live Cell with two or three live neighbours lives on to the next drawGeneration.
+ * <li>Any live Cell with more than three live neighbours dies, as if by overpopulation.
+ * <li>Any dead Cell with exactly three live neighbours becomes a live drawCell, as if by reproduction.
+ * </ol>
+ * <p>
+ * @version 1.2
  */
 public class Rules {
 
@@ -35,6 +27,7 @@ public class Rules {
      * then adds it to the list of Cells
      *
      * @param cell Cell
+     * @return boolean
      */
     public boolean checkRules(Cell cell) {
 

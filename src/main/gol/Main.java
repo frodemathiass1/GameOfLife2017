@@ -13,6 +13,11 @@ import java.io.IOException;
  * This is the Main class to fire off the standalone application.
  * Sets a primary stage and scene with the fxml document as the root node containing all its children
  * in the overridden start method.
+ *
+ * @author Frode Kristian Mathiassen
+ * @author Tommy Pedersen
+ * @author Magnus Kjernsli Hansen-Mollerud
+ * @version 2.0
  */
 public class Main extends Application {
 

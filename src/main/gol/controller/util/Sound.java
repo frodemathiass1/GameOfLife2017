@@ -10,8 +10,10 @@ import static java.lang.String.*;
 
 /**
  * This class handles audio files triggered by GUI action events.
+ * <p>
  * Contains filepath for each audio clip used in this application and
  * method for playing the audio files.
+ * <p>
  * Sound downloaded from www.freeSound.org under Creative common licence.
  *
  * @version 1.2

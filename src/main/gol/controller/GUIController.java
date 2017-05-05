@@ -32,13 +32,11 @@ import java.util.ResourceBundle;
  * The GUIController contains a series of functions that handles the GUI-elements and their
  * actionEvents to make the application do what its supposed to do.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
- * @version 1.4
+ * @version 1.5
  */
 public class GUIController implements Initializable {
 
+    @FXML public Label counter;
     @FXML private MenuItem url1, url2, url3, url4, url5, url6, url7, url8, url9, url10;
     @FXML private MenuItem file1, file2, file3, file4, file5, file6, file7, file8, file9, file10, fileBlock;
     @FXML private MenuItem small, medium, large, largest;
@@ -90,6 +88,13 @@ public class GUIController implements Initializable {
                 timeline.setRate(speedSlider.getValue());
                 board.nextGeneration();
                 draw.drawGeneration(board.getGeneration());
+
+                int cellsCounter = board.getGeneration().size();
+                if (cellsCounter >= 0) {
+
+                    counter.setText("Cells: " + cellsCounter);
+                }
+
             });
             timeline.getKeyFrames().add(kf);
             timeline.setCycleCount(Timeline.INDEFINITE);
@@ -366,7 +371,7 @@ public class GUIController implements Initializable {
 
         if (cellsCounter >= 0) {
             sound.play(sound.getFx3());
-            next.setText("Cells "+ cellsCounter);
+            next.setText("Next "+ cellsCounter);
         } else {
             next.setText("Next");
         }
@@ -394,17 +399,17 @@ public class GUIController implements Initializable {
 
         stopAnimationIfRunning();
         colors.resetAll();
-        speedSlider.setValue(1.5);
+        speedSlider.setValue(1);
         board.clearBoard();
         config.setDefault();
         board = new DynamicBoard(config.getRows(), config.getColumns());
         draw.drawBoard(board.getGrid());
-        zoomSlider.setValue(speedSlider.getMin());
         play.setText("Play");
         next.setText("Next");
         fileInfo.setDisable(true);
         fileInfo.setText("");
         sound.play(sound.getFx8());
+        counter.setText("Cells: ");
     }
 
     /**
@@ -426,13 +431,24 @@ public class GUIController implements Initializable {
         draw.drawBoard(board.getGrid());
         board.randomize();
         draw.drawGeneration(board.getGeneration());
-        board.nextGeneration();
         speedSlider.setValue(speedSlider.getMax());
     }
 
     //================================================================================
     // Functions related to Buttons and sliders for speed, sound and size
     //================================================================================
+
+    /**
+     * This method resets the board before loading a new one.
+     */
+    public void resetBoard() {
+
+        board.clearBoard();
+        fileInfo.setDisable(true);
+        fileInfo.setText("");
+        sound.play(sound.getFx8());
+        counter.setText("Cells: ");
+    }
 
     /**
      * EventHandler: "Select Grid size" MenuButton
@@ -447,14 +463,20 @@ public class GUIController implements Initializable {
             draw.drawBoard(board.getGrid());
         });
         large.setOnAction(e -> {
+            resetBoard();
+            board = new DynamicBoard(35,54);
             config.setCellSize(15);
             draw.drawBoard(board.getGrid());
         });
         medium.setOnAction(e -> {
-            config.setCellSize(30);
+            resetBoard();
+            board = new DynamicBoard(17,27);
+            config.setCellSize(31);
             draw.drawBoard(board.getGrid());
         });
         small.setOnAction(e -> {
+            resetBoard();
+            board = new DynamicBoard(13,20);
             config.setCellSize(40);
             draw.drawBoard(board.getGrid());
         });

@@ -15,9 +15,6 @@ import java.net.URLConnection;
  * To avoid multiple temp files or files being stored at your hdd after application exit, they are set to delete on exit,
  * but are preferably deleted after use in the try/catch block where they are used.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
  * @version 2.0
  */
 public class Decoder {

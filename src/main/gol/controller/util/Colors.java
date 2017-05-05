@@ -6,9 +6,6 @@ import javafx.scene.paint.Color;
  * This class is used for setting default colors and for manipulation of Board colors
  * triggered by the GUI colorPickers.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.0
  */
 public class Colors {

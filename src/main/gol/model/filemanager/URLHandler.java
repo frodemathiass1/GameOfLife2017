@@ -9,9 +9,6 @@ import java.net.URL;
  * <p>
  * It make sure that plaintext and RLE content is handled accordingly.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
  * @version 2.0
  */
 public class URLHandler {
@@ -26,7 +23,6 @@ public class URLHandler {
      * theUrlType is updated with the correct type value, and if it is RLE, the RLEDecoder is instantiated.
      *
      * @param inURL String
-     * @throws Exception e
      */
     public void selectUrlType(String inURL) {
 

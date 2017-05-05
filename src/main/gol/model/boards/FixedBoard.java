@@ -13,9 +13,6 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * This class is the class that was used for the old game board with fixed size.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.2
  * @deprecated
  * @see DynamicBoard

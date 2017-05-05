@@ -6,9 +6,6 @@ import main.gol.model.filemanager.Decoder;
 /**
  * This class contains a collection of Dialog boxes with information presented to the user on GUI.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.1
  */
 public class Dialogs {
