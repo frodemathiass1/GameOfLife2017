@@ -153,7 +153,7 @@
             <Label fx:id="zoomIcon" onMouseClicked="#flipZoom" prefHeight="20.0" styleClass="zoom-icon,highlight" />
             <Slider fx:id="zoomSlider" max="3" min="1" minorTickCount="1" value="1.0" />
             <Separator maxHeight="20.0" opacity="0.3" orientation="VERTICAL" />
-            <ToggleButton fx:id="toggleSound" prefHeight="20.0" styleClass="sound-icon, highlight" translateX="3" />
+            <ToggleButton fx:id="toggleSound" prefHeight="20.0" styleClass="sound-icon, highlight" translateX="30" />
         </ToolBar>
     </bottom>
 </BorderPane>

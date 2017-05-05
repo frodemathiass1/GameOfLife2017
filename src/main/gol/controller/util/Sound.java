@@ -14,9 +14,6 @@ import static java.lang.String.*;
  * method for playing the audio files.
  * Sound downloaded from www.freeSound.org under Creative common licence.
  *
- * @author Frode Kristian Mathiassen
- * @author Tommy Pedersen
- * @author Magnus Kjernsli Hansen-Mollerud
  * @version 1.2
  */
 public class Sound {
@@ -41,6 +38,7 @@ public class Sound {
      */
     public void play(File sound) {
 
+        if (sound.exists()) {
             try {
                 MediaPlayer audio = new MediaPlayer(
                         new Media(
@@ -57,6 +55,7 @@ public class Sound {
             } catch (RuntimeException re) {
                 System.err.println(re.getMessage());
             }
+        }
     }
 
     /**
